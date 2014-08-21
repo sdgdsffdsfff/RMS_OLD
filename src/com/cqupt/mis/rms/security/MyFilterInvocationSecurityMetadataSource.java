@@ -64,8 +64,11 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
 			ConfigAttribute ca = new SecurityConfig(String.valueOf(role.getRoleId()));
 			List<Rolepurview> rolePurviewList = rolePurviewDao.findRolePurviewListByroleId(role.getRoleId());		//获取相应角色的相应合法资源信息	
 			
+			System.out.println(rolePurviewList.get(0).getPurviewinfo());
+			System.out.println(rolePurviewList.get(0).getPurviewinfo().getPurviewUrl());
+			
 			for (Rolepurview rolePurview : rolePurviewList) {
-				String url = rolePurview.getPurviewinfo().getPurviewUrl();
+				String url = rolePurview.getPurviewinfo().getPurviewUrl();		
 				
 				/*
 				 * 判断资源文件和权限的对应关系，如果已经存在相关的资源url，则要通过该url为key提取出权限集合，将权限增加到权限集合中。

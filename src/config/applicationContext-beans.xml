@@ -93,7 +93,7 @@
 	 	2014.8.20
 	 	 用户详细信息管理：数据源、用户缓存（通过数据库管理用户、角色、权限、资源）。
 	  -->
-	<bean id="userDetailsManager" class="com.mis.bern.security.MyUserDetailsServiceImpl">
+	<bean id="userDetailsManager" class="com.cqupt.mis.rms.security.MyUserDetailsServiceImpl">
 		<property name="userInfoDao" ref="userInfoDao" />
 		<property name="roleInfoDao" ref="roleInfoDao" />
 	</bean>

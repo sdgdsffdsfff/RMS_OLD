@@ -70,6 +70,7 @@ public class RolePurviewDaoImpl extends HibernateDaoSupport implements RolePurvi
 		String hql ="delete from Rolepurview where roleinfo.roleId = ? ";
 		getSession().createQuery(hql).setParameter(0, roleId).executeUpdate();
 	}
+	
 	@Override
 	public List<Rolepurview> findRolePurviewListByPurviewId(int purviewId) {
 		String hql = "from Rolepurview rp where rp.purviewinfo.purviewId = ?";

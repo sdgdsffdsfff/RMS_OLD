@@ -51,7 +51,8 @@
 	<div id="mid">
 		<div class="left"></div>
 		<div class="right radius">
-			<form action="login.action" method="post">
+		<%-- 提交spring-security 进行验证 --%>
+			<form action="j_spring_security_check" method="post">
 				<h3>请输入用户名和密码</h3>
 				<FONT color="red"><s:actionerror /></FONT>
 				<label for="userName">用户名</label>
