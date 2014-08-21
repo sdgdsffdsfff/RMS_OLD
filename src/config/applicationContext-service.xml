@@ -234,6 +234,26 @@
 	<bean id="studentAwardsNewInfoService" class="com.cqupt.mis.rms.service.impl.StudentAwardsNewInfoServiceImpl">
 		<property name="searchDao" ref="searchDao"/>
 	</bean>
+	
+	
+	<!--spring-security 
+		以下为spring-security权限配置
+		@Bern
+		2014.8.20
 
+		事件监听:实现了 ApplicationListener监听接口,
+		包括AuthenticationCredentialsNotFoundEvent 事件，
+		AuthorizationFailureEvent事件，AuthorizedEvent事件， PublicInvocationEvent事
+		件。 
+	-->
+	<bean class="org.springframework.security.authentication.event.LoggerListener"/>
+	
+	<!-- 设置权限的前缀为AUTH_，而不是ROLE_。 -->
+	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
+    	<property name="rolePrefix" value=""/>
+    </bean>
+    <!--spring-security  
+    	spring-security 配置-end
+    -->
 		
 </beans>

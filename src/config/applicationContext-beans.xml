@@ -86,5 +86,17 @@
 	<bean id="getDownloadInfoService" class="com.cqupt.mis.rms.service.impl.GetDownloadInfoServiceImpl" parent="AbstractBean" />
 	 -->
 	 
+	 
+	 
+	 <!--spring-security
+	 	@Bern
+	 	2014.8.20
+	 	 用户详细信息管理：数据源、用户缓存（通过数据库管理用户、角色、权限、资源）。
+	  -->
+	<bean id="userDetailsManager" class="com.mis.bern.security.MyUserDetailsServiceImpl">
+		<property name="userInfoDao" ref="userInfoDao" />
+		<property name="roleInfoDao" ref="roleInfoDao" />
+	</bean>
+	<!-- spring-security-end -->
 	
 </beans>

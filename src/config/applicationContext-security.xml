@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<!-- Spring-Security 基本配置 -->
+	<http auto-config="false" access-denied-page="/accessDenied.jsp" entry-point-ref="authenticationProcessingFilterEntryPoint">
+		<!-- 不要过滤图片等静态资源 -->
+		<intercept-url pattern="/**/*.jpg" filters="none" />
+		<intercept-url pattern="/**/*.png" filters="none" />
+		<intercept-url pattern="/**/*.gif" filters="none" />
+		<intercept-url pattern="/**/*.css" filters="none" />
+		<intercept-url pattern="/**/*.js" filters="none" />
+		<!-- 登录页面和忘记密码页面不过滤  -->
+		<intercept-url pattern="/login.jsp" filters="none" /> 
+
+		<!-- <form-login login-page="/login.jsp" authentication-failure-url="/error.jsp" default-target-url="/welcome.jsp" /> -->
+
+		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） 
+		<remember-me data-source-ref="dataSource" />
+		-->
+		
+		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
+		<session-management invalid-session-url="/error.jsp" />
+		
+		<!-- 增加自定义的登录校验器-->
+		<custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER" />
+		
+		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前，
+			实现用户、角色、权限、资源的数据库管理。 11/3/23 -->
+		<custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR"/> 
+		
+	</http>
+	
+	<!-- 登录验证器 -->  
+    <b:bean id="loginFilter" class="com.cqupt.mis.rms.security.MyUsernamePasswordAuthenticationFilter">  
+        <!-- 处理登录的action -->  
+        <b:property name="filterProcessesUrl" value="/j_spring_security_check"></b:property>  
+        <!-- 验证成功后的处理-->  
+        <b:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></b:property>  
+        <!-- 验证失败后的处理-->  
+        <b:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"></b:property>  
+        <b:property name="authenticationManager" ref="authenticationManager"></b:property>  
+        <!-- 注入DAO为了查询相应的用户 -->  
+        <b:property name="userManagerService" ref="userManagerService"></b:property>  
+    </b:bean>  
+    <b:bean id="loginLogAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
+        <b:property name="defaultTargetUrl" value="/welcome.jsp"></b:property>  
+    </b:bean>  
+    <b:bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">  
+        <!-- 可以配置相应的跳转方式。属性forwardToDestination为true采用forward false为sendRedirect -->  
+        <b:property name="defaultFailureUrl" value="/error.jsp"></b:property>  
+    </b:bean>
+	
+	
+	<!-- 
+		一个自定义的filter，必须包含:
+			authenticationManager,
+			accessDecisionManager,
+			securityMetadataSource三个属性。
+	-->
+	<b:bean id="myFilter" class="com.cqupt.mis.rms.security.MyFilterSecurityInterceptor">
+		<b:property name="authenticationManager" ref="authenticationManager"/>
+		<b:property name="accessDecisionManager" ref="myAccessDecisionManager"/>
+		<b:property name="securityMetadataSource" ref="mySecurityMetadataSource"/>
+	</b:bean>
+	
+
+	<!-- 注意能够为authentication-manager 设置alias别名  -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsManager">
+			<!-- <password-encoder ref="passwordEncoder">
+				<salt-source user-property="username" />
+			</password-encoder> -->
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。 -->
+	<b:bean id="myAccessDecisionManager" class="com.cqupt.mis.rms.security.MyAccessDecisionManager">
+	</b:bean>  
+
+	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。 -->
+	<b:bean id="mySecurityMetadataSource" class="com.cqupt.mis.rms.security.MyFilterInvocationSecurityMetadataSource">
+		<b:property name="purviewDao" ref="purviewDao"></b:property>
+		<b:property name="roleInfoDao" ref="roleInfoDao"></b:property> 
+		<b:property name="rolePurviewDao" ref="rolePurviewDao"></b:property> 
+	</b:bean> 
+	
+	<!-- 未登录的切入点 -->  
+    <b:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
+        <b:property name="loginFormUrl" value="/login.jsp"></b:property>  
+    </b:bean>
+    
+</b:beans>
