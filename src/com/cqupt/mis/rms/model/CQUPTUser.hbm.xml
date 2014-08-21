@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.CQUPTUser" table="CQUPT_USER">
+		<id name="userId" column="user_id">
+			<generator class="foreign">
+				<param name="property">userLogin</param>
+			</generator>
+		</id>
+		<one-to-one name="userLogin" class="com.cqupt.mis.rms.model.UserLogin" ></one-to-one>
+		<many-to-one name="cquptCollege" class="com.cqupt.mis.rms.model.CQUPTCollege" column="college_id" not-null="true"></many-to-one>
+		<property name="department" column="department" />
+		<property name="userName" column="user_name" not-null="true" unique="true"/>
+		<property name="gender" column="gender" />
+		<property name="origin" column="origin" />
+		<property name="nationality" column="nationality" />
+		<property name="birthday" column="birthday" />
+		<property name="politicalStatus" column="political_status" />
+		<property name="timeJoinParty" column="time_join_party" />
+		<property name="timeBeginCqupt" column="time_begin_cqupt" />
+		<property name="timeBeginWork" column="time_begin_work" />
+		<property name="firstDegree" column="first_degree" />
+		<property name="firstProfessionalName" column="first_professional_name" />
+		<property name="firstGraduateSchool" column="first_graduate_school" />
+		<property name="lastDegree" column="last_degree" />
+		<property name="lastProfessionalName" column="last_professional_name" />
+		<property name="lastGraduateSchool" column="last_graduate_school" />
+		<property name="lastAcademic" column="last_academic" />
+	</class>
+</hibernate-mapping>

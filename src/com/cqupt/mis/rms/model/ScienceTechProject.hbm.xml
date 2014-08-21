@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceTechProject" table="SCIENCE_TECH_PROJECT">
+		<id name="projectId" column="project_id"></id>
+		
+		<property name="projectName" column="project_name"  not-null="true"></property>
+		<property name="timeProjectApproved" column="time_project_approved" type="java.sql.Date"></property>
+		<property name="totalFundContract" column="total_fund_contract" type="float"></property>
+		<property name="sortSubject" column="sort_subject"></property>
+		<property name="sortActivity" column="sort_activity"></property>
+		<property name="originProject" column="origin_project"></property>
+		<property name="formOrganization" column="form_organization"></property>
+		<property name="formCooperation" column="form_cooperation"></property>
+		<property name="organReliedProject" column="organ_relied_project"></property>
+		<property name="industryService" column="industry_service"></property>
+		<property name="unitProject" column="unit_project"></property>
+		
+		
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		
+		<property name="status" column="status" type="int" not-null="true"></property>
+		<property name="returnReason" column="return_reason"></property>
+	</class>
+</hibernate-mapping>

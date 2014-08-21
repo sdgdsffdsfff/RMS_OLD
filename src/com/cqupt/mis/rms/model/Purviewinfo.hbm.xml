@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+	<class name="com.cqupt.mis.rms.model.Purviewinfo" table="t_purviewinfo">
+		<id name="purviewId" type="java.lang.Integer">
+			<column name="purviewId" />
+			<generator class="native" />
+		</id>
+		<property name="purviewName" type="java.lang.String">
+			<column name="purviewName" length="50" not-null="true" />
+		</property>
+		<property name="purviewUrl" type="java.lang.String">
+			<column name="purviewUrl" length="256" />
+		</property>
+		<property name="purviewRemark" type="java.lang.String">
+			<column name="purviewRemark" length="16277215" />
+		</property>
+		<many-to-one name="parentPurviewinfo" class="com.cqupt.mis.rms.model.Purviewinfo">
+			<column name="parentId" />
+		</many-to-one>
+		<set name="rolepurviews" inverse="true" fetch="join">
+			<key>
+				<column name="purviewId" not-null="true" />
+			</key>
+			<one-to-many class="com.cqupt.mis.rms.model.Rolepurview" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.StudentAwardsNew" table="STUDENT_AWARDS_NEW">
+		<id name="awardsId" column="awards_id"/>
+		<property name="rewardTime" column="reward_time" />
+		<property name="rewardStudents" column="reward_students" />
+		<property name="rewardName" column="reward_name" />
+		<property name="rewardLevel" column="reward_level" />
+		<property name="collegeAward" column="college_award" type="float"/>
+		<property name="rewardUnit" column="reward_unit" />
+		<property name="firstStudents" column="first_students" />
+		<property name="remarks" column="remarks" />
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />
+	</class>
+</hibernate-mapping>

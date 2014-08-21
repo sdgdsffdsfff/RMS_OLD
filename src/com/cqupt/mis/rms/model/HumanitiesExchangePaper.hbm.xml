@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesExchangePaper" table="HUMANITIES_EXCHANGE_PAPER">
+		<id name="exchangePaperId" column="exchange_paper_id"/>
+		<property name="exchangePaperName" column="exchange_paper_name" not-null="true"></property>
+		<property name="searchStation" column="search_station"></property>
+		<property name="subjectsClassify" column="subjects_classify"></property>
+		<property name="publishedTime" column="published_time" type="java.sql.Date"></property>
+		<property name="hostConferenceName" column="host_conference_name"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

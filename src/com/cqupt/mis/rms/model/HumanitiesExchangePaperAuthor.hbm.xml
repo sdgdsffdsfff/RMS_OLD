@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesExchangePaperAuthor"
+		table="HUMANITIES_EXCHANGE_PAPERAUTHOR">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+
+		<many-to-one name="humanitiesExchangePaper" column="exchange_paper_id"
+			class="com.cqupt.mis.rms.model.HumanitiesExchangePaper"></many-to-one>
+		<property name="authorId" column="author_id" type="java.lang.String" />
+
+		<property name="authorName" column="author_name" />
+		<property name="orders" column="orders" type="int" not-null="true" />
+		<property name="task" column="task"></property>
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

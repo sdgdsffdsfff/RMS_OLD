@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesAcademicMeeting" table="HUMANITIES_ACADEMIC_MEETING">
+		<id name="academicMeetingId" column="academic_meeting_id"/>
+		<property name="academicMeetingName" column="academic_meeting_name" not-null="true"></property>
+		<property name="hostUnit" column="host_unit"></property>
+		<property name="meetingClassify" column="meeting_classify"></property>
+		<property name="holdingTime" column="holding_time" type="java.sql.Date"></property>
+		<property name="meetingLocation" column="meeting_location"></property>
+		<property name="participantsNumber" column="participants_number"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

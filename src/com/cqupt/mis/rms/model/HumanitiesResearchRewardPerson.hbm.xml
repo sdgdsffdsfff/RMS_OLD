@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesResearchRewardPerson"
+		table="HUMANITIES_RESEARCH_REWARDPERSON">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="humanitiesResearchReward" column="research_reward_id" class="com.cqupt.mis.rms.model.HumanitiesResearchReward"></many-to-one>
+		<property name="rewardPersonId" column="reward_person_id" type="java.lang.String" />
+		<property name="rewardPersonName" column="reward_person_name" />
+		<property name="orders" column="orders" type="int" not-null="true" />
+		<property name="task" column="task"></property>
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

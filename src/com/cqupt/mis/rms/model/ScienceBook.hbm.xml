@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceBook" table="SCIENCE_BOOK">
+		<id name="bookId" column="book_id"/>
+		<property name="unitAuthor" column="unit_author" not-null="true"></property>
+		<property name="publicationName" column="publication_name" not-null="true"></property>
+		<property name="publicationType" column="publication_type" not-null="true"></property>
+		<property name="publisher" column="publisher"></property>
+		<property name="ISBN" column="ISBN"></property>
+		<property name="awardingGrades" column="awarding_grades"></property>
+		<property name="publishedTime" column="published_time"></property>
+		<property name="totalPrize" column="total_prize" type="float"></property>
+		<property name="deductionsDistPosts" column="deductions_dist_posts" type="float"></property>
+		<property name="actualAward" column="actual_award" type="float"></property>
+		<property name="remarks" column="remarks"></property>
+		
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.TeachAchievementsCQ" table="TEACH_ACHIEVEMENTS_CQ">
+		<id name="achievementsId" column="achievements_id"/>
+		<property name="classAchievements" column="class_achievements" not-null="true"/>
+		<property name="projectName" column="project_name" not-null="true"/>
+		<property name="gradeAchievements" column="grade_achievements" />
+		<property name="timeAchievements" column="time_achievements" />
+		<property name="certificationUnit" column="certification_unit" />
+		<property name="projectType" column="project_type" />
+		<property name="reportedAmounts" column="reported_amounts"  />
+		<property name="verifyAmounts" column="verify_amounts" />
+		<property name="remarks" column="remarks" />
+		<property name="standbyField1" column="standbyField1" />
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		<property name="status" column="status" not-null="true" />
+		<property name="returnReason" column="return_reason" />
+	</class>
+</hibernate-mapping>

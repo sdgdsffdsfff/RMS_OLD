@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceOrganization" table="SCIENCE_ORGANIZATION">
+		<id name="organizationId" column="organization_id"></id>
+		<property name="organizationName" column="organization_name" not-null="true"></property>
+		<property name="organizationType" column="organization_type" not-null="true"></property>
+		<property name="organizationCategory" column="organization_category"></property>
+		<property name="sortSubject" column="sort_subject"></property>
+		<property name="modusComposition" column="modus_composition"></property>
+		<property name="totalEmployees" column="total_employees" type="int"></property>
+		<property name="doctorEmployees" column="doctor_employees" type="int"></property>
+		<property name="masterEmployees" column="master_employees" type="int"></property>
+		<property name="totalIts" column="total_its" type="int"></property>
+		<property name="advancedIts" column="advanced_its" type="int"></property>
+		<property name="middleIts" column="middle_its" type="int"></property>
+		<property name="juniorIts" column="junior_its" type="int"></property>
+		<property name="otherIts" column="other_its" type="int"></property>
+		<property name="numGraduates" column="num_graduates" type="int"></property>
+		<property name="internalExpenditures" column="internal_expenditures" type="float"></property>
+		<property name="rdExpenditures" column="rd_expenditures" type="float"></property>
+		<property name="numIssueAssume" column="num_issue_assume" type="int"></property>
+		<property name="assetsFixed" column="assets_fixed" type="float"></property>
+		<property name="assetsEquipment" column="assets_equipment" type="float"></property>
+		<property name="assetsImport" column="assets_import" type="float"></property>
+		<property name="industryService" column="industry_service"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		
+		<property name="status" column="status" type="int"  not-null="true"></property>
+		<property name="returnReason" column="return_reason"></property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.CourseContribute" table="COURSE_CONTRIBUTE">
+		<id name="courseId" column="course_id"/>
+		<property name="classContribute" column="class_contribute" not-null="true"/>
+		<property name="typeContribute" column="type_contribute" not-null="true"/>
+		<property name="timeContribute" column="time_contribute" not-null="true"/>
+		<property name="courseName" column="course_name" not-null="true"/>
+		<property name="checkTime" column="check_time" type="java.sql.Date"/>
+		<property name="endTime" column="end_time" type="java.sql.Date"/>
+		<property name="collegeAward" column="college_award" />
+		<property name="remarks" column="remarks" />
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />
+	</class>
+</hibernate-mapping>

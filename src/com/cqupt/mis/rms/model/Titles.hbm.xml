@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.Titles" table="TITLES">
+		<id name="titlesId" type="int" column="titles_id">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="user" class="com.cqupt.mis.rms.model.CQUPTUser" column="user_id"  not-null="true"></many-to-one>
+		<property name="titlesName" column="titles_name"  not-null="true"></property>
+		<property name="timeTitlesBegin" column="time_titles_begin" type="java.sql.Date"></property>
+		<property name="timeTitlesEnd" column="time_titles_end" type="java.sql.Date"></property>
+		<property name="remarks"></property>
+	</class>
+</hibernate-mapping>

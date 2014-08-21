@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceTechExchange" table="SCIENCE_TECH_EXCHANGE">
+		<id name="techExchangeId" column="tech_exchange_id"/>
+		<property name="collegesIn" column="colleges_in"></property>
+		<property name="exchangeType" column="exchange_type"></property>
+		<property name="sendNumber" column="send_number" type="int"></property>
+		<property name="receiveNumber" column="receive_number" type="int"></property>
+		<property name="attendNumber" column="attend_number" type="int"></property>
+		<property name="papersNumber" column="papers_number" type="int"></property>
+		<property name="specialInvitedNumber" column="special_invited_number" type="int"></property>
+		<property name="exchangeHost" column="exchange_host"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

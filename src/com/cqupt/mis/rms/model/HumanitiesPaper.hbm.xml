@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesPaper" table="HUMANITIES_PAPER">
+		<id name="paperId" column="paper_id"/>
+		<property name="paperName" column="paper_name" not-null="true"/>
+		<property name="publishedTime" column="published_time"></property>
+		<property name="postPublication" column="post_publication"></property>
+		<property name="publishedGrades" column="published_grades"></property>
+		<property name="searchStation" column="search_station"></property>
+		<property name="belongProject" column="belong_project"></property>
+		<property name="subjectsClassify" column="subjects_classify"></property>
+		<property name="achievementQuote" column="achievement_quote"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceTechAttendPerson" table="SCIENCE_TECH_ATTENDPERSON">
+	    <id name="id">
+	    	<generator class="native"></generator>
+	    </id>
+        <many-to-one name="scienceTechExchange" column="tech_exchange_id" class="com.cqupt.mis.rms.model.ScienceTechExchange"></many-to-one>
+        <property name="attendId" column="attend_id" type="java.lang.String"/>
+		<property name="memberName" column="member_name" />
+		<property name="orders" column="orders" type="int" not-null="true"/>
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

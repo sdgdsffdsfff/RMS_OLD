@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.HumanitiesProjectDetail"
+		table="HUMANITIES_PROJECT_DETAIL">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="humanitiesProject" column="project_id" class="com.cqupt.mis.rms.model.HumanitiesProject" lazy="false"></many-to-one>
+		<property name="updateTime" type="java.util.Date" column="update_time"></property>
+		<property name="projectStatus" column="project_status"></property>
+		<property name="money" column="money" type="float"></property>
+		<property name="timePerPerson" column="time_per_person"></property>
+	</class>
+</hibernate-mapping>

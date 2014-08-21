@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceTechTransfer" table="SCIENCE_TECH_TRANSFER">
+		<id name="transferId" column="transfer_id"/>
+		<property name="collegeIn" column="college_in" not-null="true"></property>
+		<property name="techName" column="tech_name" not-null="true"></property>
+		<property name="transfereeUnit" column="transferee_unit"></property>
+		<property name="unitProperties" column="unit_properties"></property>
+		<property name="contractAmount" column="contract_amount" type="float"></property>
+		<property name="realIncome" column="real_income" type="float"></property>
+		<property name="transformationWay" column="transformation_way"></property>
+		<property name="startTime" column="start_time" type="java.sql.Date"></property>
+		<property name="endTime" column="end_time" type="java.sql.Date"></property>
+		
+		<property name="remarks" column="remarks" />
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>

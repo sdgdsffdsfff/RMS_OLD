@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:flex="http://www.springframework.org/schema/flex"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/flex  
+	http://www.springframework.org/schema/flex/spring-flex-1.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+	http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd">
+
+	<!-- 配置struts2和spring集成的Bean -->
+	<!-- 操作确认Bean -->
+	<bean id="confirmAction" class="com.cqupt.mis.rms.action.ConfirmAction" />
+	<!-- 配置选择登录方式的Bean -->
+	<bean id="forwardLoginAction" class="com.cqupt.mis.rms.action.ForwardLoginAction">
+		<property name="roleLevelDao" ref="roleLevelDao" />
+	</bean>
+	<!-- 配置登录的Bean -->
+	<bean id="loginAction" class="com.cqupt.mis.rms.action.LoginAction"
+		scope="prototype">
+		<property name="userManagerService" ref="userManagerService" />
+	</bean>
+	<bean id="menuAction" class="com.cqupt.mis.rms.action.MenuAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<!-- 处理管理员相关的Bean -->
+	<bean id="roleInfoAction" class="com.cqupt.mis.rms.action.system.role.RoleInfoAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="addRoleAction" class="com.cqupt.mis.rms.action.system.role.AddRoleAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="forwardUpdateRoleInfoAction"
+		class="com.cqupt.mis.rms.action.system.role.ForwardUpdateRoleInfoAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="updateRoleInfoAction"
+		class="com.cqupt.mis.rms.action.system.role.UpdateRoleInfoAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="deleteRoleAction" class="com.cqupt.mis.rms.action.system.role.DeleteRoleAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="forwardAssignPurviewAction"
+		class="com.cqupt.mis.rms.action.system.purview.ForwardAssignPurviewAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="assignPurviewAction"
+		class="com.cqupt.mis.rms.action.system.purview.AssignPurviewAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="forwardAssignCollegeAction"
+		class="com.cqupt.mis.rms.action.system.role.ForwardAssignCollegeAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<bean id="assignCollegeAction"
+		class="com.cqupt.mis.rms.action.system.role.AssignCollegeAction">
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	<!-- 管理用户和角色信息的Bean -->
+	<bean id="userAndRoleMangerAction"
+		class="com.cqupt.mis.rms.action.system.user.UserAndRoleMangerAction">
+		<property name="userManagerService" ref="userManagerService" />
+		<property name="purviewService" ref="purviewService" />
+	</bean>
+	
+	<bean id="manageTeacherAction" class="com.cqupt.mis.rms.action.teacher.ViewManageTeacherAction" scope="prototype">
+		<property name="userManagerService" ref="userManagerService"></property>
+	</bean>
+	
+	<bean id="submitUserInfoAction" class="com.cqupt.mis.rms.action.teacher.SubmitUserInfoAction">
+		<property name="userManagerService"  ref="userManagerService"></property>
+	</bean>
+	
+	<bean id="viewAddUserAction" class="com.cqupt.mis.rms.action.teacher.ViewAddUserAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<bean id="checkUserIdAction" class="com.cqupt.mis.rms.action.teacher.CheckUserIdAction">
+		<property name="userManagerService"  ref="userManagerService"></property>
+	</bean>
+	<!-- 配置学院管理员的Bean -->
+	<!-- 配置得到理工科类信息的Bean -->
+	<bean id="managerCollegeTecInfoAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeTecInfoAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<!-- 配置得到文科类信息的Bean -->
+	<bean id="managerCollegeHumInfoAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeHumInfoAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<!-- 配置得到教学成果类信息的Bean -->
+	<bean id="managerCollegeAchInfoAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeAchInfoAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	
+	
+	
+	<!-- 配置得到理工科类详细信息的Bean -->
+	<bean id="managerCollegeTecStatusAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeTecStatusAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<!-- 配置得到文科类详细信息的Bean -->
+	<bean id="managerCollegeHumStatusAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeHumStatusAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<!-- 配置得到教学成果类详细信息的Bean -->
+	<bean id="managerCollegeAchStatusAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeAchStatusAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	<!-- 配置操作审批的Bean -->
+	<bean id="collegeUpdateStatusAction"
+		class="com.cqupt.mis.rms.action.college.CollegeUpdateStatusAction" scope="prototype">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	
+	<!-- ***********2013-8-11  黄海燕添加********************** -->
+	
+	
+	<!-- 配置下载旁证材料的Bean -->
+	<bean id="downloadAction" class="com.cqupt.mis.rms.action.college.DownloadAction">
+	 <property name="getDownloadInfoService" ref="getDownloadInfoService" />
+	 
+	</bean>
+	
+	<!-- 提交理科科研信息的Bean -->
+	<!-- 配置教师用户提交理科论文信息的Bean -->
+	<bean id="submitSciencePaperAction" class="com.cqupt.mis.rms.action.teacher.SubmitSciencePaperAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科活动机构信息的Bean -->
+	<bean id="submitScienceOrganizationAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceOrganizationAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科科技项目信息的Bean -->
+	<bean id="submitScienceTechProjectAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceTechProjectAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科著作信息的Bean -->
+	<bean id="submitScienceBookAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceBookAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科政府科技奖励信息的Bean -->
+	<bean id="submitScienceGovernmentAwardAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceGovernmentAwardAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科知识产权情况信息的Bean -->
+	<bean id="submitScienceIpRightsAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceIpRightsAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科技术转让信息的Bean -->
+	<bean id="submitScienceTechTransferAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceTechTransferAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交理科科技交流信息的Bean -->
+	<bean id="submitScienceTechExchangeAction" class="com.cqupt.mis.rms.action.teacher.SubmitScienceTechExchangeAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	<!-- 提交人文社科科研信息的Bean -->
+	<!-- 配置教师用户提交人文社科论文信息的Bean -->
+	<bean id="submitHumanitiesPaperAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesPaperAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科著作信息的Bean -->
+	<bean id="submitHumanitiesBookAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesBookAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科交流论文信息的Bean -->
+	<bean id="submitHumanitiesExchangePaperAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesExchangePaperAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科科研项目信息的Bean -->
+	<bean id="submitHumanitiesProjectAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesProjectAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科科研获奖信息的Bean -->
+	<bean id="submitHumanitiesResearchRewardAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesResearchRewardAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科学术会议信息的Bean -->
+	<bean id="submitHumanitiesAcademicMeetingAction" class="com.cqupt.mis.rms.action.teacher.SubmitHumanitiesAcademicMeetingAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	<!-- 提交教学成果科研信息的Bean -->
+	<!-- 配置教师用户提交教学成果专业建设信息的Bean -->
+	<bean id="submitMajorContributeAction" class="com.cqupt.mis.rms.action.teacher.SubmitMajorContributeAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交教学成果课程建设信息的Bean -->
+	<bean id="submitCourseContributeAction" class="com.cqupt.mis.rms.action.teacher.SubmitCourseContributeAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交教学成果奖信息的Bean -->
+	<bean id="submitTeachAchievementsAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachAchievementsAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+
+	
+	
+	
+	<!-- 配置教师用户提交人文社科教材立项信息的Bean -->
+	<bean id="submitTeachingMaterialSetAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachingMaterialSetAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	<!-- 配置教师用户提交教学成果学生获奖信息的Bean -->
+	<bean id="submitStudentAwardsAction" class="com.cqupt.mis.rms.action.teacher.SubmitStudentAwardsAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	<!-- 配置用户修改密码的Bean -->
+	<bean id="modifyPasswordAction" class="com.cqupt.mis.rms.action.common.ModifyPasswordAction" >
+		<property name="modifyPasswordService" ref="modifyPasswordService" />
+	</bean>
+	<!-- 配置用户管理个人信息的Bean -->
+	<bean id="manageUserInfoAction" class="com.cqupt.mis.rms.action.common.ManageUserInfoAction" scope="prototype">
+		<property name="modifyUserInfoService" ref="modifyUserInfoService" />
+		<property name="modifyUserInfoDao" ref="modifyUserInfoDao" />
+	</bean>
+	<!-- 配置用户修改更新个人信息的Bean -->
+	<bean id="modifyUserInfoAction" class="com.cqupt.mis.rms.action.common.ModifyUserInfoAction" >
+		<property name="modifyUserInfoService" ref="modifyUserInfoService" />
+	</bean>
+	<!-- 配置教师用户查看个人科研信息的Bean -->
+	<bean id="viewResearchInfoAction" class="com.cqupt.mis.rms.action.teacher.ViewResearchInfoAction" >
+		<property name="researchInfoService" ref="researchInfoService" />
+	</bean>
+	<!-- 配置教师用户查看个人科研详细信息的Bean -->
+	<bean id="viewResearchDetailInfoAction" class="com.cqupt.mis.rms.action.teacher.ViewResearchDetailInfoAction" scope="prototype">
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置教师用户删除个人科研详细信息的Bean -->
+	<bean id="deleteResearchInfoAction" class="com.cqupt.mis.rms.action.teacher.DeleteResearchInfoAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+	</bean>
+	
+	
+	
+	
+	
+	<!-- 查询理工科研信息类 -->
+	<!-- 配置查询SciencePaper论文的bean -->
+	<!-- 配置学校查询SciencePaper论文的Bean -->
+	<bean id="searchSchoolSciencePaperInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolSciencePaperInfoAction" scope="prototype">
+		<property name="sciencePaperInfoService" ref="sciencePaperInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询SciencePaper论文的Bean -->
+	<bean id="searchCollegeSciencePaperInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeSciencePaperInfoAction" scope="prototype">
+		<property name="sciencePaperInfoService" ref="sciencePaperInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	
+	
+	<!-- 配置查询ScienceOrganization科研机构的bean -->
+	<!-- 配置学校查询ScienceOrganization科研机构的bean -->
+ 	<bean id="searchSchoolScienceOrganizationAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceOrganizationAction" scope="prototype">
+		<property name="scienceOrganizationService" ref="scienceOrganizationService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	<!-- 配置学院查询ScienceOrganization科研机构的bean -->
+ 	<bean id="searchCollegeScienceOrganizationAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceOrganizationAction" scope="prototype">
+		<property name="scienceOrganizationService" ref="scienceOrganizationService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询ScienceTechProjectInfo项目信息的bean -->
+	<!-- 配置学校查询ScienceTechProjectInfo项目信息的bean -->
+ 	<bean id="searchSchoolScienceTechProjectAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceTechProjectAction" scope="prototype">
+		<property name="scienceTechProjectService" ref="scienceTechProjectService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	<!-- 配置学院查询ScienceTechProjectInfo项目信息的bean -->
+ 	<bean id="searchCollegeScienceTechProjectAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceTechProjectAction" scope="prototype">
+		<property name="scienceTechProjectService" ref="scienceTechProjectService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询ScienceBook著作的bean -->
+	<!-- 配置学校查询ScienceBook著作的Bean -->
+	<bean id="searchSchoolScienceBookInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceBookInfoAction" scope="prototype">
+		<property name="scienceBookService" ref="scienceBookService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询ScienceBook著作的Bean -->
+	<bean id="searchCollegeScienceBookInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceBookInfoAction" scope="prototype">
+		<property name="scienceBookService" ref="scienceBookService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+		
+	<!-- 配置查询ScienceGovernmentAward政府科技奖励的bean -->
+	<!-- 配置学校查询ScienceGovernmentAward政府科技奖励的Bean -->
+	<bean id="searchSchoolScienceGovernmentAwardAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceGovernmentAwardAction" scope="prototype">
+		<property name="scienceGovernmentAwardService" ref="scienceGovernmentAwardService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询ScienceGovernmentAward政府科技奖励的Bean -->
+	<bean id="searchCollegeScienceGovernmentAwardAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceGovernmentAwardAction" scope="prototype">
+		<property name="scienceGovernmentAwardService" ref="scienceGovernmentAwardService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询ScienceIpRightsInfo知识产权的bean -->
+	<!-- 配置学校查询ScienceIpRightsInfo知识产权的Bean -->
+	<bean id="searchSchoolScienceIpRightsInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceIpRightsInfoAction" scope="prototype">
+		<property name="scienceIpRightsService" ref="scienceIpRightsService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询ScienceIpRightsInfo知识产权的Bean -->
+	<bean id="searchCollegeScienceIpRightsInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceIpRightsInfoAction" scope="prototype">
+		<property name="scienceIpRightsService" ref="scienceIpRightsService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询ScienceTechTransfer技术转让的bean -->
+	<!-- 配置学校查询ScienceTechTransfer技术转让的Bean -->
+	<bean id="searchSchoolScienceTechTransferAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceTechTransferAction" scope="prototype">
+		<property name="scienceTechTransferService" ref="scienceTechTransferService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询ScienceTechTransfer技术转让的Bean -->
+	<bean id="searchCollegeScienceTechTransferAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceTechTransferAction" scope="prototype">
+		<property name="scienceTechTransferService" ref="scienceTechTransferService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询ScienceTechExchange科技交流的bean -->
+	<!-- 配置学校查询ScienceTechExchange科技交流的Bean -->
+	<bean id="searchSchoolScienceTechExchangeAction" class="com.cqupt.mis.rms.action.school.SearchSchoolScienceTechExchangeAction" scope="prototype">
+		<property name="scienceTechExchangeService" ref="scienceTechExchangeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询ScienceTechExchange科技交流的Bean -->
+	<bean id="searchCollegeScienceTechExchangeAction" class="com.cqupt.mis.rms.action.college.SearchCollegeScienceTechExchangeAction" scope="prototype">
+		<property name="scienceTechExchangeService" ref="scienceTechExchangeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	
+	
+	
+	
+	<!-- 查询人文社科科研信息类 -->
+	<!-- 配置查询HumanitiesPaperInfo论文的bean -->
+	<!-- 配置学校查询HumanitiesPaperInfo论文的Bean -->
+	<bean id="searchSchoolHumanitiesPaperInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesPaperInfoAction" scope="prototype">
+		<property name="humanitiesPaperService" ref="humanitiesPaperService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesPaperInfo论文的Bean -->
+	<bean id="searchCollegeHumanitiesPaperInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesPaperInfoAction" scope="prototype">
+		<property name="humanitiesPaperService" ref="humanitiesPaperService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询HumanitiesBookInfo著作的bean -->
+	<!-- 配置学校查询HumanitiesBookInfo著作的Bean -->
+	<bean id="searchSchoolHumanitiesBookInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesBookInfoAction" scope="prototype">
+		<property name="humanitiesBookInfoService" ref="humanitiesBookInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesBookInfo著作的Bean -->
+	<bean id="searchCollegeHumanitiesBookInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesBookInfoAction" scope="prototype">
+		<property name="humanitiesBookInfoService" ref="humanitiesBookInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询HumanitiesProjectInfo项目的bean -->
+	<!-- 配置学校查询HumanitiesProjectInfo项目的Bean -->
+	<bean id="searchSchoolHumanitiesProjectInfoAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesProjectInfoAction" scope="prototype">
+		<property name="humanitiesProjectService" ref="humanitiesProjectService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesProjectInfo项目的Bean -->
+	<bean id="searchCollegeHumanitiesProjectInfoAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesProjectInfoAction" scope="prototype">
+		<property name="humanitiesProjectService" ref="humanitiesProjectService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询HumanitiesExchangePaperInfo交流论文的bean -->
+	<!-- 配置学校查询HumanitiesExchangePaperInfo交流论文的Bean -->
+	<bean id="searchSchoolHumanitiesExchangePaperAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesExchangePaperAction" scope="prototype">
+		<property name="humanitiesExchangePaperService" ref="humanitiesExchangePaperService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesExchangePaperInfo交流论文的Bean -->
+	<bean id="searchCollegeHumanitiesExchangePaperAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesExchangePaperAction" scope="prototype">
+		<property name="humanitiesExchangePaperService" ref="humanitiesExchangePaperService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询HumanitiesResearchRewardInfo科研获奖的bean -->
+	<!-- 配置学校查询HumanitiesResearchRewardInfo科研获奖的Bean -->
+	<bean id="searchSchoolHumanitiesResearchRewardAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesResearchRewardAction" scope="prototype">
+		<property name="humanitiesResearchRewardService" ref="humanitiesResearchRewardService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesResearchRewardInfo科研获奖的Bean -->
+	<bean id="searchCollegeHumanitiesResearchRewardAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesResearchRewardAction" scope="prototype">
+		<property name="humanitiesResearchRewardService" ref="humanitiesResearchRewardService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询HumanitiesAcademicMeeting学术会议的bean -->
+	<!-- 配置学校查询HumanitiesAcademicMeeting学术会议的Bean -->
+	<bean id="searchSchoolHumanitiesAcademicMeetingAction" class="com.cqupt.mis.rms.action.school.SearchSchoolHumanitiesAcademicMeetingAction" scope="prototype">
+		<property name="humanitiesAcademicMeetingService" ref="humanitiesAcademicMeetingService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询HumanitiesAcademicMeeting学术会议的Bean -->
+	<bean id="searchCollegeHumanitiesAcademicMeetingAction" class="com.cqupt.mis.rms.action.college.SearchCollegeHumanitiesAcademicMeetingAction" scope="prototype">
+		<property name="humanitiesAcademicMeetingService" ref="humanitiesAcademicMeetingService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	
+	
+	
+	
+	
+	<!-- 查询教学成果类信息 -->
+	<!-- 配置查询MajorContributeInfo专业建设的bean -->
+	<!-- 配置学校查询MajorContributeInfo专业建设的Bean -->
+	<bean id="searchSchoolMajorContributeAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeAction" scope="prototype">
+		<property name="majorContributeService" ref="majorContributeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询MajorContributeInfo专业建设的Bean -->
+	<bean id="searchCollegeMajorContributeAction" class="com.cqupt.mis.rms.action.college.SearchCollegeMajorContributeAction" scope="prototype">
+		<property name="majorContributeService" ref="majorContributeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询CourseContributeInfo课程建设的bean -->
+	<!-- 配置学校查询CourseContributeInfo课程建设的Bean -->
+	<bean id="searchSchoolCourseContributeAction" class="com.cqupt.mis.rms.action.school.SearchSchoolCourseContributeAction" scope="prototype">
+		<property name="courseContributeService" ref="courseContributeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询CourseContributeInfo课程建设的Bean -->
+	<bean id="searchCollegeCourseContributeAction" class="com.cqupt.mis.rms.action.college.SearchCollegeCourseContributeAction" scope="prototype">
+		<property name="courseContributeService" ref="courseContributeService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean -->
+	<!-- 配置学校查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchSchoolTeachAchievementsAction" class="com.cqupt.mis.rms.action.school.SearchSchoolTeachAchievementsAction" scope="prototype">
+		<property name="teachAchievementsService" ref="teachAchievementsService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	
+	
+	<!-- 配置学院查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchCollegeTeachAchievementsAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachAchievementsAction" scope="prototype">
+		<property name="teachAchievementsService" ref="teachAchievementsService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	
+	
+	
+	<!-- 配置查询TeachingMaterialSet教材立项的bean -->
+	<!-- 配置学校查询TeachingMaterialSet教材立项的Bean -->
+	<bean id="searchSchoolTeachingMaterialSetAction" class="com.cqupt.mis.rms.action.school.SearchSchoolTeachingMaterialSetAction" scope="prototype">
+		<property name="teachingMaterialSetService" ref="teachingMaterialSetService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询TeachingMaterialSet教材立项的Bean -->
+	<bean id="searchCollegeTeachingMaterialSetAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachingMaterialSetAction" scope="prototype">
+		<property name="teachingMaterialSetService" ref="teachingMaterialSetService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询StudentAwardsInfo学生获奖的bean -->
+	<!-- 配置学校查询StudentAwardsInfo学生获奖的Bean -->
+	<bean id="searchSchoolStudentAwardsAction" class="com.cqupt.mis.rms.action.school.SearchSchoolStudentAwardsAction" scope="prototype">
+		<property name="studentAwardsInfoService" ref="studentAwardsInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询StudentAwardsInfo学生获奖的Bean -->
+	<bean id="searchCollegeStudentAwardsAction" class="com.cqupt.mis.rms.action.college.SearchCollegeStudentAwardsAction" scope="prototype">
+		<property name="studentAwardsInfoService" ref="studentAwardsInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置下载相关信息的Excel表的Bean -->
+	<bean id="downLoadExcelInfoAction" class="com.cqupt.mis.rms.action.teacher.DownLoadExcelInfoAction" scope="prototype">
+		<property name="downLoadExcelInfoService" ref="downLoadExcelInfoService" />
+	</bean>	
+	
+	<!-- 配置下载指定信息的Excel表的Bean -->
+	<bean id="downLoadExcelInfobyFactorAction" class="com.cqupt.mis.rms.action.teacher.DownLoadExcelInfobyFactorAction" scope="prototype">
+		<property name="downLoadExcelInfobyFactorService" ref="downLoadExcelInfobyFactorService" />
+	</bean>	
+	
+	<!-- 修改理科科研信息的Bean -->
+	<!-- 配置修改理科论文信息的Bean -->
+	<bean id="modifySciencePaperAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifySciencePaperAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改课程建设信息的Bean -->
+	<bean id="modifyCourseContributeAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyCourseContributeAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科学术会议信息的Bean -->
+	<bean id="modifyHumanitiesAcademicMeetingAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesAcademicMeetingAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科著作信息的Bean -->
+	<bean id="modifyHumanitiesBookAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesBookAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科论文交流信息的Bean -->
+	<bean id="modifyHumanitiesExchangePaperAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesExchangePaperAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科论文信息的Bean -->
+	<bean id="modifyHumanitiesPaperAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesPaperAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科科研项目信息的Bean -->
+	<bean id="modifyHumanitiesProjectAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesProjectAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改人文社科科研获奖信息的Bean -->
+	<bean id="modifyHumanitiesResearchRewardAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyHumanitiesResearchRewardAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置修改理科著作信息的Bean -->
+	<bean id="modifyScienceBookAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceBookAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科政府科技奖励信息的Bean -->
+	<bean id="modifyScienceGovernmentAwardAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceGovernmentAwardAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科知识产权信息的Bean -->
+	<bean id="modifyScienceIpRightsAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceIpRightsAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科活动机构信息信息的Bean -->
+	<bean id="modifyScienceOrganizationAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceOrganizationAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科科技交流信息的Bean -->
+	<bean id="modifyScienceTechExchangeAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceTechExchangeAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科科技交流信息的Bean -->
+	<bean id="modifyScienceTechProjectAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceTechProjectAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改理科技术转让信息的Bean -->
+	<bean id="modifyScienceTechTransferAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyScienceTechTransferAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置修改专业建设信息的Bean -->
+	<bean id="modifyMajorContributeAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyMajorContributeAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改学生获奖信息的Bean -->
+	<bean id="modifyStudentAwardsAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyStudentAwardsAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改教学成果奖信息的Bean -->
+	<bean id="modifyTeachAchievementsAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachAchievementsAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- *************2013-8-12   黄海燕添加************************* -->
+	
+	
+	<!-- 配置修改教材立项信息的Bean -->
+	<bean id="modifyTeachingMaterialSetAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachingMaterialSetAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置更新理科科研项目详细信息的Bean -->
+	<bean id="scienceTechProjectDetailAction" class="com.cqupt.mis.rms.action.teacher.ScienceTechProjectDetailAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置更新人文社科项目详细信息的Bean -->
+	<bean id="humanitiesProjectDetailAction" class="com.cqupt.mis.rms.action.teacher.HumanitiesProjectDetailAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean >
+	
+	<bean id="excelToDBTecAction" 
+	      class="com.cqupt.mis.rms.action.teacher.ExcelToDBTecAction" scope="prototype">
+	    <property name="excelToDBService" ref="excelToDBTecServiceImpl" />
+	</bean>
+	<bean id="excelToDBHumAction" 
+	      class="com.cqupt.mis.rms.action.teacher.ExcelToDBHumAction" scope="prototype">
+	    <property name="excelToDBService" ref="excelToDBHumServiceImpl" />
+	</bean>
+	<bean id="excelToDBAchAction" 
+	      class="com.cqupt.mis.rms.action.teacher.ExcelToDBAchAction" scope="prototype">
+	    <property name="excelToDBService" ref="excelToDBAchServiceImpl" />
+	</bean>
+	
+	<bean id="excelToDBNewAchAction" 
+	      class="com.cqupt.mis.rms.action.teacher.ExcelToDBNewAchAction" scope="prototype">
+	    <property name="excelToDBService" ref="excelToDBAchServiceImpl" />
+	</bean>
+	
+	<!-- 处理导入教师信息相关的Bean -->
+	<bean id="importUserInfoAction" class="com.cqupt.mis.rms.action.common.ImportUserInfoAction" scope="prototype">
+		<property name="userManagerService" ref="userManagerService" />
+	</bean>
+	<bean id="downExcelModelAction" class="com.cqupt.mis.rms.action.teacher.DownExcelModelAction" scope="prototype">
+	</bean>
+	
+	<bean id="downErrorExcelAction" class="com.cqupt.mis.rms.action.teacher.DownErrorExcelAction" scope="prototype">
+	<property name="researchInfoService" ref="researchInfoService" />
+    </bean>
+    
+	<bean id="deleteErrorExcelAction" class="com.cqupt.mis.rms.action.system.user.DeleteErrorExcelAction" scope="prototype">
+    </bean>
+    
+    <!-- 配置学院管理员用户查看个人科研信息的Bean -->
+	<bean id="viewResearchInfoCollegeAction" class="com.cqupt.mis.rms.action.college.ViewResearchInfoCollegeAction" >
+		<property name="researchInfoService" ref="researchInfoService" />
+	</bean>
+	
+	<bean id="viewResearchDetailInfoCollegeAction" class="com.cqupt.mis.rms.action.college.ViewResearchDetailInfoCollegeAction" >
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+    
+   
+	
+	
+	<!--****************************************添加************************************-->
+	
+	<bean id="submitMajorContributeNewAction" class="com.cqupt.mis.rms.action.teacher.SubmitMajorContributeNewAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交教学成果课程建设信息的Bean -->
+	<bean id="submitCourseContributeNewAction" class="com.cqupt.mis.rms.action.teacher.SubmitCourseContributeNewAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交教学成果奖信息的Bean -->
+	<bean id="submitTeachAchievementsNewAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachAchievementsNewAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交教学成果奖信息的Bean -->
+	<bean id="submitTeachAchievementsCQAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachAchievementsCQAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	<!-- 配置教师用户提交人文社科教材立项信息的Bean -->
+	<bean id="submitTeachingMaterialSetNewAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachingMaterialSetNewAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	<!-- 配置教师用户提交教学成果学生获奖信息的Bean -->
+	<bean id="submitStudentAwardsNewAction" class="com.cqupt.mis.rms.action.teacher.SubmitStudentAwardsNewAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
+	</bean>
+	
+	
+	<bean id="searchSchoolMajorContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeNewAction" scope="prototype">
+		<property name="majorContributeNewService" ref="majorContributeNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询MajorContributeInfo专业建设的Bean -->
+	<bean id="searchCollegeMajorContributeNewAction" class="com.cqupt.mis.rms.action.college.SearchCollegeMajorContributeNewAction" scope="prototype">
+		<property name="majorContributeNewService" ref="majorContributeNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询CourseContributeInfo课程建设的bean -->
+	<!-- 配置学校查询CourseContributeInfo课程建设的Bean -->
+	<bean id="searchSchoolCourseContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolCourseContributeNewAction" scope="prototype">
+		<property name="courseContributeNewService" ref="courseContributeNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询CourseContributeInfo课程建设的Bean -->
+	<bean id="searchCollegeCourseContributeNewAction" class="com.cqupt.mis.rms.action.college.SearchCollegeCourseContributeNewAction" scope="prototype">
+		<property name="courseContributeNewService" ref="courseContributeNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean -->
+	<!-- 配置学校查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchSchoolTeachAchievementsNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolTeachAchievementsNewAction" scope="prototype">
+		<property name="teachAchievementsNewService" ref="teachAchievementsNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	
+	
+	<!-- 配置学院查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchCollegeTeachAchievementsNewAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachAchievementsNewAction" scope="prototype">
+		<property name="teachAchievementsNewService" ref="teachAchievementsNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean -->
+	<!-- 配置学校查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchSchoolTeachAchievementsCQAction" class="com.cqupt.mis.rms.action.school.SearchSchoolTeachAchievementsCQAction" scope="prototype">
+		<property name="teachAchievementsCQService" ref="teachAchievementsCQService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	
+	
+	<!-- 配置学院查询TeachAchievementsInfo教学成果的Bean -->
+	<bean id="searchCollegeTeachAchievementsCQAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachAchievementsCQAction" scope="prototype">
+		<property name="teachAchievementsCQService" ref="teachAchievementsCQService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	
+	
+	<!-- 配置查询TeachingMaterialSet教材立项的bean -->
+	<!-- 配置学校查询TeachingMaterialSet教材立项的Bean -->
+	<bean id="searchSchoolTeachingMaterialSetNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolTeachingMaterialSetNewAction" scope="prototype">
+		<property name="teachingMaterialSetNewService" ref="teachingMaterialSetNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询TeachingMaterialSet教材立项的Bean -->
+	<bean id="searchCollegeTeachingMaterialSetNewAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachingMaterialSetNewAction" scope="prototype">
+		<property name="teachingMaterialSetNewService" ref="teachingMaterialSetNewService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	<!-- 配置查询StudentAwardsInfo学生获奖的bean -->
+	<!-- 配置学校查询StudentAwardsInfo学生获奖的Bean -->
+	<bean id="searchSchoolStudentAwardsNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolStudentAwardsNewAction" scope="prototype">
+		<property name="studentAwardsNewInfoService" ref="studentAwardsNewInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>	
+	<!-- 配置学院查询StudentAwardsInfo学生获奖的Bean -->
+	<bean id="searchCollegeStudentAwardsNewAction" class="com.cqupt.mis.rms.action.college.SearchCollegeStudentAwardsNewAction" scope="prototype">
+		<property name="studentAwardsNewInfoService" ref="studentAwardsNewInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+	</bean>
+	
+	
+	<!-- 配置修改课程建设信息的Bean -->
+	<bean id="modifyCourseContributeNewAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyCourseContributeNewAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置修改专业建设信息的Bean -->
+	<bean id="modifyMajorContributeNewAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyMajorContributeNewAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改学生获奖信息的Bean -->
+	<bean id="modifyStudentAwardsNewAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyStudentAwardsNewAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- 配置修改教学成果奖信息的Bean -->
+	<bean id="modifyTeachAchievementsNewAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachAchievementsNewAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置修改教学成果奖信息的Bean -->
+	<bean id="modifyTeachAchievementsCQAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachAchievementsCQAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	<!-- *************2013-8-12   黄海燕添加************************* -->
+	
+	
+	<!-- 配置修改教材立项信息的Bean -->
+	<bean id="modifyTeachingMaterialSetNewAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachingMaterialSetNewAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="researchInfoDao" ref="researchInfoDao" />
+	</bean>
+	
+	<!-- 配置得到教学成果类详细信息的Bean -->
+	<bean id="managerCollegeAchNewStatusAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeAchNewStatusAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	
+	<!-- 配置得到教学成果类信息的Bean -->
+	<bean id="managerCollegeAchNewInfoAction"
+		class="com.cqupt.mis.rms.action.college.ManagerCollegeAchNewInfoAction">
+		<property name="collegeManagerService" ref="collegeManagerService" />
+	</bean>
+	
+	<bean id="resetPasswordAction" class="com.cqupt.mis.rms.action.common.ResetPasswordAction" >
+		<property name="modifyPasswordService" ref="modifyPasswordService" />
+		<property name="modifyUserInfoService" ref="modifyUserInfoService" />
+	</bean>
+	
+	<!--<bean id="backUpAction" class="com.cqupt.mis.rms.action.BackUpAction" >
+		<property name="downloadExcelService" ref="downloadExcelService">
+		</property>
+	</bean>
+	
+	
+	
+	--><!-- 添加 -->
+	
+	
+	
+</beans>
+
+

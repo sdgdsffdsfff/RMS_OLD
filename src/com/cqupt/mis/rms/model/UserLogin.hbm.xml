@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.UserLogin" table="t_user">
+		<id name="userId" column="user_id" />
+		<property name="userPwd" column="user_pwd" />
+		<set name="userRoleInfo" inverse="true" >
+			<key column="userId" />
+			<one-to-many class="com.cqupt.mis.rms.model.UserRoleInfo" />
+		</set>
+	</class>
+</hibernate-mapping>

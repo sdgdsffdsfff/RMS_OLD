@@ -1,0 +1,131 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- 链接数据库 -->
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		 
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms</property>
+		<property name="hibernate.connection.username">rms</property>
+		<property name="hibernate.connection.password">123</property>
+		
+		<!-- 	
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/rms</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">2907159</property>
+		
+		
+		<property name="hibernate.connection.url">jdbc:mysql://172.22.1.159/rms</property>
+		<property name="hibernate.connection.username">misproject</property>
+		<property name="hibernate.connection.password">2907159</property>
+		-->
+		
+		<!-- 使用C3P0连接池 -->
+		<property name="connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		   <property name="hibernate.c3p0.max_size">80</property>
+	       <property name="hibernate.c3p0.min_size">5</property>
+	       <property name="hibernate.c3p0.timeout">3360</property>
+	       <property name="hibernate.c3p0.max_statements">100</property>
+	       <property name="hibernate.c3p0.acquire_increment">3</property>
+	       <property name="hibernate.c3p0.maxIdleTime">30</property>
+	       <property name="hibernate.c3p0.idle_test_period">20</property>
+		<!-- 其他配置 -->
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+		<property name="show_sql">false</property>
+		<property name="format_sql">true</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+		<!-- 加载映射文件 -->
+		<mapping resource="com/cqupt/mis/rms/model/UserLogin.hbm.xml" />
+		<mapping resource="com/cqupt/mis/rms/model/UserRoleInfo.hbm.xml" />
+		<mapping resource="com/cqupt/mis/rms/model/RoleCollege.hbm.xml" />
+		<mapping resource="com/cqupt/mis/rms/model/RoleLevel.hbm.xml" />
+		<mapping resource="com/cqupt/mis/rms/model/Purviewinfo.hbm.xml" />
+		<mapping resource="com/cqupt/mis/rms/model/Rolepurview.hbm.xml" />
+		<!-- 2012-07-17 09:55 LvHai add -->
+		<mapping resource="com/cqupt/mis/rms/model/CQUPTUser.hbm.xml"/>
+        <mapping resource="com/cqupt/mis/rms/model/CQUPTCollege.hbm.xml"/>
+        <mapping resource="com/cqupt/mis/rms/model/Proofs.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/SciencePaper.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/SciencePaperAuthor.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/MajorContribute.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeMember.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/CourseContribute.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/CourseContributeMember.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachAchievements.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachersAwards.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialSet.hbm.xml"/>
+		<!--  2012-10-31 17:00 LvHai add TeachingMaterialEditor-->
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialEditor.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/StudentAwards.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/StudentInstructor.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/CQUPTRole.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesAcademicMeeting.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesAcademicMeetingPerson.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesBook.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesBookAuthor.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesExchangePaper.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesExchangePaperAuthor.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesPaper.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesPaperAuthor.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesProject.hbm.xml"/>		
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesProjectDetail.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesProjectMember.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesResearchReward.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/HumanitiesResearchRewardPerson.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/Positions.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceBook.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceBookAuthor.hbm.xml"/>		
+		<mapping resource="com/cqupt/mis/rms/model/ScienceInventors.hbm.xml"/>		
+		<mapping resource="com/cqupt/mis/rms/model/ScienceDetailTechProject.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceGovAwardPerson.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceGovernmentAward.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceIpRights.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceOrganization.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTechAttendPerson.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTechExchange.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTechProject.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTechProjectMember.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTechTransfer.hbm.xml"/>
+		<!-- 2012-10-31 17:00 LvHai add ScienceTransferLeader-->
+		<mapping resource="com/cqupt/mis/rms/model/ScienceTransferLeader.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/Titles.hbm.xml"/>
+		
+		 <!-- 2013-8-9 15:00 HuangHaiYan add TeachAchievementsDeclarant and TeachAchievementsNew -->
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachAchievementsDeclarant.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachAchievementsCQ.hbm.xml"/>
+		
+		
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeNew.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeMemberNew.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/CourseContributeNew.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/CourseContributeMemberNew.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachAchievementsNew.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachersAwardsNew.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialSetNew.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialEditorNew.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsNew.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/StudentInstructorNew.hbm.xml"/>
+		
+		</session-factory>
+</hibernate-configuration>

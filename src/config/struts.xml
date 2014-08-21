@@ -1,0 +1,2390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.multipart.saveDir" value="D:\"></constant>
+	<constant name="struts.locale" value="en_GB"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.multipart.maxSize" value="1000000000000" />
+	<constant name="struts.objectFactory" value="spring" ></constant>
+	
+	<package name="struts2" extends="struts-default">
+		<!-- 定义拦截器 -->
+		<interceptors>
+			<interceptor name="purview"
+				class="com.cqupt.mis.rms.utils.PurviewInterceptor" />
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="purview" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mystack" />
+		<global-results>
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="input" type="redirect">/login.jsp</result>
+		</global-results>
+		<!-- 操作确认action -->
+		<action name="confirm" class="confirmAction">
+			<result name="success">/pages/common/confirm.jsp</result>
+		</action>
+		<!-- 处理选择登录方式的Action -->
+		<action name="forwardLogin" class="forwardLoginAction" method="getRoleLevel">
+			<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="download" class="downloadAction">
+			
+			<result name="success" type="stream">
+				<param name="contentType">${fileType}</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		
+			
+	
+		<!-- 处理登录的Action -->
+		<action name="menu" class="menuAction">
+			<result name="success">/pages/common/main.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="login" class="loginAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="chain">
+				<param name="actionName">menu</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科论文信息的拦截器 -->
+		<action name="submitsciencepaper" class="submitSciencePaperAction">
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理管理员权限管理相关的action -->
+		<action name="roleInfo" class="roleInfoAction">
+			<result name="success">/pages/system/role/rolelist.jsp</result>
+			
+		</action>
+		<action name="addRole" class="addRoleAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="forwardUpdateRoleInfo" class="forwardUpdateRoleInfoAction">
+			<result name="success">/pages/system/role/updateRole.jsp</result>
+		</action>
+		<action name="updateRoleInfo" class="updateRoleInfoAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="deleteRole" class="deleteRoleAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="forwardAssignPurview" class="forwardAssignPurviewAction">
+			<result name="success">/pages/system/role/assignPurview.jsp</result>
+		</action>
+		
+		<action name="assignPurview" class="assignPurviewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="forwardAssignCollege" class="forwardAssignCollegeAction">
+			<result name="success">/pages/system/role/assignCollege.jsp</result>
+		</action>
+		<action name="assignCollege" class="assignCollegeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<!-- 处理用户角色信息的action -->
+		<action name="viewUserAndRole" class="userAndRoleMangerAction"
+			method="findUserRoleInfo">
+			<result name="success">/pages/system/user/userAndRole.jsp</result>
+		</action>
+		<action name="forwardAssignRole" class="userAndRoleMangerAction"
+			method="findRoleInfo">
+			<result name="success">/pages/system/user/rolelist.jsp</result>
+		</action>
+		<action name="assignRole" class="userAndRoleMangerAction" method="assignRoleToUser">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		
+		<!-- 处理导入教师用户信息的Action -->
+		<action name="importUserInfo" class="importUserInfoAction">
+			<result name="success">/savesuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+			<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="excelToDBTec" class="excelToDBTecAction">
+		    <result name="success">/error.jsp</result>
+		</action>
+		
+		<action name="excelToDBHum" class="excelToDBHumAction">
+			<result name="success">/error.jsp</result>
+		</action>
+		
+		<action name="excelToDBAch" class="excelToDBAchAction">
+            <result name="success">/error.jsp</result>
+		</action>
+		
+		<action name="excelToDBNewAch" class="excelToDBNewAchAction">
+            <result name="success">/error.jsp</result>
+		</action>
+		
+		<action name="downErrorExcel" class="downErrorExcelAction">
+		   <result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+            </result>
+		</action>
+		
+		<action name="deleteErrorExcel" class="deleteErrorExcelAction">
+        		<result name="success">/error.jsp</result>
+		</action>
+		
+		<action name="downExcelModel" class="downExcelModelAction">
+		   
+		   <result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+            </result>
+            
+            <result name="DOC" type="stream">
+				<param name="contentType">application/msword</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+            </result>
+			<interceptor-ref name="defaultStack" />
+		</action>
+		<!-- 教师信息管理 -->
+		<action name="manageTeacher" class="manageTeacherAction">
+			<result name="manageTea">pages/teacher/manage/viewmanageTeacher.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 添加教师信息 -->
+		<action name="addNewUser" class="submitUserInfoAction">
+			<result name="addsuccess" type="chain">manageTeacher</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		 
+		<action name="viewAddUser" class="viewAddUserAction">
+			<result>pages/common/addNewUser.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 检查用户ID是否重复 -->
+		<action name="checkUserId" class="checkUserIdAction">
+			<result type="stream" name="repeat">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+    		<result type="stream" name="success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+    		<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		<!--<action name="backUp" class="backUpAction">
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	--></package>
+
+
+
+	<!-- 定义学院管理员部分的拦截器 -->
+	<package name="collegeTecInfo" extends="struts-default"
+		namespace="/collegeTecInfo">
+		<!-- 定义拦截器 -->
+		<action name="scienceTechProject" class="managerCollegeTecInfoAction"
+			method="scienceTechProject">
+			<result name="ScienceTechProject">/pages/college/simpleInfo/sciencetechproject.jsp
+			</result>
+		</action>
+		<action name="scienceBook" class="managerCollegeTecInfoAction"
+			method="scienceBook">
+			<result name="ScienceBook">/pages/college/simpleInfo/sciencebook.jsp
+			</result>
+		</action>
+		<action name="scienceGovernmentAward" class="managerCollegeTecInfoAction"
+			method="scienceGovernmentAward">
+			<result name="ScienceGovernmentAward">/pages/college/simpleInfo/sciencegovernmentaward.jsp
+			</result>
+		</action>
+		<action name="scienceIpRights" class="managerCollegeTecInfoAction"
+			method="scienceIpRights">
+			<result name="ScienceIpRights">/pages/college/simpleInfo/scienceiprights.jsp
+			</result>
+		</action>
+		<action name="scienceOrganization" class="managerCollegeTecInfoAction"
+			method="scienceOrganization">
+			<result name="ScienceOrganization">/pages/college/simpleInfo/scienceorganization.jsp
+			</result>
+		</action>
+		<action name="sciencePaper" class="managerCollegeTecInfoAction"
+			method="sciencePaper">
+			<result name="SciencePaper">/pages/college/simpleInfo/sciencepaper.jsp
+			</result>
+		</action>
+		<action name="scienceTechTransfer" class="managerCollegeTecInfoAction"
+			method="scienceTechTransfer">
+			<result name="ScienceTechTransfer">/pages/college/simpleInfo/sciencetechtransfer.jsp
+			</result>
+		</action>
+		<action name="scienceTechExchange" class="managerCollegeTecInfoAction"
+			method="scienceTechExchange">
+			<result name="ScienceTechExchange">/pages/college/simpleInfo/sciencetechexchange.jsp
+			</result>
+		</action>
+	</package>
+
+	<package name="collegeHumInfo" extends="struts-default"
+		namespace="/collegeHumInfo">
+		<!-- 定义拦截器 -->
+		<action name="humanitiesAcademicMeeting" class="managerCollegeHumInfoAction"
+			method="humanitiesAcademicMeeting">
+			<result name="HumanitiesAcademicMeeting">/pages/college/simpleInfo/humanitiesacademicmeeting.jsp
+			</result>
+		</action>
+		<action name="humanitiesBook" class="managerCollegeHumInfoAction"
+			method="humanitiesBook">
+			<result name="HumanitiesBook">/pages/college/simpleInfo/humanitiesbook.jsp
+			</result>
+		</action>
+		<action name="humanitiesExchangePaper" class="managerCollegeHumInfoAction"
+			method="humanitiesExchangePaper">
+			<result name="HumanitiesExchangePaper">/pages/college/simpleInfo/humanitiesexchangepaper.jsp
+			</result>
+		</action>
+		<action name="humanitiesPaper" class="managerCollegeHumInfoAction"
+			method="humanitiesPaper">
+			<result name="HumanitiesPaper">/pages/college/simpleInfo/humanitiespaper.jsp
+			</result>
+		</action>
+		<action name="humanitiesProject" class="managerCollegeHumInfoAction"
+			method="humanitiesProject">
+			<result name="HumanitiesProject">/pages/college/simpleInfo/humanitiesproject.jsp
+			</result>
+		</action>
+		<action name="humanitiesResearchReward" class="managerCollegeHumInfoAction"
+			method="humanitiesResearchReward">
+			<result name="HumanitiesResearchReward">/pages/college/simpleInfo/humanitiesresearchreward.jsp
+			</result>
+		</action>
+	</package>
+
+
+	<package name="collegeAchInfo" extends="struts-default"
+		namespace="/collegeAchInfo">
+		<!-- 定义拦截器 -->
+		<action name="courseContribute" class="managerCollegeAchInfoAction"
+			method="courseContribute">
+			<result name="CourseContribute">/pages/college/simpleInfo/coursecontribute.jsp
+			</result>
+		</action>
+		<action name="majorContribute" class="managerCollegeAchInfoAction"
+			method="majorContribute">
+			<result name="MajorContribute">/pages/college/simpleInfo/majorcontribute.jsp
+			</result>
+		</action>
+		<action name="studentAwards" class="managerCollegeAchInfoAction"
+			method="studentAwards">
+			<result name="StudentAwards">/pages/college/simpleInfo/studentawards.jsp
+			</result>
+		</action>
+		<action name="teachingMaterialSet" class="managerCollegeAchInfoAction"
+			method="teachingMaterialSet">
+			<result name="TeachingMaterialSet">/pages/college/simpleInfo/teachingmaterialSet.jsp
+			</result>
+		</action>
+		<action name="teachAchievements" class="managerCollegeAchInfoAction"
+			method="teachAchievements">
+			<result name="TeachAchievements">/pages/college/simpleInfo/teachachievements.jsp
+			</result>
+		</action>
+	</package>
+
+
+
+	<package name="collegeTecStatus" extends="struts-default"
+		namespace="/collegeTecStatus">
+		<!-- 定义拦截器 -->
+		<action name="scienceBook" class="managerCollegeTecStatusAction"
+			method="scienceBook">
+			<result name="ScienceBook">/pages/college/retailInfo/sciencebook.jsp
+			</result>
+		</action>
+		<action name="scienceGovernmentAward" class="managerCollegeTecStatusAction"
+			method="scienceGovernmentAward">
+			<result name="ScienceGovernmentAward">/pages/college/retailInfo/sciencegovernmentaward.jsp
+			</result>
+		</action>
+		<action name="scienceIpRights" class="managerCollegeTecStatusAction"
+			method="scienceIpRights">
+			<result name="ScienceIpRights">/pages/college/retailInfo/scienceiprights.jsp
+			</result>
+		</action>
+		<action name="scienceOrganization" class="managerCollegeTecStatusAction"
+			method="scienceOrganization">
+			<result name="ScienceOrganization">/pages/college/retailInfo/scienceorganization.jsp
+			</result>
+		</action>
+		<action name="sciencePaper" class="managerCollegeTecStatusAction"
+			method="sciencePaper">
+			<result name="SciencePaper">/pages/college/retailInfo/sciencepaper.jsp
+			</result>
+		</action>
+		<action name="scienceTechTransfer" class="managerCollegeTecStatusAction"
+			method="scienceTechTransfer">
+			<result name="ScienceTechTransfer">/pages/college/retailInfo/sciencetechtransfer.jsp
+			</result>
+		</action>
+		<action name="scienceTechProject" class="managerCollegeTecStatusAction"
+			method="scienceTechProject">
+			<result name="ScienceTechProject">/pages/college/retailInfo/sciencetechproject.jsp
+			</result>
+		</action>
+		<action name="scienceTechExchange" class="managerCollegeTecStatusAction"
+			method="scienceTechExchange">
+			<result name="ScienceTechExchange">/pages/college/retailInfo/sciencetechexchange.jsp
+			</result>
+		</action>
+	</package>
+
+	<package name="collegeHumStatus" extends="struts-default"
+		namespace="/collegeHumStatus">
+		<!-- 定义拦截器 -->
+		<action name="humanitiesAcademicMeeting" class="managerCollegeHumStatusAction"
+			method="humanitiesAcademicMeeting">
+			<result name="HumanitiesAcademicMeeting">/pages/college/retailInfo/humanitiesacademicmeeting.jsp
+			</result>
+		</action>
+		<action name="humanitiesBook" class="managerCollegeHumStatusAction"
+			method="humanitiesBook">
+			<result name="HumanitiesBook">/pages/college/retailInfo/humanitiesbook.jsp
+			</result>
+		</action>
+		<action name="humanitiesExchangePaper" class="managerCollegeHumStatusAction"
+			method="humanitiesExchangePaper">
+			<result name="HumanitiesExchangePaper">/pages/college/retailInfo/humanitiesexchangepaper.jsp
+			</result>
+		</action>
+		<action name="humanitiesPaper" class="managerCollegeHumStatusAction"
+			method="humanitiesPaper">
+			<result name="HumanitiesPaper">/pages/college/retailInfo/humanitiespaper.jsp
+			</result>
+		</action>
+		<action name="humanitiesProject" class="managerCollegeHumStatusAction"
+			method="humanitiesProject">
+			<result name="HumanitiesProject">/pages/college/retailInfo/humanitiesproject.jsp
+			</result>
+		</action>
+		<action name="humanitiesResearchReward" class="managerCollegeHumStatusAction"
+			method="humanitiesResearchReward">
+			<result name="HumanitiesResearchReward">/pages/college/retailInfo/humanitiesresearchreward.jsp
+			</result>
+		</action>
+	</package>
+
+
+	<package name="collegeAchStatus" extends="struts-default"
+		namespace="/collegeAchStatus">
+		<!-- 定义拦截器 -->
+		<action name="courseContribute" class="managerCollegeAchStatusAction"
+			method="courseContribute">
+			<result name="CourseContribute">/pages/college/retailInfo/coursecontribute.jsp
+			</result>
+		</action>
+		<action name="majorContribute" class="managerCollegeAchStatusAction"
+			method="majorContribute">
+			<result name="MajorContribute">/pages/college/retailInfo/majorcontribute.jsp
+			</result>
+		</action>
+		<action name="studentAwards" class="managerCollegeAchStatusAction"
+			method="studentAwards">
+			<result name="StudentAwards">/pages/college/retailInfo/studentawards.jsp
+			</result>
+		</action>
+		<action name="teachingMaterialSet" class="managerCollegeAchStatusAction"
+			method="teachingMaterialSet">
+			<result name="TeachingMaterialSet">/pages/college/retailInfo/teachingmaterialset.jsp
+			</result>
+		</action>
+		<action name="teachAchievements" class="managerCollegeAchStatusAction"
+			method="teachAchievements">
+			<result name="TeachAchievements">/pages/college/retailInfo/teachachievements.jsp
+			</result>
+		</action>
+	</package>
+
+
+	
+
+	<package name="collegeSetStatus" extends="struts-default">
+		<!-- 定义拦截器 -->
+		<action name="collegeUpdateStatus" class="collegeUpdateStatusAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/success.jsp</result>
+		</action>
+		
+		<!--<action name="collegeUpdateStatusNew" class="collegeUpdateStatusNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/success.jsp</result>
+		</action>
+	--></package>
+
+	<!-- 定义下载的action -->
+	<package name="download" namespace="/download" extends="struts-default">
+
+		<action name="download" class="downloadAction" method="download">
+			<result name="success"></result>
+			<result name="error">/pages/college/error.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 定义录入科研信息的拦截器 -->
+	<package name="input" extends="struts-default">
+		<!-- 定义提交理科科研信息的action -->
+		<!-- 定义教师用户提交理科论文信息的action -->
+		<action name="submitSciencePaper" class="submitSciencePaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+        	<interceptor-ref name="defaultStack" />
+		</action>
+		<!-- 定义教师用户提交理科活动机构信息的action -->
+		<action name="submitScienceOrganization" class="submitScienceOrganizationAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科科技项目信息的action -->
+		<action name="submitScienceTechProject" class="submitScienceTechProjectAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科著作信息的action -->
+		<action name="submitScienceBook" class="submitScienceBookAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科政府科技奖励信息的action -->
+		<action name="submitScienceGovernmentAward" class="submitScienceGovernmentAwardAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科知识产权情况信息的action -->
+		<action name="submitScienceIpRights" class="submitScienceIpRightsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科技术转让信息的action -->
+		<action name="submitScienceTechTransfer" class="submitScienceTechTransferAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交理科科技交流信息的action -->
+		<action name="submitScienceTechExchange" class="submitScienceTechExchangeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 定义提交人文社科科研信息的action -->
+		<!-- 定义教师用户提交人文社科论文信息的action-->
+		<action name="submitHumanitiesPaper" class="submitHumanitiesPaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交人文社科著作信息的action -->
+		<action name="submitHumanitiesBook" class="submitHumanitiesBookAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交人文社科交流论文信息的action -->
+		<action name="submitHumanitiesExchangePaper" class="submitHumanitiesExchangePaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交人文社科科研项目信息的action -->
+		<action name="submitHumanitiesProject" class="submitHumanitiesProjectAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交人文社科科研获奖信息的action -->
+		<action name="submitHumanitiesResearchReward" class="submitHumanitiesResearchRewardAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交人文社科学术会议信息的action -->
+		<action name="submitHumanitiesAcademicMeeting" class="submitHumanitiesAcademicMeetingAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 定义提交教学成果科研信息的action -->
+		<!-- 定义教师用户提交教学成果专业建设信息的action -->
+		<action name="submitMajorContribute" class="submitMajorContributeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果课程建设信息的action -->
+		<action name="submitCourseContribute" class="submitCourseContributeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果奖信息的action -->
+		<action name="submitTeachAchievements" class="submitTeachAchievementsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 定义教师用户提交教学成果教材立项信息的action -->
+		<action name="submitTeachingMaterialSet" class="submitTeachingMaterialSetAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果学生获奖信息的action -->
+		<action name="submitStudentAwards" class="submitStudentAwardsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- ***************添加***************** -->
+		<!-- 定义提交教学成果科研信息的action -->
+		<!-- 定义教师用户提交教学成果专业建设信息的action -->
+		<action name="submitMajorContributeNew" class="submitMajorContributeNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果课程建设信息的action -->
+		<action name="submitCourseContributeNew" class="submitCourseContributeNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		<!-- 定义教师用户提交教学成果教材立项信息的action -->
+		<action name="submitTeachingMaterialSetNew" class="submitTeachingMaterialSetNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果学生获奖信息的action -->
+		<action name="submitStudentAwardsNew" class="submitStudentAwardsNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果奖信息的action -->
+		<action name="submitTeachAchievementsNew" class="submitTeachAchievementsNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 定义教师用户提交教学成果奖信息的action -->
+		<action name="submitTeachAchievementsCQ" class="submitTeachAchievementsCQAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+	</package>
+	
+	<package name="modify" extends="struts-default">
+		<!-- 处理修改密码的Action -->
+		<action name="modifyPassword" class="modifyPasswordAction">
+			<result name="success">/savesuccess.jsp</result>
+			<result name="input">/pages/common/modifypassword.jsp</result>
+		</action>
+		
+		<!-- ****************添加****************************** -->
+		<action name="resetPassword" class="resetPasswordAction">
+		    <result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<!-- 处理管理用户个人信息的Action -->
+		<action name="manageUserInfo" class="manageUserInfoAction">
+			<result name="success">/pages/common/manageuserinfo.jsp</result>
+			<result name="failure">/error.jsp</result>
+		</action>
+		<!-- 处理用户修改个人信息的Action -->
+		<action name="modifyUserInfo" class="modifyUserInfoAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		
+		<!-- 查看个人职称信息的Action -->
+		<action name="viewTitles" class="manageUserInfoAction" method="viewTitles">
+			<result name="success">/pages/common/viewtitles.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 查看个人职称信息的Action -->
+		<action name="viewPositions" class="manageUserInfoAction" method="viewPositions">
+			<result name="success">/pages/common/viewpositions.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理添加个人职称的Action -->
+		<action name="manageTitles" class="manageUserInfoAction" method="manageTitles">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<!-- 处理添加个人职称的Action -->
+		<action name="managePositions" class="manageUserInfoAction" method="managePositions">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+	</package>
+	
+	<!-- 教师用户管理个人科研信息的Action -->
+	<package name="manageinfo" extends="struts-default">
+		<action name="deleteProof" class="deleteResearchInfoAction"
+		method="deleteProof">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		
+		<action name="viewSciencePaper" class="viewResearchInfoAction" 
+		method="viewSciencePaper">
+			<result name="success">/pages/teacher/manage/viewsciencepaper.jsp</result>
+		</action>
+		<action name="viewSciencePaperDetail" class="viewResearchDetailInfoAction" 
+		method="viewSciencePaperDetail">
+			<result name="success">/pages/teacher/manage/viewsciencepaperdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencepaper.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteSciencePaper" class="deleteResearchInfoAction"
+		method="deleteSciencePaper">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifySciencePaper" class="modifySciencePaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+        	<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="viewScienceOrganization" class="viewResearchInfoAction" 
+		method="viewScienceOrganization">
+			<result name="success">/pages/teacher/manage/viewscienceorganization.jsp</result>
+		</action>
+		<action name="viewScienceOrganizationDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceOrganizationDetail">
+			<result name="success">/pages/teacher/manage/viewscienceorganizationdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyscienceorganization.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceOrganization" class="deleteResearchInfoAction"
+		method="deleteScienceOrganization">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceOrganization" class="modifyScienceOrganizationAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceTechProject" class="viewResearchInfoAction" 
+		method="viewScienceTechProject">
+			<result name="success">/pages/teacher/manage/viewsciencetechproject.jsp</result>
+		</action>
+		<action name="viewScienceTechProjectDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceTechProjectDetail">
+			<result name="success">/pages/teacher/manage/viewsciencetechprojectdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencetechproject.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceTechProject" class="deleteResearchInfoAction"
+		method="deleteScienceTechProject">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceTechProject" class="modifyScienceTechProjectAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceBook" class="viewResearchInfoAction" 
+		method="viewScienceBook">
+			<result name="success">/pages/teacher/manage/viewsciencebook.jsp</result>
+		</action>
+		<action name="viewScienceBookDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceBookDetail">
+			<result name="success">/pages/teacher/manage/viewsciencebookdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencebook.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceBook" class="deleteResearchInfoAction"
+		method="deleteScienceBook">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceBook" class="modifyScienceBookAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceGovernmentAward" class="viewResearchInfoAction" 
+		method="viewScienceGovernmentAward">
+			<result name="success">/pages/teacher/manage/viewsciencegovernmentaward.jsp</result>
+		</action>
+		<action name="viewScienceGovernmentAwardDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceGovernmentAwardDetail">
+			<result name="success">/pages/teacher/manage/viewsciencegovernmentawarddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencegovernmentaward.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceGovernmentAward" class="deleteResearchInfoAction"
+		method="deleteScienceGovernmentAward">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceGovernmentAward" class="modifyScienceGovernmentAwardAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceIpRights" class="viewResearchInfoAction" 
+		method="viewScienceIpRights">
+			<result name="success">/pages/teacher/manage/viewscienceiprights.jsp</result>
+		</action>
+		<action name="viewScienceIpRightsDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceIpRightsDetail">
+			<result name="success">/pages/teacher/manage/viewscienceiprightsdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyscienceiprights.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceIpRights" class="deleteResearchInfoAction"
+		method="deleteScienceIpRights">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceIpRights" class="modifyScienceIpRightsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceTechTransfer" class="viewResearchInfoAction" 
+		method="viewScienceTechTransfer">
+			<result name="success">/pages/teacher/manage/viewsciencetechtransfer.jsp</result>
+		</action>
+		<action name="viewScienceTechTransferDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceTechTransferDetail">
+			<result name="success">/pages/teacher/manage/viewsciencetechtransferdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencetechtransfer.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceTechTransfer" class="deleteResearchInfoAction"
+		method="deleteScienceTechTransfer">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceTechTransfer" class="modifyScienceTechTransferAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewScienceTechExchange" class="viewResearchInfoAction" 
+		method="viewScienceTechExchange">
+			<result name="success">/pages/teacher/manage/viewsciencetechexchange.jsp</result>
+		</action>
+		<action name="viewScienceTechExchangeDetail" class="viewResearchDetailInfoAction" 
+		method="viewScienceTechExchangeDetail">
+			<result name="success">/pages/teacher/manage/viewsciencetechexchangedetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifysciencetechexchange.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteScienceTechExchange" class="deleteResearchInfoAction"
+		method="deleteScienceTechExchange">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyScienceTechExchange" class="modifyScienceTechExchangeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewHumanitiesPaper" class="viewResearchInfoAction" 
+		method="viewHumanitiesPaper">
+			<result name="success">/pages/teacher/manage/viewhumanitiespaper.jsp</result>
+		</action>
+		<action name="viewHumanitiesPaperDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesPaperDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiespaperdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiespaper.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesPaper" class="deleteResearchInfoAction"
+		method="deleteHumanitiesPaper">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesPaper" class="modifyHumanitiesPaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+        	<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="viewHumanitiesBook" class="viewResearchInfoAction" 
+		method="viewHumanitiesBook">
+			<result name="success">/pages/teacher/manage/viewhumanitiesbook.jsp</result>
+		</action>
+		<action name="viewHumanitiesBookDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesBookDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiesbookdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiesbook.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesBook" class="deleteResearchInfoAction"
+		method="deleteHumanitiesBook">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesBook" class="modifyHumanitiesBookAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewHumanitiesProject" class="viewResearchInfoAction" 
+		method="viewHumanitiesProject">
+			<result name="success">/pages/teacher/manage/viewhumanitiesproject.jsp</result>
+		</action>
+		<action name="viewHumanitiesProjectDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesProjectDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiesprojectdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiesproject.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesProject" class="deleteResearchInfoAction"
+		method="deleteHumanitiesProject">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesProject" class="modifyHumanitiesProjectAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewHumanitiesExchangePaper" class="viewResearchInfoAction" 
+		method="viewHumanitiesExchangePaper">
+			<result name="success">/pages/teacher/manage/viewhumanitiesexchangepaper.jsp</result>
+		</action>
+		<action name="viewHumanitiesExchangePaperDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesExchangePaperDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiesexchangepaperdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiesexchangepaper.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesExchangePaper" class="deleteResearchInfoAction"
+		method="deleteHumanitiesExchangePaper">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesExchangePaper" class="modifyHumanitiesExchangePaperAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewHumanitiesResearchReward" class="viewResearchInfoAction" 
+		method="viewHumanitiesResearchReward">
+			<result name="success">/pages/teacher/manage/viewhumanitiesresearchreward.jsp</result>
+		</action>
+		<action name="viewHumanitiesResearchRewardDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesResearchRewardDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiesresearchrewarddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiesresearchreward.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesResearchReward" class="deleteResearchInfoAction"
+		method="deleteHumanitiesResearchReward">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesResearchReward" class="modifyHumanitiesResearchRewardAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewHumanitiesAcademicMeeting" class="viewResearchInfoAction" 
+		method="viewHumanitiesAcademicMeeting">
+			<result name="success">/pages/teacher/manage/viewhumanitiesacademicmeeting.jsp</result>
+		</action>
+		<action name="viewHumanitiesAcademicMeetingDetail" class="viewResearchDetailInfoAction" 
+		method="viewHumanitiesAcademicMeetingDetail">
+			<result name="success">/pages/teacher/manage/viewhumanitiesacademicmeetingdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyhumanitiesacademicmeeting.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteHumanitiesAcademicMeeting" class="deleteResearchInfoAction"
+		method="deleteHumanitiesAcademicMeeting">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyHumanitiesAcademicMeeting" class="modifyHumanitiesAcademicMeetingAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewMajorContribute" class="viewResearchInfoAction" 
+		method="viewMajorContribute">
+			<result name="success">/pages/teacher/manage/viewmajorcontribute.jsp</result>
+		</action>
+		
+		<action name="viewMajorContributeDetail" class="viewResearchDetailInfoAction" 
+		method="viewMajorContributeDetail">
+			<result name="success">/pages/teacher/manage/viewmajorcontributedetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifymajorcontribute.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>		
+		
+		<action name="deleteMajorContribute" class="deleteResearchInfoAction"
+		method="deleteMajorContribute">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyMajorContribute" class="modifyMajorContributeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewCourseContribute" class="viewResearchInfoAction" 
+		method="viewCourseContribute">
+			<result name="success">/pages/teacher/manage/viewcoursecontribute.jsp</result>
+		</action>
+		
+		<action name="viewCourseContributeDetail" class="viewResearchDetailInfoAction" 
+		method="viewCourseContributeDetail">
+			<result name="success">/pages/teacher/manage/viewcoursecontributedetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifycoursecontribute.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteCourseContribute" class="deleteResearchInfoAction"
+		method="deleteCourseContribute">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyCourseContribute" class="modifyCourseContributeAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewTeachAchievements" class="viewResearchInfoAction" 
+		method="viewTeachAchievements">
+			<result name="success">/pages/teacher/manage/viewteachachievements.jsp</result>
+		</action>
+		
+		<action name="viewTeachAchievementsDetail" class="viewResearchDetailInfoAction" 
+		method="viewTeachAchievementsDetail">
+			<result name="success">/pages/teacher/manage/viewteachachievementsdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachachievements.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="deleteTeachAchievements" class="deleteResearchInfoAction"
+		method="deleteTeachAchievements">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyTeachAchievements" class="modifyTeachAchievementsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="viewTeachingMaterialSet" class="viewResearchInfoAction" 
+		method="viewTeachingMaterialSet">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialset.jsp</result>
+		</action>
+		
+		<action name="viewTeachingMaterialSetDetail" class="viewResearchDetailInfoAction" 
+		method="viewTeachingMaterialSetDetail">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialsetdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachingmaterialset.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteTeachingMaterialSet" class="deleteResearchInfoAction"
+		method="deleteTeachingMaterialSet">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyTeachingMaterialSet" class="modifyTeachingMaterialSetAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+        	<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="viewStudentAwards" class="viewResearchInfoAction" 
+		method="viewStudentAwards">
+			<result name="success">/pages/teacher/manage/viewstudentawards.jsp</result>
+		</action>
+		<action name="viewStudentAwardsNew" class="viewResearchInfoAction" 
+		method="viewStudentAwardsNew">
+			<result name="success">/pages/teacher/manage/viewstudentawardsNew.jsp</result>
+		</action>
+		<action name="viewStudentAwardsDetail" class="viewResearchDetailInfoAction" 
+		method="viewStudentAwardsDetail">
+			<result name="success">/pages/teacher/manage/viewstudentawardsdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifystudentawards.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteStudentAwards" class="deleteResearchInfoAction"
+		method="deleteStudentAwards">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyStudentAwards" class="modifyStudentAwardsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- *****************添加******************** -->
+		<action name="viewMajorContributeNew" class="viewResearchInfoAction" 
+		method="viewMajorContributeNew">
+			<result name="success">/pages/teacher/manage/viewmajorcontributenew.jsp</result>
+		</action>
+		
+		<action name="viewMajorContributeNewDetail" class="viewResearchDetailInfoAction" 
+		method="viewMajorContributeNewDetail">
+			<result name="success">/pages/teacher/manage/viewmajorcontributenewdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifymajorcontributenew.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>		
+		
+		<action name="deleteMajorContributeNew" class="deleteResearchInfoAction"
+		method="deleteMajorContributeNew">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyMajorContributeNew" class="modifyMajorContributeNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewCourseContributeNew" class="viewResearchInfoAction" 
+		method="viewCourseContributeNew">
+			<result name="success">/pages/teacher/manage/viewcoursecontributenew.jsp</result>
+		</action>
+		
+		<action name="viewCourseContributeNewDetail" class="viewResearchDetailInfoAction" 
+		method="viewCourseContributeNewDetail">
+			<result name="success">/pages/teacher/manage/viewcoursecontributenewdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifycoursecontributenew.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteCourseContributeNew" class="deleteResearchInfoAction"
+		method="deleteCourseContributeNew">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyCourseContributeNew" class="modifyCourseContributeNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="viewTeachAchievementsNew" class="viewResearchInfoAction" 
+		method="viewTeachAchievementsNew">
+			<result name="success">/pages/teacher/manage/viewteachachievementsnew.jsp</result>
+		</action>
+		
+		<action name="viewTeachAchievementsNewDetail" class="viewResearchDetailInfoAction" 
+		method="viewTeachAchievementsNewDetail">
+			<result name="success">/pages/teacher/manage/viewteachachievementsnewdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachachievementsnew.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="deleteTeachAchievementsNew" class="deleteResearchInfoAction"
+		method="deleteTeachAchievementsNew">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyTeachAchievementsNew" class="modifyTeachAchievementsNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="viewTeachAchievementsCQ" class="viewResearchInfoAction" 
+		method="viewTeachAchievementsCQ">
+			<result name="success">/pages/teacher/manage/viewteachachievementscq.jsp</result>
+		</action>
+		
+		<action name="viewTeachAchievementsCQDetail" class="viewResearchDetailInfoAction" 
+		method="viewTeachAchievementsCQDetail">
+			<result name="success">/pages/teacher/manage/viewteachachievementscqdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachachievementscq.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="deleteTeachAchievementsCQ" class="deleteResearchInfoAction"
+		method="deleteTeachAchievementsCQ">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyTeachAchievementsCQ" class="modifyTeachAchievementsCQAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+		<action name="viewTeachingMaterialSetNew" class="viewResearchInfoAction" 
+		method="viewTeachingMaterialSetNew">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialsetnew.jsp</result>
+		</action>
+		
+		<action name="viewTeachingMaterialSetNewDetail" class="viewResearchDetailInfoAction" 
+		method="viewTeachingMaterialSetNewDetail">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialsetnewdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachingmaterialsetnew.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteTeachingMaterialSetNew" class="deleteResearchInfoAction"
+		method="deleteTeachingMaterialSetNew">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyTeachingMaterialSetNew" class="modifyTeachingMaterialSetNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+        	<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="viewStudentAwards" class="viewResearchInfoAction" 
+				method="viewStudentAwards">
+			<result name="success">/pages/teacher/manage/viewstudentawards.jsp</result>
+		</action>
+		<action name="viewStudentAwardsDetail" class="viewResearchDetailInfoAction" 
+				method="viewStudentAwardsDetail">
+			<result name="success">/pages/teacher/manage/viewstudentawardsdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifystudentawards.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteStudentAwards" class="deleteResearchInfoAction"
+				method="deleteStudentAwards">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyStudentAwards" class="modifyStudentAwardsAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		<action name="viewStudentAwardsNew" class="viewResearchInfoAction" 
+				method="viewStudentAwardsNew">
+			<result name="success">/pages/teacher/manage/viewstudentawardsnew.jsp</result>
+		</action>
+		<action name="viewStudentAwardsNewDetail" class="viewResearchDetailInfoAction" 
+				method="viewStudentAwardsNewDetail">
+			<result name="success">/pages/teacher/manage/viewstudentawardsnewdetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifystudentawardsnew.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteStudentAwardsNew" class="deleteResearchInfoAction"
+				method="deleteStudentAwardsNew">
+			<result type="stream">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+    		</result>
+		</action>
+		<action name="modifyStudentAwardsNew" class="modifyStudentAwardsNewAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="updateScienceTechProjectDetail" class="scienceTechProjectDetailAction"
+		method="updateScienceTechProjectDetail">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="showScienceTechProjectDetail" class="scienceTechProjectDetailAction"
+		method="showScienceTechProjectDetail">
+			<result name="success">/pages/teacher/manage/showscienceprojectdetail.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="modifyScienceTechProjectDetail" class="scienceTechProjectDetailAction"
+		method="modifyScienceTechProjectDetail">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="updateHumanitiesProjectDetail" class="humanitiesProjectDetailAction"
+		method="updateHumanitiesProjectDetail">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="showHumanitiesProjectDetail" class="humanitiesProjectDetailAction"
+		method="showHumanitiesProjectDetail">
+			<result name="success">/pages/teacher/manage/showhumanitiesprojectdetail.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="modifyHumanitiesProjectDetail" class="humanitiesProjectDetailAction"
+		method="modifyHumanitiesProjectDetail">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	
+	
+	<!-- 定义查询相关的拦截器 -->
+	<package name="search" namespace="/" extends="struts-default">
+	<!-- 定义查询理工科研信息的Action -->
+		<!-- 查询SciencePaperInfo论文的Action -->
+		<!-- 学校查询SciencePaperInfo论文的Action -->
+		<action name="searchSchoolSciencePaperInfo" class="searchSchoolSciencePaperInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchSciencePaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询SciencePaperInfo论文的Action -->
+		<action name="searchCollegeSciencePaperInfo" class="searchCollegeSciencePaperInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchSciencePaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceOrganization科研机构的Action -->
+		<!-- 学校查询ScienceOrganization科研机构的Action -->
+ 		<action name="searchSchoolScienceOrganization" class="searchSchoolScienceOrganizationAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceOrganization.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceOrganization科研机构的Action -->
+ 		<action name="searchCollegeScienceOrganization" class="searchCollegeScienceOrganizationAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceOrganization.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceTechProjectInfo理工科研项目的action -->
+		<!-- 学校查询ScienceTechProjectInfo理工科研项目的action -->
+ 		<action name="searchSchoolScienceTechProject" class="searchSchoolScienceTechProjectAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceTechProject.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceTechProjectInfo理工科研项目的action -->
+ 		<action name="searchCollegeScienceTechProject" class="searchCollegeScienceTechProjectAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceTechProject.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceBookInfo著作的Action -->
+		<!-- 学校查询ScienceBookInfo著作的Action -->
+		<action name="searchSchoolScienceBookInfo" class="searchSchoolScienceBookInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceBook.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceBookInfo著作的Action -->
+		<action name="searchCollegeScienceBookInfo" class="searchCollegeScienceBookInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceBook.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceGovernmentAward政府科技奖励的Action -->
+		<!-- 学校查询ScienceGovernmentAward政府科技奖励的Action -->
+		<action name="searchSchoolScienceGovernmentAward" class="searchSchoolScienceGovernmentAwardAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceGovernmentAward.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceGovernmentAward政府科技奖励的Action -->
+		<action name="searchCollegeScienceGovernmentAward" class="searchCollegeScienceGovernmentAwardAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceGovernmentAward.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceIpRightsInfo知识产权的Action -->
+		<!-- 学校查询ScienceIpRightsInfo知识产权的Action -->
+		<action name="searchSchoolScienceIpRightsInfo" class="searchSchoolScienceIpRightsInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceIpRights.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceIpRightsInfo知识产权的Action -->
+		<action name="searchCollegeScienceIpRightsInfo" class="searchCollegeScienceIpRightsInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceIpRights.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceTechTransfer技术转让的Action -->
+		<!-- 学校查询ScienceTechTransfer技术转让的Action -->
+		<action name="searchSchoolScienceTechTransfer" class="searchSchoolScienceTechTransferAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceTechTransfer.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceTechTransfer技术转让的Action -->
+		<action name="searchCollegeScienceTechTransfer" class="searchCollegeScienceTechTransferAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceTechTransfer.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询ScienceTechExchange技术交流的Action -->
+		<!-- 学校查询ScienceTechExchange技术交流的Action -->
+		<action name="searchSchoolScienceTechExchange" class="searchSchoolScienceTechExchangeAction">
+			<result name="SUCCESS">/pages/school/schoolSearchScienceTechExchange.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询ScienceTechExchange技术交流的Action -->
+		<action name="searchCollegeScienceTechExchange" class="searchCollegeScienceTechExchangeAction">
+			<result name="SUCCESS">/pages/college/collegeSearchScienceTechExchange.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		
+		
+		
+		
+	<!-- 定义查询人文社科科研信息的Action -->
+		<!-- 查询HumanitiesPaperInfo论文的Action -->
+		<!-- 学校查询HumanitiesPaperInfo论文的Action -->
+		<action name="searchSchoolHumanitiesPaperInfo" class="searchSchoolHumanitiesPaperInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesPaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesPaperInfo论文的Action -->
+		<action name="searchCollegeHumanitiesPaperInfo" class="searchCollegeHumanitiesPaperInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesPaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询HumanitiesBookInfo著作的Action -->
+		<!-- 学校查询HumanitiesBookInfo著作的Action -->
+		<action name="searchSchoolHumanitiesBookInfo" class="searchSchoolHumanitiesBookInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesBook.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesBookInfo著作的Action -->
+		<action name="searchCollegeHumanitiesBookInfo" class="searchCollegeHumanitiesBookInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesBook.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询HumanitiesProjectInfo项目的Action -->
+		<!-- 学校查询HumanitiesProjectInfo项目的Action -->
+		<action name="searchSchoolHumanitiesProjectInfo" class="searchSchoolHumanitiesProjectInfoAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesProject.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesProjectInfo项目的Action -->
+		<action name="searchCollegeHumanitiesProjectInfo" class="searchCollegeHumanitiesProjectInfoAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesProject.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询HumanitiesExchangePaperInfo交流论文的Action -->
+		<!-- 学校查询HumanitiesExchangePaperInfo交流论文的Action -->
+		<action name="searchSchoolHumanitiesExchangePaper" class="searchSchoolHumanitiesExchangePaperAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesExchangePaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesExchangePaperInfo交流论文的Action -->
+		<action name="searchCollegeHumanitiesExchangePaper" class="searchCollegeHumanitiesExchangePaperAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesExchangePaper.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<!-- 学校查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<action name="searchSchoolHumanitiesResearchReward" class="searchSchoolHumanitiesResearchRewardAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesResearchReward.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<action name="searchCollegeHumanitiesResearchReward" class="searchCollegeHumanitiesResearchRewardAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesResearchReward.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<!-- 学校查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<action name="searchSchoolHumanitiesAcademicMeeting" class="searchSchoolHumanitiesAcademicMeetingAction">
+			<result name="SUCCESS">/pages/school/schoolSearchHumanitiesAcademicMeeting.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询HumanitiesResearchRewardInfo科研获奖的Action -->
+		<action name="searchCollegeHumanitiesAcademicMeeting" class="searchCollegeHumanitiesAcademicMeetingAction">
+			<result name="SUCCESS">/pages/college/collegeSearchHumanitiesAcademicMeeting.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 定义查询教学成果信息的Action -->
+		<!-- 查询MajorContributeInfo专业建设的Action -->
+		<!-- 学校查询MajorContributeInfo专业建设的Action -->
+		<action name="searchSchoolMajorContribute" class="searchSchoolMajorContributeAction">
+			<result name="SUCCESS">/pages/school/schoolSearchMajorContribute.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询MajorContributeInfo专业建设的Action -->
+		<action name="searchCollegeMajorContribute" class="searchCollegeMajorContributeAction">
+			<result name="SUCCESS">/pages/college/collegeSearchMajorContribute.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询MajorContributeInfo专业建设的Action -->
+		<!-- 学校查询MajorContributeInfo专业建设的Action -->
+		<action name="searchSchoolCourseContribute" class="searchSchoolCourseContributeAction">
+			<result name="SUCCESS">/pages/school/schoolSearchCourseContribute.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询MajorContributeInfo专业建设的Action -->
+		<action name="searchCollegeCourseContribute" class="searchCollegeCourseContributeAction">
+			<result name="SUCCESS">/pages/college/collegeSearchCourseContribute.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询TeachAchievementsInfo教学成果的Action -->
+		<!-- 学校查询TeachAchievementsInfo教学成果的Action -->
+		<action name="searchSchoolTeachAchievementsInfo" class="searchSchoolTeachAchievementsAction">
+			<result name="SUCCESS">/pages/school/schoolSearchTeachAchievements.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询TeachAchievementsInfo教学成果的Action -->
+		<action name="searchCollegeTeachAchievementsInfo" class="searchCollegeTeachAchievementsAction">
+			<result name="SUCCESS">/pages/college/collegeSearchTeachAchievements.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		
+		<!-- 查询TeachingMaterialSet教材立项的Action -->
+		<!-- 学校查询TeachingMaterialSet教材立项的Action -->
+		<action name="searchSchoolTeachingMaterialSet" class="searchSchoolTeachingMaterialSetAction">
+			<result name="SUCCESS">/pages/school/schoolSearchTeachingMaterialSet.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询TeachingMaterialSet教材立项的Action -->
+		<action name="searchCollegeTeachingMaterialSet" class="searchCollegeTeachingMaterialSetAction">
+			<result name="SUCCESS">/pages/college/collegeSearchTeachingMaterialSet.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询StudentAwardsInfo学生获奖的Action -->
+		<!-- 学校查询StudentAwardsInfo学生获奖的Action -->
+		<action name="searchSchoolStudentAwardsInfo" class="searchSchoolStudentAwardsAction">
+			<result name="SUCCESS">/pages/school/schoolSearchStudentAwards.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询StudentAwardsInfo学生获奖的Action -->
+		<action name="searchCollegeStudentAwardsInfo" class="searchCollegeStudentAwardsAction">
+			<result name="SUCCESS">/pages/college/collegeSearchStudentAwards.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		
+		<!-- ***************************************添加******************************************** -->
+		<!-- 查询MajorContributeInfo专业建设的Action -->
+		<!-- 学校查询MajorContributeInfo专业建设的Action -->
+		<action name="searchSchoolMajorContributeNew" class="searchSchoolMajorContributeNewAction">
+			<result name="SUCCESS">/pages/school/schoolSearchMajorContributeNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询MajorContributeNewInfo专业建设的Action -->
+		<action name="searchCollegeMajorContributeNew" class="searchCollegeMajorContributeNewAction">
+			<result name="SUCCESS">/pages/college/collegeSearchMajorContributeNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询MajorContributeNewInfo专业建设的Action -->
+		<!-- 学校查询MajorContributeNewInfo专业建设的Action -->
+		<action name="searchSchoolCourseContributeNew" class="searchSchoolCourseContributeNewAction">
+			<result name="SUCCESS">/pages/school/schoolSearchCourseContributeNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询MajorContributeNewInfo专业建设的Action -->
+		<action name="searchCollegeCourseContributeNew" class="searchCollegeCourseContributeNewAction">
+			<result name="SUCCESS">/pages/college/collegeSearchCourseContributeNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询TeachAchievementsInfo教学成果的Action -->
+		<!-- 学校查询TeachAchievementsInfo教学成果的Action -->
+		<action name="searchSchoolTeachAchievementsNew" class="searchSchoolTeachAchievementsNewAction">
+			<result name="SUCCESS">/pages/school/schoolSearchTeachAchievementsNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询TeachAchievementsNewInfo教学成果的Action -->
+		<action name="searchCollegeTeachAchievementsNew" class="searchCollegeTeachAchievementsNewAction">
+			<result name="SUCCESS">/pages/college/collegeSearchTeachAchievementsNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询TeachAchievementsCQInfo教学成果的Action -->
+		<!-- 学校查询TeachAchievementsCQInfo教学成果的Action -->
+		<action name="searchSchoolTeachAchievementsCQ" class="searchSchoolTeachAchievementsCQAction">
+			<result name="SUCCESS">/pages/school/schoolSearchTeachAchievementsCQ.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询TeachAchievementsCQInfo教学成果的Action -->
+		<action name="searchCollegeTeachAchievementsCQ" class="searchCollegeTeachAchievementsCQAction">
+			<result name="SUCCESS">/pages/college/collegeSearchTeachAchievementsCQ.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询TeachingMaterialSetNew教材立项的Action -->
+		<!-- 学校查询TeachingMaterialSetNew教材立项的Action -->
+		<action name="searchSchoolTeachingMaterialSetNew" class="searchSchoolTeachingMaterialSetNewAction">
+			<result name="SUCCESS">/pages/school/schoolSearchTeachingMaterialSetNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询TeachingMaterialSetNew教材立项的Action -->
+		<action name="searchCollegeTeachingMaterialSetNew" class="searchCollegeTeachingMaterialSetNewAction">
+			<result name="SUCCESS">/pages/college/collegeSearchTeachingMaterialSetNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 查询StudentAwardsNewInfo学生获奖的Action -->
+		<!-- 学校查询StudentAwardsNewInfo学生获奖的Action -->
+		<action name="searchSchoolStudentAwardsNew" class="searchSchoolStudentAwardsNewAction">
+			<result name="SUCCESS">/pages/school/schoolSearchStudentAwardsNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<!-- 学院查询StudentAwardsNewInfo学生获奖的Action -->
+		<action name="searchCollegeStudentAwardsNew" class="searchCollegeStudentAwardsNewAction">
+			<result name="SUCCESS">/pages/college/collegeSearchStudentAwardsNew.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="downLoadExcel" extends="struts-default" namespace="/downLoadExcel">
+		<action name="downloadCourseContributeExcel" class="downLoadExcelInfoAction" method="downloadCourseContributeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadMajorContributeExcel" class="downLoadExcelInfoAction"  method="downloadMajorContributeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadStudentAwardsExcel" class="downLoadExcelInfoAction"  method="downloadStudentAwardsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachingMaterialSetExcel" class="downLoadExcelInfoAction"  method="downloadTeachingMaterialSetExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsExcel" class="downLoadExcelInfoAction"  method="downloadTeachAchievementsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		
+		<!-- *************************添加********************** -->
+		<action name="downloadCourseContributeNewExcel" class="downLoadExcelInfoAction" method="downloadCourseContributeNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadMajorContributeNewExcel" class="downLoadExcelInfoAction"  method="downloadMajorContributeNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadStudentAwardsNewExcel" class="downLoadExcelInfoAction"  method="downloadStudentAwardsNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachingMaterialSetNewExcel" class="downLoadExcelInfoAction"  method="downloadTeachingMaterialSetNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsNewExcel" class="downLoadExcelInfoAction"  method="downloadTeachAchievementsNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsCQExcel" class="downLoadExcelInfoAction"  method="downloadTeachAchievementsCQExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-Excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		
+		
+		<action name="downloadHumanitiesAcademicMeetingExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesAcademicMeetingExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesBookExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesBookExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesExchangePaperExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesExchangePaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesPaperExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesPaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesProjectExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesProjectExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesResearchRewardExcel" class="downLoadExcelInfoAction"  method="downloadHumanitiesResearchRewardExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceBookExcel" class="downLoadExcelInfoAction"  method="downloadScienceBookExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceGovernmentAwardExcel" class="downLoadExcelInfoAction"  method="downloadScienceGovernmentAwardExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceIpRightsExcel" class="downLoadExcelInfoAction"  method="downloadScienceIpRightsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceOrganizationExcel" class="downLoadExcelInfoAction"  method="downloadScienceOrganizationExcel">
+		<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadSciencePaperExcel" class="downLoadExcelInfoAction"  method="downloadSciencePaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechTransferExcel" class="downLoadExcelInfoAction"  method="downloadScienceTechTransferExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechProjectExcel" class="downLoadExcelInfoAction"  method="downloadScienceTechProjectExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechExchangeExcel" class="downLoadExcelInfoAction"  method="downloadScienceTechExchangeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="downLoadExcelbyFactor" extends="struts-default" namespace="/downLoadExcelbyFactor">
+		<action name="downloadCourseContributeExcel" class="downLoadExcelInfobyFactorAction" method="downloadCourseContributeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadMajorContributeExcel" class="downLoadExcelInfobyFactorAction"  method="downloadMajorContributeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadStudentAwardsExcel" class="downLoadExcelInfobyFactorAction"  method="downloadStudentAwardsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachingMaterialSetExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachingMaterialSetExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachAchievementsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesAcademicMeetingExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesAcademicMeetingExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesBookExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesBookExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesExchangePaperExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesExchangePaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesPaperExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesPaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesProjectExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesProjectExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadHumanitiesResearchRewardExcel" class="downLoadExcelInfobyFactorAction"  method="downloadHumanitiesResearchRewardExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceBookExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceBookExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceGovernmentAwardExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceGovernmentAwardExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceIpRightsExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceIpRightsExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceOrganizationExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceOrganizationExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadSciencePaperExcel" class="downLoadExcelInfobyFactorAction"  method="downloadSciencePaperExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechTransferExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceTechTransferExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechProjectExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceTechProjectExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadScienceTechExchangeExcel" class="downLoadExcelInfobyFactorAction"  method="downloadScienceTechExchangeExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		
+		<!-- *************************添加********** -->
+		<action name="downloadCourseContributeNewExcel" class="downLoadExcelInfobyFactorAction" method="downloadCourseContributeNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadMajorContributeNewExcel" class="downLoadExcelInfobyFactorAction"  method="downloadMajorContributeNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadStudentAwardsNewExcel" class="downLoadExcelInfobyFactorAction"  method="downloadStudentAwardsNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachingMaterialSetNewExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachingMaterialSetNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsNewExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachAchievementsNewExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		<action name="downloadTeachAchievementsCQExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachAchievementsCQExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+	</package>
+	
+	
+	<!-- ****************************************添加********************************************** -->
+	
+	<package name="collegeAchNewInfo" extends="struts-default"
+		namespace="/collegeAchNewInfo">
+		<!-- 定义拦截器 -->
+		<action name="courseContributeNew" class="managerCollegeAchNewInfoAction"
+			method="courseContributeNew">
+			<result name="CourseContributeNew">/pages/college/simpleInfo/coursecontributenew.jsp
+			</result>
+		</action>
+		<action name="majorContributeNew" class="managerCollegeAchNewInfoAction"
+			method="majorContributeNew">
+			<result name="MajorContributeNew">/pages/college/simpleInfo/majorcontributenew.jsp
+			</result>
+		</action>
+		<action name="studentAwardsNew" class="managerCollegeAchNewInfoAction"
+			method="studentAwardsNew">
+			<result name="StudentAwardsNew">/pages/college/simpleInfo/studentawardsnew.jsp
+			</result>
+		</action>
+		<action name="teachingMaterialSetNew" class="managerCollegeAchNewInfoAction"
+			method="teachingMaterialSetNew">
+			<result name="TeachingMaterialSetNew">/pages/college/simpleInfo/teachingmaterialsetnew.jsp
+			</result>
+		</action>
+		<action name="teachAchievementsNew" class="managerCollegeAchNewInfoAction"
+			method="teachAchievementsNew">
+			<result name="TeachAchievementsNew">/pages/college/simpleInfo/teachachievementsnew.jsp
+			</result>
+		</action>
+		<action name="teachAchievementsCQ" class="managerCollegeAchNewInfoAction"
+			method="teachAchievementsCQ">
+			<result name="TeachAchievementsCQ">/pages/college/simpleInfo/teachachievementscq.jsp
+			</result>
+		</action>
+	</package>
+	
+	
+	<package name="collegeAchNewStatus" extends="struts-default"
+		namespace="/collegeAchNewStatus">
+		<!-- 定义拦截器 -->
+		<action name="courseContributeNew" class="managerCollegeAchNewStatusAction"
+			method="courseContributeNew">
+			<result name="CourseContributeNew">/pages/college/retailInfo/coursecontributenew.jsp
+			</result>
+		</action>
+		<action name="majorContributeNew" class="managerCollegeAchNewStatusAction"
+			method="majorContributeNew">
+			<result name="MajorContributeNew">/pages/college/retailInfo/majorcontributenew.jsp
+			</result>
+		</action>
+		<action name="studentAwardsNew" class="managerCollegeAchNewStatusAction"
+			method="studentAwardsNew">
+			<result name="StudentAwardsNew">/pages/college/retailInfo/studentawardsnew.jsp
+			</result>
+		</action>
+		<action name="teachingMaterialSetNew" class="managerCollegeAchNewStatusAction"
+			method="teachingMaterialSetNew">
+			<result name="TeachingMaterialSetNew">/pages/college/retailInfo/teachingmaterialsetnew.jsp
+			</result>
+		</action>
+		<action name="teachAchievementsNew" class="managerCollegeAchNewStatusAction"
+			method="teachAchievementsNew">
+			<result name="TeachAchievementsNew">/pages/college/retailInfo/teachachievementsnew.jsp
+			</result>
+		</action>
+		<action name="teachAchievementsCQ" class="managerCollegeAchNewStatusAction"
+			method="teachAchievementsCQ">
+			<result name="TeachAchievementsCQ">/pages/college/retailInfo/teachachievementscq.jsp
+			</result>
+		</action>
+	</package>
+	
+</struts>

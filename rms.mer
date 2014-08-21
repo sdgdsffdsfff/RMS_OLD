@@ -1,0 +1,3035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERDiagram version="1.1">
+  <Connection session="rms" database="rms" />
+  <Drawing gridVisible="false" snapOn="false" fastRouting="false" labelsVisible="true" />
+  <Tables>
+    <Table name="course_contribute_member_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="course_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="course_contribute_member">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="course_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="course_contribute_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="course_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="type_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="course_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="check_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="applicantRanking" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="course_contribute">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="course_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="type_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="course_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="check_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="cqupt_college">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="college_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="cqupt_role">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="role_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="role_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="role_level_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="cqupt_user">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="department" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="user_name" primary_key="false" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="gender" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="origin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="nationality" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="birthday" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="political_status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_join_party" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_begin_cqupt" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_begin_work" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="first_degree" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="first_professional_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="first_graduate_school" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="last_degree" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="last_professional_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="last_graduate_school" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="last_academic" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_academic_meeting">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="academic_meeting_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="academic_meeting_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="host_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="meeting_classify" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="holding_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="meeting_location" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="participants_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_academic_meetingperson">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="academic_meeting_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="meeting_person_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="meeting_person_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_book_author">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="book_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_book">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="book_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="book_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="publisher" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="ISBN" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="wordcount" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="belong_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="subjects_classify" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="achievement_quote" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_exchange_paper">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="exchange_paper_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="exchange_paper_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="search_station" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="subjects_classify" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="host_conference_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_exchange_paperauthor">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="exchange_paper_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_paper_author">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="paper_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_paper">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="paper_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="paper_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="post_publication" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="search_station" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="belong_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="subjects_classify" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="achievement_quote" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_project_detail">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="project_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="datetime" />
+        </Column>
+        <Column name="project_status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="money" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="time_per_person" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_project_member">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="project_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_project">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="project_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_origin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_approved" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_research_reward">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="research_reward_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="research_reward_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_classify" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="issue_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approve_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="approve_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="humanities_research_rewardperson">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="research_reward_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_person_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_person_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="major_contribute_member_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="major_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="major_contribute_member">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="major_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="major_contribute_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="major_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="type_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="major_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="check_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="reward_college" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_source" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reported_amounts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="major_contribute">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="major_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="type_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_contribute" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="major_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="check_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="reward_college" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="positions">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="position_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="position_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_position_begin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="time_position_end" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="proofs">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="proof_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="info_approved_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_proof_upload" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="datetime" />
+        </Column>
+        <Column name="desc_proof" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="proof_path" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="upload_proof_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="upload_real_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="upload_content_type" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_book_author">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="book_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_book">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="book_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="unit_author" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="publication_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="publication_type" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="publisher" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="ISBN" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="awarding_grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="total_prize" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="deductions_dist_posts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="actual_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_detailtech_project">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="deatil_project_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="datetime" />
+        </Column>
+        <Column name="input_this_year" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="expenditure_this_year" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="total_staff" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="advanced_staff" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="middle_staff" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="junior_staff" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="other_staff" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="graduate_join" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="projectStatus" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_gov_awardperson">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="award_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_government_award">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="award_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="colleges_in" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="awarding_grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="complete_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="unit_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="person_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="total_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_inventors">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="rights_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_ip_rights">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="rights_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="colleges_in" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="patent_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="patent_type" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="application_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="patent_status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="filing_date" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="announcement_date" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="incentive_payments" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_organization">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="organization_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="organization_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="organization_type" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="organization_category" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="sort_subject" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="modus_composition" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="total_employees" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="doctor_employees" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="master_employees" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="total_its" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="advanced_its" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="middle_its" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="junior_its" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="other_its" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="num_graduates" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="internal_expenditures" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="rd_expenditures" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="num_issue_assume" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="assets_fixed" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="assets_equipment" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="assets_import" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="industry_service" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_paper_author">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="paper_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_paper">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="paper_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="department" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="paper_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="subjects_in" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="post_publication" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="include_situation" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="published_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="title_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="awarding_grades" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="total_prize" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="deductions_dist_posts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="actual_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="papers_units" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_tech_attendperson">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="tech_exchange_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="attend_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_tech_exchange">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="tech_exchange_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="colleges_in" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="exchange_type" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="send_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="receive_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="attend_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="papers_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="special_invited_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="exchange_host" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_tech_project">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="project_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_project_approved" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="total_fund_contract" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="sort_subject" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="sort_activity" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="origin_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="form_organization" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="form_cooperation" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="organ_relied_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="industry_service" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="unit_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_tech_transfer">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="transfer_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_in" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="tech_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_leader" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="transferee_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="unit_properties" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="contract_amount" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="real_income" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="transformation_way" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="start_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_techproject_member">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="project_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="task" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="science_transfer_leader">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="transfer_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="leader_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="leader_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="student_awards_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="awards_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_students" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_level" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="reward_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="first_students" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="student_awards">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="awards_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_students" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reward_level" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="student_instructor_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="awards_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="instructor_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="student_instructor">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="awards_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="instructor_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_purviewinfo">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="purviewId" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="purviewName" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="50" />
+        </Column>
+        <Column name="purviewUrl" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="longtext" size="2147483647" />
+        </Column>
+        <Column name="purviewRemark" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="longtext" size="2147483647" />
+        </Column>
+        <Column name="parentId" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_role_college">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="roleId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="collegeId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_role_level">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="level_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="role_level_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="role_level_description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_rolepurview">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="roleId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="purviewId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="user_pwd" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_userrole">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="userId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="roleId" primary_key="true" foreign_key="true" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teach_achievements_cq">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="achievements_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_achievements" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="grade_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="certification_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_type" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reported_amounts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="verify_amounts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="standbyField1" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teach_achievements_declarant">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="achievements_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="declarant_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="declarant_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teach_achievements_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="achievements_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="grade_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_type" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="certification_unit" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="reported_amounts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="verify_amounts" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="submituser" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approveduser" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="standby_field1" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="level_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="words_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="first_charge_man" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="author_rank" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="publisher" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teach_achievements">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="achievements_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="class_achievements" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="project_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="level_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_achievements" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachers_awards_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="achievements_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="award_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachers_awards">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="achievements_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="award_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="member_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachingmaterial_editor_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="teachingmaterial_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="editor_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="editor_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachingmaterial_editor">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="teachingmaterial_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="editor_id" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="editor_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="orders" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachingmaterial_set_new">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="teachingmaterial_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="set_class" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="set_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="number_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="teachingmaterial_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="resultsposted_status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="words_numbers" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="college_award" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="float" size="12" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="teachingmaterial_set">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="teachingmaterial_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="set_class" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="set_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="number_project" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="teachingmaterial_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="editor_name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="resultsposted_status" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="submit_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="approved_user_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="status" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="return_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="titles">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="titles_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="int" size="10" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="titles_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+        <Column name="time_titles_begin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="time_titles_end" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="date" />
+        </Column>
+        <Column name="remarks" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="varchar" size="255" />
+        </Column>
+      </Columns>
+    </Table>
+  </Tables>
+  <Relationships>
+    <Relationship name="FKF19D624954162435">
+      <Details primary_table="course_contribute_new" foreign_table="course_contribute_member_new">
+        <PrimaryKeys>
+          <ColumnName name="course_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="course_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK23A109885A699089">
+      <Details primary_table="course_contribute" foreign_table="course_contribute_member">
+        <PrimaryKeys>
+          <ColumnName name="course_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="course_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKB0953D52C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="course_contribute_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKB0953D52E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="course_contribute_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKD227CD11E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="course_contribute">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKD227CD11C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="course_contribute">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK734E6A4A3552D86B">
+      <Details primary_table="t_role_level" foreign_table="cqupt_role">
+        <PrimaryKeys>
+          <ColumnName name="level_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="role_level_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK734FD59FF1617EB1">
+      <Details primary_table="cqupt_college" foreign_table="cqupt_user">
+        <PrimaryKeys>
+          <ColumnName name="college_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="college_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7B549663C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_academic_meeting">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7B549663E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_academic_meeting">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK948B8F78797FAAA">
+      <Details primary_table="humanities_academic_meeting" foreign_table="humanities_academic_meetingperson">
+        <PrimaryKeys>
+          <ColumnName name="academic_meeting_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="academic_meeting_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK8BBCE421C68FA6DB">
+      <Details primary_table="humanities_book" foreign_table="humanities_book_author">
+        <PrimaryKeys>
+          <ColumnName name="book_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="book_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK1731D669C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_book">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK1731D669E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_book">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA601D7D0E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_exchange_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA601D7D0C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_exchange_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK2BD4D15BCEF90FD2">
+      <Details primary_table="humanities_exchange_paper" foreign_table="humanities_exchange_paperauthor">
+        <PrimaryKeys>
+          <ColumnName name="exchange_paper_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="exchange_paper_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7841EB3ED7462499">
+      <Details primary_table="humanities_paper" foreign_table="humanities_paper_author">
+        <PrimaryKeys>
+          <ColumnName name="paper_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="paper_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKCFC7E5ECC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKCFC7E5ECE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK32F55BD79E7D81B9">
+      <Details primary_table="humanities_project" foreign_table="humanities_project_detail">
+        <PrimaryKeys>
+          <ColumnName name="project_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="project_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK424DCE209E7D81B9">
+      <Details primary_table="humanities_project" foreign_table="humanities_project_member">
+        <PrimaryKeys>
+          <ColumnName name="project_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="project_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK1A5C8379E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_project">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK1A5C8379C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_project">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK735FC6D3C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="humanities_research_reward">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK735FC6D3E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="humanities_research_reward">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK682CABE87CD7FFB2">
+      <Details primary_table="humanities_research_reward" foreign_table="humanities_research_rewardperson">
+        <PrimaryKeys>
+          <ColumnName name="research_reward_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="research_reward_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK647F947B8D0D77D">
+      <Details primary_table="major_contribute_new" foreign_table="major_contribute_member_new">
+        <PrimaryKeys>
+          <ColumnName name="major_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="major_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK86BACF869DFAEA45">
+      <Details primary_table="major_contribute" foreign_table="major_contribute_member">
+        <PrimaryKeys>
+          <ColumnName name="major_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="major_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK912B6414E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="major_contribute_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK912B6414C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="major_contribute_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK8875A8D3C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="major_contribute">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK8875A8D3E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="major_contribute">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKBD89C4A27E088E3">
+      <Details primary_table="cqupt_user" foreign_table="positions">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK9A36B626AE3C407C">
+      <Details primary_table="science_book" foreign_table="science_book_author">
+        <PrimaryKeys>
+          <ColumnName name="book_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="book_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKFCC1004C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_book">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKFCC1004E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_book">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK71C2EFCD1ABFA02">
+      <Details primary_table="science_tech_project" foreign_table="science_detailtech_project">
+        <PrimaryKeys>
+          <ColumnName name="project_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="project_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKCAB56186D9D60887">
+      <Details primary_table="science_government_award" foreign_table="science_gov_awardperson">
+        <PrimaryKeys>
+          <ColumnName name="award_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="award_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK93363F0AC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_government_award">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK93363F0AE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_government_award">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK569044FB3FD070C3">
+      <Details primary_table="science_ip_rights" foreign_table="science_inventors">
+        <PrimaryKeys>
+          <ColumnName name="rights_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="rights_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK184D3BB4E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_ip_rights">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK184D3BB4C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_ip_rights">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK2B1B674EC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_organization">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK2B1B674EE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_organization">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKC7D4999E52CBF18">
+      <Details primary_table="science_paper" foreign_table="science_paper_author">
+        <PrimaryKeys>
+          <ColumnName name="paper_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="paper_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKFA1BB3F1E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKFA1BB3F1C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_paper">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK10ABC03DA7EE5CC9">
+      <Details primary_table="science_tech_exchange" foreign_table="science_tech_attendperson">
+        <PrimaryKeys>
+          <ColumnName name="tech_exchange_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="tech_exchange_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA941AEF1E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_exchange">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA941AEF1C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_exchange">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK4A09546BC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_project">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK4A09546BE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_project">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7F00D8B9C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_transfer">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7F00D8B9E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="science_tech_transfer">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKEDA5D891D1ABFA02">
+      <Details primary_table="science_tech_project" foreign_table="science_techproject_member">
+        <PrimaryKeys>
+          <ColumnName name="project_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="project_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA9A53E2ABF737F2">
+      <Details primary_table="science_tech_transfer" foreign_table="science_transfer_leader">
+        <PrimaryKeys>
+          <ColumnName name="transfer_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="transfer_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7F36501BE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="student_awards_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7F36501BC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="student_awards_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKC86DB05AC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="student_awards">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKC86DB05AE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="student_awards">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK33ECC982C507DC35">
+      <Details primary_table="student_awards_new" foreign_table="student_instructor_new">
+        <PrimaryKeys>
+          <ColumnName name="awards_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="awards_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKBAAEF541C44BCB73">
+      <Details primary_table="student_awards" foreign_table="student_instructor">
+        <PrimaryKeys>
+          <ColumnName name="awards_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="awards_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK5B46B95773E9503">
+      <Details primary_table="t_purviewinfo" foreign_table="t_purviewinfo">
+        <PrimaryKeys>
+          <ColumnName name="purviewId" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="parentId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK2A8678B9F97B7790">
+      <Details primary_table="cqupt_role" foreign_table="t_role_college">
+        <PrimaryKeys>
+          <ColumnName name="role_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="roleId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK2A8678B9C93FCEE0">
+      <Details primary_table="cqupt_college" foreign_table="t_role_college">
+        <PrimaryKeys>
+          <ColumnName name="college_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="collegeId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA38F1EB1E6E6A98B">
+      <Details primary_table="t_purviewinfo" foreign_table="t_rolepurview">
+        <PrimaryKeys>
+          <ColumnName name="purviewId" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="purviewId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA38F1EB1F97B7790">
+      <Details primary_table="cqupt_role" foreign_table="t_rolepurview">
+        <PrimaryKeys>
+          <ColumnName name="role_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="roleId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA6D8022CBF8BF2E2">
+      <Details primary_table="t_user" foreign_table="t_userrole">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="userId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKA6D8022CF97B7790">
+      <Details primary_table="cqupt_role" foreign_table="t_userrole">
+        <PrimaryKeys>
+          <ColumnName name="role_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="roleId" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7D7477FC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_cq">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7D7477FE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_cq">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKD7D27D5B2430F99F">
+      <Details primary_table="teach_achievements_new" foreign_table="teach_achievements_declarant">
+        <PrimaryKeys>
+          <ColumnName name="achievements_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="achievements_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKF311D08FC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKF311D08FB4EAFAB7">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submituser" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKF311D08F4471B9D6">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approveduser" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKF311D08FE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK38638ACEE576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK38638ACEC73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="teach_achievements">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK7C0F0FA52430F99F">
+      <Details primary_table="teach_achievements_new" foreign_table="teachers_awards_new">
+        <PrimaryKeys>
+          <ColumnName name="achievements_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="achievements_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FKE8D7C4E4399E8CAD">
+      <Details primary_table="teach_achievements" foreign_table="teachers_awards">
+        <PrimaryKeys>
+          <ColumnName name="achievements_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="achievements_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK34627159B3AC62BA">
+      <Details primary_table="teachingmaterial_set_new" foreign_table="teachingmaterial_editor_new">
+        <PrimaryKeys>
+          <ColumnName name="teachingmaterial_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="teachingmaterial_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK1CE82098AAC2ED2">
+      <Details primary_table="teachingmaterial_set" foreign_table="teachingmaterial_editor">
+        <PrimaryKeys>
+          <ColumnName name="teachingmaterial_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="teachingmaterial_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK67080A38C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="teachingmaterial_set_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK67080A38E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="teachingmaterial_set_new">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK8A20FCF7E576D7BC">
+      <Details primary_table="cqupt_user" foreign_table="teachingmaterial_set">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="submit_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK8A20FCF7C73AEF5B">
+      <Details primary_table="cqupt_user" foreign_table="teachingmaterial_set">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="approved_user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="FK93831D1B27E088E3">
+      <Details primary_table="cqupt_user" foreign_table="titles">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+  </Relationships>
+</ERDiagram>
+

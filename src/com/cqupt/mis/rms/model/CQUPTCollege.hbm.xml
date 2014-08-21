@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.CQUPTCollege" table="CQUPT_COLLEGE">
+		<id name="collegeId" column="college_id"></id>
+		<property name="collegeName" column="college_name" not-null="true"></property>
+		<set name="roleColleges" inverse="true">
+			<key column="collegeId" />
+			<one-to-many class="com.cqupt.mis.rms.model.RoleCollege"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.CQUPTRole" table="CQUPT_ROLE">
+		<id name="roleId" column="role_id">
+			<generator class="native" />
+		</id>
+		<property name="roleName" column="role_name" not-null="true"></property>
+		<many-to-one name="roleLevel" column="role_level_id"
+			class="com.cqupt.mis.rms.model.RoleLevel" />
+		<property name="description" column="description"></property>
+		<set name="rolepurviews" inverse="true" fetch="join">
+			<key column="roleId" not-null="true" />
+			<one-to-many class="com.cqupt.mis.rms.model.Rolepurview" />
+		</set>
+		<set name="roleColleges" inverse="true" fetch="join">
+			<key column="roleId" not-null="true" />
+			<one-to-many class="com.cqupt.mis.rms.model.RoleCollege" />
+		</set>
+	</class>
+</hibernate-mapping>

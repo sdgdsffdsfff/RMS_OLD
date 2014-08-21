@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceGovAwardPerson" table="SCIENCE_GOV_AWARDPERSON">
+	    <id name="id">
+	    	<generator class="native"></generator>
+	    </id>
+        <many-to-one name="scienceGovernmentAward" column="award_id" class="com.cqupt.mis.rms.model.ScienceGovernmentAward"></many-to-one>
+        <property name="authorId" column="author_id" type="java.lang.String"/>
+		<property name="memberName" column="member_name" />
+		<property name="orders" column="orders" type="int" not-null="true"/>
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

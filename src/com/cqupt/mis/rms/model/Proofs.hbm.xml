@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.Proofs" table="PROOFS">
+		<id name="proofId" column="proof_id">
+			<generator class="native"/>
+		</id>
+		<property name="infoApprovedId" column="info_approved_id" not-null="true"/>
+		<property name="timeProofUpload" column="time_proof_upload" not-null="true"/>
+		<property name="descProof" column="desc_proof" />
+		<property name="proofPath" column="proof_path" not-null="true" />
+		<property name="uploadProofName" column="upload_proof_name" />
+		<property name="uploadRealName" column="upload_real_name" />
+		<property name="uploadContentType" column="upload_content_type" />
+	</class>
+</hibernate-mapping>

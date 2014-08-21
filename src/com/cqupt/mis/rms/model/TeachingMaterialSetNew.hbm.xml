@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.TeachingMaterialSetNew" table="TEACHINGMATERIAL_SET_New">
+		<id name="teachingMaterialId" column="teachingmaterial_id"/>
+		<property name="setClass" column="set_class" />
+		<property name="setTime" column="set_time" />
+		<property name="numberProject" column="number_project" />
+		<property name="teachingMaterialName" column="teachingmaterial_name" />
+		<property name="resultsPostedStatus" column="resultsposted_status" />
+		<property name="wordsNumbers" column="words_numbers" type="float"/>
+		<property name="remarks" column="remarks" />
+		<property name="collegeAward" column="college_award" type="float" />
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />
+	</class>
+</hibernate-mapping>

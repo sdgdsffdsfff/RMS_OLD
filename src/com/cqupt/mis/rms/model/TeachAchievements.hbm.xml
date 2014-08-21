@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.TeachAchievements" table="TEACH_ACHIEVEMENTS">
+		<id name="achievementsId" column="achievements_id"/>
+		<property name="classAchievements" column="class_achievements" not-null="true"/>
+		<property name="projectName" column="project_name" not-null="true"/>
+		<property name="levelAchievements" column="level_achievements" />
+		<property name="timeAchievements" column="time_achievements" />
+		<property name="collegeAward" column="college_award" />
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />
+	</class>
+</hibernate-mapping>

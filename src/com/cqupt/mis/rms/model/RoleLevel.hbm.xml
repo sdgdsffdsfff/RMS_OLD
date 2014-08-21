@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.RoleLevel" table="t_role_level">
+		<id name="id" column="level_id">
+			<generator class="native" />
+		</id>
+		<property name="roleLevelName" column="role_level_name" />
+		<property name="roleLevelDescription" column="role_level_description" />
+		<set name="roles" inverse="true">
+		  <key column="role_level_id" not-null="true" />
+		  <one-to-many class="com.cqupt.mis.rms.model.CQUPTRole"/>
+		</set>
+	</class>
+</hibernate-mapping>

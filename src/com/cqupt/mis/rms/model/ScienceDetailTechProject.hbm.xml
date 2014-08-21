@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceDetailTechProject" table="SCIENCE_DETAILTECH_PROJECT">
+		<id name="deatilProjectId" column="deatil_project_id"></id>
+		<many-to-one name="scienceTechProject" class="com.cqupt.mis.rms.model.ScienceTechProject" column="project_id" not-null="true" lazy="false"></many-to-one>
+		
+		<property name="updateTime" column="update_time" type="java.util.Date" not-null="true"></property>
+		<property name="inputThisYear" column="input_this_year" type="float"></property>
+		<property name="expenditureThisYear" column="expenditure_this_year" type="float"></property>
+		
+		<property name="totalStaff" column="total_staff" type="int"></property>
+		<property name="advancedStaff" column="advanced_staff" type="int"></property>
+		<property name="middleStaff" column="middle_staff" type="int"></property>
+		<property name="juniorStaff" column="junior_staff" type="int"></property>
+		<property name="otherStaff" column="other_staff" type="int"></property>
+		<property name="graduateJoin" column="graduate_join" type="int"></property>
+		<property name="projectStatus" column="projectStatus"></property>
+	</class>
+</hibernate-mapping>

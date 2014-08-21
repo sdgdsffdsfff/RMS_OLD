@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:flex="http://www.springframework.org/schema/flex"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans                       
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/flex 
+                           http://www.springframework.org/schema/flex/spring-flex-1.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd">
+	<!-- 配置service方面的bean -->
+	<bean id="userManagerService" class="com.cqupt.mis.rms.service.impl.UserManagerServiceImpl">
+		<property name="userInfoDao" ref="userInfoDao" />
+		<property name="roleInfoDao" ref="roleInfoDao" />
+		<property name="collegeInfoDao" ref="collegeInfoDao" />
+		<property name="userRoleInfoDao" ref="userRoleInfoDao" />
+	</bean>
+	<!-- 权限管理的服务 -->
+	<bean id="purviewService" class="com.cqupt.mis.rms.service.impl.PurviewServiceImpl">
+		<property name="purviewDao" ref="purviewDao" />
+		<property name="roleInfoDao" ref="roleInfoDao" />
+		<property name="roleLevelDao" ref="roleLevelDao" />
+		<property name="rolePurviewDao" ref="rolePurviewDao" />
+		<property name="collegeInfoDao" ref="collegeInfoDao" />
+		<property name="roleCollegeInfoDao" ref="roleCollegeInfoDao" />
+	</bean>
+	<!-- 配置学院管理员部分的Bean-->
+	<bean id="collegeManagerService" class="com.cqupt.mis.rms.service.impl.CollegeManagerServiceImpl">
+		<property name="getCollegeInfoDao" ref="getCollegeInfoDao" />
+	</bean>
+	
+	<!-- 配置教师用户提交科研和旁证材料信息的Bean -->
+	<bean id="submitInfoAndProofsService" 
+		  class="com.cqupt.mis.rms.service.impl.SubmitInfoAndProofsServiceImpl">
+		  <property name="submitInfoAndProofsDao" 
+		  			ref="submitInfoAndProofsDao"/>
+		  <property name="submitInfoMemberDao" 
+		  			ref="submitInfoMemberDao"/>
+	</bean>
+	
+	<!-- 配置用户修改密码的Bean -->
+	<bean id="modifyPasswordService" class="com.cqupt.mis.rms.service.impl.ModifyPasswordServiceImpl">
+		<property name="modifyPasswordDao" ref="modifyPasswordDao"/>
+	</bean>
+	
+	<!-- 配置用户修改个人信息的Bean -->
+	<bean id="modifyUserInfoService" class="com.cqupt.mis.rms.service.impl.ModifyUserInfoServiceImpl">
+		<property name="modifyUserInfoDao" ref="modifyUserInfoDao"/>
+	</bean>
+	
+	<!-- 配置用户管理个人科研信息的Bean -->
+	<bean id="researchInfoService" class="com.cqupt.mis.rms.service.impl.ResearchInfoServiceImpl">
+		<property name="researchInfoDao" ref="researchInfoDao"/>
+	</bean>
+	
+	
+	
+	
+	<!-- 配置查询 用户的bean-->
+	<bean id="searchCQUPTUserService" class="com.cqupt.mis.rms.service.impl.SearchCQUPTUserServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	
+	
+	<!-- 查询理工科研信息 -->
+	<!-- 配置查询 sciencePaper论文的bean-->
+	<bean id="sciencePaperInfoService" class="com.cqupt.mis.rms.service.impl.SciencePaperInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询 ScienceOrganization科研机构的bean-->
+ 	<bean id="scienceOrganizationService" class="com.cqupt.mis.rms.service.impl.ScienceOrganizationServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询 ScienceTechProject科研项目的bean-->
+ 	<bean id="scienceTechProjectService" class="com.cqupt.mis.rms.service.impl.ScienceTechProjectServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+
+	<!-- 配置查询 scienceBook著作的bean-->
+	<bean id="scienceBookService" class="com.cqupt.mis.rms.service.impl.ScienceBookServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询 ScienceGovernmentAward政府科技奖励的bean-->
+	<bean id="scienceGovernmentAwardService" class="com.cqupt.mis.rms.service.impl.ScienceGovernmentAwardServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询ScienceIpRightsInfo知识产权的bean-->
+	<bean id="scienceIpRightsService" class="com.cqupt.mis.rms.service.impl.ScienceIpRightsServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询ScienceTechTransfer技术转让的bean-->
+	<bean id="scienceTechTransferService" class="com.cqupt.mis.rms.service.impl.ScienceTechTransferServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询ScienceTechExchange科技交流的bean-->
+	<bean id="scienceTechExchangeService" class="com.cqupt.mis.rms.service.impl.ScienceTechExchangeServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	
+	
+	<!-- 查询人文社科科研信息 -->
+	<!-- 配置查询HumanitiesPaperInfo论文的bean-->
+	<bean id="humanitiesPaperService" class="com.cqupt.mis.rms.service.impl.HumanitiesPaperServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询HumanitiesBookInfo著作的bean-->
+	<bean id="humanitiesBookInfoService" class="com.cqupt.mis.rms.service.impl.HumanitiesBookInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询HumanitiesProjectInfo项目的bean-->
+	<bean id="humanitiesProjectService" class="com.cqupt.mis.rms.service.impl.HumanitiesProjectServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询HumanitiesExchangePaperInfo交流论文的bean-->
+	<bean id="humanitiesExchangePaperService" class="com.cqupt.mis.rms.service.impl.HumanitiesExchangePaperServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询HumanitiesResearchRewardInfo科研获奖的bean-->
+	<bean id="humanitiesResearchRewardService" class="com.cqupt.mis.rms.service.impl.HumanitiesResearchRewardServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询HumanitiesAcademicMeeting学术会议的bean-->
+	<bean id="humanitiesAcademicMeetingService" class="com.cqupt.mis.rms.service.impl.HumanitiesAcademicMeetingServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	
+	
+	<!-- 查询教学成果信息 -->
+	<!-- 配置查询MajorContributeInfo专业建设的bean-->
+	<bean id="majorContributeService" class="com.cqupt.mis.rms.service.impl.MajorContributeServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询CourseContributeInfo课程建设的bean-->
+	<bean id="courseContributeService" class="com.cqupt.mis.rms.service.impl.CourseContributeServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean-->
+	<bean id="teachAchievementsService" class="com.cqupt.mis.rms.service.impl.TeachAchievementsServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	
+	<!-- 配置查询TeachingMaterialSet教材立项的bean-->
+	<bean id="teachingMaterialSetService" class="com.cqupt.mis.rms.service.impl.TeachingMaterialSetServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询StudentAwardsInfo学生获奖的bean-->
+	<bean id="studentAwardsInfoService" class="com.cqupt.mis.rms.service.impl.StudentAwardsInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询生成excel结果集的bean-->
+	<bean id="getDownloadInfoService" class="com.cqupt.mis.rms.service.impl.GetDownloadInfoServiceImpl">
+		<property name="getInfoToExcelDao" ref="getInfoToExcelDao"/>
+	</bean>
+	<!-- 配置下载excel结果集的bean-->
+	<bean id="downLoadExcelInfoService" class="com.cqupt.mis.rms.service.impl.DownLoadExcelInfoServiceImpl">
+	    <property name="getDownloadInfoService" ref="getDownloadInfoService"/>
+	</bean>
+	
+	<!--<bean id="downloadExcelService" class="com.cqupt.mis.rms.service.impl.DownloadExcelServiceimpl">
+	 <property name="getDownloadInfoService" ref="getDownloadInfoService"></property>
+	</bean>
+	
+	--><!-- 配置下载指定信息的excel结果集的bean-->
+	<bean id="downLoadExcelInfobyFactorService" class="com.cqupt.mis.rms.service.impl.DownLoadExcelInfobyFactorServiceImpl">
+	    <property name="getDownloadInfoService" ref="getDownloadInfoService"/>
+	</bean>
+	
+	
+	<!-- 配置上传指定信息的excel结果集的bean-->
+	<bean id="excelToDBTecServiceImpl" 
+	      class="com.cqupt.mis.rms.service.impl.ExcelToDBTecServiceImpl">
+	    <property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"/>
+	</bean>
+	
+	<bean id="excelToDBHumServiceImpl" 
+		  class="com.cqupt.mis.rms.service.impl.ExcelToDBHumServiceImpl">
+	    <property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"/>
+	</bean>
+	
+	<bean id="excelToDBAchServiceImpl" 
+	      class="com.cqupt.mis.rms.service.impl.ExcelToDBAchServiceImpl">
+	    <property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"/>
+	</bean>
+		
+	<!-- 添加 -->
+	<bean id="majorContributeNewService" class="com.cqupt.mis.rms.service.impl.MajorContributeNewServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询CourseContributeInfo课程建设的bean-->
+	<bean id="courseContributeNewService" class="com.cqupt.mis.rms.service.impl.CourseContributeNewServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean-->
+	<bean id="teachAchievementsNewService" class="com.cqupt.mis.rms.service.impl.TeachAchievementsNewServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询TeachAchievementsInfo教学成果的bean-->
+	<bean id="teachAchievementsCQService" class="com.cqupt.mis.rms.service.impl.TeachAchievementsCQServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询TeachingMaterialSet教材立项的bean-->
+	<bean id="teachingMaterialSetNewService" class="com.cqupt.mis.rms.service.impl.TeachingMaterialSetNewServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+	
+	<!-- 配置查询StudentAwardsInfo学生获奖的bean-->
+	<bean id="studentAwardsNewInfoService" class="com.cqupt.mis.rms.service.impl.StudentAwardsNewInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"/>
+	</bean>
+
+		
+</beans>

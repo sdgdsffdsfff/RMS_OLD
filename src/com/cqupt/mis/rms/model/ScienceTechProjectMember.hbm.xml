@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceTechProjectMember" table="SCIENCE_TECHPROJECT_MEMBER">
+	    <id name="id">
+	    	<generator class="native"></generator>
+	    </id>
+        <many-to-one name="project" column="project_id" class="com.cqupt.mis.rms.model.ScienceTechProject"></many-to-one>
+        <property name="memberId" column="member_id" type="java.lang.String"/>
+		<property name="memberName" column="member_name" />
+		<property name="orders" column="orders" type="int" not-null="true"/>
+		<property name="task" column="task"/>
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

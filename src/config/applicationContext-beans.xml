@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:flex="http://www.springframework.org/schema/flex"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/flex  
+	http://www.springframework.org/schema/flex/spring-flex-1.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+	http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd">
+
+	<bean id="AbstractBean" abstract="true">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置权限和登录相关的Bean -->
+	<bean id="userInfoDao" class="com.cqupt.mis.rms.manager.impl.UserInfoDaoImpl"
+		parent="AbstractBean" />
+	<bean id="userRoleInfoDao" class="com.cqupt.mis.rms.manager.impl.UserRoleInfoDaoImpl"
+		parent="AbstractBean">
+		<property name="userInfoDao" ref="userInfoDao" />
+		<property name="roleInfoDao" ref="roleInfoDao" />
+	</bean>
+	<bean id="rolePurviewDao" class="com.cqupt.mis.rms.manager.impl.RolePurviewDaoImpl"
+		parent="AbstractBean">
+		<property name="roleInfoDao" ref="roleInfoDao" />
+		<property name="purviewDao" ref="purviewDao" />
+	</bean>
+	<bean id="roleInfoDao" class="com.cqupt.mis.rms.manager.impl.RoleInfoDaoImpl"
+		parent="AbstractBean">
+		<property name="rolePurviewDao" ref="rolePurviewDao" />
+		<property name="roleCollegeInfoDao" ref="roleCollegeInfoDao" />
+		<property name="userRoleInfoDao" ref="userRoleInfoDao" />
+	</bean>
+	<bean id="roleCollegeInfoDao" class="com.cqupt.mis.rms.manager.impl.RoleCollegeInfoDaoImpl"
+		parent="AbstractBean">
+		<property name="collegeInfoDao" ref="collegeInfoDao" />
+		<property name="roleInfoDao" ref="roleInfoDao" />
+	</bean>
+	<bean id="purviewDao" class="com.cqupt.mis.rms.manager.impl.PurviewDaoImpl"
+		parent="AbstractBean">
+		<property name="rolePurviewDao" ref="rolePurviewDao" />
+	</bean>
+	<bean id="collegeInfoDao" class="com.cqupt.mis.rms.manager.impl.CollegeInfoDaoImpl"
+		parent="AbstractBean" />
+	<bean id="roleLevelDao" class="com.cqupt.mis.rms.manager.impl.RoleLevelDaoImpl"
+		parent="AbstractBean">
+		<property name="roleInfoDao" ref="roleInfoDao" />
+	</bean>
+
+	<!-- 配置学院管理员得到信息Bean -->
+    <bean id="getCollegeInfoDao" class="com.cqupt.mis.rms.manager.impl.GetCollegeInfoDaoImpl" parent="AbstractBean" />
+    
+    <!-- 配置教师用户提交科研信息的Bean -->
+	
+	<bean id="submitInfoAndProofsDao" 
+		  class="com.cqupt.mis.rms.manager.impl.SubmitInfoAndProofsDaoImpl" 
+		  parent="AbstractBean" />
+	<bean id="submitInfoMemberDao" 
+		  class="com.cqupt.mis.rms.manager.impl.SubmitInfoMemberDaoImpl"
+		  parent="AbstractBean" />
+
+	<!-- 配置用户修改密码的Bean -->
+	<bean id="modifyPasswordDao" class="com.cqupt.mis.rms.manager.impl.ModifyPasswordDaoImpl" parent="AbstractBean" />
+
+	<!-- 配置用户修改个人信息的Bean -->
+	<bean id="modifyUserInfoDao" class="com.cqupt.mis.rms.manager.impl.ModifyUserInfoDaoImpl" parent="AbstractBean" />
+	
+	<!-- 配置用户管理个人科研信息的Bean -->
+	<bean id="researchInfoDao" class="com.cqupt.mis.rms.manager.impl.ResearchInfoDaoImpl" parent="AbstractBean" />
+	
+	
+	
+	<!-- 配置查询的bean -->
+	<bean id="searchDao" class="com.cqupt.mis.rms.manager.impl.SearchDaoImpl" parent="AbstractBean" />
+	
+	
+	<!-- 配置得到相应信息的excel的bean -->
+	<bean id="getInfoToExcelDao" class="com.cqupt.mis.rms.manager.impl.GetInfoToExcelDaoImpl" parent="AbstractBean" />
+	
+	<!-- 配置查询相应信息的bean -->	
+	<!-- 
+	<bean id="getDownloadInfoService" class="com.cqupt.mis.rms.service.impl.GetDownloadInfoServiceImpl" parent="AbstractBean" />
+	 -->
+	 
+	
+</beans>

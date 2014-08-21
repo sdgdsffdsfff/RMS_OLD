@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ScienceGovernmentAward" table="SCIENCE_GOVERNMENT_AWARD">
+		<id name="awardId" column="award_id"/>
+		<property name="collegesIn" column="colleges_in" not-null="true"></property>
+		<property name="projectName" column="project_name" not-null="true"></property>
+		<property name="awardingGrades" column="awarding_grades"></property>
+		<property name="completeUnit" column="complete_unit"></property>
+		<property name="unitAward" column="unit_award" type="float"></property>
+		<property name="personAward" column="person_award" type="float"></property>
+		<property name="totalAward" column="total_award" type="float"></property>
+		<property name="remarks" column="remarks"></property>
+		
+		<many-to-one name="submitUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="com.cqupt.mis.rms.model.CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+		
+		<property name="status" column="status" not-null="true"/>
+		<property name="returnReason" column="return_reason" />						
+	</class>
+</hibernate-mapping>
