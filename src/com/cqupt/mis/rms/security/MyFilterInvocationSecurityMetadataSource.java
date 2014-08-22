@@ -49,23 +49,16 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
 		purviewDao = (PurviewDao) ac.getBean("purviewDao");
 		roleInfoDao = (RoleInfoDao) ac.getBean("roleInfoDao");
 		rolePurviewDao = (RolePurviewDao) ac.getBean("rolePurviewDao");
-		
-		
-//		List<Purviewinfo> allPureview = purviewDao.findAllPurviewList();
 		List<CQUPTRole> allRole = roleInfoDao.findRoleInfoList(0, 5);		//获取全部角色？？
 
 		/*
 		 * 应当是资源为key， 权限为value。 资源通常为url， 权限就是那些以ROLE_为前缀的角色。 一个资源可以由多个权限来访问。
-		 * sparta
 		 */
 		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 		
 		for (CQUPTRole role : allRole) {
 			ConfigAttribute ca = new SecurityConfig(String.valueOf(role.getRoleId()));
 			List<Rolepurview> rolePurviewList = rolePurviewDao.findRolePurviewListByroleId(role.getRoleId());		//获取相应角色的相应合法资源信息	
-			
-			System.out.println(rolePurviewList.get(0).getPurviewinfo());
-			System.out.println(rolePurviewList.get(0).getPurviewinfo().getPurviewUrl());
 			
 			for (Rolepurview rolePurview : rolePurviewList) {
 				String url = rolePurview.getPurviewinfo().getPurviewUrl();		

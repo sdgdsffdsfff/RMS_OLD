@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping >
-	<class name="com.cqupt.mis.rms.model.Purviewinfo" table="t_purviewinfo">
+	<class name="com.cqupt.mis.rms.model.Purviewinfo" table="t_purviewinfo" lazy="false">
 		<id name="purviewId" type="java.lang.Integer">
 			<column name="purviewId" />
 			<generator class="native" />
@@ -16,14 +16,14 @@
 		<property name="purviewRemark" type="java.lang.String">
 			<column name="purviewRemark" length="16277215" />
 		</property>
-		<many-to-one name="parentPurviewinfo" class="com.cqupt.mis.rms.model.Purviewinfo">
+		<many-to-one name="parentPurviewinfo" class="com.cqupt.mis.rms.model.Purviewinfo" lazy="false" fetch="join" not-found="ignore">
 			<column name="parentId" />
 		</many-to-one>
-		<set name="rolepurviews" inverse="true" fetch="join">
+		<set name="rolepurviews" inverse="true" fetch="join" lazy="false">
 			<key>
-				<column name="purviewId" not-null="true" />
+				<column name="purviewId" not-null="true"/>
 			</key>
-			<one-to-many class="com.cqupt.mis.rms.model.Rolepurview" />
+			<one-to-many class="com.cqupt.mis.rms.model.Rolepurview" not-found="ignore"/>
 		</set>
 	</class>
 </hibernate-mapping>

@@ -7,7 +7,7 @@
             <key-many-to-one name="roleinfo" class="com.cqupt.mis.rms.model.CQUPTRole">
                 <column name="roleId" />
             </key-many-to-one>
-            <key-many-to-one name="purviewinfo" class="com.cqupt.mis.rms.model.Purviewinfo">
+            <key-many-to-one name="purviewinfo" class="com.cqupt.mis.rms.model.Purviewinfo" lazy="false">
                 <column name="purviewId" />
             </key-many-to-one>
         </composite-id>

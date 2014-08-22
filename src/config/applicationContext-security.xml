@@ -16,8 +16,14 @@
 		<intercept-url pattern="/**/*.gif" filters="none" />
 		<intercept-url pattern="/**/*.css" filters="none" />
 		<intercept-url pattern="/**/*.js" filters="none" />
-		<!-- 登录页面和忘记密码页面不过滤  -->
-		<intercept-url pattern="/login.jsp" filters="none" /> 
+		<!-- 以下页面不过滤  -->
+		<intercept-url pattern="/login.jsp" filters="none" />
+		<intercept-url pattern="/error.jsp" filters="none" />
+		<intercept-url pattern="/logout.jsp" filters="none" />
+		<intercept-url pattern="/image.jsp" filters="none" />
+		<intercept-url pattern="/savesuccess.jsp" filters="none" />
+		<intercept-url pattern="/success.jsp" filters="none" />
+		<intercept-url pattern="/sessioninvalid.jsp" filters="none" /> 
 
 		<!-- <form-login login-page="/login.jsp" authentication-failure-url="/error.jsp" default-target-url="/welcome.jsp" /> -->
 
@@ -26,7 +32,7 @@
 		-->
 		
 		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
-		<session-management invalid-session-url="/error.jsp" />
+		<session-management invalid-session-url="/sessioninvalid.jsp" />
 		
 		<!-- 增加自定义的登录校验器-->
 		<custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER" />
@@ -48,13 +54,14 @@
         <b:property name="authenticationManager" ref="authenticationManager"></b:property>  
         <!-- 注入DAO为了查询相应的用户 -->  
         <b:property name="userManagerService" ref="userManagerService"></b:property>  
-    </b:bean>  
+    </b:bean>
+      
     <b:bean id="loginLogAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
-        <b:property name="defaultTargetUrl" value="/welcome.jsp"></b:property>  
+        <b:property name="defaultTargetUrl" value="/menu.action"></b:property>  
     </b:bean>  
     <b:bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">  
         <!-- 可以配置相应的跳转方式。属性forwardToDestination为true采用forward false为sendRedirect -->  
-        <b:property name="defaultFailureUrl" value="/error.jsp"></b:property>  
+        <b:property name="defaultFailureUrl" value="/login.jsp"></b:property>  
     </b:bean>
 	
 	
