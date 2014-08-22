@@ -29,7 +29,8 @@ function countDown(secs,surl){
 	<%
 		session = request.getSession(false);
 		if(session != null){
-			session.removeAttribute("userId");
+			//session.removeAttribute("userId");
+			session.invalidate();
 		}
 	%>
 	<center>

@@ -9,6 +9,7 @@ import com.cqupt.mis.rms.service.PurviewService;
 import com.cqupt.mis.rms.service.model.MenuInfo;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.accessibility.internal.resources.accessibility;
 
 /**
  * <p>
@@ -35,6 +36,8 @@ public class MenuAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
+		//清除登录错误信息
+		ActionContext.getContext().getSession().remove("loginFailed");
 		//获取userId和roleId
 		String userId = (String) ActionContext.getContext().getSession().get("userId");
 		int roleId = (Integer) ActionContext.getContext().getSession().get("roleId");

@@ -11,12 +11,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.cqupt.mis.rms.model.CQUPTRole;
 import com.cqupt.mis.rms.service.UserManagerService;
+import com.opensymphony.xwork2.ActionContext;
 
 
 public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private UserManagerService userManagerService;
 	private static final String USERNAME = "userName";
 	private static final String USERPWD = "userPwd";
+	private static final String CHECK = "check";
 	private static final String LOGINTYPE = "loginType";
 	
 	@Override  
@@ -27,25 +29,32 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
         
         String userName = obtainUsername(request);
         String userPwd = obtainPassword(request);
+        String check = obtainLoginCheck(request);
         int loginType = obtainLoginType(request);
         
-        CQUPTRole role = userManagerService.checkRoleLevelByUserIdAndRoleLevelId(userName, loginType);
-		if(role!= null){
-			// 角色和登录类型匹配，判断用户名和密码是否正确
-			
-			boolean result = userManagerService.checkUNameAndUPass(userName,userPwd);
-			if (result) {
-			// 用户名和密码正确,则保存登录名和用户角色信息——因为后面很多地方会使用到这两个参数，所以存放在session里面
-				request.getSession().setAttribute("userId", userName);
-				request.getSession().setAttribute("roleId", role.getRoleId());
-			} else {
-//				request.setAttribute("LoginError","用户名或密码错误！");
-				throw new AuthenticationServiceException("用户名或者密码错误！");
-			}
-		} else {
-//			request.setAttribute("LoginError", "身份不匹配,请重新选择！");
-			throw new AuthenticationServiceException("身份不匹配,请重新选择！");
-		} 
+     // 首先检查角色是否匹配
+     	CQUPTRole role = userManagerService.checkRoleLevelByUserIdAndRoleLevelId(userName, loginType);
+     	if(role!= null){
+     		String rand = (String)request.getSession().getAttribute("rand");
+     		if (rand.equals(check)) {
+     			// 角色和登录类型匹配，判断用户名和密码是否正确
+     			boolean result = userManagerService.checkUNameAndUPass(userName,userPwd);
+     			if (result) {
+     				// 用户名和密码正确,则保存登录名和用户角色信息——因为后面很多地方会使用到这两个参数，所以存放在session里面
+     				request.getSession().setAttribute("userId", userName);
+     				request.getSession().setAttribute("roleId", role.getRoleId());
+     			} else {
+     				request.getSession().setAttribute("loginFailed", "用户名或密码错误！");
+     				throw new AuthenticationServiceException("用户名或密码错误！");
+     			}
+     		} else {
+     			request.getSession().setAttribute("loginFailed", "请输入正确的验证码！");
+     			throw new AuthenticationServiceException("请输入正确的验证码！");
+     		}
+     	}else {
+     		request.getSession().setAttribute("loginFailed", "身份不匹配,请重新选择！");
+     		throw new AuthenticationServiceException("身份不匹配,请重新选择！");
+     	}
           
         //UsernamePasswordAuthenticationToken实现 Authentication  
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userName, userPwd);  
@@ -68,6 +77,11 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
     protected String obtainPassword(HttpServletRequest request) {  
         Object obj = request.getParameter(USERPWD);  
         return null == obj ? "" : obj.toString();  
+    }
+    
+    protected String obtainLoginCheck(HttpServletRequest request) {  
+        Object obj = request.getParameter(CHECK);  
+        return null == obj ? "" : obj.toString();
     }
 
     protected int obtainLoginType(HttpServletRequest request) {  

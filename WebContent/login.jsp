@@ -11,6 +11,23 @@
 <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="js/jquery.validate.js"></script>
 <script type="text/javascript">
+	function checkForm() {
+		if($("#userName").attr("value") == "") {
+			alert("请输入用户名");
+			return false;
+		} else if($("#userPwd").attr("value") == "") {
+			alert("请输入用户密码");
+			return false;
+		} else if($("#check").attr("value")=="" || $("#check").attr("value").length<4) {
+			alert("请输入完整的验证码");
+			return false;
+		} else if($("#role").val() == "") {
+			alert("请选择身份信息");
+			return false;
+		} else {
+			return true;
+		}
+	}
 	function loadimage(){
     	document.getElementById("randImage").src = "image.jsp?"+Math.random();
   	}
@@ -52,9 +69,12 @@
 		<div class="left"></div>
 		<div class="right radius">
 		<%-- 提交spring-security 进行验证 --%>
-			<form action="j_spring_security_check" method="post">
+			<form action="j_spring_security_check" method="post" onsubmit="return checkForm()">
 				<h3>请输入用户名和密码</h3>
-				<FONT color="red"><s:actionerror /></FONT>
+				<FONT color="red">
+					<s:property value="#session.loginFailed"/>
+				</FONT>
+				<br>
 				<label for="userName">用户名</label>
 				<input type="text" name="userName" id="userName" />
 				<p class="clear"></p>
@@ -87,5 +107,6 @@
 		<p>技术支持：重庆邮电大学信管工作室</p>
 	</div>
 </div>
+<s:debug></s:debug>
 </body>
 </html>
