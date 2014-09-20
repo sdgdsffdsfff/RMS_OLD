@@ -43,6 +43,12 @@ public interface PurviewService {
 	 */	
 	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(String userId,int roleId,int parentId);
 	/**
+	 * 查询一级所有模块的信息
+	 * @param parentId 模块父类Id
+	 * @return 模块信息List<Purviewinfo>
+	 */
+	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(int parentId);
+	/**
 	 * 更具角色编号和模块编号，查找该角色模块信息
 	 * @param roleId 角色Id
 	 * @param purviewId 模块Id

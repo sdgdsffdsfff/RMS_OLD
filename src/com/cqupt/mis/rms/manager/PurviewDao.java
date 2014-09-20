@@ -72,8 +72,16 @@ public interface PurviewDao {
 	 */	
 	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdUsePage(String userId,int roleId,int offset,int pageSize);
 	/**
+	 * 查询所有一级模块
+	 * @param parentId
+	 * @return 模块信息List<Purviewinfo>
+	 */
+	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(int parentId);
+	/**
 	 * 返回满足条件的模块的总数
-	 * @return 满足条件的模块总是
+	 * @return 满足条件的模块总数
 	 */	
 	public int findPurviewListNumber();
+	
+	
 }

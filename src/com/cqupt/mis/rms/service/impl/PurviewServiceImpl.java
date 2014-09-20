@@ -63,7 +63,21 @@ public class PurviewServiceImpl implements PurviewService {
 		}
 		return null;
 	}
-
+	
+	@Override
+	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(
+			int parentId) {
+		try {
+			List<Purviewinfo> list = purviewDao
+					.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(parentId);
+			if (!list.isEmpty()) {
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(
 			String userId, int roleId, int parentId) {
@@ -303,4 +317,6 @@ public class PurviewServiceImpl implements PurviewService {
 		return false;
 
 	}
+
+
 }

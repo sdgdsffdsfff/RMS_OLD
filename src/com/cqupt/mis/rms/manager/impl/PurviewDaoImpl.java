@@ -44,13 +44,21 @@ public class PurviewDaoImpl extends BaseHibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(String userId, int roleId,int parentId) {
+
 		String hql = "select p from UserRoleInfo ur , Rolepurview rp ,Purviewinfo p where ur.userLogin.userId = ? "
 				+ "and ur.roleinfo.roleId = rp.roleinfo.roleId "
 				+ "and rp.purviewinfo.purviewId = p.purviewId and p.parentPurviewinfo.purviewId = ? "
 				+ "and ur.roleinfo.roleId = ?";
 		return getSession().createQuery(hql).setParameter(0, userId).setParameter(1, parentId).setParameter(2, roleId).list();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Purviewinfo> findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(int parentId) {
+		String hql = "select p from Purviewinfo p where p.parentPurviewinfo.purviewId = ?";
+		return  getSession().createQuery(hql).setParameter(0, parentId).list();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Purviewinfo> findPurviewListByparentId(int parentId) {
@@ -112,4 +120,6 @@ public class PurviewDaoImpl extends BaseHibernateDaoSupport implements
 	public int findPurviewListNumber() {
 		return this.getTotalNumber();
 	}
+
+
 }
