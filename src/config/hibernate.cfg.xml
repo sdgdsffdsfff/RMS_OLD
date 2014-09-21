@@ -9,7 +9,7 @@
 			com.mysql.jdbc.Driver
 		</property>
 		 
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms_fd</property>
 		<property name="hibernate.connection.username">rms</property>
 		<property name="hibernate.connection.password">123</property>
 		
@@ -126,6 +126,11 @@
 		
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsNew.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/StudentInstructorNew.hbm.xml"/>
+		
+		<!-- 2014-9-20 Bern add 动态数据库字段 -->
+		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsData.hbm.xml"/>
 		
 		</session-factory>
 </hibernate-configuration>
