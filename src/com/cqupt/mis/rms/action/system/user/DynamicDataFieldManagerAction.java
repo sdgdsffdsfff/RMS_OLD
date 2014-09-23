@@ -1,6 +1,7 @@
 package com.cqupt.mis.rms.action.system.user;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
+import com.cqupt.mis.rms.model.DynamicField;
 import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -14,12 +15,13 @@ public class DynamicDataFieldManagerAction extends ActionSupport {
 	
 	//添加字段
 	public String addField() {
-		boolean result = false;
+		boolean result = false;		
 		Object obj = getInitedObject();
 		if(obj == null) {
 			return "error";
 		}
 		result = dynamicDataFieldDao.addField(obj);
+		
 		if(result) {
 			return SUCCESS;
 		} else {
@@ -50,14 +52,19 @@ public class DynamicDataFieldManagerAction extends ActionSupport {
 			
 			return null;
 		} else if(classNum == 5) {
-			StudentAwardsField stuaAwardsField = new StudentAwardsField();
-			stuaAwardsField.setName(fieldName);
-			stuaAwardsField.setDescription(fieldDes);
-			stuaAwardsField.setIsDelete(0);
-			return stuaAwardsField;
+			DynamicField dynamicField = new StudentAwardsField();
+//			StudentAwardsField stuaAwardsField = new StudentAwardsField();
+//			stuaAwardsField.setName(fieldName);
+//			stuaAwardsField.setDescription(fieldDes);
+//			stuaAwardsField.setIsDelete(0);
+			dynamicField.setName(fieldName);
+			dynamicField.setDescription(fieldDes);
+			dynamicField.setIsDelete(0);
+			return dynamicField;
 		}
 		return null;
 	}
+	
 	
 	private String getClassName() {
 		

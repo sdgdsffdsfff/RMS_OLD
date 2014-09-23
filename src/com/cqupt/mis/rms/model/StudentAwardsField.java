@@ -4,12 +4,11 @@ import java.util.Date;
 
 /*
  * 可动态添加数据库字段的类
- * 字段类
- * @author fengdi
+ * 属于学生获奖信息的动态字段类
+ * @author Bern
  * 2014.9.20
  */
-
-public class StudentAwardsField {
+public class StudentAwardsField implements DynamicField {
 	private int id;		//字段id
 	private String name;		//字段在数据库中的名字
 	private String description;		//字段在页面展示的名字
