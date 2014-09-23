@@ -689,6 +689,21 @@
 		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService" />
 	</bean>
 	
+	<!-- ************************* 20140922 Bern 添加  *************************** -->
+	
+	<!-- 配置处理输入学生获奖信息前的动态字段加载 -->
+	<bean id="inputStudentAwardsAction" class="com.cqupt.mis.rms.action.teacher.InputStudentAwardsAction" scope="prototype">
+		<property name="dynamicDataFieldService" ref="dynamicDataFieldService"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置动态字段管理的Action -->
+	<bean id="dynamicDataFieldManagerAction" class="com.cqupt.mis.rms.action.system.user.DynamicDataFieldManagerAction" scope="prototype">
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
+	</bean>
+	
+	
+	
 	
 	<bean id="searchSchoolMajorContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeNewAction" scope="prototype">
 		<property name="majorContributeNewService" ref="majorContributeNewService" />

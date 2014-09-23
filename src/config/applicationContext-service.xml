@@ -248,12 +248,20 @@
 	-->
 	<bean class="org.springframework.security.authentication.event.LoggerListener"/>
 	
-	<!-- 设置权限的前缀为AUTH_，而不是ROLE_。 -->
+	<!-- 设置权限的前缀为“”，而不是ROLE_。 -->
 	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
     	<property name="rolePrefix" value=""/>
     </bean>
     <!--spring-security  
     	spring-security 配置-end
     -->
-		
+    
+    <!-- ********************** 2014.9.22 Bern添加  ******************** -->
+	
+	<!-- 配置添加动态添加数据库字段的逻辑处理Bean -->
+	<bean id="dynamicDataFieldService" class="com.cqupt.mis.rms.service.impl.DynamicDataFieldServiceImpl">
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
+	</bean>	
+
+
 </beans>

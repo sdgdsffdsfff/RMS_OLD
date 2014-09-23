@@ -697,6 +697,20 @@
 		</action>
 		
 		
+		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段***************** -->
+		<!-- 配置输入学生获奖信息之前动态字段的加载的Action -->
+		<action name="inputStudentAwards" class="inputStudentAwardsAction">
+			<result name="success">/pages/teacher/inputstudentawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理动态字段管理的Action -->
+		<action name="dynamicDataFieldManager" class="dynamicDataFieldManagerAction" method="addField">
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
 	</package>
 	
 	<package name="modify" extends="struts-default">
