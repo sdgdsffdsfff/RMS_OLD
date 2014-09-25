@@ -698,12 +698,17 @@
 	</bean>
 	
 	<!-- 配置动态字段管理的Action -->
-	<bean id="dynamicDataFieldManagerAction" class="com.cqupt.mis.rms.action.system.user.DynamicDataFieldManagerAction" scope="prototype">
-		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
+	<bean id="findDynamicDataFieldAction" class="com.cqupt.mis.rms.action.system.user.FindDynamicDataFieldAction" scope="prototype">
+		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置处理添加动态字段的Action -->
+	<bean id="addDynamicDataFieldAction" class="com.cqupt.mis.rms.action.system.user.AddDynamicDataFieldAction" scope="prototype">
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 	
-	
+	<!-- ************************* Bern 添加  end*************************** -->
 	
 	<bean id="searchSchoolMajorContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeNewAction" scope="prototype">
 		<property name="majorContributeNewService" ref="majorContributeNewService" />

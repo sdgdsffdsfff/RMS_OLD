@@ -23,7 +23,7 @@
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;">
-	<form id="form" name="form" action="" onsubmit="return checkClickAndSubmit();" method="post">
+	<form id="form" name="form" action="findDynamicDataField.action" method="post">
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
@@ -46,10 +46,28 @@
 		</div>
 	</div>
 	</div>
+		<button type="submit">查询</button>
 	</form>
 	
-	<s:if test="allField">
-	
+	<s:if test="#allFields!=null">
+	<table border="1">
+		<tr>
+			<th>字段数据库名</th>
+			<th>字段前台展示名</th>
+			<th>字段提交时间</th>
+			<th>操作</th>
+			<th>操作</th>
+		</tr>
+		<s:iterator value="#allFields" id="f">
+		<tr>
+			<td><s:property value="#f.name"/></td>
+			<td><s:property value="#f.description"/></td>
+			<td><s:property value="#f.submitTime"/></td>
+			<td>删除</td>
+			<td>修改</td>
+		</tr>
+		</s:iterator>
+	</table>
 	</s:if>
 </body>
 </html>

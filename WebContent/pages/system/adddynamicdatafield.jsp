@@ -3,7 +3,6 @@
 <%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,13 +17,13 @@
     <script src="js/addPerson.js" type="text/javascript"></script>
     <script src="js/vanadium.js" type="text/javascript"></script>
 	<script src="js/check.js" type="text/javascript"></script>
-	<link href="css/input.css" rel="stylesheet" type="text/css" />
-	<link href="css/upload.css" rel="stylesheet" type="text/css" />
+	<link href="css/input.css" rel="stylesheet" type="text/css"/>
+	<link href="css/upload.css" rel="stylesheet" type="text/css"/>
 	<script src="js/teacher/inputInfo.js" type="text/javascript"></script>
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;">
-	<form id="form" name="form" action="dynamicDataFieldManager.action" onsubmit="return checkClickAndSubmit();" method="post">
+	<form id="form" name="form" action="addDynamicDataField.action" onsubmit="return checkClickAndSubmit();" method="post">
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
@@ -59,7 +58,6 @@
 					<input type="text" id="" name="fieldDes" class=":required"/>
 				</div>
 			</div>
-    			
 		</div>
 			
 	</div>

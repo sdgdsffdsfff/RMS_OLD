@@ -9,8 +9,16 @@ public class DynamicDataFieldDaoImpl extends BaseHibernateDaoSupport implements 
 
 	@Override
 	public boolean addField(Object obj) {
-		this.getHibernateTemplate().save(obj);
-		return false;
+		boolean result = false;
+		try {
+			this.getHibernateTemplate().save(obj);
+			result = true;
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 
 	@Override
@@ -21,13 +29,14 @@ public class DynamicDataFieldDaoImpl extends BaseHibernateDaoSupport implements 
 
 	@Override
 	public boolean updateField(Object obj) {
+		//TODO
 		this.getHibernateTemplate().update(obj);
 		return false;
 	}
 
 	@Override
 	public List<Object> findAllFields(String className) {
-		
+		//TODO
 		return null;
 	}
 

@@ -704,12 +704,23 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
-		<!-- 处理动态字段管理的Action -->
-		<action name="dynamicDataFieldManager" class="dynamicDataFieldManagerAction" method="addField">
-			<result name="success">/success.jsp</result>
+		<!-- 处理查找动态字段的Action -->
+		<action name="findDynamicDataField" class="findDynamicDataFieldAction">
+			<result name="success">/pages/system/managedynamicdatafield.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
 
+		<!-- 处理添加动态字段的Action -->
+		<action name="addDynamicDataField" class="addDynamicDataFieldAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
 
 	</package>
 	
