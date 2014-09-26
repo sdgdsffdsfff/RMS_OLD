@@ -24,7 +24,7 @@
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;">
-	<form id="form" name="form" action="" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	<form id="form" name="form" action="submitStudentAwardsRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
@@ -34,13 +34,13 @@
 		<div class="content">
 			<div class="line">	<!-- ####三个换行#### -->
 				<div class="element">
-					<label for="rewardTime">时间:</label>
-					<input type="text" id="rewardTime" name="rewardTime" class=":required" />
+					<label for="awardsName">获奖名称</label>
+					<input type="text" id="awardsName" name="awardsName" class=":required" />
 				</div>
 				<s:iterator value="#allFields" id="f">
-					<div class="element">
-					<label for="rewardTime"><s:property value="#f.description"/></label>
-					<input type="text" id="rewardTime" name="rewardTime" class=":required" />
+				<div class="element">
+					<label for="<s:property value="#f.name"/>"><s:property value="#f.description"/></label>
+					<input type="text" id="<s:property value="#f.name"/>" name="<s:property value="#f.name"/>" class=":required" />
 				</div>
 				</s:iterator>
 			</div>

@@ -708,6 +708,13 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置处理添加学生获奖信息的Action -->
+	<bean id="submitStudentAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitStudentAwardsRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- ************************* Bern 添加  end*************************** -->
 	
 	<bean id="searchSchoolMajorContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeNewAction" scope="prototype">

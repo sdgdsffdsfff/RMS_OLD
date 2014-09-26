@@ -101,8 +101,10 @@
 	
 	<!-- ********************** 2014.9.22 Bern添加  ******************** -->
 	
-	<!-- 配置处理动态数据库类的Dao层的Bean -->
+	<!-- 配置处理动态数据库类字段的Dao层的Bean -->
 	<bean id="dynamicDataFieldDao" class="com.cqupt.mis.rms.manager.impl.DynamicDataFieldDaoImpl" parent="AbstractBean" />
 	
+	<!-- 配置处理动态数据库类记录的Dao层的Bean -->
+	<bean id="dynamicDataRecordDao" class="com.cqupt.mis.rms.manager.impl.DynamicDataRecordDaoImpl" parent="AbstractBean" />
 	
 </beans>

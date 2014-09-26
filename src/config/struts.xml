@@ -719,6 +719,15 @@
 			<result name="error">/error.jsp</result>
 		</action>
 
+		
+		<!-- 处理提交学生获奖信息的Action -->
+		<action name="submitStudentAwardsRecord" class="submitStudentAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
 
