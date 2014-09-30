@@ -715,6 +715,12 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置处理添加学生获奖信息的Action -->
+	<bean id="ViewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- ************************* Bern 添加  end*************************** -->
 	
 	<bean id="searchSchoolMajorContributeNewAction" class="com.cqupt.mis.rms.action.school.SearchSchoolMajorContributeNewAction" scope="prototype">

@@ -729,6 +729,14 @@
 			<result name="error">/error.jsp</result>
 		</action>
 
+
+		<!-- 处理查询学生获奖信息的Action -->
+		<action name="viewStudentAwardsRecords" class="ViewTeachingInfoAction" method="viewStudentAwardsRecords">
+			<result name="success">/pages/teacher/manage/viewteachinginfo.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
 
 	</package>
