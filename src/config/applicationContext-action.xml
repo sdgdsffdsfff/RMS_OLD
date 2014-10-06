@@ -696,9 +696,8 @@
 	<!-- ************************* 20140922 Bern 添加  *************************** -->
 	
 	
-	<!-- 配置处理输入学生获奖信息前的动态字段加载 -->
-	<bean id="inputStudentAwardsAction" class="com.cqupt.mis.rms.action.teacher.InputStudentAwardsAction" scope="prototype">
-		<property name="dynamicDataFieldService" ref="dynamicDataFieldService"></property>
+	<!-- 配置处理录入动态字段类信息前的动态字段加载 -->
+	<bean id="InputDynamicDataRecordAction" class="com.cqupt.mis.rms.action.teacher.InputDynamicDataRecordAction">
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
@@ -731,7 +730,7 @@
 	</bean>
 	
 	<!-- 配置处理查看教学类信息的Action -->
-	<bean id="viewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction" scope="prototype">
+	<bean id="viewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction">
 		<property name="researchInfoService" ref="researchInfoService"></property>
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>

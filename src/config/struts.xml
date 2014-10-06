@@ -734,7 +734,7 @@
 		
 		
 		<!-- 配置输入学生获奖信息之前动态字段的加载的Action -->
-		<action name="inputStudentAwards" class="inputStudentAwardsAction">
+		<action name="inputStudentAwardsRecord" class="InputDynamicDataRecordAction" method="inputStudentAwardsRecord">
 			<result name="success">/pages/teacher/inputstudentawardsrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
