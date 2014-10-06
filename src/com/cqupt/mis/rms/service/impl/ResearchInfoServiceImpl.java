@@ -27,6 +27,7 @@ import com.cqupt.mis.rms.model.ScienceTechProjectMember;
 import com.cqupt.mis.rms.model.ScienceTransferLeader;
 import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentInstructorNew;
+import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.model.TeachAchievementsDeclarant;
 import com.cqupt.mis.rms.model.TeachersAwards;
 import com.cqupt.mis.rms.model.TeachersAwardsNew;
@@ -200,6 +201,7 @@ public class ResearchInfoServiceImpl implements ResearchInfoService {
 		try {
 			//删除旧的科研成员信息
 			researchInfoDao.deleteMemberInfoByResearchId(researchId, memberModelName, memberFactor, researchFactor);
+			
 			//添加新的科研成员信息
 			switch(flag){
 			case 1:
@@ -301,6 +303,12 @@ public class ResearchInfoServiceImpl implements ResearchInfoService {
 			case 19:
 				List<TeachAchievementsDeclarant> teachAchievementsDeclarantlists = (List<TeachAchievementsDeclarant>)memberListObject;
 				this.submitTeachAchievementsDeclarant(teachAchievementsDeclarantlists);
+				break;
+				
+				/****************2014.10.6	Bern 添加***************************/
+			case 25:
+				List<StudentRecordInstructor> studentRecordInstructorlists = (List<StudentRecordInstructor>)memberListObject;
+				this.submitStudentRecordInstructors(studentRecordInstructorlists);
 				break;
 				
 			}
@@ -800,10 +808,27 @@ public class ResearchInfoServiceImpl implements ResearchInfoService {
 				researchInfoDao.addMemberInfo(teachingMaterialEditor);
 			}
 		}
-		
-		
-		
 	}
 	
+	
+	/*******************************2014.10.6 Bern	添加***********************************/
 
+	public void submitStudentRecordInstructors(
+			List<StudentRecordInstructor> studentRecordInstructors) {
+		if(!studentRecordInstructors.isEmpty()){
+			for (int i = 0; i < studentRecordInstructors.size(); i++) {
+				StudentRecordInstructor studentRecordInstructor = studentRecordInstructors.get(i);
+				CQUPTUser cquptUser = researchInfoDao.findCQUPTUserByUserName(studentRecordInstructor.getMemberName());
+				if(cquptUser != null){
+					studentRecordInstructor.setInstructorId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					studentRecordInstructor.setInstructorId(GenerateUtils.generateUserID());
+				}
+				researchInfoDao.addMemberInfo(studentRecordInstructor);
+			}
+		}
+	}
+	
+	
 }

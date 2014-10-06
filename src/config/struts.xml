@@ -339,6 +339,25 @@
 
 
 
+	<!-- ******************************Bern 2014.10.4添加*********************************** -->
+	
+	<package name="collegeAchInfoRecord" extends="struts-default"
+		namespace="/collegeAchInfoRecord">
+		<!-- 定义拦截器 -->
+		<global-results>
+			<result name="success">/pages/college/simpleInfo/teachinginfo.jsp</result>
+		</global-results>
+		<action name="studentAwardsRecord" class="managerCollegeAchInfoRecordAction"
+			method="studentAwardsRecord">
+		</action>
+	</package>
+	
+	
+	<!-- *********************************Bern 添加   end********************************** -->
+
+
+
+
 	<package name="collegeTecStatus" extends="struts-default"
 		namespace="/collegeTecStatus">
 		<!-- 定义拦截器 -->
@@ -448,6 +467,20 @@
 			<result name="TeachAchievements">/pages/college/retailInfo/teachachievements.jsp
 			</result>
 		</action>
+		
+		
+		
+		<!-- ********************************2014.10.6	Bern	添加************************************* -->		
+		
+		
+		<action name="studentAwardsRecord" class="managerCollegeAchRecordStatusAction"
+			method="studentAwardsRecord">
+			<result name="success">/pages/college/retailInfo/studentawardsrecord.jsp
+			</result>
+		</action>
+		
+		
+		<!-- *********************************Bern 添加	end************************************ -->	
 	</package>
 
 
@@ -698,6 +731,8 @@
 		
 		
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段***************** -->
+		
+		
 		<!-- 配置输入学生获奖信息之前动态字段的加载的Action -->
 		<action name="inputStudentAwards" class="inputStudentAwardsAction">
 			<result name="success">/pages/teacher/inputstudentawardsrecord.jsp</result>
@@ -719,6 +754,29 @@
 			<result name="error">/error.jsp</result>
 		</action>
 
+		<!-- 处理删除动态字段的Action -->
+		<action name="deleteDynamicDataField" class="deleteDynamicDataFieldAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理修改之前查找动态字段的Action -->
+		<action name="modifyDynamicDataFieldBefore" class="modifyDynamicDataFieldAction" method="findFieldByClassNameAndId">
+			<result name="success">/pages/system/modifydynamicdatafield.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理修改动态字段的Action -->
+		<action name="modifyDynamicDataField" class="modifyDynamicDataFieldAction" method="modify">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 		
 		<!-- 处理提交学生获奖信息的Action -->
 		<action name="submitStudentAwardsRecord" class="submitStudentAwardsRecordAction">
@@ -731,13 +789,38 @@
 
 
 		<!-- 处理查询学生获奖信息的Action -->
-		<action name="viewStudentAwardsRecords" class="ViewTeachingInfoAction" method="viewStudentAwardsRecords">
+		<action name="viewStudentAwardsRecords" class="viewTeachingInfoAction" method="viewStudentAwardsRecords">
 			<result name="success">/pages/teacher/manage/viewteachinginfo.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 处理查找学生获奖详细信息的Action -->
+		<action name="viewStudentAwardsRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewStudentAwardsRecordDetail">
+			<result name="success">/pages/teacher/manage/viewstudentawardsrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifystudentawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		<!-- 处理教师修改学生获奖信息的Action -->
+		<action name="modifyStudentAwardsRecord" class="modifyStudentAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		
+		
+		
 		
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
+
+
+
 
 	</package>
 	
@@ -1841,6 +1924,19 @@
 			<result name="input">/error.jsp</result>
 		</action>
 		
+		<!-- ************************************Bern 2014.10.4 添加*********************************************** -->
+		
+		<!-- 学院查询StudentAwardsRecordInfo学生获奖的Action -->
+		<action name="searchCollegeStudentAwardsRecordInfo" class="searchCollegeStudentAwardsRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchstudentawardsrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		
+		
+		<!-- ************************************Bern 添加 end*********************************************** -->
+	
+	
 	</package>
 	
 	<package name="downLoadExcel" extends="struts-default" namespace="/downLoadExcel">

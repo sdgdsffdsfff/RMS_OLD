@@ -15,7 +15,7 @@ public interface DynamicDataFieldDao {
 	 * @param obj
 	 * @return
 	 */
-	public boolean deleteField(Object obj);
+	public boolean deleteField(String className, int fieldId);
 		
 	/**
 	 * 修改字段
@@ -27,7 +27,14 @@ public interface DynamicDataFieldDao {
 	/**
 	 * 查找所有字段
 	 * @param className
-	 * @return
+	 * @return List<Object>
 	 */
 	public List<Object> findAllFields(String className);
+	
+	/**
+	 * 根据类名和字段id查找单个字段
+	 * @param className
+	 * @return Object
+	 */
+	public Object findFieldByClassNameAndId(String className, int fieldId);
 }

@@ -30,4 +30,11 @@ public interface DynamicDataRecordDao {
 	 * @return
 	 */
 	public List<Object> findAllRecords(String className);
+	
+	/**
+	 * 通过类名和记录id查找单条详细记录
+	 * @param className
+	 * @param recordId
+	 */
+	public Object findRecordByClassNameAndId(String className, String recordId);
 }

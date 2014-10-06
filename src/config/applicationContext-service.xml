@@ -256,12 +256,17 @@
     	spring-security 配置-end
     -->
     
-    <!-- ********************** 2014.9.22 Bern添加  ******************** -->
+    <!-- ********************** 2014.9.22 Bern添加 Service ******************** -->
 	
 	<!-- 配置添加动态添加数据库字段的逻辑处理Bean -->
 	<bean id="dynamicDataFieldService" class="com.cqupt.mis.rms.service.impl.DynamicDataFieldServiceImpl">
 		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
-	</bean>	
+	</bean>
+	
+	<!-- 配置处理查找学生获奖逻辑处理的Bean -->
+	<bean id="studentAwardsRecordInfoService" class="com.cqupt.mis.rms.service.impl.StudentAwardsRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 
-
+	<!-- ********************** 2014.9.22 Bern	添加	end ******************** -->
 </beans>

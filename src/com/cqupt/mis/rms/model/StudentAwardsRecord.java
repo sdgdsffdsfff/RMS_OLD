@@ -15,6 +15,7 @@ public class StudentAwardsRecord implements Serializable {
 	private String name;		//记录的名字
 	private String returnReason;		//未通过审核的原因
 	private int status;		//记录的状态
+	private String statusDes;
 	private Set<StudentAwardsData> fields;		//记录的动态字段
 	
 	private CQUPTUser submitUser;		//记录的提交者
@@ -61,6 +62,30 @@ public class StudentAwardsRecord implements Serializable {
 	}
 	public void setApprovedUser(CQUPTUser approvedUser) {
 		this.approvedUser = approvedUser;
+	}
+	/**
+	 * 返回相应状态码的状态描述
+	 * @return statusDes
+	 */
+	public String getStatusDes() {
+		switch (status) {
+		case 0:
+			statusDes = "已保存";
+			break;
+		case 1:
+			statusDes = "未审批";
+			break;
+		case 2:
+			statusDes = "审批通过";
+			break;
+		case 3:
+			statusDes = "审批未通过";
+			break;
+		default:
+			statusDes = "";
+			break;
+		}
+		return statusDes;
 	}
 	
 }

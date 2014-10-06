@@ -62,9 +62,9 @@
 		<tr>
 			<td><s:property value="#f.name"/></td>
 			<td><s:property value="#f.description"/></td>
-			<td><s:property value="#f.submitTime"/></td>
-			<td>删除</td>
-			<td>修改</td>
+			<td><s:property value="#f.submittime"/></td>
+			<td><a href="deleteDynamicDataField.action?fieldId=<s:property value="#f.id"/>&classNum=<s:property value="#classNum"/>">删除</a></td>
+			<td><a href="modifyDynamicDataFieldBefore.action?fieldId=<s:property value="#f.id"/>&classNum=<s:property value="#classNum"/>">修改</a></td>
 		</tr>
 		</s:iterator>
 	</table>

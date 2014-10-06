@@ -29,6 +29,7 @@ import com.cqupt.mis.rms.model.ScienceTechProjectMember;
 import com.cqupt.mis.rms.model.ScienceTransferLeader;
 import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentInstructorNew;
+import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.model.TeachAchievementsDeclarant;
 import com.cqupt.mis.rms.model.TeachersAwards;
 import com.cqupt.mis.rms.model.TeachersAwardsNew;
@@ -191,6 +192,13 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 				//教材立项成员信息
 				List<TeachingMaterialEditorNew> teachingMaterialEditorsNew = (List<TeachingMaterialEditorNew>)memberListObject;
 				this.submitTeachingMaterialEditorNew(teachingMaterialEditorsNew);
+				break;
+			
+			/*****************2014.10.6  Bern添加*************************************************************/
+			case 25:
+				//学生获奖指导教师信息
+				List<StudentRecordInstructor> StudentRecordInstructors = (List<StudentRecordInstructor>)memberListObject;
+				this.submitStudentRecordInstructors(StudentRecordInstructors);
 				break;
 			}
 			return true;
@@ -622,4 +630,24 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 			}
 		}
 	}
+	
+	/*********************	Bern添加 2014.10.3 **************************/
+	public void submitStudentRecordInstructors(
+			List<StudentRecordInstructor> studentRecordInstructors) {
+		if(!studentRecordInstructors.isEmpty()){
+			for (int i = 0; i < studentRecordInstructors.size(); i++) {
+				StudentRecordInstructor studentRecordInstructor = studentRecordInstructors.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(studentRecordInstructor.getMemberName());
+				if(cquptUser != null){
+					studentRecordInstructor.setInstructorId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					studentRecordInstructor.setInstructorId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(studentRecordInstructor);
+			}
+		}
+	}
+	
+	
 }

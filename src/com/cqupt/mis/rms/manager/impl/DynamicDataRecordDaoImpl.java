@@ -29,8 +29,15 @@ public class DynamicDataRecordDaoImpl extends BaseHibernateDaoSupport implements
 
 	@Override
 	public boolean updateRecord(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			this.getHibernateTemplate().update(obj);
+			result = true;
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
@@ -39,5 +46,16 @@ public class DynamicDataRecordDaoImpl extends BaseHibernateDaoSupport implements
 		return null;
 	}
 
-
+	@Override
+	public Object findRecordByClassNameAndId(String className, String recordId) {
+		Object obj = null;
+		try {
+			String hql = "from "+className+" record where record.id = ?";
+			obj = getSession().createQuery(hql).setParameter(0, recordId).uniqueResult();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
 }

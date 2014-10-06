@@ -131,6 +131,7 @@
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/StudentRecordInstructor.hbm.xml"/>
 		
 		</session-factory>
 </hibernate-configuration>

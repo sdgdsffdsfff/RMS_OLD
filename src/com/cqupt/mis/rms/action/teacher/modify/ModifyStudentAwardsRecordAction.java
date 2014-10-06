@@ -1,4 +1,4 @@
-package com.cqupt.mis.rms.action.teacher;
+package com.cqupt.mis.rms.action.teacher.modify;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,25 +21,22 @@ import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.model.StudentAwardsData;
 import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.StudentAwardsRecord;
-import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
+import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.service.SubmitInfoAndProofsService;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-/**
- * 处理学生获奖信息的Action
- * @author Bern
- */
-public class SubmitStudentAwardsRecordAction extends ActionSupport implements ServletContextAware {
-	private SubmitInfoAndProofsService submitInfoAndProofsService;
+public class ModifyStudentAwardsRecordAction extends ActionSupport implements ServletContextAware {
+	private ResearchInfoService researchInfoService;
 	private DynamicDataRecordDao dynamicDataRecordDao;
 	private SearchDao searchDao;
 	
 	private String submit;
-	private String awardsName;
+	private String recordId;
+	private String recordName;
 	
 	//成员名字
 	private String[] memberName;
@@ -51,6 +48,7 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 	private String[] uploadFileName; // 上传文件名
 	private String[] descProof;//旁证材料描述
 	private ServletContext context;
+	
 	@Override
 	public void setServletContext(ServletContext context) {
 		this.context = context;
@@ -59,7 +57,6 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 	public String execute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		StudentAwardsRecord studentAwardsRecord = new StudentAwardsRecord();
-		String id = GenerateUtils.getID();	//生成ID
 		
 		//如果submit==保存，status=0，如果submit==提交，status=1
 		int status;
@@ -80,9 +77,9 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 		/*
 		 * 构建一条记录对象
 		 */
-		studentAwardsRecord.setId(id);
+		studentAwardsRecord.setId(recordId);
 		studentAwardsRecord.setSubmitUser(user);
-		studentAwardsRecord.setName(awardsName);
+		studentAwardsRecord.setName(recordName);
 		studentAwardsRecord.setStatus(status);
 		List<StudentAwardsField> fieldsFromDataBase = searchDao.SearchObjectsByFactor("com.cqupt.mis.rms.model.StudentAwardsField", "isDelete", 0);
 		Set<StudentAwardsData> fields = new HashSet<StudentAwardsData>();
@@ -117,7 +114,7 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 			        File target = new File(targetDirectory, targetFileName); 
 			        FileUtils.copyFile(upload[i], target);
 			        Proofs proof = new Proofs();
-			        proof.setInfoApprovedId(id);
+			        proof.setInfoApprovedId(recordId);
 			        proof.setTimeProofUpload(new Date());
 			        proof.setUploadProofName(fileName);
 			        proof.setUploadContentType(fileType);
@@ -149,18 +146,18 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 			return ERROR;
 		}
 		
-		boolean result1 = dynamicDataRecordDao.addRecord(studentAwardsRecord);
-		boolean result2 = submitInfoAndProofsService.submitProofs(proofs);
-		boolean result3 = submitInfoAndProofsService.submitResearchMemberInfo(25, studentRecordInstructors);
+		boolean result1 = dynamicDataRecordDao.updateRecord(studentAwardsRecord);
+		boolean result2 = researchInfoService.modifyProofs(proofs);
+		boolean result3 = researchInfoService.modifyResearchMemberInfo(recordId, "StudentRecordInstructor", "studentAwardsRecord", "id", 25, studentRecordInstructors);//TODO
 		Confirm confirm = new Confirm();
 		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("学生获奖信息添加成功");
+			confirm.setMessage("学生获奖信息修改成功");
 			confirm.setUrl("viewStudentAwardsRecords.action");
 			confirm.setRetName("个人学生获奖信息页面");
 		} else {
 			confirm.setIsSuccess("error");
-			confirm.setMessage("学生获奖信息添加失败");
+			confirm.setMessage("学生获奖信息修改失败");
 			confirm.setUrl("viewStudentAwardsRecords.action");
 			confirm.setRetName("个人学生获奖信息页面");
 		}
@@ -168,37 +165,52 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 		return SUCCESS;
 	}
 
-	
-	public SubmitInfoAndProofsService getSubmitInfoAndProofsService() {
-		return submitInfoAndProofsService;
+	public ResearchInfoService getResearchInfoService() {
+		return researchInfoService;
 	}
-	public void setSubmitInfoAndProofsService(
-			SubmitInfoAndProofsService submitInfoAndProofsService) {
-		this.submitInfoAndProofsService = submitInfoAndProofsService;
+
+	public void setResearchInfoService(ResearchInfoService researchInfoService) {
+		this.researchInfoService = researchInfoService;
 	}
-	public SearchDao getSearchDao() {
-		return searchDao;
-	}
-	public void setSearchDao(SearchDao searchDao) {
-		this.searchDao = searchDao;
-	}
-	public String getAwardsName() {
-		return awardsName;
-	}
-	public void setAwardsName(String awardsName) {
-		this.awardsName = awardsName;
-	}
+
 	public DynamicDataRecordDao getDynamicDataRecordDao() {
 		return dynamicDataRecordDao;
 	}
+
 	public void setDynamicDataRecordDao(DynamicDataRecordDao dynamicDataRecordDao) {
 		this.dynamicDataRecordDao = dynamicDataRecordDao;
 	}
+
+	public SearchDao getSearchDao() {
+		return searchDao;
+	}
+
+	public void setSearchDao(SearchDao searchDao) {
+		this.searchDao = searchDao;
+	}
+
 	public String getSubmit() {
 		return submit;
 	}
+
 	public void setSubmit(String submit) {
 		this.submit = submit;
+	}
+
+	public String getRecordId() {
+		return recordId;
+	}
+
+	public void setRecordId(String recordId) {
+		this.recordId = recordId;
+	}
+
+	public String getRecordName() {
+		return recordName;
+	}
+
+	public void setRecordName(String recordName) {
+		this.recordName = recordName;
 	}
 
 	public String[] getMemberName() {
@@ -248,5 +260,6 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 	public void setDescProof(String[] descProof) {
 		this.descProof = descProof;
 	}
-	
+
+
 }
