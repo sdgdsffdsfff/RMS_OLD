@@ -221,6 +221,14 @@ public class CollegeUpdateStatusAction extends ActionSupport{
 				confirm.setMessage("学生获奖信息审批成功");
 				confirm.setUrl("collegeAchInfoRecord/studentAwardsRecord.action");
 				confirm.setRetName("学生获奖信息审批页面");
+			}else if("MajorContributeRecord".equals(modelName)) {		
+				confirm.setMessage("学生获奖信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
+				confirm.setRetName("学生获奖信息审批页面");
+			}else if("TeachingMaterialRecord".equals(modelName)) {		
+				confirm.setMessage("学生获奖信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
+				confirm.setRetName("学生获奖信息审批页面");
 			}
 		}else {
 			confirm.setIsSuccess("error");
@@ -327,6 +335,14 @@ public class CollegeUpdateStatusAction extends ActionSupport{
 			}else if("StudentAwardsRecord".equals(modelName)) {		//TODO
 				confirm.setMessage("学生获奖信息审批失败");
 				confirm.setUrl("collegeAchInfoRecord/studentAwardsRecord.action");
+				confirm.setRetName("学生获奖信息审批页面");
+			}else if("MajorContributeRecord".equals(modelName)) {
+				confirm.setMessage("学生获奖信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
+				confirm.setRetName("学生获奖信息审批页面");
+			}else if("TeachingMaterialRecord".equals(modelName)) {
+				confirm.setMessage("学生获奖信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
 				confirm.setRetName("学生获奖信息审批页面");
 			}
 		}

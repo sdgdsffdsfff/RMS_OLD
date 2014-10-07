@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.cqupt.mis.rms.manager.DynamicDataRecordDao;
 import com.cqupt.mis.rms.manager.ResearchInfoDao;
+import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
+import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -37,6 +39,50 @@ public class ViewResearchDetailRecordInfoAction extends ActionSupport {
 		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
 		List<StudentRecordInstructor> memberList = (List<StudentRecordInstructor>)researchInfoDao.
 				findMemberByIdAndModelNameAndFactor(recordId, "StudentRecordInstructor", "studentAwardsRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的专业建设信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewMajorContributeRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("MajorContributeRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<MajorRecordMember> memberList = (List<MajorRecordMember>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "MajorRecordMember", "majorContributeRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的教材立项信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewTeachingMaterialRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("TeachingMaterialRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<TeachingRecordEditor> memberList = (List<TeachingRecordEditor>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "TeachingRecordEditor", "teachingMaterialRecord.id");
 		if(record == null) {
 			return "error";
 		}

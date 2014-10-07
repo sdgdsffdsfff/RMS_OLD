@@ -5,8 +5,10 @@ import java.util.List;
 import com.cqupt.mis.rms.manager.DynamicDataRecordDao;
 import com.cqupt.mis.rms.model.MajorContribute;
 import com.cqupt.mis.rms.model.MajorContributeMember;
+import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
+import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.service.CollegeManagerService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,6 +36,34 @@ public class ManagerCollegeAchRecordStatusAction extends ActionSupport {
     	Object record = dynamicDataRecordDao.findRecordByClassNameAndId("StudentAwardsRecord",recordId);
     	List<Proofs> proofs = (List<Proofs>) collegeManagerService.getInfoByFactor(recordId, "Proofs", "infoApprovedId");
     	List<StudentRecordInstructor> memberList = (List<StudentRecordInstructor>)collegeManagerService.getInfoByFactor(recordId, "StudentRecordInstructor", "studentAwardsRecord.id");
+    	ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put(PROOFS, proofs);
+		ActionContext.getContext().put("memberList", memberList);
+    	return SUCCESS;
+	}
+	
+	/**
+	 * 查找专业建设的所有详细信息
+	 */
+	@SuppressWarnings("unchecked")
+	public String majorContributeRecord() {
+    	Object record = dynamicDataRecordDao.findRecordByClassNameAndId("MajorContributeRecord",recordId);
+    	List<Proofs> proofs = (List<Proofs>) collegeManagerService.getInfoByFactor(recordId, "Proofs", "infoApprovedId");
+    	List<MajorRecordMember> memberList = (List<MajorRecordMember>)collegeManagerService.getInfoByFactor(recordId, "MajorRecordMember", "majorContributeRecord.id");
+    	ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put(PROOFS, proofs);
+		ActionContext.getContext().put("memberList", memberList);
+    	return SUCCESS;
+	}
+	
+	/**
+	 * 查找教材立项的所有详细信息
+	 */
+	@SuppressWarnings("unchecked")
+	public String teachingMaterialRecord() {
+    	Object record = dynamicDataRecordDao.findRecordByClassNameAndId("TeachingMaterialRecord",recordId);
+    	List<Proofs> proofs = (List<Proofs>) collegeManagerService.getInfoByFactor(recordId, "Proofs", "infoApprovedId");
+    	List<TeachingRecordEditor> memberList = (List<TeachingRecordEditor>)collegeManagerService.getInfoByFactor(recordId, "TeachingRecordEditor", "teachingMaterialRecord.id");
     	ActionContext.getContext().put(RECORD, record);
 		ActionContext.getContext().put(PROOFS, proofs);
 		ActionContext.getContext().put("memberList", memberList);

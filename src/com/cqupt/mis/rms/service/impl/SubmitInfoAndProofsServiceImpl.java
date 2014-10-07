@@ -19,6 +19,7 @@ import com.cqupt.mis.rms.model.HumanitiesProjectMember;
 import com.cqupt.mis.rms.model.HumanitiesResearchRewardPerson;
 import com.cqupt.mis.rms.model.MajorContributeMember;
 import com.cqupt.mis.rms.model.MajorContributeMemberNew;
+import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.model.ScienceBookAuthor;
 import com.cqupt.mis.rms.model.ScienceGovAwardPerson;
@@ -35,6 +36,7 @@ import com.cqupt.mis.rms.model.TeachersAwards;
 import com.cqupt.mis.rms.model.TeachersAwardsNew;
 import com.cqupt.mis.rms.model.TeachingMaterialEditor;
 import com.cqupt.mis.rms.model.TeachingMaterialEditorNew;
+import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.service.SubmitInfoAndProofsService;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 
@@ -199,6 +201,18 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 				//学生获奖指导教师信息
 				List<StudentRecordInstructor> StudentRecordInstructors = (List<StudentRecordInstructor>)memberListObject;
 				this.submitStudentRecordInstructors(StudentRecordInstructors);
+				break;
+				
+			case 28:
+				//专业建设负责人信息
+				List<MajorRecordMember> majorRecordMembers = (List<MajorRecordMember>)memberListObject;
+				this.submitMajorRecordMembers(majorRecordMembers);
+				break;
+				
+			case 29:
+				//教材立项作者信息
+				List<TeachingRecordEditor> teachingRecordEditors = (List<TeachingRecordEditor>)memberListObject;
+				this.submitTeachingRecordEditors(teachingRecordEditors);
 				break;
 			}
 			return true;
@@ -645,6 +659,38 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 					studentRecordInstructor.setInstructorId(GenerateUtils.generateUserID());
 				}
 				submitInfoMemberDao.addInfoMember(studentRecordInstructor);
+			}
+		}
+	}
+	
+	public void submitMajorRecordMembers(List<MajorRecordMember> majorRecordMembers) {
+		if(!majorRecordMembers.isEmpty()){
+			for (int i = 0; i < majorRecordMembers.size(); i++) {
+				MajorRecordMember majorRecordMember = majorRecordMembers.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(majorRecordMember.getMemberName());
+				if(cquptUser != null){
+					majorRecordMember.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					majorRecordMember.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(majorRecordMember);
+			}
+		}
+	}
+	
+	public void submitTeachingRecordEditors(List<TeachingRecordEditor> teachingRecordEditors) {
+		if(!teachingRecordEditors.isEmpty()){
+			for (int i = 0; i < teachingRecordEditors.size(); i++) {
+				TeachingRecordEditor teachingRecordEditor = teachingRecordEditors.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(teachingRecordEditor.getEditorName());
+				if(cquptUser != null){
+					teachingRecordEditor.setEditorId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					teachingRecordEditor.setEditorId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(teachingRecordEditor);
 			}
 		}
 	}

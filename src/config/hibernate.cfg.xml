@@ -133,5 +133,16 @@
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsData.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/StudentRecordInstructor.hbm.xml"/>
 		
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/MajorContributeData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/MajorRecordMember.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachingRecordEditor.hbm.xml"/>
+		<!-- 2014-9-20 Bern add end -->
+		
 		</session-factory>
 </hibernate-configuration>

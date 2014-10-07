@@ -267,6 +267,16 @@
 	<bean id="studentAwardsRecordInfoService" class="com.cqupt.mis.rms.service.impl.StudentAwardsRecordInfoServiceImpl">
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
+	
+	<!-- 配置处理查找专业建设信息逻辑处理的Bean -->
+	<bean id="majorContributeRecordInfoService" class="com.cqupt.mis.rms.service.impl.MajorContributeRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理查找教材立项信息逻辑处理的Bean -->
+	<bean id="teachingMaterialRecordInfoService" class="com.cqupt.mis.rms.service.impl.TeachingMaterialRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 
 	<!-- ********************** 2014.9.22 Bern	添加	end ******************** -->
 </beans>

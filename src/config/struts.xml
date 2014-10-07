@@ -344,11 +344,23 @@
 	<package name="collegeAchInfoRecord" extends="struts-default"
 		namespace="/collegeAchInfoRecord">
 		
+		<!-- 管理员审批学生获奖信息之前的查看 -->
 		<action name="studentAwardsRecord" class="managerCollegeAchInfoRecordAction"
 			method="studentAwardsRecord">
 			<result name="success">/pages/college/simpleInfo/studentawardsrecord.jsp</result>
 		</action>
 		
+		<!-- 管理员审批专业建设信息之前的查看 -->
+		<action name="majorContributeRecord" class="managerCollegeAchInfoRecordAction"
+			method="majorContributeRecord">
+			<result name="success">/pages/college/simpleInfo/majorContributeRecord.jsp</result>
+		</action>
+		
+		<!-- 管理员审批教材立项信息之前的查看 -->
+		<action name="teachingMaterialRecord" class="managerCollegeAchInfoRecordAction"
+			method="teachingMaterialRecord">
+			<result name="success">/pages/college/simpleInfo/teachingMaterialRecord.jsp</result>
+		</action>
 		
 	</package>
 	
@@ -472,10 +484,24 @@
 		
 		<!-- ********************************2014.10.6	Bern	添加************************************* -->		
 		
-		
+		<!-- 管理员审批学生获奖信息查看详细 -->
 		<action name="studentAwardsRecord" class="managerCollegeAchRecordStatusAction"
 			method="studentAwardsRecord">
 			<result name="success">/pages/college/retailInfo/studentawardsrecord.jsp
+			</result>
+		</action>
+		
+		<!-- 管理员审批专业建设信息查看详细 -->
+		<action name="majorContributeRecord" class="managerCollegeAchRecordStatusAction"
+			method="majorContributeRecord">
+			<result name="success">/pages/college/retailInfo/majorcontributerecord.jsp
+			</result>
+		</action>
+		
+		<!-- 管理员审批教材立项信息查看详细 -->
+		<action name="teachingMaterialRecord" class="managerCollegeAchRecordStatusAction"
+			method="teachingMaterialRecord">
+			<result name="success">/pages/college/retailInfo/teachingmaterialrecord.jsp
 			</result>
 		</action>
 		
@@ -739,6 +765,18 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 配置输入专业建设信息之前动态字段的加载的Action -->
+		<action name="inputMajorContributeRecord" class="InputDynamicDataRecordAction" method="inputMajorContributeRecord">
+			<result name="success">/pages/teacher/inputmajorcontributerecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 配置输入教材立项信息之前动态字段的加载的Action -->
+		<action name="inputTeachingMaterialRecord" class="InputDynamicDataRecordAction" method="inputTeachingMaterialRecord">
+			<result name="success">/pages/teacher/inputteachingmaterialrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
 		<!-- 处理查找动态字段的Action -->
 		<action name="findDynamicDataField" class="findDynamicDataFieldAction">
 			<result name="success">/pages/system/managedynamicdatafield.jsp</result>
@@ -786,6 +824,24 @@
 			</result>
 			<result name="error">/error.jsp</result>
 		</action>
+		
+		<!-- 处理提交专业建设信息的Action -->
+		<action name="submitMajorContributeRecord" class="submitMajorContributeRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理提交教材立项信息的Action -->
+		<action name="submitTeachingMaterialRecord" class="submitTeachingMaterialRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 
 
 		<!-- 处理查询学生获奖信息的Action -->
@@ -794,11 +850,39 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 处理查询专业建设信息的Action -->
+		<action name="viewMajorContributeRecords" class="viewTeachingInfoAction" method="viewMajorContributeRecords">
+			<result name="success">/pages/teacher/manage/viewmajorcontributerecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查询教材立项信息的Action -->
+		<action name="viewTeachingMaterialRecords" class="viewTeachingInfoAction" method="viewTeachingMaterialRecords">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
 		<!-- 处理查找学生获奖详细信息的Action -->
 		<action name="viewStudentAwardsRecordDetail" class="viewResearchDetailRecordInfoAction" 
 		method="viewStudentAwardsRecordDetail">
 			<result name="success">/pages/teacher/manage/viewstudentawardsrecorddetail.jsp</result>
 			<result name="modify">/pages/teacher/manage/modifystudentawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找专业建设详细信息的Action -->
+		<action name="viewMajorContributeRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewMajorContributeRecordDetail">
+			<result name="success">/pages/teacher/manage/viewmajorcontributerecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifymajorcontributerecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找教材立项详细信息的Action -->
+		<action name="viewTeachingMaterialRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewTeachingMaterialRecordDetail">
+			<result name="success">/pages/teacher/manage/viewteachingmaterialrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteachingmaterialrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		
@@ -812,9 +896,23 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 处理教师修改教材立项信息的Action -->
+		<action name="modifyTeachingMaterialRecord" class="modifyTeachingMaterialRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 		
-		
-		
+		<!-- 处理教师修改专业建设信息的Action -->
+		<action name="modifyMajorContributeRecord" class="modifyMajorContributeRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 		
 		
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
@@ -1932,6 +2030,17 @@
 			<result name="input">/error.jsp</result>
 		</action>
 		
+		<!-- 学院查询MajorContributeRecordInfo专业建设的Action -->
+		<action name="searchCollegeMajorContributeRecordInfo" class="searchCollegeMajorContributeRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchmajorcontributerecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询TeachingMaterialRecordInfo教材立项的Action -->
+		<action name="searchCollegeTeachingMaterialRecordInfo" class="searchCollegeTeachingMaterialRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchteachingmaterialrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
 		
 		
 		<!-- ************************************Bern 添加 end*********************************************** -->

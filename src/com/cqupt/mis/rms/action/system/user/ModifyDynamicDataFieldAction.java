@@ -1,7 +1,9 @@
 package com.cqupt.mis.rms.action.system.user;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
+import com.cqupt.mis.rms.model.MajorContributeField;
 import com.cqupt.mis.rms.model.StudentAwardsField;
+import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
@@ -72,14 +74,24 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 	 * 如果增加了一个动态字段表，在此方法中添加if判断，并初始化相应的类
 	 */
 	private Object getModifyedObject() {
-		if(classNum == 1) {
-			return null;	
+		if(classNum == 1) {		//专业建设/教改项目信息的动态字段类
+			MajorContributeField majorContributeField = new MajorContributeField();
+			majorContributeField.setId(fieldId);
+			majorContributeField.setName(fieldName);
+			majorContributeField.setDescription(fieldDes);
+			majorContributeField.setIsDelete(0);
+			return majorContributeField;
 		} else if (classNum == 2) {
 			return null;
 		} else if (classNum == 3) {
 			return null;
-		} else if(classNum == 4) {
-			return null;
+		} else if(classNum == 4) {		//教材立项信息的动态字段类
+			TeachingMaterialField teachingMaterialField = new TeachingMaterialField();
+			teachingMaterialField.setId(fieldId);
+			teachingMaterialField.setName(fieldName);
+			teachingMaterialField.setDescription(fieldDes);
+			teachingMaterialField.setIsDelete(0);
+			return teachingMaterialField;
 		} else if(classNum == 5) {		//学生获奖信息的动态字段类
 			StudentAwardsField studentAwardsField = new StudentAwardsField();
 			studentAwardsField.setId(fieldId);

@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批学生获奖信息</title>
+        <title>审批教材立项信息</title>
    
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
@@ -39,11 +39,11 @@
 
 	<div class="item">
 		<div class="title">
-			1.学生获奖信息
+			1.教材立项信息
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">获奖名称</label>
+				<label for="awardsName">立项名称</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">
@@ -58,14 +58,14 @@
 	<div class="clear" style="height:15px;"></div>
 	<div class="item">
 		<div class="title">
-			2.指导老师信息
+			2.作者信息
 		</div>
 		<s:iterator value="#memberList" id="m">
 		<div class="content">
 			<div class="line">
 				<div class="element">
 					<label for="memberName">姓名:</label>
-					<input type="text" name="memberName" value='<s:property value="#m.memberName"/>' readonly/>
+					<input type="text" name="memberName" value='<s:property value="#m.editorName"/>' readonly/>
 				</div>
 				<div class="element">
 					<label for="remarks">备注:</label>
@@ -97,7 +97,7 @@
     <div class="item">
 		<div class="content">
     	<div style="text-align:right; padding:0 30px 20px 30px;">
-	    <form action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" onsubmit="return checkPassed();" method="post"> 
+	    <form action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=TeachingMaterialRecord&idName=id" onsubmit="return checkPassed();" method="post"> 
 		
 			<input style="background:url(images/button.png); width:57px; height:25px; border:0; cursor:pointer; color:#fff;" type="submit"  value="审批通过" />
 			<input type="hidden" value="2" name="status">
@@ -105,7 +105,7 @@
 	    </form>
 	    
 	    
-	    <form name="form" onsubmit="return checkReturnReason();" action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" method="post"> 
+	    <form name="form" onsubmit="return checkReturnReason();" action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=TeachingMaterialRecord&idName=id" method="post"> 
 	    	<br/>
 		    <p>
 		    	拒绝理由：

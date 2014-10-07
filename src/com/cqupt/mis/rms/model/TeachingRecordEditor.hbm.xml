@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.TeachingRecordEditor" table="teaching_record_editor">
+	    <id name="id">
+	    	<generator class="native"></generator>
+	    </id>
+        <many-to-one name="teachingMaterialRecord" column="record_id" class="com.cqupt.mis.rms.model.TeachingMaterialRecord"></many-to-one>
+        <property name="editorId" column="editor_id" type="java.lang.String"/>
+		<property name="editorName" column="editor_name" />
+		<property name="orders" column="orders" />
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>

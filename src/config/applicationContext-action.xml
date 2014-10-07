@@ -729,6 +729,20 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置处理提交专业建设信息的Action -->
+	<bean id="submitMajorContributeRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitMajorContributeRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理提交教材立项信息的Action -->
+	<bean id="submitTeachingMaterialRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachingMaterialRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- 配置处理查看教学类信息的Action -->
 	<bean id="viewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction">
 		<property name="researchInfoService" ref="researchInfoService"></property>
@@ -747,6 +761,20 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置学院查询MajorContributeRecordInfo专业建设的Bean -->
+	<bean id="searchCollegeMajorContributeRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeMajorContributeRecordAction" scope="prototype">
+		<property name="majorContributeRecordInfoService" ref="majorContributeRecordInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置学院查询TeachingMaterialRecordInfo教材立项的Bean -->
+	<bean id="searchCollegeTeachingMaterialRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachingMaterialRecordAction" scope="prototype">
+		<property name="teachingMaterialRecordInfoService" ref="teachingMaterialRecordInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- 配置学院查询教学类详细信息的Bean -->
 	<bean id="viewResearchDetailRecordInfoAction" class="com.cqupt.mis.rms.action.teacher.ViewResearchDetailRecordInfoAction" scope="prototype">
 		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
@@ -755,6 +783,20 @@
 	
 	<!-- 配置教师修改学生获奖信息Bean -->
 	<bean id="modifyStudentAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyStudentAwardsRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改专业建设信息Bean -->
+	<bean id="modifyMajorContributeRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyMajorContributeRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改教材立项信息Bean -->
+	<bean id="modifyTeachingMaterialRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeachingMaterialRecordAction" scope="prototype">
 		<property name="researchInfoService" ref="researchInfoService" />
 		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
 		<property name="searchDao" ref="searchDao"></property>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -11,30 +11,21 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批学生获奖信息</title>
-   
+    <title>学生获奖详细信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
-    <script src="lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script> 
-    <script src="lib/ligerUI/js/core/base.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script> 
-    <script src="lib/ligerUI/js/plugins/ligerTextBox.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerMenu.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerMenuBar.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerButton.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
-    <script src="lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
-       <link rel="stylesheet" type="text/css" href="js/XYTipsWindow/style.css">
+    <script src="lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="js/teacher/detailInfo.js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" type="text/css" href="js/XYTipsWindow/style.css">
 	<script type="text/javascript" src="js/XYTipsWindow/jquery.XYTipsWindow.2.8.js"></script>
 	<script type="text/javascript" src="js/jquery.clearfield.js"></script>
-    <script src="js/collegeaprovel/detail/CollegeProjectDetail.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;"> 
+
 <div id="allpage">
 
 	<div class="item">
@@ -58,7 +49,7 @@
 	<div class="clear" style="height:15px;"></div>
 	<div class="item">
 		<div class="title">
-			2.指导老师信息
+			2.负责人信息
 		</div>
 		<s:iterator value="#memberList" id="m">
 		<div class="content">
@@ -82,7 +73,7 @@
 		</div>
 		<div class="content">
     	<div id="maingrid" style="margin:0; padding:0">
-     	<s:iterator value="#proofs">
+     	<s:iterator value="proofs">
      	<script type="text/javascript">
      		var row = {proofId: "${proofId}", infoApprovedId: "${infoApprovedId}", proofPath: "${proofPath}",
      				uploadProofName: "${uploadProofName}", uploadRealName: "${uploadRealName}", 
@@ -94,30 +85,7 @@
     	</div>
     </div>
     
-    <div class="item">
-		<div class="content">
-    	<div style="text-align:right; padding:0 30px 20px 30px;">
-	    <form action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" onsubmit="return checkPassed();" method="post"> 
-		
-			<input style="background:url(images/button.png); width:57px; height:25px; border:0; cursor:pointer; color:#fff;" type="submit"  value="审批通过" />
-			<input type="hidden" value="2" name="status">
-		
-	    </form>
-	    
-	    
-	    <form name="form" onsubmit="return checkReturnReason();" action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" method="post"> 
-	    	<br/>
-		    <p>
-		    	拒绝理由：
-		  		<input type="text" name="returnReason" id="returnReason" style="margin-right:20px;">
-				<input type="submit" style="float:right;background:url(images/button.png); width:57px; height:25px; border:0; cursor:pointer;color:#fff;" value="审批拒绝"/>
-				<input type="hidden" style="float:right;" value="3" name="status">
-			</p>
-	    </form>
-	  </div>
-		</div>
-	</div>
-    
 </div>
+
 </body>
 </html>

@@ -25,6 +25,24 @@ public class InputDynamicDataRecordAction extends ActionSupport {
 		ActionContext.getContext().put("allFields", fields);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 录入专业建设信息前的加载 
+	 */
+	public String inputMajorContributeRecord() {
+		List<Object> fields = searchDao.SearchObjectsByFactor("com.cqupt.mis.rms.model.MajorContributeField", "isDelete", 0);		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 录入教材立项信息前的加载 
+	 */
+	public String inputTeachingMaterialRecord() {
+		List<Object> fields = searchDao.SearchObjectsByFactor("com.cqupt.mis.rms.model.TeachingMaterialField", "isDelete", 0);		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
 
 	public SearchDao getSearchDao() {
 		return searchDao;
