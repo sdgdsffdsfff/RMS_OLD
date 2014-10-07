@@ -217,7 +217,7 @@ public class CollegeUpdateStatusAction extends ActionSupport{
 				confirm.setMessage("重庆市大学生创新创业训练计划项目信息审批成功");
 				confirm.setUrl("collegeAchNewInfo/teachAchievementsCQ.action");
 				confirm.setRetName("重庆市大学生创新创业训练计划项目信息审批页面");
-			}else if("StudentAwardsRecord".equals(modelName)) {
+			}else if("StudentAwardsRecord".equals(modelName)) {		//TODO
 				confirm.setMessage("学生获奖信息审批成功");
 				confirm.setUrl("collegeAchInfoRecord/studentAwardsRecord.action");
 				confirm.setRetName("学生获奖信息审批页面");
@@ -324,7 +324,7 @@ public class CollegeUpdateStatusAction extends ActionSupport{
 				confirm.setMessage("重庆市大学生创新创业训练计划项目信息审批失败");
 				confirm.setUrl("collegeAchNewInfo/teachAchievementsCQ.action");
 				confirm.setRetName("重庆市大学生创新创业训练计划项目信息审批页面");
-			}else if("StudentAwardsRecord".equals(modelName)) {
+			}else if("StudentAwardsRecord".equals(modelName)) {		//TODO
 				confirm.setMessage("学生获奖信息审批失败");
 				confirm.setUrl("collegeAchInfoRecord/studentAwardsRecord.action");
 				confirm.setRetName("学生获奖信息审批页面");

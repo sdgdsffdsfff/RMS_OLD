@@ -41,6 +41,9 @@ public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 	 * 查询管辖范围内的所有学生获奖记录
 	 */
 	public void findAllStudentAwardsRecordInfo(){
+		/*
+		 * 取出当前登录角色的id
+		 */
 		roleId = ActionContext.getContext().getSession().get("roleId").toString();
 		int role = java.lang.Integer.parseInt(roleId);
 		List<CQUPTUser> cquptUsers = searchCQUPTUserService.findManageUserByRoleId(role);

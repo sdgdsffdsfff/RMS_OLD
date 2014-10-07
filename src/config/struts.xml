@@ -343,13 +343,13 @@
 	
 	<package name="collegeAchInfoRecord" extends="struts-default"
 		namespace="/collegeAchInfoRecord">
-		<!-- 定义拦截器 -->
-		<global-results>
-			<result name="success">/pages/college/simpleInfo/teachinginfo.jsp</result>
-		</global-results>
+		
 		<action name="studentAwardsRecord" class="managerCollegeAchInfoRecordAction"
 			method="studentAwardsRecord">
+			<result name="success">/pages/college/simpleInfo/studentawardsrecord.jsp</result>
 		</action>
+		
+		
 	</package>
 	
 	
@@ -790,7 +790,7 @@
 
 		<!-- 处理查询学生获奖信息的Action -->
 		<action name="viewStudentAwardsRecords" class="viewTeachingInfoAction" method="viewStudentAwardsRecords">
-			<result name="success">/pages/teacher/manage/viewteachinginfo.jsp</result>
+			<result name="success">/pages/teacher/manage/viewstudentawardsrecords.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		

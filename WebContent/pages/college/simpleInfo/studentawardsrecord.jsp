@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <base href="<%=basePath%>">
 <head>
-        <title></title>
+        <title>学生获奖信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
     <script src="lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script> 
