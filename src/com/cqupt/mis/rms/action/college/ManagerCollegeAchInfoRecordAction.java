@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cqupt.mis.rms.model.MajorContributeRecord;
 import com.cqupt.mis.rms.model.StudentAwardsRecord;
+import com.cqupt.mis.rms.model.TeachersAwardsRecord;
 import com.cqupt.mis.rms.model.TeachingMaterialRecord;
 import com.cqupt.mis.rms.service.CollegeManagerService;
 import com.opensymphony.xwork2.ActionContext;
@@ -21,7 +22,7 @@ public class ManagerCollegeAchInfoRecordAction extends ActionSupport {
 	private CollegeManagerService collegeManagerService;
 	
 	private final static String RECORDS = "records";
-	
+
 	//得到符合条件的教学成果信息类专业建设的相关信息
     @SuppressWarnings("unchecked")
 	public String majorContributeRecord(){
@@ -48,7 +49,16 @@ public class ManagerCollegeAchInfoRecordAction extends ActionSupport {
     	ActionContext.getContext().put(RECORDS, studentAwardsRecordsLists);
     	return SUCCESS;
 	}
-
+    
+    //liu add 得到符合条件的教学成果奖的相关信息
+    @SuppressWarnings("unchecked")
+    public String teacherAwardsRecord(){
+		List<TeachersAwardsRecord> teachersAwardsRecordsLists;
+    	teachersAwardsRecordsLists = (List<TeachersAwardsRecord>) collegeManagerService.getInfo("TeachersAwardsRecord");
+    	ActionContext.getContext().put(RECORDS, teachersAwardsRecordsLists);
+    	return SUCCESS;
+	}
+    
 	public CollegeManagerService getCollegeManagerService() {
 		return collegeManagerService;
 	}

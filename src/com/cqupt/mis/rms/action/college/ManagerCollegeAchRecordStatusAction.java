@@ -3,11 +3,10 @@ package com.cqupt.mis.rms.action.college;
 import java.util.List;
 
 import com.cqupt.mis.rms.manager.DynamicDataRecordDao;
-import com.cqupt.mis.rms.model.MajorContribute;
-import com.cqupt.mis.rms.model.MajorContributeMember;
 import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
+import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.service.CollegeManagerService;
 import com.opensymphony.xwork2.ActionContext;
@@ -41,6 +40,21 @@ public class ManagerCollegeAchRecordStatusAction extends ActionSupport {
 		ActionContext.getContext().put("memberList", memberList);
     	return SUCCESS;
 	}
+
+	/**
+	 * 查找教学成果奖的所有详细信息
+	 */
+	@SuppressWarnings("unchecked")
+	public String teacherAwardsRecord() {
+    	Object record = dynamicDataRecordDao.findRecordByClassNameAndId("TeachersAwardsRecord",recordId);
+    	List<Proofs> proofs = (List<Proofs>) collegeManagerService.getInfoByFactor(recordId, "Proofs", "infoApprovedId");
+    	List<TeachersRecordAchievements> memberList = (List<TeachersRecordAchievements >)collegeManagerService.getInfoByFactor(recordId, "TeachersRecordAchievements ", "teachersAwardsRecord.id");
+    	ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put(PROOFS, proofs);
+		ActionContext.getContext().put("memberList", memberList);
+    	return SUCCESS;
+	}
+
 	
 	/**
 	 * 查找专业建设的所有详细信息
@@ -69,7 +83,7 @@ public class ManagerCollegeAchRecordStatusAction extends ActionSupport {
 		ActionContext.getContext().put("memberList", memberList);
     	return SUCCESS;
 	}
-
+	
 	public DynamicDataRecordDao getDynamicDataRecordDao() {
 		return dynamicDataRecordDao;
 	}

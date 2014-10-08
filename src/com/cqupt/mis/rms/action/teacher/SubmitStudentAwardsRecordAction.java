@@ -129,7 +129,7 @@ public class SubmitStudentAwardsRecordAction extends ActionSupport implements Se
 			        proofs.add(proof);
 				}
 			}
-			
+	
 			//保存成员信息
 			if(memberName != null){
 				for(int j = 0; j < memberName.length; j++) {

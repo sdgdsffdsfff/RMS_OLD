@@ -4,6 +4,7 @@
 */
 package com.cqupt.mis.rms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cqupt.mis.rms.manager.SubmitInfoAndProofsDao;
@@ -34,6 +35,7 @@ import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.model.TeachAchievementsDeclarant;
 import com.cqupt.mis.rms.model.TeachersAwards;
 import com.cqupt.mis.rms.model.TeachersAwardsNew;
+import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.model.TeachingMaterialEditor;
 import com.cqupt.mis.rms.model.TeachingMaterialEditorNew;
 import com.cqupt.mis.rms.model.TeachingRecordEditor;
@@ -202,13 +204,17 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 				List<StudentRecordInstructor> StudentRecordInstructors = (List<StudentRecordInstructor>)memberListObject;
 				this.submitStudentRecordInstructors(StudentRecordInstructors);
 				break;
-				
+			/*****************2014.10.07   liu添加*************************************************************/	
+			case 26:
+				//教学成果奖获奖老师信息
+				List<TeachersRecordAchievements> teachersRecordAchievementsList =(List<TeachersRecordAchievements>)memberListObject ;
+				this.submitTeachersRecordAchievements(teachersRecordAchievementsList);
+				break;
 			case 28:
 				//专业建设负责人信息
 				List<MajorRecordMember> majorRecordMembers = (List<MajorRecordMember>)memberListObject;
 				this.submitMajorRecordMembers(majorRecordMembers);
 				break;
-				
 			case 29:
 				//教材立项作者信息
 				List<TeachingRecordEditor> teachingRecordEditors = (List<TeachingRecordEditor>)memberListObject;
@@ -659,6 +665,23 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 					studentRecordInstructor.setInstructorId(GenerateUtils.generateUserID());
 				}
 				submitInfoMemberDao.addInfoMember(studentRecordInstructor);
+			}
+		}
+	}
+	/*********************	liu添加 2014.10.07 **************************/
+	public void submitTeachersRecordAchievements(List<TeachersRecordAchievements> teachersRecordAchievementsList) {
+		if(!teachersRecordAchievementsList.isEmpty()){
+			for (int i = 0; i < teachersRecordAchievementsList.size(); i++) {
+				TeachersRecordAchievements teachersRecordAchievements = teachersRecordAchievementsList.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(teachersRecordAchievements.getMemberName());
+				teachersRecordAchievements.setOrders(i + 1);
+				if(cquptUser != null){
+					teachersRecordAchievements.setAwardId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					teachersRecordAchievements.setAwardId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(teachersRecordAchievements);
 			}
 		}
 	}

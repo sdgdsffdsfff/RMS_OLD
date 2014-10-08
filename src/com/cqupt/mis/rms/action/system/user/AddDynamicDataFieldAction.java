@@ -5,6 +5,7 @@ import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.MajorContributeField;
 import com.cqupt.mis.rms.model.MajorContributeRecord;
 import com.cqupt.mis.rms.model.StudentAwardsField;
+import com.cqupt.mis.rms.model.TeachersAwardsField;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.opensymphony.xwork2.ActionContext;
@@ -64,8 +65,12 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 			return majorContributeField;
 		} else if (classNum == 2) {
 			return null;
-		} else if (classNum == 3) {
-			return null;
+		} else if (classNum == 3) {     //教学成果奖信息的动态字段
+			TeachersAwardsField teachersAwardsField = new TeachersAwardsField();
+			teachersAwardsField.setName(fieldName);
+			teachersAwardsField.setDescription(fieldDes);
+			teachersAwardsField.setIsDelete(0);
+			return teachersAwardsField;
 		} else if(classNum == 4) {		//教材立项信息
 			TeachingMaterialField teachingMaterialField = new TeachingMaterialField();
 			teachingMaterialField.setName(fieldName);

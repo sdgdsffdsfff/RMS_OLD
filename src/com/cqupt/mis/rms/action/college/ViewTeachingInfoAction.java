@@ -3,7 +3,6 @@ package com.cqupt.mis.rms.action.college;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.MajorContributeData;
@@ -12,11 +11,13 @@ import com.cqupt.mis.rms.model.MajorContributeRecord;
 import com.cqupt.mis.rms.model.StudentAwardsData;
 import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.StudentAwardsRecord;
+import com.cqupt.mis.rms.model.TeachersAwardsData;
+import com.cqupt.mis.rms.model.TeachersAwardsField;
+import com.cqupt.mis.rms.model.TeachersAwardsRecord;
 import com.cqupt.mis.rms.model.TeachingMaterialData;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.model.TeachingMaterialRecord;
 import com.cqupt.mis.rms.service.ResearchInfoService;
-import com.cqupt.mis.rms.utils.MyDynamicFieldComparator;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -65,6 +66,42 @@ public class ViewTeachingInfoAction extends ActionSupport {
 		ActionContext.getContext().put(RECORDS, studentAwardsRecords);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 查找有关当前用户（session）的教学成果奖信息
+	 */
+	public String viewTeacherAwardsRecords() {
+ 		Set<TeachersAwardsData> sortedFields2 = new HashSet<TeachersAwardsData>();
+		//获取相应的所有字段
+		List<TeachersAwardsField> fields = searchDao.SearchObjectsByFactor("TeachersAwardsField", "isDelete", 0);		
+		//获取相应的教学成果奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<TeachersAwardsRecord> teachersAwardsRecords = (List<TeachersAwardsRecord>) researchInfoService.viewResearchInfo(userId, "TeachersAwardsRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(TeachersAwardsField field1 : fields) {
+			TeachersAwardsData teachersAwardsData = new TeachersAwardsData();
+			teachersAwardsData.setField(field1);
+			teachersAwardsData.setValue("");
+ 			sortedFields2.add(teachersAwardsData);
+			for(TeachersAwardsRecord record : teachersAwardsRecords) {
+				Set<TeachersAwardsData> datas = record.getFields(); 
+				Set<TeachersAwardsData> tempDatas = new HashSet<TeachersAwardsData>();
+				//剔除已经假删除的字段
+				for(TeachersAwardsData d : datas) {
+					if(d.getField().getIsDelete() == 1) {
+						tempDatas.add(d);
+					}
+				}
+				datas.removeAll(tempDatas);
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(teachersAwardsData);
+			} 
+		}
+		ActionContext.getContext().put(ALLFIELDS, sortedFields2);
+		ActionContext.getContext().put(RECORDS, teachersAwardsRecords);
+		return SUCCESS;
+	}
+	
 	
 	/**
 	 * 查找有关当前用户（session）的专业建设信息

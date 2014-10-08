@@ -6,13 +6,12 @@ import com.cqupt.mis.rms.manager.DynamicDataRecordDao;
 import com.cqupt.mis.rms.manager.ResearchInfoDao;
 import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
-import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
+import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.net.httpserver.Authenticator.Success;
 
 /**
  * 处理用户查看详细科研信息(动态字段)的Action
@@ -39,6 +38,30 @@ public class ViewResearchDetailRecordInfoAction extends ActionSupport {
 		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
 		List<StudentRecordInstructor> memberList = (List<StudentRecordInstructor>)researchInfoDao.
 				findMemberByIdAndModelNameAndFactor(recordId, "StudentRecordInstructor", "studentAwardsRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+
+	/**
+	 * 查找单个详细的教学成果奖信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewTeacherAwardsRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("TeachersAwardsRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+	
+		List<TeachersRecordAchievements> memberList = (List<TeachersRecordAchievements>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "TeachersRecordAchievements", "teachersAwardsRecord.id");
 		if(record == null) {
 			return "error";
 		}

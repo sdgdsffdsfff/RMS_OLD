@@ -729,6 +729,13 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- liu add 配置处理提交学生获奖信息的Action -->
+	<bean id="submitTeachersAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitTeachersAwardsRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- 配置处理提交专业建设信息的Action -->
 	<bean id="submitMajorContributeRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitMajorContributeRecordAction" scope="prototype">
 		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
@@ -760,6 +767,13 @@
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
+
+	<!-- liu add 配置学院查询TeacherAwardsInfoRecord教师获奖的Bean -->
+	<bean id="searchCollegeTeacherAwardsRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeacherAwardsRecordAction" scope="prototype">
+		<property name="teacherAwardsRecordInfoService" ref="teacherAwardsRecordInfoService" />
+		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 	
 	<!-- 配置学院查询MajorContributeRecordInfo专业建设的Bean -->
 	<bean id="searchCollegeMajorContributeRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeMajorContributeRecordAction" scope="prototype">
@@ -783,6 +797,13 @@
 	
 	<!-- 配置教师修改学生获奖信息Bean -->
 	<bean id="modifyStudentAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyStudentAwardsRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!--liu add 配置教师修改教学成果奖信息Bean -->
+	<bean id="modifyTeacherAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyTeacherAwardsRecordAction" scope="prototype">
 		<property name="researchInfoService" ref="researchInfoService" />
 		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
 		<property name="searchDao" ref="searchDao"></property>

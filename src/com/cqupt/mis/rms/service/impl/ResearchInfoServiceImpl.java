@@ -32,6 +32,7 @@ import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.model.TeachAchievementsDeclarant;
 import com.cqupt.mis.rms.model.TeachersAwards;
 import com.cqupt.mis.rms.model.TeachersAwardsNew;
+import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.model.TeachingMaterialEditor;
 import com.cqupt.mis.rms.model.TeachingMaterialEditorNew;
 import com.cqupt.mis.rms.model.TeachingRecordEditor;
@@ -312,7 +313,11 @@ public class ResearchInfoServiceImpl implements ResearchInfoService {
 				List<StudentRecordInstructor> studentRecordInstructorlists = (List<StudentRecordInstructor>)memberListObject;
 				this.submitStudentRecordInstructors(studentRecordInstructorlists);
 				break;
-				
+				/****************2014.10.07	liu 添加***************************/
+			case 26:
+				List<TeachersRecordAchievements> teachersRecordAchievementslists = (List<TeachersRecordAchievements>)memberListObject;
+				this.submitTeacherRecordAchievements(teachersRecordAchievementslists);
+				break;	
 			case 28:
 				List<MajorRecordMember> majorRecordMembers = (List<MajorRecordMember>)memberListObject;
 				this.submitMajorRecordMembers(majorRecordMembers);
@@ -838,6 +843,23 @@ public class ResearchInfoServiceImpl implements ResearchInfoService {
 					studentRecordInstructor.setInstructorId(GenerateUtils.generateUserID());
 				}
 				researchInfoDao.addMemberInfo(studentRecordInstructor);
+			}
+		}
+	}
+	/*******************************2014.10.6 Liu	添加***********************************/
+	public void submitTeacherRecordAchievements(
+			List<TeachersRecordAchievements> teachersRecordAchievementsList) {
+		if(!teachersRecordAchievementsList.isEmpty()){
+			for (int i = 0; i < teachersRecordAchievementsList.size(); i++) {
+				TeachersRecordAchievements  teachersRecordAchievements = teachersRecordAchievementsList.get(i);
+				CQUPTUser cquptUser = researchInfoDao.findCQUPTUserByUserName(teachersRecordAchievements.getMemberName());
+				if(cquptUser != null){
+					teachersRecordAchievements.setAwardId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					teachersRecordAchievements.setAwardId(GenerateUtils.generateUserID());
+				}
+				researchInfoDao.addMemberInfo(teachersRecordAchievements);
 			}
 		}
 	}

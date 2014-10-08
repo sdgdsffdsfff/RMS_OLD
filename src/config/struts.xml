@@ -339,16 +339,21 @@
 
 
 
-	<!-- ******************************Bern 2014.10.4添加*********************************** -->
+
 	
 	<package name="collegeAchInfoRecord" extends="struts-default"
 		namespace="/collegeAchInfoRecord">
 		
+	<!-- ******************************Bern 2014.10.4添加*********************************** -->	
+
 		<!-- 管理员审批学生获奖信息之前的查看 -->
+
 		<action name="studentAwardsRecord" class="managerCollegeAchInfoRecordAction"
 			method="studentAwardsRecord">
 			<result name="success">/pages/college/simpleInfo/studentawardsrecord.jsp</result>
 		</action>
+			
+	<!-- *********************************Bern 添加   end********************************** -->
 		
 		<!-- 管理员审批专业建设信息之前的查看 -->
 		<action name="majorContributeRecord" class="managerCollegeAchInfoRecordAction"
@@ -356,6 +361,13 @@
 			<result name="success">/pages/college/simpleInfo/majorContributeRecord.jsp</result>
 		</action>
 		
+<!-- ******************************liu 2014.10.07添加*********************************** -->	
+	<action name="teacherAwardsRecord" class="managerCollegeAchInfoRecordAction"
+			method="teacherAwardsRecord">
+			<result name="success">/pages/college/simpleInfo/teacherawardsrecord.jsp</result>
+		</action>
+<!-- *********************************liu 添加   end********************************** -->		
+
 		<!-- 管理员审批教材立项信息之前的查看 -->
 		<action name="teachingMaterialRecord" class="managerCollegeAchInfoRecordAction"
 			method="teachingMaterialRecord">
@@ -364,11 +376,6 @@
 		
 	</package>
 	
-	
-	<!-- *********************************Bern 添加   end********************************** -->
-
-
-
 
 	<package name="collegeTecStatus" extends="struts-default"
 		namespace="/collegeTecStatus">
@@ -507,6 +514,18 @@
 		
 		
 		<!-- *********************************Bern 添加	end************************************ -->	
+		
+		<!-- ********************************2014.10.07	liu	添加************************************* -->		
+		
+		
+		<action name="teacherAwardsRecord" class="managerCollegeAchRecordStatusAction"
+			method="teacherAwardsRecord">
+			<result name="success">/pages/college/retailInfo/teacherawardsrecord.jsp
+			</result>
+		</action>
+		
+		
+		<!-- *********************************liu 添加	end************************************ -->	
 	</package>
 
 
@@ -904,7 +923,19 @@
 			</result>
 			<result name="error">/error.jsp</result>
 		</action>
-		
+
+		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
+
+
+
+		<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 start***************** -->
+			
+		<!-- liu add 配置输入教学成果奖信息之前动态字段的加载的Action -->
+		<action name="inputTeacherAwardsRecord" class="InputDynamicDataRecordAction" method="inputTeacherAwardsRecord">
+			<result name="success">/pages/teacher/inputteacherawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+
 		<!-- 处理教师修改专业建设信息的Action -->
 		<action name="modifyMajorContributeRecord" class="modifyMajorContributeRecordAction">
 			<result name="success" type="chain">
@@ -914,12 +945,38 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- liu add 处理提交教学成果奖信息的Action -->
+		<action name="submitTeacherAwardsRecord" class="submitTeachersAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 		
-		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
-
-
-
-
+		<!--liu add 处理查询教学成果奖信息的Action -->
+		<action name="viewTeacherAwardsRecords" class="viewTeachingInfoAction" method="viewTeacherAwardsRecords">
+			<result name="success">/pages/teacher/manage/viewteacherawardsrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!--liu add 处理查找教学成果奖详细信息的Action -->
+		<action name="viewTeacherAwardsRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewTeacherAwardsRecordDetail">
+			<result name="success">/pages/teacher/manage/viewteacherawardsrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyteacherawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!--liu add 处理教师修改学生获奖信息的Action -->
+		<action name="modifyTeacherAwardsRecord" class="modifyTeacherAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 end***************** -->
 	</package>
 	
 	<package name="modify" extends="struts-default">
@@ -2044,7 +2101,19 @@
 		
 		
 		<!-- ************************************Bern 添加 end*********************************************** -->
-	
+		
+		
+		<!-- ************************************liu 2014.10.07 添加*********************************************** -->
+		
+		<!-- 学院查询StudentAwardsRecordInfo学生获奖的Action -->
+		<action name="searchCollegeTeacherAwardsRecordInfo" class="searchCollegeTeacherAwardsRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchteacherawardsrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		
+		
+		<!-- ************************************liu 添加 end*********************************************** -->
 	
 	</package>
 	

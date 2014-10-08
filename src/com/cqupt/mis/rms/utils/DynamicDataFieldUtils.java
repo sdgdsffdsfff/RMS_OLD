@@ -16,8 +16,8 @@ public class DynamicDataFieldUtils {
 		case 2:
 			className = null;
 			break;
-		case 3:
-			className = null;
+		case 3:     //教学成果奖信息字段类
+			className = "TeachersAwardsField";
 			break;
 		case 4:		//教材立项信息
 			className = "TeachingMaterialField";
@@ -40,8 +40,8 @@ public class DynamicDataFieldUtils {
 		case 2:
 			infoName = null;
 			break;
-		case 3:
-			infoName = null;
+		case 3:     //教学成果奖信息字段类
+			infoName = "教学成果奖信息";
 			break;
 		case 4:		//教材立项信息
 			infoName = "教材立项信息";

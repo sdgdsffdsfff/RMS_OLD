@@ -279,4 +279,8 @@
 	</bean>
 
 	<!-- ********************** 2014.9.22 Bern	添加	end ******************** -->
+	<!-- liu add 配置处理查找教学成果奖获奖逻辑处理的Bean -->
+	<bean id="teacherAwardsRecordInfoService" class="com.cqupt.mis.rms.service.impl.TeacherAwardsRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 </beans>

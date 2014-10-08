@@ -9,10 +9,15 @@
 			com.mysql.jdbc.Driver
 		</property>
 		 
+		<!-- 		
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms_fd</property>
 		<property name="hibernate.connection.username">rms</property>
-		<property name="hibernate.connection.password">123</property>
+		<property name="hibernate.connection.password">123</property> 
+		-->
 		
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms_fd</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
 		<!-- 	
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/rms</property>
 		<property name="hibernate.connection.username">root</property>
@@ -39,7 +44,7 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+		<property name="hibernate.hbm2ddl.auto">update</property> 
 		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
@@ -133,6 +138,12 @@
 		<mapping resource="com/cqupt/mis/rms/model/StudentAwardsData.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/StudentRecordInstructor.hbm.xml"/>
 		
+		<!-- 2014-10-07 liu add 动态数据库字段 -->
+		<mapping resource="com/cqupt/mis/rms/model/TeachersAwardsRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachersAwardsField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachersAwardsData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/TeachersRecordAchievements.hbm.xml"/>
+		
 		<mapping resource="com/cqupt/mis/rms/model/MajorContributeRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/MajorContributeField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/MajorContributeData.hbm.xml"/>
@@ -144,5 +155,6 @@
 		<mapping resource="com/cqupt/mis/rms/model/TeachingRecordEditor.hbm.xml"/>
 		<!-- 2014-9-20 Bern add end -->
 		
-		</session-factory>
+</session-factory>
+
 </hibernate-configuration>

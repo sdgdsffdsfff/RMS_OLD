@@ -27,6 +27,15 @@ public class InputDynamicDataRecordAction extends ActionSupport {
 	}
 	
 	/**
+	 * 录入教学成果奖前的加载
+	 */
+	public String inputTeacherAwardsRecord() {
+		List<Object> fields = searchDao.SearchObjectsByFactor("com.cqupt.mis.rms.model.TeachersAwardsField", "isDelete", 0);		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
 	 * 录入专业建设信息前的加载 
 	 */
 	public String inputMajorContributeRecord() {
