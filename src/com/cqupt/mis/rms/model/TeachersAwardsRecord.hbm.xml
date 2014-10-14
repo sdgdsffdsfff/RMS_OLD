@@ -7,7 +7,7 @@
 		<id name="id" column="achievements_id"/>
 		<property name="name" column="project_name" not-null="true"/>
 		
-		<set name="fields" table="teacher_awards_data" inverse="true" cascade="all">
+		<set name="fields" table="teacher_awards_data" inverse="true" cascade="all" order-by="field_id">
 			<key column="achievements_id"></key>
 			<one-to-many class="com.cqupt.mis.rms.model.TeachersAwardsData"/>
 		</set>

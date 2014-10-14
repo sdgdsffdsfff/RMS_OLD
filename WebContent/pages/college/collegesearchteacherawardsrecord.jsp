@@ -58,7 +58,7 @@
 				<option value="approvedUser">审批者</option>
 				<option value="teacher">获奖教师</option>
 				<s:iterator value="#fields" id="f">
-					<option value="<s:property value="#f.field.name"/>"><s:property value="#f.field.description"/></option>
+					<option value="<s:property value="#f.name"/>"><s:property value="#f.description"/></option>
 				</s:iterator>
 			</select>
 			<input type="text" class="logical_word"  name="stringValue1" id="stringValue1"/>
@@ -74,7 +74,7 @@
 				<option value="approvedUser">审批者</option>
 				<option value="teacher">获奖教师</option>
 				<s:iterator value="#fields" id="f">
-					<option value="<s:property value="#f.field.name"/>"><s:property value="#f.field.description"/></option>
+					<option value="<s:property value="#f.name"/>"><s:property value="#f.description"/></option>
 				</s:iterator>
 			</select>
 			<input type="text" class="logical_word"  name="stringValue2" id="stringValue2"/>
@@ -92,7 +92,7 @@
 				<option value="approvedUser">审批者</option>
 				<option value="teacher">获奖教师</option>
 				<s:iterator value="#fields" id="f">
-					<option value="<s:property value="#f.field.name"/>"><s:property value="#f.field.description"/></option>
+					<option value="<s:property value="#f.name"/>"><s:property value="#f.description"/></option>
 				</s:iterator>
 			</select>
 			<input type="text" class="logical_word"  name="stringValue3" id="stringValue3"/>
@@ -108,7 +108,7 @@
 				<option value="approvedUser">审批者</option>
 				<option value="teacher">获奖教师</option>
 				<s:iterator value="#fields" id="f">
-					<option value="<s:property value="#f.field.name"/>"><s:property value="#f.field.description"/></option>
+					<option value="<s:property value="#f.name"/>"><s:property value="#f.description"/></option>
 				</s:iterator>
 			</select>
 			<input type="text" class="logical_word"  name="stringValue4" id="stringValue4"/>
@@ -128,7 +128,7 @@
     		<th>操作</th>
     		<th>信息名字</th>
     		<s:iterator value="#fields" id="f">
-     			<th><s:property value="#f.field.description"/></th>
+     			<th><s:property value="#f.description"/></th>
      		</s:iterator>	
      	</tr>
      	<s:iterator value="#teacherAwardsInfos" id="i">

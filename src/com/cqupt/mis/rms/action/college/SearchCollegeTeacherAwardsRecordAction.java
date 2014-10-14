@@ -119,8 +119,9 @@ public class SearchCollegeTeacherAwardsRecordAction extends ActionSupport {
 			} 
 		}
 
+		System.out.println(fields.get(0).getName());
 		//将序列化话的值放入值栈
-		ActionContext.getContext().put("fields", sortedFields2);
+		ActionContext.getContext().put("fields", fields);
 		ActionContext.getContext().put("teacherAwardsInfos", teacherAwardsRecordInfos);
 		type="search";
 		

@@ -62,7 +62,7 @@ public class ViewTeachingInfoAction extends ActionSupport {
 				datas.add(studentAwardsData);
 			} 
 		}
-		ActionContext.getContext().put(ALLFIELDS, sortedFields2);
+		ActionContext.getContext().put(ALLFIELDS,fields);
 		ActionContext.getContext().put(RECORDS, studentAwardsRecords);
 		return SUCCESS;
 	}
@@ -97,7 +97,8 @@ public class ViewTeachingInfoAction extends ActionSupport {
 				datas.add(teachersAwardsData);
 			} 
 		}
-		ActionContext.getContext().put(ALLFIELDS, sortedFields2);
+		System.out.println(fields.get(0).getName());
+		ActionContext.getContext().put(ALLFIELDS,fields);
 		ActionContext.getContext().put(RECORDS, teachersAwardsRecords);
 		return SUCCESS;
 	}
