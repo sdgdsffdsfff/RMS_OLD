@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cqupt.mis.rms.model">
+	<class name="OtherTeachingAwardsData" table="other_teaching_awards_data">
+		<composite-id>	
+			<key-many-to-one name="record" column="record_id" class="OtherTeachingAwardsRecord"></key-many-to-one>
+			<key-many-to-one name="field" column="field_id" class="OtherTeachingAwardsField"></key-many-to-one> 
+		</composite-id>
+		
+		<property name="value" column="value"></property> 
+	</class>
+</hibernate-mapping>

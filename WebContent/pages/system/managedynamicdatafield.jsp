@@ -35,11 +35,15 @@
 				<div class="element">
 					<label for="rewardTime">信息类别：</label>
 					<select style="width:150px" name="classNum">
-						<option value="1">专业建设/教改项目</option>
-						<option value="2">课程建设</option>
-						<option value="3">教学成果</option>
-						<option value="4">教材立项</option>
-						<option selected="selected" value="5">学生获奖信息</option>
+						<option selected="selected" value="1">专业建设/教改项目</option>
+						<option value="2">优秀培训师信息</option>
+						<option value="3">教学成果信息</option>
+						<option value="4">教材立项信息</option>
+						<option value="5">学生获奖信息</option>
+						<option value="6">质量工程信息</option>
+						<option value="7">学评教信息</option>
+						<option value="8">教改结题项目信息</option>
+						<option value="9">其他教学奖励信息</option>
 					</select>
 				</div>
 			</div>

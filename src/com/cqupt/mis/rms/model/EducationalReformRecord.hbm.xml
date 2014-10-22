@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cqupt.mis.rms.model">
+	<class name="EducationalReformRecord" table="educational_reform_record">
+		<id name="id" column="record_id"></id>
+		<property name="name" column="record_name"></property>
+		<property name="returnReason" column="return_reason"></property>
+		<property name="status" column="status"></property>
+		
+		<set name="fields" table="educational_reform_data" inverse="true" cascade="all">
+			<key column="record_id"></key>
+			<one-to-many class="EducationalReformData"/>
+		</set>
+		
+		<many-to-one name="submitUser" class="CQUPTUser" column="submit_user_id" lazy="false"></many-to-one>
+		<many-to-one name="approvedUser" class="CQUPTUser" column="approved_user_id" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

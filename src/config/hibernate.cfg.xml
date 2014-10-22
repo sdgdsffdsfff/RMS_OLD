@@ -17,7 +17,7 @@
 		
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms_fd</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.password">bern123</property>
 		<!-- 	
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/rms</property>
 		<property name="hibernate.connection.username">root</property>
@@ -44,7 +44,13 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-	<!-- 	<property name="hibernate.hbm2ddl.auto">update</property>  -->
+		
+		<!-- 第一次加载hibernate时根据model类会自动建立起表的结构,如果已存在表结构则根据配置文件自动更新表结构 -->
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+		
+		<!-- 第一次加载hibernate时根据model类校验表结构 -->
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+		
 		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
@@ -154,6 +160,29 @@
 		<mapping resource="com/cqupt/mis/rms/model/TeachingMaterialData.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/TeachingRecordEditor.hbm.xml"/>
 		<!-- 2014-9-20 Bern add end -->
+		
+		<!-- 2014.10.22 Bern add 动态数据库字段 -->
+		<mapping resource="com/cqupt/mis/rms/model/QualityProjectRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/QualityProjectField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/QualityProjectData.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationData.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerData.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/EducationalReformRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/EducationalReformField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/EducationalReformData.hbm.xml"/>
+		
+		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsRecord.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsField.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsData.hbm.xml"/>
+		<!-- 2014-9-20 Bern add end -->
+		
 		
 </session-factory>
 

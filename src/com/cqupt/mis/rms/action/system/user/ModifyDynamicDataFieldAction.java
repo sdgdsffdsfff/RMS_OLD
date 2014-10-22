@@ -1,8 +1,14 @@
 package com.cqupt.mis.rms.action.system.user;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
+import com.cqupt.mis.rms.model.EducationalReformField;
+import com.cqupt.mis.rms.model.ExcellentTrainerField;
+import com.cqupt.mis.rms.model.LearningEvaluationField;
 import com.cqupt.mis.rms.model.MajorContributeField;
+import com.cqupt.mis.rms.model.OtherTeachingAwardsField;
+import com.cqupt.mis.rms.model.QualityProjectField;
 import com.cqupt.mis.rms.model.StudentAwardsField;
+import com.cqupt.mis.rms.model.TeachersAwardsField;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
@@ -81,10 +87,20 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			majorContributeField.setDescription(fieldDes);
 			majorContributeField.setIsDelete(0);
 			return majorContributeField;
-		} else if (classNum == 2) {
-			return null;
-		} else if (classNum == 3) {
-			return null;
+		} else if (classNum == 2) {		//优秀培训师信息的动态字段类
+			ExcellentTrainerField excellentTrainerField = new ExcellentTrainerField();
+			excellentTrainerField.setId(fieldId);
+			excellentTrainerField.setName(fieldName);
+			excellentTrainerField.setDescription(fieldDes);
+			excellentTrainerField.setIsDelete(0);
+			return excellentTrainerField;
+		} else if (classNum == 3) {		//教学成果奖信息的动态字段类
+			TeachersAwardsField teachersAwardsField = new TeachersAwardsField();
+			teachersAwardsField.setId(fieldId);
+			teachersAwardsField.setName(fieldName);
+			teachersAwardsField.setDescription(fieldDes);
+			teachersAwardsField.setIsDelete(0);
+			return teachersAwardsField;
 		} else if(classNum == 4) {		//教材立项信息的动态字段类
 			TeachingMaterialField teachingMaterialField = new TeachingMaterialField();
 			teachingMaterialField.setId(fieldId);
@@ -99,6 +115,34 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			studentAwardsField.setDescription(fieldDes);
 			studentAwardsField.setIsDelete(0);
 			return studentAwardsField;
+		} else if(classNum == 6) {		//质量工程的动态字段类
+			QualityProjectField qualityProjectField = new QualityProjectField();
+			qualityProjectField.setId(fieldId);
+			qualityProjectField.setName(fieldName);
+			qualityProjectField.setDescription(fieldDes);
+			qualityProjectField.setIsDelete(0);
+			return qualityProjectField;
+		} else if(classNum == 7) {		//学评教的动态字段类
+			LearningEvaluationField learningEvaluationField = new LearningEvaluationField();
+			learningEvaluationField.setId(fieldId);
+			learningEvaluationField.setName(fieldName);
+			learningEvaluationField.setDescription(fieldDes);
+			learningEvaluationField.setIsDelete(0);
+			return learningEvaluationField;
+		} else if(classNum == 8) {		//教改结题信息的动态字段类
+			EducationalReformField educationalReformField = new EducationalReformField();
+			educationalReformField.setId(fieldId);
+			educationalReformField.setName(fieldName);
+			educationalReformField.setDescription(fieldDes);
+			educationalReformField.setIsDelete(0);
+			return educationalReformField;
+		} else if(classNum == 9) {		//其他教学奖励信息的动态字段类
+			OtherTeachingAwardsField otherTeachingAwardsField = new OtherTeachingAwardsField();
+			otherTeachingAwardsField.setId(fieldId);
+			otherTeachingAwardsField.setName(fieldName);
+			otherTeachingAwardsField.setDescription(fieldDes);
+			otherTeachingAwardsField.setIsDelete(0);
+			return otherTeachingAwardsField;
 		}
 		return null;
 	}

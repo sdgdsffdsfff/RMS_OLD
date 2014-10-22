@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.ExcellentTrainerField" table="excellent_trainer_field">
+		<id name="id" column="field_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="field_name"></property>
+		<property name="description" column="field_des"></property>
+		<property name="isDelete" column="is_delete"></property>
+		<property name="submittime" column="submittime"></property>
+	</class>
+</hibernate-mapping>
