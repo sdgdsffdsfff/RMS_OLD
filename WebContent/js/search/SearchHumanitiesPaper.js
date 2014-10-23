@@ -1,4 +1,3 @@
-
 // JavaScript Document
 var $grid;
 var manager, g;

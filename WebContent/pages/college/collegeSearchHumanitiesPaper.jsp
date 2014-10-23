@@ -2,8 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.cqupt.mis.rms.model.*"%>
 <%@page import="com.cqupt.mis.rms.service.model.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- <%    
@@ -40,7 +39,7 @@
 </head>
 <body style="padding:0px; "> 
 
-<div class="l-loading" style="display:block" id="pageloading"></div> 
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><div class="l-loading" style="display:block" id="pageloading"></div> 
   
  <form id="form1" action="searchCollegeHumanitiesPaperInfo.action" method="post"> 
 <div id="hippo">
