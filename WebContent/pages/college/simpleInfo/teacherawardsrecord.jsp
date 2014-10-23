@@ -31,7 +31,42 @@
  </head>
 <body style="padding:0px; overflow:hidden;"> 
   <form id="form1" > 
-	<table border="1">
+    <div id="maingrid" style="margin:0; padding:0">
+    		<s:iterator value="records">
+     			<script type="text/javascript">
+	     			var row = {submitUser: "${submitUser.userName}",
+	     					name: "${name}", 
+	     					Status: "${statusDes}"
+					};
+	     			rows.push(row);
+	     			 g = manager = $grid = $("#maingrid").ligerGrid({
+	                     columns:[
+	                              { display: '提交者', name: 'submitUser', align: 'left', width: 100, minWidth: 60 },
+	                              { display: '信息名称', name: 'name', align: 'left', minWidth: 140 },
+	                              { display: '审批状态', name: 'Status', width: 120  },
+	                              { display: '操作', isAllowHide: false, width: 60, frozen: true,
+	                                 	render: function (row)
+	                                     {
+	                                 		var html = '<a href="collegeAchStatus/teacherAwardsRecord.action?recordId='+${id}+'">查看详细</a>';
+	                                         return html;
+	                                     }
+	                                 }
+	                              ], dataAction: 'server', data: row, sortName: 'id',
+	                     width: '100%', height: '100%', pageSize: 30,rownumbers:true,
+	                     checkbox : true,
+	                    
+	                     cssClass: 'l-grid-gray', 
+	                     heightDiff: -6
+	                 });
+	                 show();
+	               
+	                gridManager = $("#maingrid").ligerGetGridManager();
+
+	                 $("#pageloading").hide();
+	     		</script>
+   			</s:iterator> 
+    	</div>
+	<%-- <table border="1">
     	<tr>
     		<th>操作</th>
     		<th>提交者</th>
@@ -46,8 +81,7 @@
      			<td><s:property value="#r.statusDes"/></td>
      		</tr>
      	</s:iterator>
-     	</table>
+     	</table> --%>
   </form>
- 
 </body>
 </html>

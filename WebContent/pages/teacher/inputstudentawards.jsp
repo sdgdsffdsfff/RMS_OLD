@@ -43,7 +43,7 @@
 				</div>
 				<div class="element">
 					<label for="rewardStudents">获奖个人或集体:</label>
-					<input type="text" id="rewardStudents" name="rewardStudents" class=":required" />
+					<input style="width: 100px" type="text" id="rewardStudents" name="rewardStudents" class=":required" />
 				</div>
 			</div>
 			<div class="line">

@@ -24,12 +24,9 @@
 <!-- <body style="padding:0px; overflow:hidden;">
 	<div class="l-loading" style="display:block" id="pageloading"></div>  -->
 <body>
-  	<form id="form1"> 
-		<!-- 
-		<div id="toptoolbar"></div> 
-    	<div id="maingrid" style="margin:0; padding:0"> 
-    	-->
-    	<table border="1">
+  	<form id="form1">  
+	
+    	<table border="1" class="l-panel l-grid-gray l-frozen">
     	<tr>
     		<th>状态</th>
     		<th>拒绝原因</th>

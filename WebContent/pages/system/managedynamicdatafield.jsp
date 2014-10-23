@@ -1,9 +1,15 @@
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
+<%@page import="java.util.List"%>
+<%@page import="com.cqupt.mis.rms.model.*"%>
+<%@page import="com.cqupt.mis.rms.service.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <base href="<%=basePath%>">
@@ -21,6 +27,7 @@
 	<link href="css/upload.css" rel="stylesheet" type="text/css" />
 	<script src="js/teacher/inputInfo.js" type="text/javascript"></script>
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+	<script src="js/search/managedynamicdatafield.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="findDynamicDataField.action" method="post">
@@ -51,27 +58,59 @@
 	</div>
 	</div>
 		<button type="submit">查询</button>
-	</form>
+		
+		<div id="toptoolbar"></div> 
+    	<div id="maingrid" style="margin:0; padding:0">
+    	<s:if test="#allFields!=null">
+    		<s:iterator value="allFields">
+     			<script type="text/javascript">
+	     			var row = {name: "${name}",
+	     					description: "${description}", 
+	     					submittime: "${submittime}",
+	     					Status: "${status}",
+	     					type: "${type}"
+					};
+	     			rows.push(row);
+	     			 //表格
+     	            g = manager = $grid = $("#maingrid").ligerGrid({
+     	                columns: [
+     	                { display: '字段数据库名', name: 'name', align: 'left', width: 100, minWidth: 60 },
+     	                { display: '字段前台展示名', name: 'description', align: 'left', width: 100, minWidth: 60 },
+     	                { display: '字段提交时间', name: 'submittime', align: 'left', width: 100, minWidth: 60 },
+     					{ display: '操作', isAllowHide: false, width: 60, frozen: true,
+     	                   	render: function (row)
+     	                       {
+     	                   		var html = '<a href="deleteDynamicDataField.action?classNum='+${classNum}+'&fieldId='+${id}+'">删除</a>';
+     	                        return html;
+     	                       }
+     	                 },
+     	                { display: '操作', isAllowHide: false, width: 60, frozen: true,
+     	                   	render: function (row)
+     	                       {
+     	                   		 var html = '<a href="modifyDynamicDataFieldBefore.action?classNum='+${classNum}+'&fieldId='+${id}+'">修改</a>';
+     	                         return html;
+     	                       }
+     	                   }
+     	                ], dataAction: 'server', data: row, sortName: 'id',
+     	                width: '100%', height: '100%', pageSize: 30,rownumbers:true,
+     	                checkbox : true, pageSizeOptions : [5, 10, 15, 20, 25, 30],
+     	                //应用灰色表头
+     	                cssClass: 'l-grid-gray', 
+     	                heightDiff: -6
+     	            });
+     	            show();
+     	            
+     	           gridManager = $("#maingrid").ligerGetGridManager();
+
+     	            $("#pageloading").hide();	
+	     		</script>
+   			</s:iterator> 
+   			 </s:if>
+    	</div>
 	
-	<s:if test="#allFields!=null">
-	<table border="1">
-		<tr>
-			<th>字段数据库名</th>
-			<th>字段前台展示名</th>
-			<th>字段提交时间</th>
-			<th>操作</th>
-			<th>操作</th>
-		</tr>
-		<s:iterator value="#allFields" id="f">
-		<tr>
-			<td><s:property value="#f.name"/></td>
-			<td><s:property value="#f.description"/></td>
-			<td><s:property value="#f.submittime"/></td>
-			<td><a href="deleteDynamicDataField.action?fieldId=<s:property value="#f.id"/>&classNum=<s:property value="#classNum"/>">删除</a></td>
-			<td><a href="modifyDynamicDataFieldBefore.action?fieldId=<s:property value="#f.id"/>&classNum=<s:property value="#classNum"/>">修改</a></td>
-		</tr>
-		</s:iterator>
-	</table>
-	</s:if>
+<div style="display:none;">
+
+</div>
+</form>
 </body>
 </html>
