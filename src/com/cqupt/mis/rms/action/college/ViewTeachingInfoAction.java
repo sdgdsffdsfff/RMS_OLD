@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.sf.json.JSONArray;
+
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.MajorContributeData;
 import com.cqupt.mis.rms.model.MajorContributeField;
@@ -62,8 +64,15 @@ public class ViewTeachingInfoAction extends ActionSupport {
 				datas.add(studentAwardsData);
 			} 
 		}
-		ActionContext.getContext().put(ALLFIELDS,fields);
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields2);
+		String json = jsonArray.toString();
+		System.out.println(json);
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields2);
 		ActionContext.getContext().put(RECORDS, studentAwardsRecords);
+	
+		
 		return SUCCESS;
 	}
 	
@@ -98,7 +107,7 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			} 
 		}
 		System.out.println(fields.get(0).getName());
-		ActionContext.getContext().put(ALLFIELDS,fields);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields2);
 		ActionContext.getContext().put(RECORDS, teachersAwardsRecords);
 		return SUCCESS;
 	}
