@@ -42,7 +42,7 @@ request.getServerName() + ":" + request.getServerPort() + path + "/";
 	     					id:"${id}",
 	     					submitUser: "${submitUser.userName}",
 	     					name: "${name}", 
-	     					Status: "${statusDes}"
+	     					Status: "${statusDes}",
 					};
 	     			rows.push(row);
 	     			 

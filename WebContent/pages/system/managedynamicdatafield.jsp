@@ -65,13 +65,13 @@
     		<s:iterator value="allFields">
      			<script type="text/javascript">
 	     			var row = {
-	     					id:"${id}",
-	     					classNum:"${requestScope.classNum}",
+	     					id: "${id}",
+	     					classNum: "${requestScope.classNum}",
 	     					name: "${name}",
 	     					description: "${description}", 
 	     					submittime: "${submittime}",
-	     					order:"${order}"
-					};
+	     					order: "${order}"
+	     			};
 	     			rows.push(row);
 	     		</script>
    			</s:iterator> 

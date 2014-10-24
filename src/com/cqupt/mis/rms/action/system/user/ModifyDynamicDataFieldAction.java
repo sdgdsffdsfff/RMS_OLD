@@ -1,5 +1,7 @@
 package com.cqupt.mis.rms.action.system.user;
 
+import sun.awt.image.PixelConverter.Bgrx;
+
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.model.EducationalReformField;
 import com.cqupt.mis.rms.model.ExcellentTrainerField;
@@ -12,6 +14,7 @@ import com.cqupt.mis.rms.model.TeachersAwardsField;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -28,6 +31,8 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 	private int classNum;
 	private String fieldName;
 	private String fieldDes;
+	private int oldOrder;
+	private int newOrder;
 	
 	/**
 	 * 根据类名和字段id查找相应的字段
@@ -38,6 +43,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 		if(className == null) {
 			return "error";
 		}
+		int count = dynamicDataFieldDao.countField(className);
 		Object obj = dynamicDataFieldDao.findFieldByClassNameAndId(className, fieldId);
 		if(obj == null) {
 			return "error";
@@ -45,6 +51,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 		ActionContext.getContext().put("field", obj);
 		ActionContext.getContext().put("classNum", classNum);
 		ActionContext.getContext().put("infoName", infoName);
+		ActionContext.getContext().put("count", count);
 		return SUCCESS;
 	}
 	
@@ -53,6 +60,13 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 	 */
 	public String modify() {
 		boolean result = false;
+		String className = DynamicDataFieldUtils.getClassNameByClassNum(classNum);
+		if(oldOrder > newOrder) {
+			dynamicDataFieldDao.updateOrder(className, newOrder, oldOrder, true);
+		} else if(oldOrder < newOrder) {
+			dynamicDataFieldDao.updateOrder(className, oldOrder, newOrder, false);
+		}
+		
 		Object obj = getModifyedObject();
 		if(obj == null) {
 			return "error";
@@ -113,6 +127,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			studentAwardsField.setId(fieldId);
 			studentAwardsField.setName(fieldName);
 			studentAwardsField.setDescription(fieldDes);
+			studentAwardsField.setOrder(newOrder);
 			studentAwardsField.setIsDelete(0);
 			return studentAwardsField;
 		} else if(classNum == 6) {		//质量工程的动态字段类
@@ -185,6 +200,22 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 
 	public void setFieldDes(String fieldDes) {
 		this.fieldDes = fieldDes;
+	}
+
+	public int getOldOrder() {
+		return oldOrder;
+	}
+
+	public void setOldOrder(int oldOrder) {
+		this.oldOrder = oldOrder;
+	}
+
+	public int getNewOrder() {
+		return newOrder;
+	}
+
+	public void setNewOrder(int newOrder) {
+		this.newOrder = newOrder;
 	}
 
 }

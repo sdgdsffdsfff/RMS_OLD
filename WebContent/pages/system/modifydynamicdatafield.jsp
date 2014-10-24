@@ -35,6 +35,7 @@
 				修改字段
 				<input type="hidden" name="classNum" value="<s:property value="#classNum"/>"/>
 				<input type="hidden" name="fieldId" value="<s:property value="#field.id"/>"/>
+				<input type="hidden" name="oldOrder" value="<s:property value="#field.order"/>"/>
 			</div>
 			<div class="item">
 				<div class="element del person">
@@ -44,6 +45,19 @@
 				<div class="element del detail">
 					<label for="remarksMem">字段前台展示名：</label>
 					<input type="text" name="fieldDes" value="<s:property value="#field.description"/>" class=":required"/>
+				</div>
+				<div class="element del detail">
+					<label for="remarksMem">字段展示顺序：</label>
+					<select style="width:150px" name="newOrder">
+						<%
+							int count = (Integer) request.getAttribute("count");
+							for(int i=1; i<=count; i++) {
+						%>
+							<option value="<%=i %>"><%=i %></option>
+						<% 
+							}
+						%>
+					</select>
 				</div>
 			</div>
 		</div>

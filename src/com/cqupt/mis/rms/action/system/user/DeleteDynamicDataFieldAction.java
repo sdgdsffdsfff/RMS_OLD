@@ -1,8 +1,6 @@
 package com.cqupt.mis.rms.action.system.user;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
-import com.cqupt.mis.rms.manager.SearchDao;
-import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,6 +17,7 @@ public class DeleteDynamicDataFieldAction extends ActionSupport {
 			
 	private int classNum;
 	private int fieldId;
+	private int fieldOrder;
 	
 	/**
 	 * 删除字段（假删除，仅仅将isDelete字段值改为1）
@@ -29,6 +28,8 @@ public class DeleteDynamicDataFieldAction extends ActionSupport {
 		if(className == null) {
 			return "error";
 		}
+		int count = dynamicDataFieldDao.countField(className);
+		dynamicDataFieldDao.updateOrder(className, fieldOrder, count, false);
 		result = dynamicDataFieldDao.deleteField(className, fieldId);
 		Confirm confirm = new Confirm();
 		if(result) {
@@ -69,6 +70,14 @@ public class DeleteDynamicDataFieldAction extends ActionSupport {
 
 	public void setFieldId(int fieldId) {
 		this.fieldId = fieldId;
+	}
+
+	public int getFieldOrder() {
+		return fieldOrder;
+	}
+
+	public void setFieldOrder(int fieldOrder) {
+		this.fieldOrder = fieldOrder;
 	}
 	
 }

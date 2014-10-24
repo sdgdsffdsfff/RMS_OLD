@@ -23,7 +23,7 @@ var manager, g;
 	     					{ display: '操作', isAllowHide: false, width: 60, frozen: true,
 	     	                   	render: function (row)
 	     	                       {
-	     	                   		var html = '<a href="deleteDynamicDataField.action?classNum='+row.classNum+'&fieldId='+row.id+'">删除</a>';
+	     	                   		var html = '<a href="deleteDynamicDataField.action?classNum='+row.classNum+'&fieldId='+row.id+'&fieldOrder='+row.order+'">删除</a>';
 	     	                        return html;
 	     	                       }
 	     	                 },

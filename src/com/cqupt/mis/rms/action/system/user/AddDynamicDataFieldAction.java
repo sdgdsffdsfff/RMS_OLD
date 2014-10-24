@@ -6,13 +6,13 @@ import com.cqupt.mis.rms.model.EducationalReformField;
 import com.cqupt.mis.rms.model.ExcellentTrainerField;
 import com.cqupt.mis.rms.model.LearningEvaluationField;
 import com.cqupt.mis.rms.model.MajorContributeField;
-import com.cqupt.mis.rms.model.MajorContributeRecord;
 import com.cqupt.mis.rms.model.OtherTeachingAwardsField;
 import com.cqupt.mis.rms.model.QualityProjectField;
 import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.TeachersAwardsField;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -35,9 +35,14 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 	 */
 	public String execute() {
 		boolean result;
-		Object obj = getInitedObject();
+		String className = DynamicDataFieldUtils.getClassNameByClassNum(classNum);
+		if(className == null) {
+			return ERROR;
+		}
+		int count = dynamicDataFieldDao.countField(className);
+		Object obj = getInitedObject(count);
 		if(obj == null) {
-			return "error";
+			return ERROR;
 		}
 		result = dynamicDataFieldDao.addField(obj);
 		Confirm confirm = new Confirm();
@@ -61,7 +66,9 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 	 * 根据classNum初始化一个相应类型的对象
 	 * 如果增加了一个动态字段表，在此方法中添加if判断，并初始化相应的类
 	 */
-	private Object getInitedObject() {
+	private Object getInitedObject(int order) {
+		order = order + 1;		//新插入的order值
+		
 		if(classNum == 1) {		//专业建设/教改项目信息
 			MajorContributeField majorContributeField = new MajorContributeField();
 			majorContributeField.setName(fieldName);
@@ -90,6 +97,7 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 			StudentAwardsField stuaAwardsField = new StudentAwardsField();
 			stuaAwardsField.setName(fieldName);
 			stuaAwardsField.setDescription(fieldDes);
+			stuaAwardsField.setOrder(order);
 			stuaAwardsField.setIsDelete(0);
 			return stuaAwardsField;
 		} else if(classNum == 6) {		//质量工程的动态字段类

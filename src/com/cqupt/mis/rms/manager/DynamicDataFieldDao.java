@@ -37,4 +37,21 @@ public interface DynamicDataFieldDao {
 	 * @return Object
 	 */
 	public Object findFieldByClassNameAndId(String className, int fieldId);
+	
+	/**
+	 * 根据类名查找其所对应的字段总数
+	 * @param className
+	 * @return 字段总数
+	 */
+	public int countField(String className);
+	
+	/**
+	 * 将order字段重新排序
+	 * @param className	字段类名
+	 * @param beginOrder 起始排序值
+	 * @param endOrder	结束的排序值
+	 * @param add 修改介于beginOrder和endOrder值之间的字段。如果为true，每个加1；如果为false，每个减1
+	 * @return
+	 */
+	public boolean updateOrder(String className, int beginorder, int endOrder, boolean add);
 }
