@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cqupt.mis.rms.model.QualityRecordAward" table="quality_record_award">
+	    <id name="id">
+	    	<generator class="native"></generator>
+	    </id>
+        <many-to-one name="qualityProjectRecord" column="record_id" class="com.cqupt.mis.rms.model.QualityProjectRecord"></many-to-one>
+        <property name="memberId" column="member_id" type="java.lang.String"/>
+		<property name="memberName" column="member_name" />
+		<property name="orders" column="orders" />
+		<property name="remarks" column="remarks" />
+	</class>
+</hibernate-mapping>
