@@ -73,24 +73,28 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 			MajorContributeField majorContributeField = new MajorContributeField();
 			majorContributeField.setName(fieldName);
 			majorContributeField.setDescription(fieldDes);
+			majorContributeField.setOrder(order);
 			majorContributeField.setIsDelete(0);
 			return majorContributeField;
 		} else if (classNum == 2) {		//优秀培训师信息
 			ExcellentTrainerField excellentTrainerField = new ExcellentTrainerField();
 			excellentTrainerField.setName(fieldName);
 			excellentTrainerField.setDescription(fieldDes);
+			excellentTrainerField.setOrder(order);
 			excellentTrainerField.setIsDelete(0);
 			return excellentTrainerField;
 		} else if (classNum == 3) {     //教学成果奖信息的动态字段
 			TeachersAwardsField teachersAwardsField = new TeachersAwardsField();
 			teachersAwardsField.setName(fieldName);
 			teachersAwardsField.setDescription(fieldDes);
+			teachersAwardsField.setOrder(order);
 			teachersAwardsField.setIsDelete(0);
 			return teachersAwardsField;
 		} else if(classNum == 4) {		//教材立项信息
 			TeachingMaterialField teachingMaterialField = new TeachingMaterialField();
 			teachingMaterialField.setName(fieldName);
 			teachingMaterialField.setDescription(fieldDes);
+			teachingMaterialField.setOrder(order);
 			teachingMaterialField.setIsDelete(0);
 			return teachingMaterialField;
 		} else if(classNum == 5) {		//学生获奖信息的动态字段类
@@ -104,24 +108,28 @@ public class AddDynamicDataFieldAction extends ActionSupport {
 			QualityProjectField qualityProjectField = new QualityProjectField();
 			qualityProjectField.setName(fieldName);
 			qualityProjectField.setDescription(fieldDes);
+			qualityProjectField.setOrder(order);
 			qualityProjectField.setIsDelete(0);
 			return qualityProjectField;
 		} else if(classNum == 7) {		//学评教的动态字段类
 			LearningEvaluationField learningEvaluationField = new LearningEvaluationField();
 			learningEvaluationField.setName(fieldName);
 			learningEvaluationField.setDescription(fieldDes);
+			learningEvaluationField.setOrder(order);
 			learningEvaluationField.setIsDelete(0);
 			return learningEvaluationField;
 		} else if(classNum == 8) {		//教改结题信息的动态字段类
 			EducationalReformField educationalReformField = new EducationalReformField();
 			educationalReformField.setName(fieldName);
 			educationalReformField.setDescription(fieldDes);
+			educationalReformField.setOrder(order);
 			educationalReformField.setIsDelete(0);
 			return educationalReformField;
 		} else if(classNum == 9) {		//其他教学奖励信息的动态字段类
 			OtherTeachingAwardsField otherTeachingAwardsField = new OtherTeachingAwardsField();
 			otherTeachingAwardsField.setName(fieldName);
 			otherTeachingAwardsField.setDescription(fieldDes);
+			otherTeachingAwardsField.setOrder(order);
 			otherTeachingAwardsField.setIsDelete(0);
 			return otherTeachingAwardsField;
 		}

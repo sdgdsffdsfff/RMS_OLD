@@ -33,12 +33,12 @@
 		</div>
 		<div class="content">
 			<div class="line">	<!-- ####三个换行#### -->
-				<div class="element">
+				<div class="element" style="height:31px;">
 					<label for="contributeName">立项名称</label>
 					<input type="text" id="contributeName" name="contributeName" class=":required" />
 				</div>
 				<s:iterator value="#allFields" id="f">
-				<div class="element">
+				<div class="element" style="height:31px;">
 					<label for="<s:property value="#f.name"/>"><s:property value="#f.description"/></label>
 					<input type="text" id="<s:property value="#f.name"/>" name="<s:property value="#f.name"/>" class=":required" />
 				</div>

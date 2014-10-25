@@ -11,6 +11,7 @@ public class LearningEvaluationField {
 	private int id;		//字段id
 	private String name;		//字段在数据库中的名字
 	private String description;		//字段在页面展示的名字
+	private int order;		//字段展示顺序
 	private int isDelete;		//字段是否删除，0为未删除，1为删除
 	private Date submittime;		//字段提交时间
 	
@@ -44,6 +45,12 @@ public class LearningEvaluationField {
 	}
 	public void setSubmittime(Date submittime) {
 		this.submittime = submittime;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
 	}
 	
 	

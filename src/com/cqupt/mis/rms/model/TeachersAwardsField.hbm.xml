@@ -9,6 +9,7 @@
 		</id>
 		<property name="name" column="field_name"></property>
 		<property name="description" column="field_des"></property>
+		<property name="order" column="`order`"></property>
 		<property name="isDelete" column="is_delete"></property>
 		<property name="submittime" column="submittime"></property>
 		<set name="fieldDatas" table="teachers_awards_data" cascade="all" order-by="field_id">

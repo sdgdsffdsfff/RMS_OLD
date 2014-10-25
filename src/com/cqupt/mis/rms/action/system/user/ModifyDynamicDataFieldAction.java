@@ -99,6 +99,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			majorContributeField.setId(fieldId);
 			majorContributeField.setName(fieldName);
 			majorContributeField.setDescription(fieldDes);
+			majorContributeField.setOrder(newOrder);
 			majorContributeField.setIsDelete(0);
 			return majorContributeField;
 		} else if (classNum == 2) {		//优秀培训师信息的动态字段类
@@ -106,6 +107,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			excellentTrainerField.setId(fieldId);
 			excellentTrainerField.setName(fieldName);
 			excellentTrainerField.setDescription(fieldDes);
+			excellentTrainerField.setOrder(newOrder);
 			excellentTrainerField.setIsDelete(0);
 			return excellentTrainerField;
 		} else if (classNum == 3) {		//教学成果奖信息的动态字段类
@@ -113,6 +115,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			teachersAwardsField.setId(fieldId);
 			teachersAwardsField.setName(fieldName);
 			teachersAwardsField.setDescription(fieldDes);
+			teachersAwardsField.setOrder(newOrder);
 			teachersAwardsField.setIsDelete(0);
 			return teachersAwardsField;
 		} else if(classNum == 4) {		//教材立项信息的动态字段类
@@ -120,6 +123,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			teachingMaterialField.setId(fieldId);
 			teachingMaterialField.setName(fieldName);
 			teachingMaterialField.setDescription(fieldDes);
+			teachingMaterialField.setOrder(newOrder);
 			teachingMaterialField.setIsDelete(0);
 			return teachingMaterialField;
 		} else if(classNum == 5) {		//学生获奖信息的动态字段类
@@ -135,6 +139,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			qualityProjectField.setId(fieldId);
 			qualityProjectField.setName(fieldName);
 			qualityProjectField.setDescription(fieldDes);
+			qualityProjectField.setOrder(newOrder);
 			qualityProjectField.setIsDelete(0);
 			return qualityProjectField;
 		} else if(classNum == 7) {		//学评教的动态字段类
@@ -142,6 +147,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			learningEvaluationField.setId(fieldId);
 			learningEvaluationField.setName(fieldName);
 			learningEvaluationField.setDescription(fieldDes);
+			learningEvaluationField.setOrder(newOrder);
 			learningEvaluationField.setIsDelete(0);
 			return learningEvaluationField;
 		} else if(classNum == 8) {		//教改结题信息的动态字段类
@@ -149,6 +155,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			educationalReformField.setId(fieldId);
 			educationalReformField.setName(fieldName);
 			educationalReformField.setDescription(fieldDes);
+			educationalReformField.setOrder(newOrder);
 			educationalReformField.setIsDelete(0);
 			return educationalReformField;
 		} else if(classNum == 9) {		//其他教学奖励信息的动态字段类
@@ -156,6 +163,7 @@ public class ModifyDynamicDataFieldAction extends ActionSupport {
 			otherTeachingAwardsField.setId(fieldId);
 			otherTeachingAwardsField.setName(fieldName);
 			otherTeachingAwardsField.setDescription(fieldDes);
+			otherTeachingAwardsField.setOrder(newOrder);
 			otherTeachingAwardsField.setIsDelete(0);
 			return otherTeachingAwardsField;
 		}
