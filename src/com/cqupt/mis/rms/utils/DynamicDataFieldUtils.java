@@ -61,16 +61,16 @@ public class DynamicDataFieldUtils {
 		case 5:		//学生获奖信息的字段类
 			infoName = "学生获奖信息";
 			break;
-		case 6:		//学生获奖信息的字段类
+		case 6:		//质量工程获奖信息的字段类
 			infoName = "质量工程获奖信息";
 			break;
-		case 7:		//学生获奖信息的字段类
+		case 7:		//学评教信息的字段类
 			infoName = "学评教信息";
 			break;
-		case 8:		//学生获奖信息的字段类
+		case 8:		//教改项目结题信息的字段类
 			infoName = "教改项目结题信息";
 			break;
-		case 9:		//学生获奖信息的字段类
+		case 9:		//其他教学奖励信息的字段类
 			infoName = "其他教学奖励信息";
 			break;
 		default:
@@ -78,4 +78,5 @@ public class DynamicDataFieldUtils {
 		}
 		return infoName;
 	}
+	
 }

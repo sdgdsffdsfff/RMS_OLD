@@ -37,7 +37,7 @@
     		<th>操作</th>
     		<th>信息名字</th>
     	<s:iterator value="#allFields" id="d">
-     			<th><s:property value="#d.description"/></th>
+     			<th><s:property value="#d.field.description"/></th>
      	</s:iterator>	
      	</tr>
      	<s:iterator value="#records" id="r">

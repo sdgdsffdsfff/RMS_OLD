@@ -41,8 +41,14 @@ public class DynamicDataRecordDaoImpl extends BaseHibernateDaoSupport implements
 	}
 
 	@Override
-	public List<Object> findAllRecords(String className) {
-		// TODO Auto-generated method stub
+	public <T> List<T> findAllRecords(String className) {
+		// TODO 暂不可用，有问题
+		try {
+			String hql = "select distinct record from "+className+" record join record.fields data where data.field.isDelete=0";
+			return getSession().createQuery(hql).list();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

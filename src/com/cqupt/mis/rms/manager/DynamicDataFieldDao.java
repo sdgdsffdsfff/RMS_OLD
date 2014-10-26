@@ -25,11 +25,11 @@ public interface DynamicDataFieldDao {
 	public boolean updateField(Object obj);
 		
 	/**
-	 * 查找所有字段
+	 * 查找所有字段(未删除，已按order排序)
 	 * @param className
 	 * @return List<Object>
 	 */
-	public List<Object> findAllFields(String className);
+	public <T> List<T> findAllFields(String className);
 	
 	/**
 	 * 根据类名和字段id查找单个字段

@@ -1,4 +1,4 @@
-package com.cqupt.mis.rms.model;
+   package com.cqupt.mis.rms.model;
 
 import java.util.Date;
 import java.util.HashSet;

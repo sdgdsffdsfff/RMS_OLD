@@ -698,7 +698,7 @@
 	
 	<!-- 配置处理录入动态字段类信息前的动态字段加载 -->
 	<bean id="InputDynamicDataRecordAction" class="com.cqupt.mis.rms.action.teacher.InputDynamicDataRecordAction">
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置查找动态字段管理的Action -->
@@ -753,7 +753,8 @@
 	<!-- 配置处理查看教学类信息的Action -->
 	<bean id="viewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction">
 		<property name="researchInfoService" ref="researchInfoService"></property>
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
+
 	</bean>
 	
 	<!-- 配置获取未审批教学类信息的Action -->

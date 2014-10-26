@@ -2,9 +2,7 @@ package com.cqupt.mis.rms.action.system.user;
 
 import java.util.List;
 
-import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.manager.SearchDao;
-import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,7 +25,7 @@ public class FindDynamicDataFieldAction extends ActionSupport {
 		if(className == null) {
 			return "error";
 		}
-		List<Object> fields = searchDao.SearchObjectsByFactor(className, "isDelete", 0);		
+		List<Object> fields = searchDao.SearchObjectsByFactor(className, "isDelete", 0);
 		ActionContext.getContext().put("allFields", fields);
 		ActionContext.getContext().put("classNum", classNum);
 		return SUCCESS;

@@ -48,9 +48,15 @@ public class DynamicDataFieldDaoImpl extends BaseHibernateDaoSupport implements 
 	}
 
 	@Override
-	public List<Object> findAllFields(String className) {
-		//TODO
-		return null;
+	public <T> List<T> findAllFields(String className) {
+		List<T> list = null;
+		try {
+			String hql = "from "+className+" field where field.isDelete=0 order by field.order";
+			list = getSession().createQuery(hql).list();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override

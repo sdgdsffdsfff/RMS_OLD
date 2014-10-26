@@ -25,12 +25,12 @@
 	<script src="js/check.js" type="text/javascript"></script>
 	<link href="css/input.css" rel="stylesheet" type="text/css" />
 	<link href="css/upload.css" rel="stylesheet" type="text/css" />
-	<script src="js/teacher/inputInfo.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/admin/checkDynamicFieldForm.js"></script>
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
 	<script src="js/search/managedynamicdatafield.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px;">
-	<form id="form" name="form" action="findDynamicDataField.action" method="post">
+	<form id="form" name="form" action="findDynamicDataField.action" onsubmit="return checkClick();" method="post">
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
@@ -41,8 +41,9 @@
 			<div class="line">
 				<div class="element">
 					<label for="rewardTime">信息类别：</label>
-					<select style="width:150px" name="classNum">
-						<option selected="selected" value="1">专业建设/教改项目</option>
+					<select style="width:150px" name="classNum" id="select">
+						<option value="0">请选择信息类别</option>	
+						<option value="1">专业建设/教改项目</option>
 						<option value="2">优秀培训师信息</option>
 						<option value="3">教学成果信息</option>
 						<option value="4">教材立项信息</option>
