@@ -51,9 +51,57 @@ public class InputDynamicDataRecordAction extends ActionSupport {
 		ActionContext.getContext().put("allFields", fields);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 录入优秀培训师信息前的加载
+	 */
+	public String inputExcellentTrainerRecord() {
+		List<Object> fields = dynamicDataFieldDao.findAllFields("ExcellentTrainerField");		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 录入质量工程信息前的加载
+	 */
+	public String inputQualityProjectRecord() {
+		List<Object> fields = dynamicDataFieldDao.findAllFields("QualityProjectField");		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 录入学评教信息前的加载
+	 */
+	public String inputLearningEvaluationRecord() {
+		List<Object> fields = dynamicDataFieldDao.findAllFields("LearningEvaluationField");		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 录入教改项目信息前的加载
+	 */
+	public String inputEducationalReformRecord() {
+		List<Object> fields = dynamicDataFieldDao.findAllFields("EducationalReformField");		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 录入其他教学奖励信息前的加载
+	 */
+	public String inputOtherTeachingAwardsRecord() {
+		List<Object> fields = dynamicDataFieldDao.findAllFields("OtherTeachingAwardsField");		
+		ActionContext.getContext().put("allFields", fields);
+		return SUCCESS;
+	}
+	
+
 
 	public DynamicDataFieldDao getDynamicDataFieldDao() {
 		return dynamicDataFieldDao;
+
 	}
 
 	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {

@@ -977,6 +977,81 @@
 			<result name="error">/error.jsp</result>
 		</action>
 	<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 end***************** -->
+	
+	
+	<!-- ***************2014.10.26 # liu添加 # 动态数据库字段 start***************** -->
+	
+		<!-- liu add 配置输入优秀培训师信息之前动态字段的加载的Action -->
+		<action name="inputExcellentTrainerRecord" class="InputDynamicDataRecordAction" method="inputExcellentTrainerRecord">
+			<result name="success">/pages/teacher/inputexcellenttrainerrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<!-- liu add 配置输入质量工程信息信息之前动态字段的加载的Action -->
+		<action name="inputQualityProjectRecord" class="InputDynamicDataRecordAction" method="inputQualityProjectRecord">
+			<result name="success">/pages/teacher/inputqualityprojectrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<!-- liu add 配置输入学评教信息之前动态字段的加载的Action -->
+		<action name="inputLearningEvaluationRecord" class="InputDynamicDataRecordAction" method="inputLearningEvaluationRecord">
+			<result name="success">/pages/teacher/inputlearningevaluationrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<!-- liu add 配置输入教改项目信息之前动态字段的加载的Action -->
+		<action name="inputEducationalReformRecord" class="InputDynamicDataRecordAction" method="inputEducationalReformRecord">
+			<result name="success">/pages/teacher/inputeducationalreformrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<!-- liu add 配置输入其他教学奖励信息之前动态字段的加载的Action -->
+		<action name="inputOtherTeachingAwardsRecord" class="InputDynamicDataRecordAction" method="inputOtherTeachingAwardsRecord">
+			<result name="success">/pages/teacher/inputotherteachingrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		
+		<!-- liu add 处理提交优秀培训师信息的Action -->
+		<action name="submitExcellentTrainerRecord" class="submitExcellentTrainerRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- liu add 处理提交质量工程信息信息的Action -->
+		<action name="submitQualityProjectRecord" class="submitQualityProjectRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- liu add 处理提交学评教信息的Action -->
+		<action name="submitLearningEvaluationRecord" class="submitLearningEvaluationRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- liu add 处理提交教改项目信息的Action -->
+		<action name="submitEducationalReformRecord" class="submitEducationalReformRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- liu add 处理提交其他教学奖励信息的Action -->
+		<action name="submitOtherTeachingAwardsRecord" class="submitOtherTeachingAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	<!-- ***************2014.10.26 # liu添加 # 动态数据库字段 end***************** -->		
 	</package>
 	
 	<package name="modify" extends="struts-default">

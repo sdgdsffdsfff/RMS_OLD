@@ -750,6 +750,41 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- ***************2014.10.26 # liu添加 # 动态数据库字段 start***************** -->
+	
+	<!-- liu add 配置处理提交优秀培训师信息的Action -->
+	<bean id="submitExcellentTrainerRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitExcellentTrainerRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- liu add 配置处理提交质量工程信息的Action -->
+	<bean id="submitQualityProjectRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitQualityProjectRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- liu add 配置处理提交学评教信息的Action -->
+	<bean id="submitLearningEvaluationRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitLearningEvaluationRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	<!-- liu add 配置处理提交教改项目信息的Action -->
+	<bean id="submitEducationalReformRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitEducationalReformRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	<!-- liu add 配置处理提交其他教学奖励信息的Action -->
+	<bean id="submitOtherTeachingAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.SubmitOtherTeachingAwardsRecordAction" scope="prototype">
+		<property name="submitInfoAndProofsService" ref="submitInfoAndProofsService"></property>
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao"></property>
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	<!-- ***************2014.10.26 # liu添加 # 动态数据库字段 end***************** -->	
 	<!-- 配置处理查看教学类信息的Action -->
 	<bean id="viewTeachingInfoAction" class="com.cqupt.mis.rms.action.college.ViewTeachingInfoAction">
 		<property name="researchInfoService" ref="researchInfoService"></property>
@@ -966,14 +1001,13 @@
 		<property name="modifyUserInfoService" ref="modifyUserInfoService" />
 	</bean>
 	
-	<!--<bean id="backUpAction" class="com.cqupt.mis.rms.action.BackUpAction" >
+	<!--
+	<bean id="backUpAction" class="com.cqupt.mis.rms.action.BackUpAction" >
 		<property name="downloadExcelService" ref="downloadExcelService">
 		</property>
 	</bean>
 	
-	
-	
-	--><!-- 添加 -->
+	-->
 	
 	
 	

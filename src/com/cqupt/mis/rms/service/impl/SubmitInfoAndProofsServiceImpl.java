@@ -4,7 +4,6 @@
 */
 package com.cqupt.mis.rms.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.cqupt.mis.rms.manager.SubmitInfoAndProofsDao;
@@ -12,16 +11,21 @@ import com.cqupt.mis.rms.manager.SubmitInfoMemberDao;
 import com.cqupt.mis.rms.model.CQUPTUser;
 import com.cqupt.mis.rms.model.CourseContributeMember;
 import com.cqupt.mis.rms.model.CourseContributeMemberNew;
+import com.cqupt.mis.rms.model.EducationalRecordAward;
+import com.cqupt.mis.rms.model.ExcellentRecordAward;
 import com.cqupt.mis.rms.model.HumanitiesAcademicMeetingPerson;
 import com.cqupt.mis.rms.model.HumanitiesBookAuthor;
 import com.cqupt.mis.rms.model.HumanitiesExchangePaperAuthor;
 import com.cqupt.mis.rms.model.HumanitiesPaperAuthor;
 import com.cqupt.mis.rms.model.HumanitiesProjectMember;
 import com.cqupt.mis.rms.model.HumanitiesResearchRewardPerson;
+import com.cqupt.mis.rms.model.LearningRecordAward;
 import com.cqupt.mis.rms.model.MajorContributeMember;
 import com.cqupt.mis.rms.model.MajorContributeMemberNew;
 import com.cqupt.mis.rms.model.MajorRecordMember;
+import com.cqupt.mis.rms.model.OtherTeachingRecordAward;
 import com.cqupt.mis.rms.model.Proofs;
+import com.cqupt.mis.rms.model.QualityRecordAward;
 import com.cqupt.mis.rms.model.ScienceBookAuthor;
 import com.cqupt.mis.rms.model.ScienceGovAwardPerson;
 import com.cqupt.mis.rms.model.ScienceInventors;
@@ -220,6 +224,31 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 				List<TeachingRecordEditor> teachingRecordEditors = (List<TeachingRecordEditor>)memberListObject;
 				this.submitTeachingRecordEditors(teachingRecordEditors);
 				break;
+			case 30:
+				//优秀培训师信息
+				List<ExcellentRecordAward> excellentRecordAwards = (List<ExcellentRecordAward>)memberListObject;
+				this.submitExcellentRecordAward(excellentRecordAwards);
+				break;
+			case 31:
+				//质量工程负责人信息
+				List<QualityRecordAward> qualityRecordAward = (List<QualityRecordAward>)memberListObject;
+				this.submitQualityRecordAward(qualityRecordAward);
+				break;
+			case 32:
+				//学评教教师信息
+				List<LearningRecordAward> learningRecordAwards = (List<LearningRecordAward>)memberListObject;
+				this.submitLearningRecordAward(learningRecordAwards);
+				break;
+			case 33:
+				//教改项目负责人信息
+				List<EducationalRecordAward> educationalRecordAwards = (List<EducationalRecordAward>)memberListObject;
+				this.submitEducationalRecordAward(educationalRecordAwards);
+				break;
+			case 34:
+				//其他教学奖励教师信息
+				List<OtherTeachingRecordAward> otherTeachingRecordAwards = (List<OtherTeachingRecordAward>)memberListObject;
+				this.submitOtherTeachingRecordAward(otherTeachingRecordAwards);
+				break;
 			}
 			return true;
 		} catch (Exception e) {
@@ -227,7 +256,7 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 			return false;
 		}
 	}
-	
+
 	public void submitSciencePaperAuthors(
 			List<SciencePaperAuthor> sciencePaperAuthors) {
 		if(!sciencePaperAuthors.isEmpty()){
@@ -702,6 +731,8 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 		}
 	}
 	
+	
+	
 	public void submitTeachingRecordEditors(List<TeachingRecordEditor> teachingRecordEditors) {
 		if(!teachingRecordEditors.isEmpty()){
 			for (int i = 0; i < teachingRecordEditors.size(); i++) {
@@ -718,5 +749,88 @@ public class SubmitInfoAndProofsServiceImpl implements SubmitInfoAndProofsServic
 		}
 	}
 	
+	public void submitExcellentRecordAward(List<ExcellentRecordAward> excellentRecordAwards) {
+		if(!excellentRecordAwards.isEmpty()){
+			for (int i = 0; i < excellentRecordAwards.size(); i++) {
+				ExcellentRecordAward excellentRecordAward = excellentRecordAwards.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(excellentRecordAward.getMemberName());
+				if(cquptUser != null){
+					excellentRecordAward.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					excellentRecordAward.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(excellentRecordAward);
+			}
+		}
+	}
 	
+	private void submitLearningRecordAward(
+			List<LearningRecordAward> learningRecordAwards) {
+		if(!learningRecordAwards.isEmpty()){
+			for (int i = 0; i < learningRecordAwards.size(); i++) {
+				LearningRecordAward learningRecordAward = learningRecordAwards.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(learningRecordAward.getMemberName());
+				if(cquptUser != null){
+					learningRecordAward.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					learningRecordAward.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(learningRecordAward);
+			}
+		}
+		
+	}
+	private void submitEducationalRecordAward(
+			List<EducationalRecordAward> educationalRecordAwards) {
+		if(!educationalRecordAwards.isEmpty()){
+			for (int i = 0; i < educationalRecordAwards.size(); i++) {
+				EducationalRecordAward otherTeachingRecordAward = educationalRecordAwards.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(otherTeachingRecordAward.getMemberName());
+				if(cquptUser != null){
+					otherTeachingRecordAward.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					otherTeachingRecordAward.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(otherTeachingRecordAward);
+			}
+		}
+		
+	}
+
+	private void submitQualityRecordAward(
+			List<QualityRecordAward> qualityRecordAwards) {
+		if(!qualityRecordAwards.isEmpty()){
+			for (int i = 0; i < qualityRecordAwards.size(); i++) {
+				QualityRecordAward qualityRecordAward = qualityRecordAwards.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(qualityRecordAward.getMemberName());
+				if(cquptUser != null){
+					qualityRecordAward.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					qualityRecordAward.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(qualityRecordAward);
+			}
+		}
+		
+	}
+	
+	public void submitOtherTeachingRecordAward(List<OtherTeachingRecordAward> otherTeachingRecordAwards) {
+		if(!otherTeachingRecordAwards.isEmpty()){
+			for (int i = 0; i < otherTeachingRecordAwards.size(); i++) {
+				OtherTeachingRecordAward otherTeachingRecordAward = otherTeachingRecordAwards.get(i);
+				CQUPTUser cquptUser = submitInfoMemberDao.findCQUPTUserByUserName(otherTeachingRecordAward.getMemberName());
+				if(cquptUser != null){
+					otherTeachingRecordAward.setMemberId(cquptUser.getUserId());
+				}else{
+					//此处为自动为用户生成的ID
+					otherTeachingRecordAward.setMemberId(GenerateUtils.generateUserID());
+				}
+				submitInfoMemberDao.addInfoMember(otherTeachingRecordAward);
+			}
+		}
+	}
 }

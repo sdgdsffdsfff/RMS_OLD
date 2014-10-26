@@ -165,22 +165,27 @@
 		<mapping resource="com/cqupt/mis/rms/model/QualityProjectRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/QualityProjectField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/QualityProjectData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/QualityRecordAward.hbm.xml"/>
 		
 		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/LearningEvaluationData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/LearningRecordAward.hbm.xml"/>
 		
 		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/ExcellentTrainerData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/ExcellentRecordAward.hbm.xml"/>
 		
 		<mapping resource="com/cqupt/mis/rms/model/EducationalReformRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/EducationalReformField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/EducationalReformData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/EducationalRecordAward.hbm.xml"/>
 		
 		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsRecord.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsField.hbm.xml"/>
 		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingAwardsData.hbm.xml"/>
+		<mapping resource="com/cqupt/mis/rms/model/OtherTeachingRecordAward.hbm.xml"/>
 		<!-- 2014-9-20 Bern add end -->
 		
 		
