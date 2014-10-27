@@ -360,19 +360,52 @@
 			method="majorContributeRecord">
 			<result name="success">/pages/college/simpleInfo/majorContributeRecord.jsp</result>
 		</action>
-		
-<!-- ******************************liu 2014.10.07添加*********************************** -->	
-	<action name="teacherAwardsRecord" class="managerCollegeAchInfoRecordAction"
-			method="teacherAwardsRecord">
-			<result name="success">/pages/college/simpleInfo/teacherawardsrecord.jsp</result>
-		</action>
-<!-- *********************************liu 添加   end********************************** -->		
+
 
 		<!-- 管理员审批教材立项信息之前的查看 -->
 		<action name="teachingMaterialRecord" class="managerCollegeAchInfoRecordAction"
 			method="teachingMaterialRecord">
 			<result name="success">/pages/college/simpleInfo/teachingMaterialRecord.jsp</result>
 		</action>
+				
+		
+<!-- liu add   以下添加均为管理员审批之前对各种信息的查看  -->
+	<action name="teacherAwardsRecord" class="managerCollegeAchInfoRecordAction"
+			method="teacherAwardsRecord">
+			<result name="success">/pages/college/simpleInfo/teacherawardsrecord.jsp</result>
+	</action>
+
+<!-- ******************************liu 2014.10.27添加*********************************** -->
+		<action name="excellentTrainerRecord" class="managerCollegeAchInfoRecordAction"
+			method="excellentTrainerRecord">
+			<result name="success">/pages/college/simpleInfo/excellentTrainerRecord.jsp
+			</result>
+		</action>
+		
+		<action name="qualityProjectRecord" class="managerCollegeAchInfoRecordAction"
+			method="qualityProjectRecord">
+			<result name="success">/pages/college/simpleInfo/qualityProjectRecord.jsp
+			</result>
+		</action>
+		
+		<action name="learningEvaluationRecord" class="managerCollegeAchInfoRecordAction"
+			method="learningEvaluationRecord">
+			<result name="success">/pages/college/simpleInfo/learningEvaluationRecord.jsp
+			</result>
+		</action>
+		
+		<action name="educationalReformRecord" class="managerCollegeAchInfoRecordAction"
+			method="educationalReformRecord">
+			<result name="success">/pages/college/simpleInfo/educationalReformRecord.jsp
+			</result>
+		</action>
+		
+		<action name="otherTeachingAwardsRecord" class="managerCollegeAchInfoRecordAction"
+			method="otherTeachingAwardsRecord">
+			<result name="success">/pages/college/simpleInfo/otherTeachingAwardsRecord.jsp
+			</result>
+		</action>
+<!-- *********************************liu 添加   end********************************** -->		
 		
 	</package>
 	
@@ -515,15 +548,43 @@
 		
 		<!-- *********************************Bern 添加	end************************************ -->	
 		
-		<!-- ********************************2014.10.07	liu	添加************************************* -->		
-		
-		
+		<!-- liu add  以下添加均为管理员审批各种信息查看详细 -->
 		<action name="teacherAwardsRecord" class="managerCollegeAchRecordStatusAction"
 			method="teacherAwardsRecord">
 			<result name="success">/pages/college/retailInfo/teacherawardsrecord.jsp
 			</result>
 		</action>
 		
+		<!-- ********************************2014.10.27	liu	添加************************************* -->		
+		<action name="excellentTrainerRecord" class="managerCollegeAchRecordStatusAction"
+			method="excellentTrainerRecord">
+			<result name="success">/pages/college/retailInfo/excellentTrainerRecord.jsp
+			</result>
+		</action>
+		
+		<action name="qualityProjectRecord" class="managerCollegeAchRecordStatusAction"
+			method="qualityProjectRecord">
+			<result name="success">/pages/college/retailInfo/qualityProjectRecord.jsp
+			</result>
+		</action>
+		
+		<action name="learningEvaluationRecord" class="managerCollegeAchRecordStatusAction"
+			method="learningEvaluationRecord">
+			<result name="success">/pages/college/retailInfo/learningEvaluationRecord.jsp
+			</result>
+		</action>
+		
+		<action name="educationalReformRecord" class="managerCollegeAchRecordStatusAction"
+			method="educationalReformRecord">
+			<result name="success">/pages/college/retailInfo/educationalReformRecord.jsp
+			</result>
+		</action>
+		
+		<action name="otherTeachingAwardsRecord" class="managerCollegeAchRecordStatusAction"
+			method="otherTeachingAwardsRecord">
+			<result name="success">/pages/college/retailInfo/otherTeachingAwardsRecord.jsp
+			</result>
+		</action>
 		
 		<!-- *********************************liu 添加	end************************************ -->	
 	</package>
