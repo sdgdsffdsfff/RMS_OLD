@@ -160,12 +160,12 @@ public class SubmitExcellentTrainerRecordAction extends ActionSupport implements
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
 					confirm.setMessage("优秀培训师信息添加成功");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewExcellentTrainerRecords.action");
 					confirm.setRetName("优秀培训师信息页面");
 				}else{
 					confirm.setIsSuccess("error");
 					confirm.setMessage("优秀培训师信息添加失败");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewExcellentTrainerRecords.action");
 					confirm.setRetName("优秀培训师信息页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);

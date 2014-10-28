@@ -942,6 +942,39 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 处理查询优秀培训师信息的Action -->
+		<action name="viewExcellentTrainerRecords" class="viewTeachingInfoAction" method="viewExcellentTrainerRecords">
+			<result name="success">/pages/teacher/manage/viewexcellenttrainerrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查询质量工程信息的Action -->
+		<action name="viewQualityProjectRecords" class="viewTeachingInfoAction" method="viewQualityProjectRecords">
+			<result name="success">/pages/teacher/manage/viewqualityprojectrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查询学评教信息的Action -->
+		<action name="viewLearningEvaluationRecords" class="viewTeachingInfoAction" method="viewLearningEvaluationRecords">
+			<result name="success">/pages/teacher/manage/viewlearningevaluationrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查询教改项目结题信息的Action -->
+		<action name="viewEducationalReformRecords" class="viewTeachingInfoAction" method="viewEducationalReformRecords">
+			<result name="success">/pages/teacher/manage/vieweducationalreformrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查询其他教学获奖信息的Action -->
+		<action name="viewOtherTeachingAwardsRecords" class="viewTeachingInfoAction" method="viewOtherTeachingAwardsRecords">
+			<result name="success">/pages/teacher/manage/viewotherteachingawardsrecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		
+		
 		<!-- 处理查找学生获奖详细信息的Action -->
 		<action name="viewStudentAwardsRecordDetail" class="viewResearchDetailRecordInfoAction" 
 		method="viewStudentAwardsRecordDetail">
@@ -966,6 +999,47 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<!-- 处理查找优秀培训师详细信息的Action -->
+		<action name="viewExcellentTrainerRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewExcellentTrainerRecordDetail">
+			<result name="success">/pages/teacher/manage/viewexcellenttrainerrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyexcellenttrainerrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找质量工程详细信息的Action -->
+		<action name="viewQualityProjectRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewQualityProjectRecordDetail">
+			<result name="success">/pages/teacher/manage/viewqualityprojectrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyqualityprojectrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找学评教详细信息的Action -->
+		<action name="viewLearningEvaluationRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewLearningEvaluationRecordDetail">
+			<result name="success">/pages/teacher/manage/viewlearningevaluationrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifylearningevaluationrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找教改结题详细信息的Action -->
+		<action name="viewEducationalReformRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewEducationalReformRecordDetail">
+			<result name="success">/pages/teacher/manage/vieweducationalreformrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyeducationalreformrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理查找其他教学获奖详细信息的Action -->
+		<action name="viewOtherTeachingAwardsRecordDetail" class="viewResearchDetailRecordInfoAction" 
+		method="viewOtherTeachingAwardsRecordDetail">
+			<result name="success">/pages/teacher/manage/viewotherteachingawardsrecorddetail.jsp</result>
+			<result name="modify">/pages/teacher/manage/modifyotherteachingawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
 		
 		<!-- 处理教师修改学生获奖信息的Action -->
 		<action name="modifyStudentAwardsRecord" class="modifyStudentAwardsRecordAction">
@@ -984,19 +1058,16 @@
 			</result>
 			<result name="error">/error.jsp</result>
 		</action>
-
-		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
-
-
-
-		<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 start***************** -->
-			
-		<!-- liu add 配置输入教学成果奖信息之前动态字段的加载的Action -->
-		<action name="inputTeacherAwardsRecord" class="InputDynamicDataRecordAction" method="inputTeacherAwardsRecord">
-			<result name="success">/pages/teacher/inputteacherawardsrecord.jsp</result>
+		
+		<!--liu add 处理教师修改学生获奖信息的Action -->
+		<action name="modifyTeacherAwardsRecord" class="modifyTeacherAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
 			<result name="error">/error.jsp</result>
-		</action>	
-
+		</action>
+		
 		<!-- 处理教师修改专业建设信息的Action -->
 		<action name="modifyMajorContributeRecord" class="modifyMajorContributeRecordAction">
 			<result name="success" type="chain">
@@ -1006,14 +1077,56 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
-		<!-- liu add 处理提交教学成果奖信息的Action -->
-		<action name="submitTeacherAwardsRecord" class="submitTeachersAwardsRecordAction">
+		<!-- 处理教师修改优秀培训师信息的Action -->
+		<action name="modifyExcellentTrainerRecord" class="modifyExcellentTrainerRecordAction">
 			<result name="success" type="chain">
 				<param name="actionName">confirm</param>
 				<param name="namespace">/</param>
 			</result>
 			<result name="error">/error.jsp</result>
 		</action>
+		
+		<!-- 处理教师修改质量工程信息的Action -->
+		<action name="modifyQualityProjectRecord" class="modifyQualityProjectRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理教师修改学评教信息的Action -->
+		<action name="modifyLearningEvaluationRecord" class="modifyLearningEvaluationRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理教师修改教改结题信息的Action -->
+		<action name="modifyEducationalReformRecord" class="modifyEducationalReformRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理教师修改其他教学奖励信息的Action -->
+		<action name="modifyOtherTeachingAwardsRecord" class="modifyOtherTeachingAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
+
+
+
+		<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 start***************** -->
 		
 		<!--liu add 处理查询教学成果奖信息的Action -->
 		<action name="viewTeacherAwardsRecords" class="viewTeachingInfoAction" method="viewTeacherAwardsRecords">
@@ -1029,44 +1142,55 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
-		<!--liu add 处理教师修改学生获奖信息的Action -->
-		<action name="modifyTeacherAwardsRecord" class="modifyTeacherAwardsRecordAction">
-			<result name="success" type="chain">
-				<param name="actionName">confirm</param>
-				<param name="namespace">/</param>
-			</result>
-			<result name="error">/error.jsp</result>
-		</action>
+		
 	<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 end***************** -->
 	
 	
 	<!-- ***************2014.10.26 # liu添加 # 动态数据库字段 start***************** -->
+		<!-- liu add 配置输入教学成果奖信息之前动态字段的加载的Action -->
+		<action name="inputTeacherAwardsRecord" class="InputDynamicDataRecordAction" method="inputTeacherAwardsRecord">
+			<result name="success">/pages/teacher/inputteacherawardsrecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
 	
 		<!-- liu add 配置输入优秀培训师信息之前动态字段的加载的Action -->
 		<action name="inputExcellentTrainerRecord" class="InputDynamicDataRecordAction" method="inputExcellentTrainerRecord">
 			<result name="success">/pages/teacher/inputexcellenttrainerrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>	
+		
 		<!-- liu add 配置输入质量工程信息信息之前动态字段的加载的Action -->
 		<action name="inputQualityProjectRecord" class="InputDynamicDataRecordAction" method="inputQualityProjectRecord">
 			<result name="success">/pages/teacher/inputqualityprojectrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>	
+		
 		<!-- liu add 配置输入学评教信息之前动态字段的加载的Action -->
 		<action name="inputLearningEvaluationRecord" class="InputDynamicDataRecordAction" method="inputLearningEvaluationRecord">
 			<result name="success">/pages/teacher/inputlearningevaluationrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>	
+		
 		<!-- liu add 配置输入教改项目信息之前动态字段的加载的Action -->
 		<action name="inputEducationalReformRecord" class="InputDynamicDataRecordAction" method="inputEducationalReformRecord">
 			<result name="success">/pages/teacher/inputeducationalreformrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>	
+		
 		<!-- liu add 配置输入其他教学奖励信息之前动态字段的加载的Action -->
 		<action name="inputOtherTeachingAwardsRecord" class="InputDynamicDataRecordAction" method="inputOtherTeachingAwardsRecord">
 			<result name="success">/pages/teacher/inputotherteachingrecord.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>	
+		
+		<!-- liu add 处理提交教学成果奖信息的Action -->
+		<action name="submitTeacherAwardsRecord" class="submitTeachersAwardsRecordAction">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
 		
 		<!-- liu add 处理提交优秀培训师信息的Action -->
 		<action name="submitExcellentTrainerRecord" class="submitExcellentTrainerRecordAction">

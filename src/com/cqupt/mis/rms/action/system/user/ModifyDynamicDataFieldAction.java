@@ -1,7 +1,5 @@
 package com.cqupt.mis.rms.action.system.user;
 
-import sun.awt.image.PixelConverter.Bgrx;
-
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.model.EducationalReformField;
 import com.cqupt.mis.rms.model.ExcellentTrainerField;
@@ -14,7 +12,6 @@ import com.cqupt.mis.rms.model.TeachersAwardsField;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 

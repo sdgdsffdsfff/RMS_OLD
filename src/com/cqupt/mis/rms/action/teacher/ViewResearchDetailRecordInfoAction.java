@@ -4,8 +4,13 @@ import java.util.List;
 
 import com.cqupt.mis.rms.manager.DynamicDataRecordDao;
 import com.cqupt.mis.rms.manager.ResearchInfoDao;
+import com.cqupt.mis.rms.model.EducationalRecordAward;
+import com.cqupt.mis.rms.model.ExcellentRecordAward;
+import com.cqupt.mis.rms.model.LearningRecordAward;
 import com.cqupt.mis.rms.model.MajorRecordMember;
+import com.cqupt.mis.rms.model.OtherTeachingRecordAward;
 import com.cqupt.mis.rms.model.Proofs;
+import com.cqupt.mis.rms.model.QualityRecordAward;
 import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.model.TeachingRecordEditor;
@@ -106,6 +111,116 @@ public class ViewResearchDetailRecordInfoAction extends ActionSupport {
 		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
 		List<TeachingRecordEditor> memberList = (List<TeachingRecordEditor>)researchInfoDao.
 				findMemberByIdAndModelNameAndFactor(recordId, "TeachingRecordEditor", "teachingMaterialRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的优秀培训师信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewExcellentTrainerRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("ExcellentTrainerRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<ExcellentRecordAward> memberList = (List<ExcellentRecordAward>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "ExcellentRecordAward", "excellentTrainerRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)) {
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的质量工程信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewQualityProjectRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("QualityProjectRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<QualityRecordAward> memberList = (List<QualityRecordAward>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "QualityRecordAward", "qualityProjectRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)) {
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的学评教信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewLearningEvaluationRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("LearningEvaluationRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<LearningRecordAward> memberList = (List<LearningRecordAward>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "LearningRecordAward", "learningEvaluationRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的教改结题信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewEducationalReformRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("EducationalReformRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<EducationalRecordAward> memberList = (List<EducationalRecordAward>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "EducationalRecordAward", "educationalReformRecord.id");
+		if(record == null) {
+			return "error";
+		}
+		ActionContext.getContext().put(RECORD, record);
+		ActionContext.getContext().put("proofs", proofs);
+		ActionContext.getContext().put("memberList", memberList);
+		if("modify".equals(flag)){
+			return "modify";
+		}else{
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * 查找单个详细的其他教学奖励信息 
+	 */
+	@SuppressWarnings("unchecked")
+	public String viewOtherTeachingAwardsRecordDetail() {
+		Object record = dynamicDataRecordDao.findRecordByClassNameAndId("OtherTeachingAwardsRecord", recordId);
+		List<Proofs> proofs = researchInfoDao.findProofByApprovedId(recordId);
+		List<OtherTeachingRecordAward> memberList = (List<OtherTeachingRecordAward>)researchInfoDao.
+				findMemberByIdAndModelNameAndFactor(recordId, "OtherTeachingRecordAward", "otherTeachingAwardsRecord.id");
 		if(record == null) {
 			return "error";
 		}

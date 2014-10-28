@@ -160,12 +160,12 @@ public class SubmitOtherTeachingAwardsRecordAction extends ActionSupport impleme
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
 					confirm.setMessage("其他教学奖励信息添加成功");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewOtherTeachingAwardsRecords.action");
 					confirm.setRetName("其他教学奖励信息页面");
 				}else{
 					confirm.setIsSuccess("error");
 					confirm.setMessage("其他教学奖励信息添加失败");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewOtherTeachingAwardsRecords.action");
 					confirm.setRetName("其他教学奖励信息页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);

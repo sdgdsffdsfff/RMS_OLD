@@ -159,12 +159,12 @@ public class SubmitEducationalReformRecordAction extends ActionSupport implement
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
 					confirm.setMessage("教改项目信息添加成功");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewEducationalReformRecords.action");
 					confirm.setRetName("教改项目信息页面");
 				}else{
 					confirm.setIsSuccess("error");
 					confirm.setMessage("教改项目信息添加失败");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewEducationalReformRecords.action");
 					confirm.setRetName("教改项目信息页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);

@@ -159,12 +159,12 @@ public class SubmitQualityProjectRecordAction extends ActionSupport implements S
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
 					confirm.setMessage("质量工程信息添加成功");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewQualityProjectRecords.action");
 					confirm.setRetName("质量工程信息页面");
 				}else{
 					confirm.setIsSuccess("error");
 					confirm.setMessage("质量工程信息添加失败");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewQualityProjectRecords.action");
 					confirm.setRetName("质量工程信息页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);

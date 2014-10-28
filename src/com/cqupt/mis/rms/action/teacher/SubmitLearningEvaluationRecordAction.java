@@ -160,12 +160,12 @@ public class SubmitLearningEvaluationRecordAction extends ActionSupport implemen
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
 					confirm.setMessage("学评教信息添加成功");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewLearningEvaluationRecords.action");
 					confirm.setRetName("学评教信息页面");
 				}else{
 					confirm.setIsSuccess("error");
 					confirm.setMessage("学评教信息添加失败");
-					confirm.setUrl("viewTeacherAwardsRecords.action");
+					confirm.setUrl("viewLearningEvaluationRecords.action");
 					confirm.setRetName("学评教信息页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);

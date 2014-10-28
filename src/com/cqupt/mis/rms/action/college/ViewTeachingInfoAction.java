@@ -8,9 +8,24 @@ import java.util.Set;
 import net.sf.json.JSONArray;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
+import com.cqupt.mis.rms.model.EducationalReformData;
+import com.cqupt.mis.rms.model.EducationalReformField;
+import com.cqupt.mis.rms.model.EducationalReformRecord;
+import com.cqupt.mis.rms.model.ExcellentTrainerData;
+import com.cqupt.mis.rms.model.ExcellentTrainerField;
+import com.cqupt.mis.rms.model.ExcellentTrainerRecord;
+import com.cqupt.mis.rms.model.LearningEvaluationData;
+import com.cqupt.mis.rms.model.LearningEvaluationField;
+import com.cqupt.mis.rms.model.LearningEvaluationRecord;
 import com.cqupt.mis.rms.model.MajorContributeData;
 import com.cqupt.mis.rms.model.MajorContributeField;
 import com.cqupt.mis.rms.model.MajorContributeRecord;
+import com.cqupt.mis.rms.model.OtherTeachingAwardsData;
+import com.cqupt.mis.rms.model.OtherTeachingAwardsField;
+import com.cqupt.mis.rms.model.OtherTeachingAwardsRecord;
+import com.cqupt.mis.rms.model.QualityProjectData;
+import com.cqupt.mis.rms.model.QualityProjectField;
+import com.cqupt.mis.rms.model.QualityProjectRecord;
 import com.cqupt.mis.rms.model.StudentAwardsData;
 import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.StudentAwardsRecord;
@@ -21,7 +36,12 @@ import com.cqupt.mis.rms.model.TeachingMaterialData;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.model.TeachingMaterialRecord;
 import com.cqupt.mis.rms.service.ResearchInfoService;
+import com.cqupt.mis.rms.utils.EducationalReformDataComparator;
+import com.cqupt.mis.rms.utils.ExcellentTrainerDataComparator;
+import com.cqupt.mis.rms.utils.LearningEvaluationDataComparator;
 import com.cqupt.mis.rms.utils.MajorContributeDataComparator;
+import com.cqupt.mis.rms.utils.OtherTeachingAwardsDataComparator;
+import com.cqupt.mis.rms.utils.QualityProjectDataComparator;
 import com.cqupt.mis.rms.utils.StudentAwardsDataComparator;
 import com.cqupt.mis.rms.utils.TeachAchievementsDataComparator;
 import com.cqupt.mis.rms.utils.TeachingMaterialDataComparator;
@@ -242,6 +262,257 @@ public class ViewTeachingInfoAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	/**
+	 * 查找有关当前用户（session）的优秀培训师信息
+	 */
+	public String viewExcellentTrainerRecords() {
+		List<ExcellentTrainerData> sortedFields = new ArrayList<ExcellentTrainerData>();
+		//获取相应的所有字段
+		List<ExcellentTrainerField> fields = dynamicDataFieldDao.findAllFields("ExcellentTrainerField");	
+		//获取相应的学生获奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<ExcellentTrainerRecord> excellentTrainerRecords = (List<ExcellentTrainerRecord>) researchInfoService.viewResearchInfo(userId, "ExcellentTrainerRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(ExcellentTrainerField field1 : fields) {
+			ExcellentTrainerData excellentTrainerData = new ExcellentTrainerData();
+			excellentTrainerData.setField(field1);
+			excellentTrainerData.setValue("");
+			sortedFields.add(excellentTrainerData);
+			for(ExcellentTrainerRecord record : excellentTrainerRecords) {
+				Set<ExcellentTrainerData> datas = record.getFields();
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(excellentTrainerData);
+			} 
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(ExcellentTrainerRecord record : excellentTrainerRecords) {
+			Set<ExcellentTrainerData> datas = record.getFields();
+			Set<ExcellentTrainerData> tempDatas = new HashSet<ExcellentTrainerData>();
+			//找出假删除的字段
+			for(ExcellentTrainerData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<ExcellentTrainerData> sortedDatas = new TreeSet(new ExcellentTrainerDataComparator());
+			sortedDatas.addAll(datas);
+			record.setFields(sortedDatas);
+		}		
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+		String json = jsonArray.toString();
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields);
+		ActionContext.getContext().put(RECORDS, excellentTrainerRecords);
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查找有关当前用户（session）的质量工程信息
+	 */
+	public String viewQualityProjectRecords() {
+		List<QualityProjectData> sortedFields = new ArrayList<QualityProjectData>();
+		//获取相应的所有字段
+		List<QualityProjectField> fields = dynamicDataFieldDao.findAllFields("QualityProjectField");	
+		//获取相应的学生获奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<QualityProjectRecord> qualityProjectRecords = (List<QualityProjectRecord>) researchInfoService.viewResearchInfo(userId, "QualityProjectRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(QualityProjectField field1 : fields) {
+			QualityProjectData qualityProjectData = new QualityProjectData();
+			qualityProjectData.setField(field1);
+			qualityProjectData.setValue("");
+			sortedFields.add(qualityProjectData);
+			for(QualityProjectRecord record : qualityProjectRecords) {
+				Set<QualityProjectData> datas = record.getFields();
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(qualityProjectData);
+			} 
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(QualityProjectRecord record : qualityProjectRecords) {
+			Set<QualityProjectData> datas = record.getFields();
+			Set<QualityProjectData> tempDatas = new HashSet<QualityProjectData>();
+			//找出假删除的字段
+			for(QualityProjectData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<QualityProjectData> sortedDatas = new TreeSet(new QualityProjectDataComparator());
+			sortedDatas.addAll(datas);
+			record.setFields(sortedDatas);
+		}		
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+		String json = jsonArray.toString();
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields);
+		ActionContext.getContext().put(RECORDS, qualityProjectRecords);
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查找有关当前用户（session）的学评教信息
+	 */
+	public String viewLearningEvaluationRecords() {
+		List<LearningEvaluationData> sortedFields = new ArrayList<LearningEvaluationData>();
+		//获取相应的所有字段
+		List<LearningEvaluationField> fields = dynamicDataFieldDao.findAllFields("LearningEvaluationField");	
+		//获取相应的学生获奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<LearningEvaluationRecord> learningEvaluationRecords = (List<LearningEvaluationRecord>) researchInfoService.viewResearchInfo(userId, "LearningEvaluationRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(LearningEvaluationField field1 : fields) {
+			LearningEvaluationData learningEvaluationData = new LearningEvaluationData();
+			learningEvaluationData.setField(field1);
+			learningEvaluationData.setValue("");
+			sortedFields.add(learningEvaluationData);
+			for(LearningEvaluationRecord record : learningEvaluationRecords) {
+				Set<LearningEvaluationData> datas = record.getFields();
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(learningEvaluationData);
+			} 
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(LearningEvaluationRecord record : learningEvaluationRecords) {
+			Set<LearningEvaluationData> datas = record.getFields();
+			Set<LearningEvaluationData> tempDatas = new HashSet<LearningEvaluationData>();
+			//找出假删除的字段
+			for(LearningEvaluationData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<LearningEvaluationData> sortedDatas = new TreeSet(new LearningEvaluationDataComparator());
+			sortedDatas.addAll(datas);
+			record.setFields(sortedDatas);
+		}		
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+		String json = jsonArray.toString();
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields);
+		ActionContext.getContext().put(RECORDS, learningEvaluationRecords);
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查找有关当前用户（session）的教改项目结题信息
+	 */
+	public String viewEducationalReformRecords() {
+		List<EducationalReformData> sortedFields = new ArrayList<EducationalReformData>();
+		//获取相应的所有字段
+		List<EducationalReformField> fields = dynamicDataFieldDao.findAllFields("EducationalReformField");	
+		//获取相应的学生获奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<EducationalReformRecord> educationalReformRecords = (List<EducationalReformRecord>) researchInfoService.viewResearchInfo(userId, "EducationalReformRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(EducationalReformField field1 : fields) {
+			EducationalReformData educationalReformData = new EducationalReformData();
+			educationalReformData.setField(field1);
+			educationalReformData.setValue("");
+			sortedFields.add(educationalReformData);
+			for(EducationalReformRecord record : educationalReformRecords) {
+				Set<EducationalReformData> datas = record.getFields();
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(educationalReformData);
+			} 
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(EducationalReformRecord record : educationalReformRecords) {
+			Set<EducationalReformData> datas = record.getFields();
+			Set<EducationalReformData> tempDatas = new HashSet<EducationalReformData>();
+			//找出假删除的字段
+			for(EducationalReformData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<EducationalReformData> sortedDatas = new TreeSet(new EducationalReformDataComparator());
+			sortedDatas.addAll(datas);
+			record.setFields(sortedDatas);
+		}		
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+		String json = jsonArray.toString();
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields);
+		ActionContext.getContext().put(RECORDS, educationalReformRecords);
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查找有关当前用户（session）的其他获奖信息
+	 */
+	public String viewOtherTeachingAwardsRecords() {
+		List<OtherTeachingAwardsData> sortedFields = new ArrayList<OtherTeachingAwardsData>();
+		//获取相应的所有字段
+		List<OtherTeachingAwardsField> fields = dynamicDataFieldDao.findAllFields("OtherTeachingAwardsField");	
+		//获取相应的学生获奖信息数据
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		List<OtherTeachingAwardsRecord> otherTeachingAwardsRecords = (List<OtherTeachingAwardsRecord>) researchInfoService.viewResearchInfo(userId, "OtherTeachingAwardsRecord");
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(OtherTeachingAwardsField field1 : fields) {
+			OtherTeachingAwardsData otherTeachingAwardsData = new OtherTeachingAwardsData();
+			otherTeachingAwardsData.setField(field1);
+			otherTeachingAwardsData.setValue("");
+			sortedFields.add(otherTeachingAwardsData);
+			for(OtherTeachingAwardsRecord record : otherTeachingAwardsRecords) {
+				Set<OtherTeachingAwardsData> datas = record.getFields();
+				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
+				datas.add(otherTeachingAwardsData);
+			} 
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(OtherTeachingAwardsRecord record : otherTeachingAwardsRecords) {
+			Set<OtherTeachingAwardsData> datas = record.getFields();
+			Set<OtherTeachingAwardsData> tempDatas = new HashSet<OtherTeachingAwardsData>();
+			//找出假删除的字段
+			for(OtherTeachingAwardsData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<OtherTeachingAwardsData> sortedDatas = new TreeSet(new OtherTeachingAwardsDataComparator());
+			sortedDatas.addAll(datas);
+			record.setFields(sortedDatas);
+		}		
+		
+		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+		String json = jsonArray.toString();
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put(ALLFIELDS,sortedFields);
+		ActionContext.getContext().put(RECORDS, otherTeachingAwardsRecords);
+		
+		return SUCCESS;
+	}
+	
 	
 	public ResearchInfoService getResearchInfoService() {
 		return researchInfoService;

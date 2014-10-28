@@ -859,6 +859,41 @@
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
 	
+	<!-- 配置教师修改优秀培训师信息Bean -->
+	<bean id="modifyExcellentTrainerRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyExcellentTrainerRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改质量工程信息Bean -->
+	<bean id="modifyQualityProjectRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyQualityProjectRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改学评教信息Bean -->
+	<bean id="modifyLearningEvaluationRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyLearningEvaluationRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改教改结题信息Bean -->
+	<bean id="modifyEducationalReformRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyEducationalReformRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置教师修改其他教学奖励信息Bean -->
+	<bean id="modifyOtherTeachingAwardsRecordAction" class="com.cqupt.mis.rms.action.teacher.modify.ModifyOtherTeachingAwardsRecordAction" scope="prototype">
+		<property name="researchInfoService" ref="researchInfoService" />
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
 	<!-- 配置审批者查询详细信息的Bean -->
 	<bean id="managerCollegeAchRecordStatusAction" class="com.cqupt.mis.rms.action.college.ManagerCollegeAchRecordStatusAction" scope="prototype">
 		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />

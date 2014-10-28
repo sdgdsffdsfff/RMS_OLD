@@ -15,9 +15,9 @@
 		<property name="hibernate.connection.password">123</property> 
 		-->
 		
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rms_fd</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">bern123</property>
+		<property name="hibernate.connection.url">jdbc:mysql://172.22.4.128:3306/rms_fd</property>
+		<property name="hibernate.connection.username">rms</property>
+		<property name="hibernate.connection.password">rms</property>
 		<!-- 	
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/rms</property>
 		<property name="hibernate.connection.username">root</property>
