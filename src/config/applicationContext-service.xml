@@ -283,4 +283,29 @@
 	<bean id="teacherAwardsRecordInfoService" class="com.cqupt.mis.rms.service.impl.TeacherAwardsRecordInfoServiceImpl">
 		<property name="searchDao" ref="searchDao"></property>
 	</bean>
+	
+	<!-- 配置处理查找优秀培训师逻辑处理的Bean -->
+	<bean id="excellentTrainerRecordInfoService" class="com.cqupt.mis.rms.service.impl.ExcellentTrainerRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理查找质量工程逻辑处理的Bean -->
+	<bean id="qualityProjectRecordInfoService" class="com.cqupt.mis.rms.service.impl.QualityProjectRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理查找学评教逻辑处理的Bean -->
+	<bean id="learningEvaluationRecordInfoService" class="com.cqupt.mis.rms.service.impl.LearningEvaluationRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理查找教改结题逻辑处理的Bean -->
+	<bean id="educationalReformRecordInfoService" class="com.cqupt.mis.rms.service.impl.EducationalReformRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
+	
+	<!-- 配置处理查找其他教学奖励逻辑处理的Bean -->
+	<bean id="otherTeachingAwardsRecordInfoService" class="com.cqupt.mis.rms.service.impl.OtherTeachingAwardsRecordInfoServiceImpl">
+		<property name="searchDao" ref="searchDao"></property>
+	</bean>
 </beans>

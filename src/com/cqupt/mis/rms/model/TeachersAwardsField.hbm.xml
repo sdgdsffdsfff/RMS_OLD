@@ -12,9 +12,5 @@
 		<property name="order" column="`order`"></property>
 		<property name="isDelete" column="is_delete"></property>
 		<property name="submittime" column="submittime"></property>
-		<set name="fieldDatas" table="teachers_awards_data" cascade="all" order-by="order">
-			<key column="field_id"/>
-			<one-to-many class="com.cqupt.mis.rms.model.TeachersAwardsData"/>
-		</set>
 	</class>
 </hibernate-mapping>

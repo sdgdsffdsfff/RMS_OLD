@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.cqupt.mis.rms.model">
-	<class name="TeachersAwardsData" table="teachers_awards_Data">
+	<class name="TeachersAwardsData" table="teachers_awards_data">
 		<composite-id>	
 			<key-many-to-one name="awards" column="achievements_id" class="TeachersAwardsRecord"></key-many-to-one>
 			<key-many-to-one name="field" column="field_id" class="TeachersAwardsField"></key-many-to-one> 

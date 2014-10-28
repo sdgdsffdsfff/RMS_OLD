@@ -2359,6 +2359,36 @@
 			<result name="input">/error.jsp</result>
 		</action>
 		
+		<!-- 学院查询ExcellentTrainerRecordInfo优秀培训师的Action -->
+		<action name="searchCollegeExcellentTrainerRecordInfo" class="searchCollegeExcellentTrainerRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchexcellenttrainerrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询QualityProjectRecordInfo质量工程的Action -->
+		<action name="searchCollegeQualityProjectRecordInfo" class="searchCollegeQualityProjectRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchqualityprojectrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询LearningEvaluationRecordInfo学评教信息的Action -->
+		<action name="searchCollegeLearningEvaluationRecordInfo" class="searchCollegeLearningEvaluationRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchlearningevaluationrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询EducationalReformRecordInfo教改结题项目的Action -->
+		<action name="searchCollegeEducationalReformRecordInfo" class="searchCollegeEducationalReformRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearcheducationalreformrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<!-- 学院查询OtherTeachingAwardsRecordInfo其他教学奖励的Action -->
+		<action name="searchCollegeOtherTeachingAwardsRecordInfo" class="searchCollegeOtherTeachingAwardsRecordAction">
+			<result name="SUCCESS">/pages/college/collegesearchotherteachingawardsrecord.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
 		
 		<!-- ************************************Bern 添加 end*********************************************** -->
 		

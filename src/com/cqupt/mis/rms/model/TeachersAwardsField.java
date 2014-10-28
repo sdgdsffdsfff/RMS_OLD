@@ -1,8 +1,6 @@
    package com.cqupt.mis.rms.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TeachersAwardsField {
 	
@@ -13,9 +11,6 @@ public class TeachersAwardsField {
 	private int isDelete;		//字段是否删除，0为未删除，1为删除
 	private Date submittime;		//字段提交时间
 	
-
-	private Set<TeachersAwardsData> fieldDatas = new HashSet<TeachersAwardsData>();
-
 	public int getId() {
 		return id;
 	}
@@ -54,14 +49,6 @@ public class TeachersAwardsField {
 
 	public void setSubmittime(Date submittime) {
 		this.submittime = submittime;
-	}
-
-	public Set<TeachersAwardsData> getFieldDatas() {
-		return fieldDatas;
-	}
-
-	public void setFieldDatas(Set<TeachersAwardsData> fieldDatas) {
-		this.fieldDatas = fieldDatas;
 	}
 
 	public int getOrder() {

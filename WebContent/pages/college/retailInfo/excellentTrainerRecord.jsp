@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批学生获奖信息</title>
+        <title>审批优秀培训师信息</title>
    
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
@@ -39,7 +39,7 @@
 
 	<div class="item">
 		<div class="title">
-			1.教学成果奖信息
+			1.优秀培训师信息
 		</div>
 		<div class="content">
 			<div class="element">
@@ -97,7 +97,7 @@
     <div class="item">
 		<div class="content">
     	<div style="text-align:right; padding:0 30px 20px 30px;">
-	    <form action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" onsubmit="return checkPassed();" method="post"> 
+	    <form action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=ExcellentTrainerRecord&idName=id" onsubmit="return checkPassed();" method="post"> 
 		
 			<input style="background:url(images/button.png); width:57px; height:25px; border:0; cursor:pointer; color:#fff;" type="submit"  value="审批通过" />
 			<input type="hidden" value="2" name="status">
@@ -105,7 +105,7 @@
 	    </form>
 	    
 	    
-	    <form name="form" onsubmit="return checkReturnReason();" action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=StudentAwardsRecord&idName=id" method="post"> 
+	    <form name="form" onsubmit="return checkReturnReason();" action="collegeUpdateStatus.action?id=<s:property value="#record.id"/>&modelName=ExcellentTrainerRecord&idName=id" method="post"> 
 	    	<br/>
 		    <p>
 		    	拒绝理由：
