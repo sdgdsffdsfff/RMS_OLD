@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.cqupt.mis.rms.model.ExcellentRecordAward" table="excellen_record_award">
+	<class name="com.cqupt.mis.rms.model.ExcellentRecordAward" table="excellent_record_award">
 	    <id name="id">
 	    	<generator class="native"></generator>
 	    </id>

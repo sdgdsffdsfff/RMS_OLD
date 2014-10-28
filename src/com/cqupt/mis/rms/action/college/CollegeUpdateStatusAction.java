@@ -227,13 +227,33 @@ public class CollegeUpdateStatusAction extends ActionSupport {
 				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
 				confirm.setRetName("教学成果奖信息审批页面");
 			}else if("MajorContributeRecord".equals(modelName)) {		
-				confirm.setMessage("学生获奖信息审批成功");
+				confirm.setMessage("专业建设/教改项目信息审批成功");
 				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
+				confirm.setRetName("专业建设/教改项目信息审批页面");
 			}else if("TeachingMaterialRecord".equals(modelName)) {		
-				confirm.setMessage("学生获奖信息审批成功");
+				confirm.setMessage("教材立项信息审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
+				confirm.setRetName("教材立项信息审批页面");
+			}else if("ExcellentTrainerRecord".equals(modelName)){
+				confirm.setMessage("优秀培训师信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/excellentTrainerRecord.action");
+				confirm.setRetName("优秀培训师信息审批页面");
+			}else if("QualityProjectRecord".equals(modelName)){
+				confirm.setMessage("质量工程信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/qualityProjectRecord.action");
+				confirm.setRetName("质量工程信息审批页面");
+			}else if("LearningEvaluationRecord".equals(modelName)){
+				confirm.setMessage("学评教信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/learningEvaluationRecord.action");
+				confirm.setRetName("学评教信息审批页面");
+			}else if("EducationalReformRecord".equals(modelName)){
+				confirm.setMessage("教改项目信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/educationalReformRecord.action");
+				confirm.setRetName("教改项目信息审批页面");
+			}else if("OtherTeachingAwardsRecord".equals(modelName)){
+				confirm.setMessage("其他教学奖励信息审批成功");
+				confirm.setUrl("collegeAchInfoRecord/otherTeachingAwardsRecord.action");
+				confirm.setRetName("其他教学奖励信息审批页面");
 			}
 		} else {
 			confirm.setIsSuccess("error");
@@ -345,14 +365,34 @@ public class CollegeUpdateStatusAction extends ActionSupport {
 				confirm.setMessage("教学成果奖信息审批失败");
 				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
 				confirm.setRetName("教学成果奖信息审批页面");
-			}else if("MajorContributeRecord".equals(modelName)) {
-				confirm.setMessage("学生获奖信息审批失败");
+			}else if("MajorContributeRecord".equals(modelName)) {		
+				confirm.setMessage("专业建设/教改项目信息审批失败");
 				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
-			}else if("TeachingMaterialRecord".equals(modelName)) {
-				confirm.setMessage("学生获奖信息审批失败");
+				confirm.setRetName("专业建设/教改项目信息审批页面");
+			}else if("TeachingMaterialRecord".equals(modelName)) {		
+				confirm.setMessage("教材立项信息审批失败");
 				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
+				confirm.setRetName("教材立项信息审批页面");
+			}else if("ExcellentTrainerRecord".equals(modelName)){
+				confirm.setMessage("优秀培训师信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
+				confirm.setRetName("优秀培训师信息审批页面");
+			}else if("QualityProjectRecord".equals(modelName)){
+				confirm.setMessage("质量工程信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/qualityProjectRecord.action");
+				confirm.setRetName("质量工程信息审批页面");
+			}else if("LearningEvaluationRecord".equals(modelName)){
+				confirm.setMessage("学评教信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/learningEvaluationRecord.action");
+				confirm.setRetName("学评教信息审批页面");
+			}else if("EducationalReformRecord".equals(modelName)){
+				confirm.setMessage("教改项目信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/educationalReformRecord.action");
+				confirm.setRetName("教改项目信息审批页面");
+			}else if("OtherTeachingAwardsRecord".equals(modelName)){
+				confirm.setMessage("其他教学奖励信息审批失败");
+				confirm.setUrl("collegeAchInfoRecord/otherTeachingAwardsRecord.action");
+				confirm.setRetName("其他教学奖励信息审批页面");
 			}
 		}
 		ActionContext.getContext().put("confirm", confirm);
