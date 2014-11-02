@@ -105,8 +105,6 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-//		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-//		String json = jsonArray.toString();
 		StringBuilder temp = new StringBuilder();
 		temp.append("{ \"field\": [");
 		for(StudentAwardsData data : sortedFields) {
@@ -114,7 +112,7 @@ public class ViewTeachingInfoAction extends ActionSupport {
 		}
 		String json = temp.substring(0, temp.length()-1);
 		json += "] }";
-//		System.out.println("Action:fieldJson:"+json);
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, studentAwardsRecords);
@@ -164,9 +162,15 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-//		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-//		String json = jsonArray.toString();
-//		ActionContext.getContext().put("fieldJson",json);
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(TeachersAwardsData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
+		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, teachersAwardsRecords);
 		
@@ -215,8 +219,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(MajorContributeData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, majorContributeRecords);
@@ -265,8 +275,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(TeachingMaterialData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, teachingMaterialRecords);
@@ -315,8 +331,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(ExcellentTrainerData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, excellentTrainerRecords);
@@ -365,8 +387,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(QualityProjectData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, qualityProjectRecords);
@@ -415,8 +443,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(LearningEvaluationData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, learningEvaluationRecords);
@@ -465,8 +499,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(EducationalReformData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, educationalReformRecords);
@@ -515,8 +555,14 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(OtherTeachingAwardsData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, otherTeachingAwardsRecords);

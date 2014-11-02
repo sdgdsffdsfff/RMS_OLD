@@ -13,7 +13,7 @@ public class TeachersAwardsRecord {
 	private String returnReason;
 	private String statusDes;
 	private Set<TeachersAwardsData> fields ;
-	
+	private String fieldsJson;		//动态字段类的json格式
 		
 	
 	public void setStatusDes(String statusDes) {
@@ -96,5 +96,24 @@ public class TeachersAwardsRecord {
 		return statusDes;
 	}
 
+	/**
+	 * 返回字段集合的json格式(只有值)
+	 * @return 
+	 */
+	public String getFieldsJson() {
+		fieldsJson = "";
+		
+		if(fields != null) {
+			StringBuilder temp = new StringBuilder();
+			temp.append("{ [");
+			for(TeachersAwardsData d : fields) {
+				temp.append("{ \"value\":\" "+d.getValue()+"\" }, ");
+			}
+			fieldsJson = temp.substring(0, temp.length()-2);
+			fieldsJson = fieldsJson +" ] }";
+		}
+		//System.out.println("fieldJson:"+fieldsJson);
+		return fieldsJson;
+	}
 
 }

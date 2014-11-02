@@ -57,34 +57,6 @@
 <div style="display:none;">
 
 </div>
-    	<%-- <table border="1">
-    	<tr>
-    		<th>状态</th>
-    		<th>拒绝原因</th>
-    		<th>操作</th>
-    		<th>操作</th>
-    		<th>信息名字</th>
-    	<s:iterator value="#allFields" id="d">
-     			<th><s:property value="#d.field.description"/></th>
-     	</s:iterator>	
-     	</tr>
-     	<s:iterator value="#records" id="r">
-     		<tr>
-     			<td><s:property value="#r.statusDes"/></td>
-     			<td><s:property value="#r.returnReason"/></td>
-     			<td><a href="viewStudentAwardsRecordDetail.action?recordId=<s:property value="#r.id"/>">查看详细</a></td>
-     			<s:if test="#r.status==0 || #r.status==3">
-     				<td><a href="viewStudentAwardsRecordDetail.action?recordId=<s:property value="#r.id"/>&flag=modify">修改</a></td>
-     			</s:if><s:else>
-     				<td></td> 
-     			</s:else>
-     			<td><s:property value="#r.name"/></td>
-     			<s:iterator value="#r.fields" id="f2">
-     				<td><s:property value="#f2.value"/></td>
-     			</s:iterator>
-     		</tr>
-     	</s:iterator>
-     	</table> --%>
 	</form>
 </body>
 </html>

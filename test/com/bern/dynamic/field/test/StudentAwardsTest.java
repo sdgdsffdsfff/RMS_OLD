@@ -1,11 +1,7 @@
 package com.bern.dynamic.field.test;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -118,16 +114,31 @@ public class StudentAwardsTest {
 		sf = (SessionFactory) ac.getBean("sessionFactory");
 		session = sf.openSession();
 		session.beginTransaction();
-		StudentAwardsRecord record = (StudentAwardsRecord) session.get(com.cqupt.mis.rms.model.StudentAwardsRecord.class, "20140920");
+		StudentAwardsRecord record = (StudentAwardsRecord) session.get(com.cqupt.mis.rms.model.StudentAwardsRecord.class, "20140827102858821");
 		
-		Set<StudentAwardsData> datas = record.getFields();
-		Iterator it = datas.iterator();
-		while(it.hasNext()) {
-			StudentAwardsData data = (StudentAwardsData) it.next();
-			System.out.println("动态字段名："+data.getField().getDescription()+" ## 动态字段值："+data.getValue());
-		}
+		System.out.println(record.getFieldsJson());
+		
+//		Set<StudentAwardsData> datas = record.getFields();
+//		Iterator it = datas.iterator();
+//		while(it.hasNext()) {
+//			StudentAwardsData data = (StudentAwardsData) it.next();
+//			System.out.println("动态字段名："+data.getField().getDescription()+" ## 动态字段值："+data.getValue());
+//		}
+		
 		session.getTransaction().commit();
 	
+	}
+	
+	@Test
+	public void jsonTest() {
+		SessionFactory sf;
+		Session session;
+		
+		sf = (SessionFactory) ac.getBean("sessionFactory");
+		session = sf.openSession();
+		session.beginTransaction();
+		
+		
 	}
 
 }
