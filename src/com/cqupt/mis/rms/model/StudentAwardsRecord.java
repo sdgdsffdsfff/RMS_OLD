@@ -17,6 +17,7 @@ public class StudentAwardsRecord implements Serializable {
 	private int status;		//记录的状态
 	private String statusDes;
 	private Set<StudentAwardsData> fields;		//记录的动态字段
+	private String fieldsJson;		//动态字段类的json格式
 	
 	private CQUPTUser submitUser;		//记录的提交者
 	private CQUPTUser approvedUser;		//记录的审核者
@@ -86,6 +87,26 @@ public class StudentAwardsRecord implements Serializable {
 			break;
 		}
 		return statusDes;
+	}
+	
+	/**
+	 * 返回字段集合的json格式(只有值)
+	 * @return 
+	 */
+	public String getFieldsJson() {
+		fieldsJson = "";
+		
+		if(fields != null) {
+			StringBuilder temp = new StringBuilder();
+			temp.append("{ [");
+			for(StudentAwardsData d : fields) {
+				temp.append("{ \"value\":\" "+d.getValue()+"\" }, ");
+			}
+			fieldsJson = temp.substring(0, temp.length()-2);
+			fieldsJson = fieldsJson +" ] }";
+		}
+		//System.out.println("fieldJson:"+fieldsJson);
+		return fieldsJson;
 	}
 	
 }

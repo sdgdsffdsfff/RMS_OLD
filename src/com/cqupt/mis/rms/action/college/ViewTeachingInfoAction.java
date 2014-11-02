@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.struts2.ServletActionContext;
+
 import net.sf.json.JSONArray;
 
 import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
@@ -103,11 +105,20 @@ public class ViewTeachingInfoAction extends ActionSupport {
 			record.setFields(sortedDatas);
 		}		
 		
-		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
-		String json = jsonArray.toString();
+//		JSONArray jsonArray = JSONArray.fromObject(sortedFields);
+//		String json = jsonArray.toString();
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(StudentAwardsData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+//		System.out.println("Action:fieldJson:"+json);
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put(ALLFIELDS,sortedFields);
 		ActionContext.getContext().put(RECORDS, studentAwardsRecords);
+		
 		
 		return SUCCESS;
 	}
