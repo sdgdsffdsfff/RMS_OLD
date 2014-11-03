@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.CQUPTUser;
 import com.cqupt.mis.rms.model.StudentAwardsData;
@@ -13,11 +14,15 @@ import com.cqupt.mis.rms.model.StudentRecordInstructor;
 import com.cqupt.mis.rms.service.SearchCQUPTUserService;
 import com.cqupt.mis.rms.service.StudentAwardsRecordInfoService;
 import com.cqupt.mis.rms.service.model.ModelInfo;
+import com.cqupt.mis.rms.utils.StudentAwardsDataComparator;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.emory.mathcs.backport.java.util.TreeSet;
+
 public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 	private SearchDao searchDao;
+	private DynamicDataFieldDao dynamicDataFieldDao;
 	private SearchCQUPTUserService searchCQUPTUserService;
 	private StudentAwardsRecordInfoService studentAwardsRecordInfoService;
 	private List<ModelInfo<StudentAwardsRecord, StudentRecordInstructor>> studentAwardsRecordInfos;
@@ -87,32 +92,52 @@ public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 		/*
 		 * 将动态字段的输出序列化
 		 */
-		Set<StudentAwardsData> sortedFields2 = new HashSet<StudentAwardsData>();
+		Set<StudentAwardsData> sortedFields = new HashSet<StudentAwardsData>();
 		//获取相应的所有字段
-		List<StudentAwardsField> fields = searchDao.SearchObjectsByFactor("StudentAwardsField", "isDelete", 0);	
+		List<StudentAwardsField> fields = dynamicDataFieldDao.findAllFields("StudentAwardsField");	
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
 		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
 		for(StudentAwardsField field1 : fields) {
 			StudentAwardsData studentAwardsData = new StudentAwardsData();
 			studentAwardsData.setField(field1);
 			studentAwardsData.setValue("");
-			sortedFields2.add(studentAwardsData);
+			sortedFields.add(studentAwardsData);
 			for(ModelInfo<StudentAwardsRecord, StudentRecordInstructor> info : studentAwardsRecordInfos) {
 				Set<StudentAwardsData> datas = info.getModel().getFields();
-				Set<StudentAwardsData> tempDatas = new HashSet<StudentAwardsData>();
-				//剔除已经假删除的字段
-				for(StudentAwardsData d : datas) {
-					if(d.getField().getIsDelete() == 1) {
-						tempDatas.add(d);
-					}
-				}
-				datas.removeAll(tempDatas);
 				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
 				datas.add(studentAwardsData);
-			}
+			} 
 		}
 		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(ModelInfo<StudentAwardsRecord, StudentRecordInstructor> info : studentAwardsRecordInfos) {
+			Set<StudentAwardsData> datas = info.getModel().getFields();
+			Set<StudentAwardsData> tempDatas = new HashSet<StudentAwardsData>();
+			//找出假删除的字段
+			for(StudentAwardsData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<StudentAwardsData> sortedDatas = new TreeSet(new StudentAwardsDataComparator());
+			sortedDatas.addAll(datas);
+			info.getModel().setFields(sortedDatas);
+		}
+		
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(StudentAwardsData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		//将序列化话的值放入值栈
-		ActionContext.getContext().put("fields", sortedFields2);
+		ActionContext.getContext().put("fieldJson", json);
+		ActionContext.getContext().put("fields", sortedFields);
 		ActionContext.getContext().put("studentAwardsInfos", studentAwardsRecordInfos);
 		type="search";
 		
@@ -233,6 +258,14 @@ public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 
 	public void setSearchDao(SearchDao searchDao) {
 		this.searchDao = searchDao;
+	}
+
+	public DynamicDataFieldDao getDynamicDataFieldDao() {
+		return dynamicDataFieldDao;
+	}
+
+	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {
+		this.dynamicDataFieldDao = dynamicDataFieldDao;
 	}
 
 }

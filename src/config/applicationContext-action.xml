@@ -802,6 +802,7 @@
 		<property name="studentAwardsRecordInfoService" ref="studentAwardsRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
 		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 
 	<!-- liu add 配置学院查询TeacherAwardsInfoRecord教师获奖的Bean -->
