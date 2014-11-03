@@ -22,7 +22,8 @@
 	<link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
     <link href="css/search.css" rel="stylesheet" type="text/css" />
-    <script src="lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script> 
+    <script src="lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script> 
     <script src="lib/ligerUI/js/core/base.js" type="text/javascript"></script>
     <script src="lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script> 
     <script src="lib/ligerUI/js/plugins/ligerTextBox.js" type="text/javascript"></script>
@@ -95,6 +96,11 @@
 					<option value="<s:property value="#f.name"/>"><s:property value="#f.description"/></option>
 				</s:iterator>
 			</select>
+			
+			<p id="tijiao" style="margin:1em 0 1em 20em;">
+		             <input type="submit" class="btn" value="查询" />
+		             <input type="reset" class="btn" value="重置" />
+	        </p>
 			<input type="text" class="logical_word"  name="stringValue3" id="stringValue3"/>
 			<div class="clear"></div>
 			
@@ -116,12 +122,9 @@
 		</li>
 	</ul>
 </div>
-	<p id="tijiao" style="margin:1em 0 1em 20em;">
-		<input type="submit" class="btn" value="查询" />
-		<input type="reset" class="btn" value="重置" />
-	</p>
+
 	
-    <table border="1">
+   <%--  <table border="1">
     	<tr>
     		<th>提交者</th>
     		<th>审批者</th>
@@ -142,8 +145,7 @@
      			</s:iterator>
      		</tr>
      	</s:iterator>
-     	</table> 
+     	</table>  --%>
   </form>
-  
 </body>
 </html>

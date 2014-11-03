@@ -5,7 +5,6 @@
 <%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +32,6 @@
      			   <script type="text/javascript">
      			   //行数据
      			   var data = $("#search input").last();
-     			  
      			   $.each(data, function(){
      				  var r1 = '\"id\": \"${r.id}\", \"refuse\": \"${r.returnReason}\", \"name\": \"${r.name}\",\"Status\":\"${r.statusDes}\"';
         			  var rowdata="";
@@ -48,7 +46,6 @@
   		             var rowObj = JSON.parse(row);
   		             rows.push(rowObj);
      			   });
-     			  
 	     		 </script>
    			</s:iterator> 
    			 </s:if>
@@ -57,6 +54,6 @@
 <div style="display:none;">
 
 </div>
-	</form>
+</form>
 </body>
 </html>

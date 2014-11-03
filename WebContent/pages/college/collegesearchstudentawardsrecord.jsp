@@ -6,15 +6,12 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%    
+<%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
 %>
-<base href="<%=basePath%>"> --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
 <html>
+<base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>学生获奖信息查询</title>
@@ -36,11 +33,11 @@
     <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script src="lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
     
-    <script src="js/search/SearchStudentAwards.js" type="text/javascript"></script>
+    <script src="js/search/SearchStudentAwardsreccords.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px; "> 
   
- <form id="form1" action="searchCollegeStudentAwardsRecordInfo.action" method="post"> 
+<form id="form1" action="searchCollegeStudentAwardsRecordInfo.action" method="post"> 
 <div id="hippo">
 	<ul class="list">
 		<li class="til">
@@ -120,8 +117,39 @@
 		<input type="submit" class="btn" value="查询" />
 		<input type="reset" class="btn" value="重置" />
 	</p>
+    <input type="hidden" value='<s:property value="#fieldJson"/>' id="data"/>
+    <div id="toptoolbar"></div> 
+	<div id="maingrid" style="margin:0; padding:0">
+    	<s:if test="#records!=null">
+    		<s:iterator value="studentAwardsInfos" id="i">
+    		<div id="search"><input type="hidden" value="<s:property value="#r.fieldsJson"/>"/></div>
+     			   <script type="text/javascript">
+     			   //行数据
+     			   var data = $("#search input").last();
+     			   $.each(data, function(){
+     				  var r1 = '\"id\": \"${i.model.id}\", \"approvedUser\": \"${i.model.approvedUser.userName}\", \"submitUser\": \"${i.model.submitUser.userName}\",\"name\":\"${i.model.name}\"';
+        			  var rowdata="";
+        			  var rvalue = $(this).val();
+  			    	  var objVal = eval(rvalue);
+        			  for(var j=1;j<=objVal.length;j++) //在这里读json的行数据
+   		              {
+   		                 rowdata+="\"value"+j+"\":\""+objVal[j-1].value+"\",";
+   		              }
+  		             rowdata=rowdata+r1;
+  		             var row="{"+rowdata+"}";
+  		             var rowObj = JSON.parse(row);
+  		             rows.push(rowObj);
+     			   });
+     			  
+	     		 </script>
+   			</s:iterator> 
+   			 </s:if>
+    	</div>
 	
-    <table border="1">
+<div style="display:none;">
+
+</div>
+    <%-- <table border="1">
     	<tr>
     		<th>提交者</th>
     		<th>审批者</th>
@@ -143,7 +171,7 @@
      		</tr>
      	</s:iterator>
      	</table> 
-  </form>
+  </form> --%>
   
 </body>
 </html>

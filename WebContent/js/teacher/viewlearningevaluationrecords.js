@@ -72,7 +72,7 @@ var manager;
                                 {
                                     if(result)
                                     	{
-                                    		url = 'viewStudentAwardsRecordDetail.action?flag=modify'+'&recordId='+checkedIds;
+                                    		url = 'viewLearningEvaluationRecordDetail.action?flag=modify'+'&recordId='+checkedIds;
                                     		modifyInfo(url);
                                         }
                                 });
@@ -100,7 +100,7 @@ var manager;
                                 {
                                     if(result)
                                     	{
-                                    		url = 'viewStudentAwardsRecordDetail.action?recordId='+checkedIds;
+                                    		url = 'viewLearningEvaluationRecordDetail.action?recordId='+checkedIds;
                                     		detailInfo(url);
                                         }
                                 });

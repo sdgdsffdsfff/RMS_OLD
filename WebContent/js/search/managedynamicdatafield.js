@@ -14,6 +14,7 @@ var manager, g;
 			                { text: '导出Excel', id:'Excel', click: itemclick, icon: 'save' },{ line:true }
 			            ]
 			            });
+			          
 			            g = manager = $grid = $("#maingrid").ligerGrid({
 	     	                columns: [
 	     	                { display: '字段数据库名', name: 'name', align: 'left', width: 100, minWidth: 60 },

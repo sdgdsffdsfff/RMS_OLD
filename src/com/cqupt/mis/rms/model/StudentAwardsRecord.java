@@ -105,7 +105,7 @@ public class StudentAwardsRecord implements Serializable {
 			fieldsJson = temp.substring(0, temp.length()-2);
 			fieldsJson = fieldsJson +" ] }";
 		}
-		//System.out.println("fieldJson:"+fieldsJson);
+		System.out.println("fieldJson:"+fieldsJson);
 		return fieldsJson;
 	}
 	
