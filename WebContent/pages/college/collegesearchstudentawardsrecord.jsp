@@ -2,8 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.cqupt.mis.rms.model.*"%>
 <%@page import="com.cqupt.mis.rms.service.model.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%    
@@ -37,7 +36,7 @@
 </head>
 <body style="padding:0px; "> 
   
-<form id="form1" action="searchCollegeStudentAwardsRecordInfo.action" method="post"> 
+<form id="form1" action="searchCollegeStudentAwardsRecordInfo.action" onsubmit="return checkClick();" method="post"> 
 <div id="hippo">
 	<ul class="list">
 		<li class="til">
@@ -120,9 +119,9 @@
     <input type="hidden" value='<s:property value="#fieldJson"/>' id="data"/>
     <div id="toptoolbar"></div> 
 	<div id="maingrid" style="margin:0; padding:0">
-    	<s:if test="#records!=null">
+    	<s:if test="#studentAwardsInfos!=null">
     		<s:iterator value="studentAwardsInfos" id="i">
-    		<div id="search"><input type="hidden" value="<s:property value="#r.fieldsJson"/>"/></div>
+    		<div id="search"><input type="hidden" value="<s:property value="#i.model.fieldsJson"/>"/></div>
      			   <script type="text/javascript">
      			   //行数据
      			   var data = $("#search input").last();
@@ -140,38 +139,13 @@
   		             var rowObj = JSON.parse(row);
   		             rows.push(rowObj);
      			   });
-     			  
 	     		 </script>
    			</s:iterator> 
    			 </s:if>
     	</div>
-	
 <div style="display:none;">
 
 </div>
-    <%-- <table border="1">
-    	<tr>
-    		<th>提交者</th>
-    		<th>审批者</th>
-    		<th>操作</th>
-    		<th>信息名字</th>
-    		<s:iterator value="#fields" id="f">
-     			<th><s:property value="#f.field.description"/></th>
-     		</s:iterator>	
-     	</tr>
-     	<s:iterator value="#studentAwardsInfos" id="i">
-     		<tr>
-     			<td><s:property value="#i.model.submitUser.userName"/></td>
-     			<td><s:property value="#i.model.approvedUser.userName"/></td>
-     			<td><a href="viewStudentAwardsRecordDetail.action?recordId=<s:property value="#i.model.id"/>">查看详细</a></td>
-     			<td><s:property value="#i.model.name"/></td>
-     			<s:iterator value="#i.model.fields" id="f2">
-     				<td><s:property value="#f2.value"/></td>
-     			</s:iterator>
-     		</tr>
-     	</s:iterator>
-     	</table> 
-  </form> --%>
-  
+</form>
 </body>
 </html>

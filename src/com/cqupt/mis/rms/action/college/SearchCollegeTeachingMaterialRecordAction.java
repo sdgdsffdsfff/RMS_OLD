@@ -141,7 +141,7 @@ public class SearchCollegeTeachingMaterialRecordAction extends ActionSupport {
 		//将序列化话的值放入值栈
 		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put("fields", sortedFields);
-		ActionContext.getContext().put("studentAwardsInfos", teachingMaterialRecordInfos);
+		ActionContext.getContext().put("teachingMaterialInfos", teachingMaterialRecordInfos);
 		type="search";
 		
 		return "SUCCESS";

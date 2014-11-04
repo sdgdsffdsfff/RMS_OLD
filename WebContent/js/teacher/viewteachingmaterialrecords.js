@@ -18,17 +18,17 @@ var manager;
                 { text: '刷新', id:'refresh', click: itemclick, icon: 'refresh' }
             ]
             });
-            //列标题
+          //列标题
         	var json = $("#data").val();
         	var objJson = JSON.parse(json);
-            var s1 = "{ \"display\": \"状态\", \"name\": \"Status\", \"align\": \"center\", \"width\": 100, \"minWidth\": 60 },{ \"display\": \"拒绝原因\", \"name\": \"refuse\", \"align\": \"center\", \"minWidth\": 140 },{ \"display\": \"信息名字\", \"name\": \"name\", \"width\": 120 }";
+            var s1 = "{ \"display\": \"信息名字\", \"name\": \"name\", \"width\": 120 },{ \"display\": \"状态\", \"name\": \"Status\", \"align\": \"center\", \"width\": 100, \"minWidth\": 60 },{ \"display\": \"拒绝原因\", \"name\": \"refuse\", \"align\": \"center\", \"minWidth\": 140 }";
             var colnames="";
             var s3 ="\"dataAction\": \"server\", \"data\": \"rows\", \"sortName\": \"id\",\" width\": \"100%\", \"height\": \"100%\", \"pageSize\": 30,\"rownumbers\":true,\"checkbox\" : false,\"colDraggable\" : true,\"rowDraggable\" : true,\"cssClass\" : \"l-grid-gray\", \"heightDiff\": 0";
             for(var i=1;i<=objJson.field.length;i++) //在这里读json的列名，当作表格的列名
               {
-                  colnames+="{\"name\":\"value"+i+"\",\"minWidth\": 60, \"display\":\""+objJson.field[i-1].des+"\"},";
+                  colnames+=",{\"name\":\"value"+i+"\",\"minWidth\": 60, \"display\":\""+objJson.field[i-1].des+"\"}";
               }
-              colnames=colnames+s1;
+              colnames=s1+colnames;
               var col="{"+"\"columns\":["+colnames+"],"+s3+"}";
               var colObj = JSON.parse(col);
               g = manager = $grid = $("#maingrid").ligerGrid(colObj);
@@ -51,7 +51,7 @@ var manager;
                 	case "refresh":
                 	window.location.reload();
                     return;
-                    case "modify":
+                	 case "modify":
                     	 var data = gridManager.getCheckedRows();
                          if (data.length == 0)
                              alert('请选择行!');
@@ -59,25 +59,32 @@ var manager;
                          {
                              var checkedIds = [];
                              var checkedNames = [];
+                             var checkedStatus = [];
                              $(data).each(function ()
                                      {
                                      
                                          	checkedIds.push(this.id);
                                          	checkedNames.push(this.name);
+                                         	checkedStatus.push(this.Status);
+                                         	
                                      });
-                            
-                            if(checkedIds.length == data.length)
-                            {
-                            	$.ligerDialog.confirm('确定修改:' + checkedNames.join(' ; ') + '?', function (result)
-                                {
-                                    if(result)
-                                    	{
-                                    		url = 'viewTeachingMaterialRecordDetail.action?flag=modify'+'&recordId='+checkedIds;
-                                    		modifyInfo(url);
-                                        }
-                                });
+                             if(checkedStatus == "审批通过"||checkedStatus == "未审批"){
+                             	alert("不能修改已提交审批的界面");
+                            	return;
+                            }
+                            else if(checkedIds.length == data.length)
+                               {
+                            	
+	                            	$.ligerDialog.confirm('确定修改:' + checkedNames.join(' ; ') + '?', function (result)
+	                                {
+	                            		if(result)
+	                            		{
+	                                       		url = 'viewTeachingMaterialRecordDetail.action?flag=modify'+'&recordId='+checkedIds;
+	                                       		modifyInfo(url);
+	                                    }
+	                            	 });
                              }
-                          }
+                            }
                         return;
                     case "detail":
                         var data = gridManager.getCheckedRows();

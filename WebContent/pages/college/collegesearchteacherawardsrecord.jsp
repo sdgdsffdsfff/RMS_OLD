@@ -6,15 +6,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%    
+<%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
 %>
-<base href="<%=basePath%>"> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
 <html>
+<base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>教学成果奖信息查询</title>
@@ -37,7 +35,7 @@
     <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script src="lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
     
-    <script src="js/search/SearchStudentAwards.js" type="text/javascript"></script>
+    <script src="js/search/searchTeacherAwardsRecords.js" type="text/javascript"></script>
 </head>
 <body style="padding:0px; "> 
   
@@ -121,29 +119,36 @@
 	<input type="submit" class="btn" value="查询" />
 	<input type="reset" class="btn" value="重置" />
 </p>
-	
-   <table border="1">
-    	<tr>
-    		<th>提交者</th>
-    		<th>审批者</th>
-    		<th>操作</th>
-    		<th>信息名字</th>
-    		<s:iterator value="#fields" id="f">
-     			<th><s:property value="#f.description"/></th>
-     		</s:iterator>	
-     	</tr>
-     	<s:iterator value="#teacherAwardsInfos" id="i">
-     		<tr>
-     			<td><s:property value="#i.model.submitUser.userName"/></td>
-     			<td><s:property value="#i.model.approvedUser.userName"/></td>
-     			<td><a href="viewTeacherAwardsRecordDetail.action?recordId=<s:property value="#i.model.id"/>">查看详细</a></td>
-     			<td><s:property value="#i.model.name"/></td>
-     			<s:iterator value="#i.model.fields" id="f2">
-     				<td><s:property value="#f2.value"/></td>
-     			</s:iterator>
-     		</tr>
-     	</s:iterator>
-     	</table> 
+	<input type="hidden" value='<s:property value="#fieldJson"/>' id="data"/>
+    <div id="toptoolbar"></div> 
+	<div id="maingrid" style="margin:0; padding:0">
+    	<s:if test="#teacherAwardsInfos!=null">
+    		<s:iterator value="teacherAwardsInfos" id="i">
+    		<div id="search"><input type="hidden" value="<s:property value="#i.model.fieldsJson"/>"/></div>
+     			   <script type="text/javascript">
+     			   //行数据
+     			   var data = $("#search input").last();
+     			   $.each(data, function(){
+     				  var r1 = '\"id\": \"${i.model.id}\", \"approvedUser\": \"${i.model.approvedUser.userName}\", \"submitUser\": \"${i.model.submitUser.userName}\",\"name\":\"${i.model.name}\"';
+        			  var rowdata="";
+        			  var rvalue = $(this).val();
+  			    	  var objVal = eval(rvalue);
+        			  for(var j=1;j<=objVal.length;j++) //在这里读json的行数据
+   		              {
+   		                 rowdata+="\"value"+j+"\":\""+objVal[j-1].value+"\",";
+   		              }
+  		             rowdata=rowdata+r1;
+  		             var row="{"+rowdata+"}";
+  		             var rowObj = JSON.parse(row);
+  		             rows.push(rowObj);
+     			   });
+	     		 </script>
+   			</s:iterator> 
+   			 </s:if>
+    	</div>
+    	<div style="display:none;">
+
+        </div>
   </form>
 </body>
 </html>

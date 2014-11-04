@@ -1,27 +1,19 @@
 // JavaScript Document
-
 var $grid;
-var manager;
-
- var alert = function (content)
-        {
-            $.ligerDialog.alert(content);
-        };
-        var gridManager = null;
+var manager, g;
         $(function ()
         {
         	//工具条
             $("#toptoolbar").ligerToolBar({ items: [
                 { text: '导出Excel', id:'Excel', click: itemclick, icon: 'save' },{ line:true },
-                { text: '修改', id:'modify', click: itemclick, icon: 'modify' },{ line:true },
                 { text: '查看详情', id:'detail', click: itemclick, icon: 'home' },{ line:true },
                 { text: '刷新', id:'refresh', click: itemclick, icon: 'refresh' }
-            ]
+               ]
             });
           //列标题
         	var json = $("#data").val();
         	var objJson = JSON.parse(json);
-            var s1 = "{ \"display\": \"信息名字\", \"name\": \"name\", \"width\": 120 },{ \"display\": \"状态\", \"name\": \"Status\", \"align\": \"center\", \"width\": 100, \"minWidth\": 60 },{ \"display\": \"拒绝原因\", \"name\": \"refuse\", \"align\": \"center\", \"minWidth\": 140 }";
+            var s1 = "{ \"display\": \"提交者\", \"name\": \"submitUser\", \"align\": \"center\", \"width\": 100, \"minWidth\": 60 },{ \"display\": \"审批者\", \"name\": \"approvedUser\", \"align\": \"center\", \"minWidth\": 140 },{ \"display\": \"信息名字\", \"name\": \"name\", \"width\": 120 }";
             var colnames="";
             var s3 ="\"dataAction\": \"server\", \"data\": \"rows\", \"sortName\": \"id\",\" width\": \"100%\", \"height\": \"100%\", \"pageSize\": 30,\"rownumbers\":true,\"checkbox\" : false,\"colDraggable\" : true,\"rowDraggable\" : true,\"cssClass\" : \"l-grid-gray\", \"heightDiff\": 0";
             for(var i=1;i<=objJson.field.length;i++) //在这里读json的列名，当作表格的列名
@@ -36,7 +28,7 @@ var manager;
 	          gridManager = $("#maingrid").ligerGetGridManager();
 	          $("#pageloading").hide();	
         });
-      
+
         function showDetail(id)
         {
         	alert("您选中的ID是" + id);
@@ -51,41 +43,6 @@ var manager;
                 	case "refresh":
                 	window.location.reload();
                     return;
-                	 case "modify":
-                    	 var data = gridManager.getCheckedRows();
-                         if (data.length == 0)
-                             alert('请选择行!');
-                         else
-                         {
-                             var checkedIds = [];
-                             var checkedNames = [];
-                             var checkedStatus = [];
-                             $(data).each(function ()
-                                     {
-                                     
-                                         	checkedIds.push(this.id);
-                                         	checkedNames.push(this.name);
-                                         	checkedStatus.push(this.Status);
-                                         	
-                                     });
-                             if(checkedStatus == "审批通过"||checkedStatus == "未审批"){
-                             	alert("不能修改已提交审批的界面");
-                            	return;
-                            }
-                            else if(checkedIds.length == data.length)
-                               {
-                            	
-	                            	$.ligerDialog.confirm('确定修改:' + checkedNames.join(' ; ') + '?', function (result)
-	                                {
-	                            		if(result)
-	                            		{
-	                                       		url = 'viewMajorContributeRecordDetail.action?flag=modify'+'&recordId='+checkedIds;
-	                                       		modifyInfo(url);
-	                                    }
-	                            	 });
-                             }
-                            }
-                        return;
                     case "detail":
                         var data = gridManager.getCheckedRows();
                         if (data.length == 0)
@@ -107,7 +64,7 @@ var manager;
                                 {
                                     if(result)
                                     	{
-                                    		url = 'viewMajorContributeRecordDetail.action?recordId='+checkedIds;
+                                    		url = 'viewEducationalReformRecordDetail.action?recordId='+checkedIds;
                                     		detailInfo(url);
                                         }
                                 });
@@ -179,10 +136,6 @@ var manager;
         {
         	window.location.href=url;
         }
-      
-        
-  
-        
         function downloadExcel(link)
         {
         	window.location.href=link;
@@ -204,3 +157,4 @@ var manager;
      }
 	 
 	 var rows = [];
+
