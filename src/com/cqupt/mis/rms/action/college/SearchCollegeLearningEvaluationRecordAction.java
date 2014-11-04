@@ -1,9 +1,11 @@
 package com.cqupt.mis.rms.action.college;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.CQUPTUser;
 import com.cqupt.mis.rms.model.LearningEvaluationData;
@@ -13,10 +15,13 @@ import com.cqupt.mis.rms.model.LearningRecordAward;
 import com.cqupt.mis.rms.service.LearningEvaluationRecordInfoService;
 import com.cqupt.mis.rms.service.SearchCQUPTUserService;
 import com.cqupt.mis.rms.service.model.ModelInfo;
+import com.cqupt.mis.rms.utils.LearningEvaluationDataComparator;
 import com.opensymphony.xwork2.ActionContext;
 
+import edu.emory.mathcs.backport.java.util.TreeSet;
+
 public class SearchCollegeLearningEvaluationRecordAction {
-	private SearchDao searchDao;
+	private DynamicDataFieldDao dynamicDataFieldDao;
 	private SearchCQUPTUserService searchCQUPTUserService;
 	private LearningEvaluationRecordInfoService learningEvaluationRecordInfoService;
 	private List<ModelInfo<LearningEvaluationRecord, LearningRecordAward>> learningEvaluationRecordInfos;
@@ -86,32 +91,51 @@ public class SearchCollegeLearningEvaluationRecordAction {
 		/*
 		 * 将动态字段的输出序列化
 		 */
-		Set<LearningEvaluationData> sortedFields2 = new HashSet<LearningEvaluationData>();
+		List<LearningEvaluationData> sortedFields = new ArrayList<LearningEvaluationData>();
 		//获取相应的所有字段
-		List<LearningEvaluationField> fields = searchDao.SearchObjectsByFactor("LearningEvaluationField", "isDelete", 0);	
+		List<LearningEvaluationField> fields = dynamicDataFieldDao.findAllFields("LearningEvaluationField");	
 		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
 		for(LearningEvaluationField field1 : fields) {
 			LearningEvaluationData learningEvaluationData = new LearningEvaluationData();
 			learningEvaluationData.setField(field1);
 			learningEvaluationData.setValue("");
-			sortedFields2.add(learningEvaluationData);
+			sortedFields.add(learningEvaluationData);
 			for(ModelInfo<LearningEvaluationRecord, LearningRecordAward> info : learningEvaluationRecordInfos) {
 				Set<LearningEvaluationData> datas = info.getModel().getFields();
-				Set<LearningEvaluationData> tempDatas = new HashSet<LearningEvaluationData>();
-				//剔除已经假删除的字段
-				for(LearningEvaluationData d : datas) {
-					if(d.getField().getIsDelete() == 1) {
-						tempDatas.add(d);
-					}
-				}
-				datas.removeAll(tempDatas);
 				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
 				datas.add(learningEvaluationData);
-			}
+			} 
 		}
 		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(ModelInfo<LearningEvaluationRecord, LearningRecordAward> info : learningEvaluationRecordInfos) {
+			Set<LearningEvaluationData> datas = info.getModel().getFields();
+			Set<LearningEvaluationData> tempDatas = new HashSet<LearningEvaluationData>();
+			//找出假删除的字段
+			for(LearningEvaluationData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<LearningEvaluationData> sortedDatas = new TreeSet(new LearningEvaluationDataComparator());
+			sortedDatas.addAll(datas);
+			info.getModel().setFields(sortedDatas);
+		}		
+		
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(LearningEvaluationData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		//将序列化话的值放入值栈
-		ActionContext.getContext().put("fields", sortedFields2);
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put("fields", sortedFields);
 		ActionContext.getContext().put("learningEvaluationInfos", learningEvaluationRecordInfos);
 		type="search";
 		
@@ -119,12 +143,12 @@ public class SearchCollegeLearningEvaluationRecordAction {
 
 	}
 
-	public SearchDao getSearchDao() {
-		return searchDao;
+	public DynamicDataFieldDao getDynamicDataFieldDao() {
+		return dynamicDataFieldDao;
 	}
 
-	public void setSearchDao(SearchDao searchDao) {
-		this.searchDao = searchDao;
+	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {
+		this.dynamicDataFieldDao = dynamicDataFieldDao;
 	}
 
 	public SearchCQUPTUserService getSearchCQUPTUserService() {

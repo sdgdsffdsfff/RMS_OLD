@@ -801,7 +801,6 @@
 	<bean id="searchCollegeStudentAwardsRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeStudentAwardsRecordAction" scope="prototype">
 		<property name="studentAwardsRecordInfoService" ref="studentAwardsRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
 		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 
@@ -809,56 +808,56 @@
 	<bean id="searchCollegeTeacherAwardsRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeacherAwardsRecordAction" scope="prototype">
 		<property name="teacherAwardsRecordInfoService" ref="teacherAwardsRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置学院查询MajorContributeRecordInfo专业建设的Bean -->
 	<bean id="searchCollegeMajorContributeRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeMajorContributeRecordAction" scope="prototype">
 		<property name="majorContributeRecordInfoService" ref="majorContributeRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置学院查询TeachingMaterialRecordInfo教材立项的Bean -->
 	<bean id="searchCollegeTeachingMaterialRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeTeachingMaterialRecordAction" scope="prototype">
 		<property name="teachingMaterialRecordInfoService" ref="teachingMaterialRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置学院查询ExcellentTrainerRecordInfo优秀培训师的Bean -->
 	<bean id="searchCollegeExcellentTrainerRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeExcellentTrainerRecordAction" scope="prototype">
 		<property name="excellentTrainerRecordInfoService" ref="excellentTrainerRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置查询QualityProjectRecordInfo质量工程的Bean -->
 	<bean id="searchCollegeQualityProjectRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeQualityProjectRecordAction" scope="prototype">
 		<property name="qualityProjectRecordInfoService" ref="qualityProjectRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置查询LearningEvaluationRecordInfo学评教信息的Bean -->
 	<bean id="searchCollegeLearningEvaluationRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeLearningEvaluationRecordAction" scope="prototype">
 		<property name="learningEvaluationRecordInfoService" ref="learningEvaluationRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置查询EducationalReformRecordInfo教改结题项目的Bean -->
 	<bean id="searchCollegeEducationalReformRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeEducationalReformRecordAction" scope="prototype">
 		<property name="educationalReformRecordInfoService" ref="educationalReformRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	<!-- 配置查询OtherTeachingAwardsRecordInfo其他教学奖励的Bean -->
 	<bean id="searchCollegeOtherTeachingAwardsRecordAction" class="com.cqupt.mis.rms.action.college.SearchCollegeOtherTeachingAwardsRecordAction" scope="prototype">
 		<property name="otherTeachingAwardsRecordInfoService" ref="otherTeachingAwardsRecordInfoService" />
 		<property name="searchCQUPTUserService" ref="searchCQUPTUserService" />
-		<property name="searchDao" ref="searchDao"></property>
+		<property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"></property>
 	</bean>
 	
 	

@@ -1,11 +1,16 @@
 package com.cqupt.mis.rms.action.college;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.CQUPTUser;
+import com.cqupt.mis.rms.model.TeachersAwardsData;
+import com.cqupt.mis.rms.model.TeachersAwardsField;
+import com.cqupt.mis.rms.model.TeachersAwardsRecord;
 import com.cqupt.mis.rms.model.TeachingMaterialData;
 import com.cqupt.mis.rms.model.TeachingMaterialField;
 import com.cqupt.mis.rms.model.TeachingMaterialRecord;
@@ -13,11 +18,15 @@ import com.cqupt.mis.rms.model.TeachingRecordEditor;
 import com.cqupt.mis.rms.service.SearchCQUPTUserService;
 import com.cqupt.mis.rms.service.TeachingMaterialRecordInfoService;
 import com.cqupt.mis.rms.service.model.ModelInfo;
+import com.cqupt.mis.rms.utils.TeachAchievementsDataComparator;
+import com.cqupt.mis.rms.utils.TeachingMaterialDataComparator;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.emory.mathcs.backport.java.util.TreeSet;
+
 public class SearchCollegeTeachingMaterialRecordAction extends ActionSupport {
-	private SearchDao searchDao;
+	private DynamicDataFieldDao dynamicDataFieldDao;
 	private SearchCQUPTUserService searchCQUPTUserService;
 	private TeachingMaterialRecordInfoService teachingMaterialRecordInfoService;
 	private List<ModelInfo<TeachingMaterialRecord, TeachingRecordEditor>> teachingMaterialRecordInfos;
@@ -87,32 +96,51 @@ public class SearchCollegeTeachingMaterialRecordAction extends ActionSupport {
 		/*
 		 * 将动态字段的输出序列化
 		 */
-		Set<TeachingMaterialData> sortedFields2 = new HashSet<TeachingMaterialData>();
+		List<TeachingMaterialData> sortedFields = new ArrayList<TeachingMaterialData>();
 		//获取相应的所有字段
-		List<TeachingMaterialField> fields = searchDao.SearchObjectsByFactor("TeachingMaterialField", "isDelete", 0);	
+		List<TeachingMaterialField> fields = dynamicDataFieldDao.findAllFields("TeachingMaterialField");	
 		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
 		for(TeachingMaterialField field1 : fields) {
 			TeachingMaterialData teachingMaterialData = new TeachingMaterialData();
 			teachingMaterialData.setField(field1);
 			teachingMaterialData.setValue("");
-			sortedFields2.add(teachingMaterialData);
+			sortedFields.add(teachingMaterialData);
 			for(ModelInfo<TeachingMaterialRecord, TeachingRecordEditor> info : teachingMaterialRecordInfos) {
 				Set<TeachingMaterialData> datas = info.getModel().getFields();
-				Set<TeachingMaterialData> tempDatas = new HashSet<TeachingMaterialData>();
-				//剔除已经假删除的字段
-				for(TeachingMaterialData d : datas) {
-					if(d.getField().getIsDelete() == 1) {
-						tempDatas.add(d);
-					}
-				}
-				datas.removeAll(tempDatas);
 				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
 				datas.add(teachingMaterialData);
-			}
+			} 
 		}
 		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(ModelInfo<TeachingMaterialRecord, TeachingRecordEditor> info : teachingMaterialRecordInfos) {
+			Set<TeachingMaterialData> datas = info.getModel().getFields();
+			Set<TeachingMaterialData> tempDatas = new HashSet<TeachingMaterialData>();
+			//找出假删除的字段
+			for(TeachingMaterialData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<TeachingMaterialData> sortedDatas = new TreeSet(new TeachingMaterialDataComparator());
+			sortedDatas.addAll(datas);
+			info.getModel().setFields(sortedDatas);
+		}		
+		
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(TeachingMaterialData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		//将序列化话的值放入值栈
-		ActionContext.getContext().put("fields", sortedFields2);
+		ActionContext.getContext().put("fieldJson",json);
+		ActionContext.getContext().put("fields", sortedFields);
 		ActionContext.getContext().put("studentAwardsInfos", teachingMaterialRecordInfos);
 		type="search";
 		
@@ -120,12 +148,12 @@ public class SearchCollegeTeachingMaterialRecordAction extends ActionSupport {
 
 	}
 
-	public SearchDao getSearchDao() {
-		return searchDao;
+	public DynamicDataFieldDao getDynamicDataFieldDao() {
+		return dynamicDataFieldDao;
 	}
 
-	public void setSearchDao(SearchDao searchDao) {
-		this.searchDao = searchDao;
+	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {
+		this.dynamicDataFieldDao = dynamicDataFieldDao;
 	}
 
 	public SearchCQUPTUserService getSearchCQUPTUserService() {

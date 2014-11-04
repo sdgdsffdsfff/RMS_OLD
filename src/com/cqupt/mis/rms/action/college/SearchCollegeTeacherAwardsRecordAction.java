@@ -1,9 +1,11 @@
 package com.cqupt.mis.rms.action.college;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
 import com.cqupt.mis.rms.manager.SearchDao;
 import com.cqupt.mis.rms.model.CQUPTUser;
 import com.cqupt.mis.rms.model.StudentAwardsData;
@@ -17,13 +19,14 @@ import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.service.SearchCQUPTUserService;
 import com.cqupt.mis.rms.service.TeacherAwardsRecordInfoService;
 import com.cqupt.mis.rms.service.model.ModelInfo;
+import com.cqupt.mis.rms.utils.TeachAchievementsDataComparator;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.emory.mathcs.backport.java.util.TreeSet;
+
 public class SearchCollegeTeacherAwardsRecordAction extends ActionSupport {
-
-
-	private SearchDao searchDao;
+	private DynamicDataFieldDao dynamicDataFieldDao;
 	private SearchCQUPTUserService searchCQUPTUserService;
 	private TeacherAwardsRecordInfoService teacherAwardsRecordInfoService;
 	private List<ModelInfo<TeachersAwardsRecord, TeachersRecordAchievements>> teacherAwardsRecordInfos;
@@ -94,33 +97,50 @@ public class SearchCollegeTeacherAwardsRecordAction extends ActionSupport {
 		 * 将动态字段的输出序列化
 		 */
 		
-		Set<TeachersAwardsData> sortedFields2 = new HashSet<TeachersAwardsData>();
+		List<TeachersAwardsData> sortedFields = new ArrayList<TeachersAwardsData>();
 		//获取相应的所有字段
-		List<TeachersAwardsField> fields = searchDao.SearchObjectsByFactor("TeachersAwardsField", "isDelete", 0);		
+		List<TeachersAwardsField> fields = dynamicDataFieldDao.findAllFields("TeachersAwardsField");		
 		//获取相应的教学成果奖信息数据
-
 		for(TeachersAwardsField field1 : fields) {
 			TeachersAwardsData teachersAwardsData = new TeachersAwardsData();
 			teachersAwardsData.setField(field1);
 			teachersAwardsData.setValue("");
- 			sortedFields2.add(teachersAwardsData);
- 			for(ModelInfo<TeachersAwardsRecord, TeachersRecordAchievements> info : teacherAwardsRecordInfos) {
+			sortedFields.add(teachersAwardsData);
+			for(ModelInfo<TeachersAwardsRecord, TeachersRecordAchievements> info : teacherAwardsRecordInfos) {
 				Set<TeachersAwardsData> datas =info.getModel().getFields();
-				Set<TeachersAwardsData> tempDatas = new HashSet<TeachersAwardsData>();
-				//剔除已经假删除的字段
-				for(TeachersAwardsData d : datas) {
-					if(d.getField().getIsDelete() == 1) {
-						tempDatas.add(d);
-					}
-				}
-				datas.removeAll(tempDatas);
 				//添加字段，若该字段已存在，则不会添加；若该字段不存在，则添加且置值为“”
 				datas.add(teachersAwardsData);
 			} 
 		}
-
-		System.out.println(fields.get(0).getName());
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(ModelInfo<TeachersAwardsRecord, TeachersRecordAchievements> info : teacherAwardsRecordInfos) {
+			Set<TeachersAwardsData> datas =info.getModel().getFields();
+			Set<TeachersAwardsData> tempDatas = new HashSet<TeachersAwardsData>();
+			//找出假删除的字段
+			for(TeachersAwardsData d : datas) {
+				if(d.getField().getIsDelete() == 1) {
+					tempDatas.add(d);
+				}
+			}
+			//剔除假删除的字段
+			datas.removeAll(tempDatas);
+			//按order排序
+			Set<TeachersAwardsData> sortedDatas = new TreeSet(new TeachAchievementsDataComparator());
+			sortedDatas.addAll(datas);
+			info.getModel().setFields(sortedDatas);
+		}		
+		
+		StringBuilder temp = new StringBuilder();
+		temp.append("{ \"field\": [");
+		for(TeachersAwardsData data : sortedFields) {
+			temp.append(" { \"des\":\""+data.getField().getDescription()+"\" },");
+		}
+		String json = temp.substring(0, temp.length()-1);
+		json += "] }";
+		
 		//将序列化话的值放入值栈
+		ActionContext.getContext().put("fieldJson",json);
 		ActionContext.getContext().put("fields", fields);
 		ActionContext.getContext().put("teacherAwardsInfos", teacherAwardsRecordInfos);
 		type="search";
@@ -137,8 +157,6 @@ public class SearchCollegeTeacherAwardsRecordAction extends ActionSupport {
 			SearchCQUPTUserService searchCQUPTUserService) {
 		this.searchCQUPTUserService = searchCQUPTUserService;
 	}
-
-
 
 	public String getRoleId() {
 		return roleId;
@@ -220,13 +238,14 @@ public class SearchCollegeTeacherAwardsRecordAction extends ActionSupport {
 		this.type = type;
 	}
 
-	public SearchDao getSearchDao() {
-		return searchDao;
+	public DynamicDataFieldDao getDynamicDataFieldDao() {
+		return dynamicDataFieldDao;
 	}
 
-	public void setSearchDao(SearchDao searchDao) {
-		this.searchDao = searchDao;
+	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {
+		this.dynamicDataFieldDao = dynamicDataFieldDao;
 	}
+
 	public TeacherAwardsRecordInfoService getTeacherAwardsRecordInfoService() {
 		return teacherAwardsRecordInfoService;
 	}

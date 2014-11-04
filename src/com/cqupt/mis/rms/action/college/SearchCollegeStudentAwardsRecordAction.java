@@ -1,5 +1,6 @@
 package com.cqupt.mis.rms.action.college;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import edu.emory.mathcs.backport.java.util.TreeSet;
 
 public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
-	private SearchDao searchDao;
 	private DynamicDataFieldDao dynamicDataFieldDao;
 	private SearchCQUPTUserService searchCQUPTUserService;
 	private StudentAwardsRecordInfoService studentAwardsRecordInfoService;
@@ -92,7 +92,7 @@ public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 		/*
 		 * 将动态字段的输出序列化
 		 */
-		Set<StudentAwardsData> sortedFields = new HashSet<StudentAwardsData>();
+		List<StudentAwardsData> sortedFields = new ArrayList<StudentAwardsData>();
 		//获取相应的所有字段
 		List<StudentAwardsField> fields = dynamicDataFieldDao.findAllFields("StudentAwardsField");	
 		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
@@ -250,14 +250,6 @@ public class SearchCollegeStudentAwardsRecordAction extends ActionSupport {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public SearchDao getSearchDao() {
-		return searchDao;
-	}
-
-	public void setSearchDao(SearchDao searchDao) {
-		this.searchDao = searchDao;
 	}
 
 	public DynamicDataFieldDao getDynamicDataFieldDao() {
