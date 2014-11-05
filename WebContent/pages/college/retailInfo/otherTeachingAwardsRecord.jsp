@@ -43,7 +43,7 @@
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">项目名称</label>
+				<label for="awardsName">获奖名称</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">
