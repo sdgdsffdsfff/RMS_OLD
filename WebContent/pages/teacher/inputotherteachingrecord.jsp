@@ -36,7 +36,7 @@
 			<div class="line">
 				
 				<div class="element" style="height:31px;">
-					<label for="projectName">项目名称:</label>
+					<label for="projectName">获奖名称:</label>
 					<input type="text" id="projectName" name="projectName" class=":required" />
 				</div>
 				
