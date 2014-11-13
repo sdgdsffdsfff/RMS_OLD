@@ -41,10 +41,17 @@ public class ForwardAssignPurviewAction extends ActionSupport {
 		// 获取userId和roleId
 		String userId = (String) ActionContext.getContext().getSession().get("userId");
 		int userRoleId = (Integer) ActionContext.getContext().getSession().get("roleId");
-		// 找出一级菜单，parentId=0
-		//liuzezhou  update  \findPurviewListByUserIdAndRoleIdAndParentIdForCommonds\   method
-		List<Purviewinfo> firstPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(0);
-//		List<Purviewinfo> firstPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(userId,userRoleId, 0);
+		/*
+		 * bern 修改
+		 * 当操作用户为管理员时，默认取出所有权限菜单，防止管理员权限丢失
+		 * 找出一级菜单，parentId=0
+		 */
+		List<Purviewinfo> firstPurviewList;
+		if(userRoleId == 1) {
+			firstPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(0);
+		}else {
+			firstPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(userId,userRoleId, 0);
+		}
 		if (firstPurviewList != null) {
 			StringBuffer sb = new StringBuffer();
 			// 获取一级菜单
@@ -65,9 +72,17 @@ public class ForwardAssignPurviewAction extends ActionSupport {
 							+ firstPurview.getPurviewName());
 				}
 				sb.append("</td>");
-				// 获取一级菜单下面的二级菜单(根据它的PurviewId号)
-//				List<Purviewinfo> secondPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(userId, userRoleId, firstPurview.getPurviewId());
-				List<Purviewinfo> secondPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(firstPurview.getPurviewId());
+				/*
+				 * bern 修改
+				 * 当操作用户为管理员时，默认取出所有权限菜单，防止管理员权限丢失
+				 * 获取一级菜单下面的二级菜单(根据它的PurviewId号)
+				 */
+				List<Purviewinfo> secondPurviewList;
+				if(userRoleId == 1) {
+					secondPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(firstPurview.getPurviewId());
+				}else {
+					secondPurviewList = purviewService.findPurviewListByUserIdAndRoleIdAndParentIdForCommonds(userId, userRoleId, firstPurview.getPurviewId());
+				}
 				if (secondPurviewList != null) {
 					sb.append("<td align=\"left\">");
 					for (Purviewinfo secondPurviewChild : secondPurviewList) {
