@@ -28,6 +28,18 @@
 	<script type="text/javascript" src="js/admin/checkDynamicFieldForm.js"></script>
 	<script src="lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
 	<script src="js/search/managedynamicdatafield.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+	$(function() {
+		var order ="${requestScope.classNum}";
+		$("#select option").each(function() {  
+	        if ($(this).val() == order) {  
+	                $(this).attr("selected", true);  
+	            
+	            }  
+	        }); 
+	});
+	</script>
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="findDynamicDataField.action" onsubmit="return checkClick();" method="post">
@@ -78,7 +90,7 @@
    			</s:iterator> 
    			 </s:if>
     	</div>
-	
+
 <div style="display:none;">
 
 </div>
