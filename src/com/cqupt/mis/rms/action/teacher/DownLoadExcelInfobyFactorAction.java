@@ -2,9 +2,14 @@ package com.cqupt.mis.rms.action.teacher;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
+
 import com.cqupt.mis.rms.service.DownLoadExcelInfobyFactorService;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.ExcelTemplate;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -89,8 +94,8 @@ public class DownLoadExcelInfobyFactorAction extends ActionSupport{
 	public String downloadStudentAwardsExcel(){
 		HttpServletResponse response = ServletActionContext.getResponse();  
 		String userId = (String)ActionContext.getContext().getSession().get("userId");
-		 ExcelTemplate template = (ExcelTemplate) downLoadExcelInfobyFactorService.getExcelStudentAwardsInfo(factorName,factorValue,userId);
-		 response.reset();  
+		ExcelTemplate template = (ExcelTemplate) downLoadExcelInfobyFactorService.getExcelStudentAwardsInfo(factorName,factorValue,userId);
+		response.reset();  
         response.setContentType("application/x-download;charset=GBK");  
         response.setHeader("Content-Disposition", "attachment;filename=StudentAwards_"+System.currentTimeMillis()+".xls");  
         try {  
@@ -469,6 +474,39 @@ public class DownLoadExcelInfobyFactorAction extends ActionSupport{
 		return SUCCESS;
 		
 	}
+	
+	/**
+	 * 导出动态字段记录类的excel
+	 * @return
+	 */
+	public String downloadDynamicDataRecordExcel(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();  
+		String userId = (String)ActionContext.getContext().getSession().get("userId");
+		int classNum = Integer.valueOf(request.getParameter("classNum"));
+		String recordName = DynamicDataFieldUtils.getRecordNameByClassNum(classNum);
+		ExcelTemplate template = null;
+		try {
+			template = (ExcelTemplate) downLoadExcelInfobyFactorService.getExcelDyanmicDataRecordInfo(factorName, factorValue, userId, classNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+		if(template == null) {
+			return ERROR;
+		}
+		response.reset();  
+        response.setContentType("application/x-download;charset=GBK");  
+        response.setHeader("Content-Disposition", "attachment;filename="+recordName+"_"+System.currentTimeMillis()+".xls");  
+        try {  
+            template.getWorkbook().write(response.getOutputStream());  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+		return SUCCESS;
+		
+	}
+	
 	
 	
 }

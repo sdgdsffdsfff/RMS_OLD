@@ -186,6 +186,7 @@
 	--><!-- 配置下载指定信息的excel结果集的bean-->
 	<bean id="downLoadExcelInfobyFactorService" class="com.cqupt.mis.rms.service.impl.DownLoadExcelInfobyFactorServiceImpl">
 	    <property name="getDownloadInfoService" ref="getDownloadInfoService"/>
+	    <property name="dynamicDataFieldDao" ref="dynamicDataFieldDao"/>
 	</bean>
 	
 	

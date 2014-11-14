@@ -129,7 +129,7 @@ var manager;
                         	{
                         		if(result)
                         		{
-                        			link = 'downLoadExcelbyFactor/downloadStudentAwardsExcel.action?factorName=id&factorValue='+checkedIds;
+                        			link = 'downLoadExcelbyFactor/downloadDynamicDataRecordExcel.action?factorName=id&factorValue='+checkedIds+'&classNum=9';
                         			downloadExcel(link);
                         		}
                         	});

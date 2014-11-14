@@ -2665,6 +2665,9 @@
 	</package>
 	
 	<package name="downLoadExcelbyFactor" extends="struts-default" namespace="/downLoadExcelbyFactor">
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
 		<action name="downloadCourseContributeExcel" class="downLoadExcelInfobyFactorAction" method="downloadCourseContributeExcel">
 			<result name="success" type="stream">
 				<param name="contentType">application/vnd.ms-excel</param>
@@ -2908,6 +2911,18 @@
 			</result>
 		</action>
 		<action name="downloadTeachAchievementsCQExcel" class="downLoadExcelInfobyFactorAction"  method="downloadTeachAchievementsCQExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+				<param name="contentDisposition">
+                    filename="${fileShowName}"
+                </param>
+			</result>
+		</action>
+		
+		
+		<action name="downloadDynamicDataRecordExcel" class="downLoadExcelInfobyFactorAction"  method="downloadDynamicDataRecordExcel">
 			<result name="success" type="stream">
 				<param name="contentType">application/vnd.ms-excel</param>
 				<param name="inputName">inputStream</param>

@@ -1,11 +1,13 @@
 package com.cqupt.mis.rms.action.system.purview;
 
+import com.cqupt.mis.rms.security.MyFilterInvocationSecurityMetadataSource;
 import com.cqupt.mis.rms.service.PurviewService;
 import com.cqupt.mis.rms.utils.Confirm;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
+ * 处理分配权限的Action
  * @author LM
  * 
  */
@@ -41,6 +43,8 @@ public class AssignPurviewAction extends ActionSupport {
 	public String execute() throws Exception {
 		Confirm confirm = new Confirm();
 		boolean result = purviewService.addRolePurviewByRoleIdAndpurviewIdArray(roleId, purviewId);
+		//重新加载resourceMap里的权限资源对应列表
+		MyFilterInvocationSecurityMetadataSource source = new MyFilterInvocationSecurityMetadataSource();
 		if (result) {
 			confirm.setIsSuccess("right");
 			confirm.setMessage("权限分配成功");

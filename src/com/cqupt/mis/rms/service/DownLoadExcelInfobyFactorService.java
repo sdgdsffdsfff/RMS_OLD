@@ -1,5 +1,7 @@
 package com.cqupt.mis.rms.service;
 
+import com.cqupt.mis.rms.utils.ExcelTemplate;
+
 
 
 
@@ -189,8 +191,15 @@ public interface DownLoadExcelInfobyFactorService {
 	public Object getExcelTeachAchievementsInfo(String factorName,
 			String factorValues, String userId);
 
-	
-	
+	/**
+	 * 通过相应的条件得到相应动态字段类的信息
+	 * @param factorName 需要的信息的字段名
+	 * @param factorValue 需要的信息的字段名所对应的值
+	 * @param className 动态字段记录类类名
+	 * @return Object 返回教学成果信息类学生获奖对应的excel
+	 */
+	public Object getExcelDyanmicDataRecordInfo(String factorName,String factorValues,String userId,int classNum) 
+			throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, InstantiationException;	
 	
 	
 }

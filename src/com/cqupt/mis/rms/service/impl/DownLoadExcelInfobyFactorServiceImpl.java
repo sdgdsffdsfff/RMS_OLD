@@ -1,11 +1,20 @@
 package com.cqupt.mis.rms.service.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.cqupt.mis.rms.manager.DynamicDataFieldDao;
+import com.cqupt.mis.rms.model.CQUPTUser;
 import com.cqupt.mis.rms.model.CourseContribute;
 import com.cqupt.mis.rms.model.CourseContributeMember;
 import com.cqupt.mis.rms.model.CourseContributeNew;
 import com.cqupt.mis.rms.model.CourseContributeMemberNew;
+import com.cqupt.mis.rms.model.EducationalReformData;
 import com.cqupt.mis.rms.model.HumanitiesAcademicMeeting;
 import com.cqupt.mis.rms.model.HumanitiesAcademicMeetingPerson;
 import com.cqupt.mis.rms.model.HumanitiesBook;
@@ -41,7 +50,10 @@ import com.cqupt.mis.rms.model.ScienceTechProjectMember;
 import com.cqupt.mis.rms.model.ScienceTechTransfer;
 import com.cqupt.mis.rms.model.ScienceTransferLeader;
 import com.cqupt.mis.rms.model.StudentAwards;
+import com.cqupt.mis.rms.model.StudentAwardsData;
+import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.StudentAwardsNew;
+import com.cqupt.mis.rms.model.StudentAwardsRecord;
 import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentInstructorNew;
 import com.cqupt.mis.rms.model.TeachAchievements;
@@ -56,10 +68,15 @@ import com.cqupt.mis.rms.model.TeachingMaterialSet;
 import com.cqupt.mis.rms.model.TeachingMaterialSetNew;
 import com.cqupt.mis.rms.service.DownLoadExcelInfobyFactorService;
 import com.cqupt.mis.rms.service.GetDownloadInfoService;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.ExcelTemplate;
+import com.cqupt.mis.rms.utils.StudentAwardsDataComparator;
+
+import edu.emory.mathcs.backport.java.util.TreeSet;
 
 public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfobyFactorService{
 
+	private DynamicDataFieldDao dynamicDataFieldDao;
 	
 	private GetDownloadInfoService getDownloadInfoService;
 	
@@ -68,6 +85,10 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 		this.getDownloadInfoService = getDownloadInfoService;
 	}
 	
+	public void setDynamicDataFieldDao(DynamicDataFieldDao dynamicDataFieldDao) {
+		this.dynamicDataFieldDao = dynamicDataFieldDao;
+	}
+
 	@Override
 	public ExcelTemplate getExcelCourseContributeNewInfo(String factorName,String factorValues ,String userId) {
         
@@ -4991,7 +5012,7 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 			 template.createCell(submitUser);
 			 
 			 //审批该信息的用户
-			 String approvedUser = studentAwards.getApprovedUser().getUserName();
+			 String approvedUser = "";
              if(studentAwards.getApprovedUser()==null){
 				 
             	 approvedUser="无"; 
@@ -5374,8 +5395,223 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 		
 		return template;
 	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public ExcelTemplate getExcelDyanmicDataRecordInfo(String factorName,String factorValues,String userId,int classNum) 
+			throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+		
+		ExcelTemplate template = ExcelTemplate.newInstance("download.xls");    
+		String recordName = DynamicDataFieldUtils.getRecordNameByClassNum(classNum);
+		String fieldName = DynamicDataFieldUtils.getClassNameByClassNum(classNum);
+		String dataName = DynamicDataFieldUtils.getDataNameByClassNum(classNum);
+		String dataComparatorName = DynamicDataFieldUtils.getDataComparatorNameByClassNum(classNum);
+		
+		List<Object> lists1 = (List<Object>) getDownloadInfoService.getExcelDownloadInfoByFactors(recordName,factorName,factorValues);
+		List<Object> lists2 = (List<Object>) dynamicDataFieldDao.findAllFields(fieldName);
+		
+		//将每条记录中值为空的字段插入，并初始化一个排好序的字段Set
+		for(Object object : lists2) {
+			//获取相应的动态字段数据类实例,并初始化
+			Class<?> dataClass = Class.forName("com.cqupt.mis.rms.model."+dataName);
+			Object data = dataClass.newInstance();
+			//获取动态字段数据类的field,并设为object
+			Field dataField = data.getClass().getDeclaredField("field");
+			dataField.setAccessible(true);
+			dataField.set(data, object);
+			//获取动态字段数据类的value,并设为“”
+			Field dataValue = data.getClass().getDeclaredField("value");
+			dataValue.setAccessible(true);
+			dataValue.set(data, "");
+			for(Object object1 : lists1) {
+				Field field1 = object1.getClass().getDeclaredField("fields");
+				field1.setAccessible(true);
+				Set<Object> data2 = (Set<Object>) field1.get(object1);
+				data2.add(data);
+			}
+		}
+		
+		//剔除已经假删除的字段,并将每个record的fields值按Order排序
+		for(Object object1 : lists1) {
+			Field field1 = object1.getClass().getDeclaredField("fields");
+			field1.setAccessible(true);
+			Set<Object> data = (Set<Object>) field1.get(object1);
+			Set<Object> tempDatas = new HashSet<Object>();
+			for(Object object2 : data) {
+				//获取field字段
+				Field field2 = object2.getClass().getDeclaredField("field");
+				field2.setAccessible(true);
+				Object object3 = field2.get(object2);	//field字段
+				//通过java反射的方法调用来获取isDelete值（不能直接获取isDelete字段，延迟加载会报错）
+				int isDelete = 0;
+				try {
+					Method method = object3.getClass().getDeclaredMethod("getIsDelete");
+					isDelete = (Integer) method.invoke(object3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				//获取isDelete字段
+//				Field field3 = object3.getClass().getDeclaredField("isDelete");
+//				field3.setAccessible(true);
+//				int isDelete = (Integer) field3.get(object3);	//isDelete字段
+				if(isDelete == 1) {
+					tempDatas.add(object2);
+				}
+			}
+			//剔除假删除的字段
+			data.removeAll(tempDatas);
+			//按order排序
+			Class<?> comparatorClass = Class.forName("com.cqupt.mis.rms.utils."+dataComparatorName);
+			Comparator comparator = (Comparator) comparatorClass.newInstance();
+			Set<Object> sortedDatas = new TreeSet(comparator);
+			sortedDatas.addAll(data);
+			field1.set(object1, sortedDatas);
+		}
+		
 
-
+		
+		template.createRow(0);
+		template.createCell("编号");
+		template.createCell("信息id");
+		template.createCell("信息名称");
+		for(Object object : lists2) {
+			Field field = object.getClass().getDeclaredField("description");
+			field.setAccessible(true);
+			String title = (String) field.get(object);
+			template.createCell(title);
+		}
+		template.createCell("提交该信息的用户");
+		template.createCell("审批该信息的用户");
+		template.createCell("该信息的状态");
+		template.createCell("返回原因");
+		
+		if("admin".equals(userId)){
+			 template.createCell("附件");
+		}
+		
+		for(int i=0;i<lists1.size();i++){
+			Object object = lists1.get(i);
+			
+			template.createRow(i+1);
+			//编号
+			template.createCell(i+1+"");
+			 
+			//ID
+			Field field1 = object.getClass().getDeclaredField("id");
+			field1.setAccessible(true);
+			String value1 = (String) field1.get(object);
+			template.createCell(value1);
+			 
+			//名称
+			Field field2 = object.getClass().getDeclaredField("name");
+			field2.setAccessible(true);
+			String value2 = (String) field2.get(object);
+            if(value2 == ""){
+            	value2 = "无"; 
+			}
+			template.createCell(value2);
+			 
+			 
+			//动态字段
+			Field dynamicData = object.getClass().getDeclaredField("fields");
+			dynamicData.setAccessible(true);
+			Set<Object> data = (Set<Object>) dynamicData.get(object);
+			for(Object object2 : data) {
+				//获取field字段
+				Field field = object2.getClass().getDeclaredField("value");
+				field.setAccessible(true);
+				String value = (String) field.get(object2);
+				template.createCell(value);
+			}
+           
+			
+			//提交该信息的用户
+			Field field3 = object.getClass().getDeclaredField("submitUser");
+			field3.setAccessible(true);
+			CQUPTUser submitUser = (CQUPTUser) field3.get(object);
+			String value3 = "";
+            if(submitUser == null){
+            	value3 = "无"; 
+			}else {
+				value3 = submitUser.getUserName();
+			}
+			template.createCell(value3);
+			
+			//审批该信息的用户
+			Field field4 = object.getClass().getDeclaredField("approvedUser");
+			field4.setAccessible(true);
+			CQUPTUser approvedUser = (CQUPTUser) field4.get(object);
+			String value4 = "";
+            if(approvedUser == null){
+            	value4 = "无"; 
+			}else {
+				value4 = approvedUser.getUserName();
+			}
+			template.createCell(value4);
+			
+			//该信息的状态
+			Field field5 = object.getClass().getDeclaredField("status");
+			field5.setAccessible(true);
+			int value5 = (Integer) field5.get(object);
+			String statusStr = "";
+			if(value5 == 0){
+				statusStr = "该信息已保存但未提交";
+			}else if(value5 == 1){
+				statusStr = "信息已提交";
+			}else if(value5 == 2){
+				statusStr = "信息已审批通过";
+			}else if(value5 == 3){
+				statusStr = "信息审批未通过";
+			}
+			template.createCell(statusStr);
+			
+			//返回原因
+			Field field6 = object.getClass().getDeclaredField("returnReason");
+			field6.setAccessible(true);
+			String value6 = (String) field6.get(object);
+            if(value6 == ""){
+            	value6 = "无"; 
+			}
+			template.createCell(value6);
+			
+			 
+/*			//指导老师
+			@SuppressWarnings("unchecked")
+			List<StudentInstructor> lists2 = (List<StudentInstructor>) getDownloadInfoService.getExcelDownloadInfoByFactor("StudentInstructor", "studentAwards.awardsId", awardsId);
+			String other = "";
+			for(int j=0;j<lists2.size();j++){
+				StudentInstructor studentInstructor= lists2.get(j);
+				other = other + studentInstructor.getMemberName()+"、";
+			}
+				 
+			if(other==""){
+				other = "无"; 
+			}else{
+				other = other.substring(0,other.length()-1);
+			}
+			template.createCell(other);
+			 
+			//旁证材料
+			 if("admin".equals(userId)){
+				@SuppressWarnings("unchecked")
+				List<Proofs> proofslists = (List<Proofs>) getDownloadInfoService.getExcelDownloadInfoByFactor("Proofs", "infoApprovedId",awardsId);
+				
+				 for(int j=0;j<proofslists.size();j++){
+					 Proofs proofs= proofslists.get(j);
+					 if("".equals(proofs)){
+						 template.createCell("没有上传附件");
+					 }else{
+						 String proofsUrl = proofs.getUploadRealName();
+						 proofsUrl = "file:///"+proofsUrl;
+						 template.createCell(proofsUrl);
+					 }
+				 }
+			  } 
+ */		
+		}
+		return template;
+	}
 
 	
 }
