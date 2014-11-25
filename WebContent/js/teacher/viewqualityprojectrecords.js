@@ -51,6 +51,41 @@ var manager;
                 	case "refresh":
                 	window.location.reload();
                     return;
+                	case "delete":
+                        var data = gridManager.getCheckedRows();
+                        if (data.length == 0)
+                            alert('请选择行!');
+                        else
+                        {
+                            var checkedIds = [];
+                            var checkedNames = [];
+                            var checkedStatus = [];
+                            $(data).each(function ()
+                            {
+                                    
+                            	checkedIds.push(this.id);
+                            	checkedNames.push(this.name);
+                            	checkedStatus.push(this.Status);
+                                        	
+                            });
+                            if(checkedStatus == "审批通过"||checkedStatus == "未审批"||checkedStatus == "审批未通过"){
+                             	alert("不能删除已提交审批的界面");
+                            	return;
+                            }
+                            if(checkedIds.length == data.length)
+                            {
+                            	$.ligerDialog.confirm('确定删除:' + checkedNames.join(' ; ') + '?', function (result)
+                                {
+                                    if(result)
+                                    	{
+                                    		url = 'deleteQualityProjectRecord.action?&recordIds='+checkedIds;
+                                    		deleteInfo(url);
+                                        }
+                                });
+                            }
+                           
+                        }
+                    return;
                 	 case "modify":
                     	 var data = gridManager.getCheckedRows();
                          if (data.length == 0)
@@ -179,10 +214,29 @@ var manager;
         {
         	window.location.href=url;
         }
-      
+        function deleteInfo(url)
+        {
+        	xmlhttp = GetxmlhttpObject();
+            xmlhttp.open("POST",url,true);
+            xmlhttp.onreadystatechange = showMessage;
+            xmlhttp.send(null);
+        }
         
-  
-        
+        function showMessage(){
+        	if(xmlhttp.readyState == 4){
+        		$.ligerDialog.waitting('删除中，请稍候...');
+        		setTimeout(function ()
+                {
+        			$.ligerDialog.closeWaitting();
+        			if(xmlhttp.responseText == "true"){
+        				gridManager.deleteSelectedRow();
+        				$.ligerDialog.success('删除成功！');
+        			}else{
+        				$.ligerDialog.error('删除失败！');
+        			}
+                },1500);
+        	}
+        }
         function downloadExcel(link)
         {
         	window.location.href=link;

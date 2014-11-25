@@ -51,6 +51,41 @@ var manager;
                 	case "refresh":
                 	window.location.reload();
                     return;
+                	case "delete":
+                        var data = gridManager.getCheckedRows();
+                        if (data.length == 0)
+                            alert('请选择行!');
+                        else
+                        {
+                            var checkedIds = [];
+                            var checkedNames = [];
+                            var checkedStatus = [];
+                            $(data).each(function ()
+                            {
+                                    
+                            	checkedIds.push(this.id);
+                            	checkedNames.push(this.name);
+                            	checkedStatus.push(this.Status);
+                                        	
+                            });
+                            if(checkedStatus == "审批通过"||checkedStatus == "未审批"||checkedStatus == "审批未通过"){
+                             	alert("不能删除已提交审批的界面");
+                            	return;
+                            }
+                            if(checkedIds.length == data.length)
+                            {
+                            	$.ligerDialog.confirm('确定删除:' + checkedNames.join(' ; ') + '?', function (result)
+                                {
+                                    if(result)
+                                    	{
+                                    		url = 'deleteStudentAwards.action?&recordId='+checkedIds;
+                                    		deleteInfo(url);
+                                        }
+                                });
+                            }
+                           
+                        }
+                    return;
                 	 case "modify":
                     	 var data = gridManager.getCheckedRows();
                          if (data.length == 0)
