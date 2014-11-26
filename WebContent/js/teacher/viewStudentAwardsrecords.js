@@ -69,8 +69,8 @@ var manager;
                             	checkedStatus.push(this.Status);
                                         	
                             });
-                            if(checkedStatus == "审批通过"||checkedStatus == "未审批"||checkedStatus == "审批未通过"){
-                             	alert("不能删除已提交审批的界面");
+                            if(checkedStatus == "审批通过"||checkedStatus == "未审批"){
+                             	alert("不能删除这种类型的记录");
                             	return;
                             }
                             if(checkedIds.length == data.length)
@@ -79,7 +79,7 @@ var manager;
                                 {
                                     if(result)
                                     	{
-                                    		url = 'deleteStudentAwardsRecord.action?&recordIds='+checkedIds;
+                                    		url = 'deleteStudentAwardsRecord.action?&recordIdString='+checkedIds;
                                     		deleteInfo(url);
                                         }
                                 });

@@ -57,7 +57,10 @@
 		<property name="researchInfoDao" ref="researchInfoDao"/>
 	</bean>
 	
-	
+	<!-- 配置处理动态字段信息逻辑的Bean -->
+	<bean id="researchRecordInfoService" class="com.cqupt.mis.rms.service.impl.ResearchRecordInfoServiceImpl">
+		<property name="dynamicDataRecordDao" ref="dynamicDataRecordDao" />
+	</bean>
 	
 	
 	<!-- 配置查询 用户的bean-->

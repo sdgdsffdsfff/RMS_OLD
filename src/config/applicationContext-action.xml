@@ -246,6 +246,11 @@
 	</bean>
 	
 	
+	<!-- 配置教师用户删除个人教学类动态字段详细信息的Bean -->
+	<bean id="deleteResearchRecordInfoAction" class="com.cqupt.mis.rms.action.teacher.DeleteResearchRecordInfoAction" scope="prototype">
+		<property name="researchRecordInfoService" ref="researchRecordInfoService" />
+	</bean>
+	
 	
 	
 	

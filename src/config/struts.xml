@@ -1123,7 +1123,94 @@
 		</action>
 
 		<!-- ***************2014.09.21 # Bern添加 # 动态数据库字段 end***************** -->
-
+		
+		
+		<!-- ***************2014.11.26 # Bern添加 # 动态数据库记录的删除 start***************** -->
+		
+		<!-- 处理删除学生获奖信息的Action -->
+		<action name="deleteStudentAwardsRecord" class="deleteResearchRecordInfoAction" method="deleteStudentAwardsRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除教学成果奖信息的Action -->
+		<action name="deleteTeacherAwardsRecord" class="deleteResearchRecordInfoAction" method="deleteTeacherAwardsRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除专业建设信息的Action -->
+		<action name="deleteMajorContributeRecord" class="deleteResearchRecordInfoAction" method="deleteMajorContributeRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除教材立项信息的Action -->
+		<action name="deleteTeachingMaterialRecord" class="deleteResearchRecordInfoAction" method="deleteTeachingMaterialRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除优秀培训师信息的Action -->
+		<action name="deleteExcellentTrainerRecord" class="deleteResearchRecordInfoAction" method="deleteExcellentTrainerRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除质量工程信息 的Action -->
+		<action name="deleteQualityProjectRecord" class="deleteResearchRecordInfoAction" method="deleteQualityProjectRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除学评教信息 的Action -->
+		<action name="deleteLearningEvaluationRecord" class="deleteResearchRecordInfoAction" method="deleteLearningEvaluationRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 处理删除教改结题信息  的Action -->
+		<action name="deleteEducationalReformRecord" class="deleteResearchRecordInfoAction" method="deleteEducationalReformRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		
+		<!-- 处理教师删除其他教学奖励信息的Action -->
+		<action name="deleteOtherTeachingAwardsRecord" class="deleteResearchRecordInfoAction" method="deleteOtherTeachingAwardsRecord">
+			<result name="success" type="chain">
+				<param name="actionName">confirm</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+			
+		
+		<!-- ***************2014.11.26 # Bern添加 # 动态数据库记录的删除 end***************** -->
 
 
 		<!-- ***************2014.10.07 # liu添加 # 动态数据库字段 start***************** -->
