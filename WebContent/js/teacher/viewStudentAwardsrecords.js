@@ -78,7 +78,7 @@ var manager;
                                 {
                                     if(result)
                                     	{
-                                    		url = 'deleteStudentAwardsRecord.action?&recordIds='+checkedIds;
+                                    		url = 'deleteStudentAwardsRecord.action?recordIdString='+checkedIds;
                                     		deleteInfo(url);
                                         }
                                 });
@@ -124,7 +124,7 @@ var manager;
                     case "detail":
                         var data = gridManager.getCheckedRows();
                         if (data.length != 1)
-                       	 alert('请选择单行进行操作!');
+                        	alert('请选择单行进行操作!');
                         else
                         {
                             var checkedIds=[];
@@ -231,7 +231,7 @@ var manager;
         				gridManager.deleteSelectedRow();
         				$.ligerDialog.success('删除成功！');
         			}else{
-        				//$.ligerDialog.error('删除失败！');
+        				$.ligerDialog.error('删除失败！');
         			}
                 },1500);
       
