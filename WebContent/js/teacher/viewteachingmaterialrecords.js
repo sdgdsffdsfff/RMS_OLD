@@ -64,7 +64,7 @@ var manager;
                             $(data).each(function()
                             {
                             	checkedStatus.push(this.Status);
-                            	if(checkedStatus == "审批通过"||checkedStatus == "未审批"){
+                            	if(this.Status == "审批通过"||this.Status == "未审批"){
                             		alert("您所选数据中有正在审批中的条目");
                             		return;
                                 }else{

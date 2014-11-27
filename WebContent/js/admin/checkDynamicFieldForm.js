@@ -9,6 +9,14 @@ function checkClickAndSubmit() {
 		alert('请选择信息类别'); 
 		return false;
 	}
+	
+	var ovalue=document.getElementById('name');
+	var text=ovalue.value;
+    var pattern=/^[a-zA-Z_]+$/;
+    if(!pattern.test(text)){
+	  alert('字段数据库名不能含有中文！');
+	  return false;
+    }
     
 	if(clickresult == 'save') {
 		showContent = '确定提交已填写的字段信息？';

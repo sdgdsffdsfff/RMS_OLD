@@ -56,11 +56,11 @@
 			<div class="item">
 				<div class="element del person">
 					<label for="fieldName">字段数据库名：</label>
-					<input type="text" id="" name="fieldName" class=":required"/>
+					<input type="text" id="name" name="fieldName" class=":required"/>
 				</div>
 				<div class="element del detail">
 					<label for="remarksMem">字段前台展示名：</label>
-					<input type="text" id="" name="fieldDes" class=":required"/>
+					<input type="text" id="des" name="fieldDes" class=":required"/>
 				</div>
 			</div>
 		</div>
@@ -75,6 +75,8 @@
 	</p>
 	</div>
 	</form>
+	
+	说明：字段的数据名请使用英文加下划线，字段的前台展示名为录入和展现数据时前台显示的名字！
 	
 </body>
 </html>
