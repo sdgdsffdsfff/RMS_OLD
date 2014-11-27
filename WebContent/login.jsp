@@ -107,6 +107,5 @@
 		<p>技术支持：重庆邮电大学信管工作室</p>
 	</div>
 </div>
-<s:debug></s:debug>
 </body>
 </html>
