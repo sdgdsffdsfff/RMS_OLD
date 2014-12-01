@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-    <title>修改教改结题信息</title>
+    <title>修改教改项目信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -36,13 +36,13 @@
 
 	<div class="item">
 		<div class="title">
-			1.教改结题信息
+			1.教改项目信息
 		</div>
 		<div class="content">
 		<input type="hidden" id="recordId" name="recordId" value='<s:property value="#record.id"/>'/>
 			<div class="line">
 				<div class="element">
-					<label for="name">信息名称:</label>
+					<label for="name">项目名称:</label>
 					<input type="text" name="recordName" value='<s:property value="#record.name"/>' class=":required"/>
 				</div>	
 				<s:iterator value="#record.fields" id="f">
@@ -55,13 +55,13 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			2.指导老师信息
+			2.负责人信息
 			</div>
 			<div id="membertoolbar"></div>
 			<s:if test="%{#memberList == null || #memberList.isEmpty()}">
 				<div class="line spe">
 					<div class="element del person">
-						<label for="memberName">指导老师姓名:</label>
+						<label for="memberName">负责人姓名:</label>
 						<input type="text" id="memberName" name="memberName" />
 					</div>
 					<div class="element del detail">

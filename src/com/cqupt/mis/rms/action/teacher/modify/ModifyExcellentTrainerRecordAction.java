@@ -24,6 +24,7 @@ import com.cqupt.mis.rms.model.ExcellentTrainerRecord;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -146,14 +147,14 @@ public class ModifyExcellentTrainerRecordAction extends ActionSupport implements
 		Confirm confirm = new Confirm();
 		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("优秀培训师信息修改成功");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"修改成功");
 			confirm.setUrl("viewExcellentTrainerRecords.action");
-			confirm.setRetName("个人优秀培训师信息页面");
-		} else {
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(2)+"页面");
+		}else{
 			confirm.setIsSuccess("error");
-			confirm.setMessage("优秀培训师信息修改失败");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"修改失败");
 			confirm.setUrl("viewExcellentTrainerRecords.action");
-			confirm.setRetName("个人优秀培训师信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(2)+"页面");
 		}
 		ActionContext.getContext().put("confirm", confirm);
 		return SUCCESS;

@@ -13,7 +13,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>专业建设信息</title>
+	<title>发表教改论文信息</title>
 	<link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 	<link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />

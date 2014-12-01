@@ -10,7 +10,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-    <title>学评教详细信息</title>
+    <title>重庆市大学生创新创业训练计划项目详细信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -29,11 +29,11 @@
 
 	<div class="item">
 		<div class="title">
-			1.学评教信息
+			1.重庆市大学生创新创业训练计划项目信息
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">信息名称</label>
+				<label for="awardsName">项目名称</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">

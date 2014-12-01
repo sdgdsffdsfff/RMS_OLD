@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-    <title>教改结题详细信息</title>
+    <title>教改项目详细信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -34,7 +34,7 @@
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">信息名称</label>
+				<label for="awardsName">项目名称</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">
@@ -49,7 +49,7 @@
 	<div class="clear" style="height:15px;"></div>
 	<div class="item">
 		<div class="title">
-			2.指导老师信息
+			2.负责人信息
 		</div>
 		<s:iterator value="#memberList" id="m">
 		<div class="content">

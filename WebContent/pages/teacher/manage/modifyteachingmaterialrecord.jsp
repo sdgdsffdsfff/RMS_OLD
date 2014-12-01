@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-    <title>修改教材立项信息</title>
+    <title>修改教材出版信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -36,13 +36,13 @@
 
 	<div class="item">
 		<div class="title">
-			1.教材立项信息
+			1.教材出版信息
 		</div>
 		<div class="content">
 		<input type="hidden" id="recordId" name="recordId" value='<s:property value="#record.id"/>'/>
 			<div class="line">
 				<div class="element">
-					<label for="name">信息名称:</label>
+					<label for="name">教材名:</label>
 					<input type="text" name="recordName" value='<s:property value="#record.name"/>' class=":required"/>
 				</div>	
 				<s:iterator value="#record.fields" id="f">

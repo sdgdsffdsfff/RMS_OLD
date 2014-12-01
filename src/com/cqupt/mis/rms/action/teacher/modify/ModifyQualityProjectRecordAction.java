@@ -24,6 +24,7 @@ import com.cqupt.mis.rms.model.QualityProjectRecord;
 import com.cqupt.mis.rms.model.QualityRecordAward;
 import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -145,16 +146,16 @@ public class ModifyQualityProjectRecordAction extends ActionSupport implements S
 		boolean result2 = researchInfoService.modifyProofs(proofs);
 		boolean result3 = researchInfoService.modifyResearchMemberInfo(recordId, "QualityRecordAward", "qualityProjectRecord", "id", 30, qualityRecordAwards);//TODO
 		Confirm confirm = new Confirm();
-		if(result1 && result2 && result3) {
+		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("质量工程信息修改成功");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"修改成功");
 			confirm.setUrl("viewQualityProjectRecords.action");
-			confirm.setRetName("个人质量工程信息页面");
-		} else {
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(6)+"页面");
+		}else{
 			confirm.setIsSuccess("error");
-			confirm.setMessage("优质量工程信息修改失败");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"修改失败");
 			confirm.setUrl("viewQualityProjectRecords.action");
-			confirm.setRetName("个人质量工程信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(6)+"页面");
 		}
 		ActionContext.getContext().put("confirm", confirm);
 		return SUCCESS;

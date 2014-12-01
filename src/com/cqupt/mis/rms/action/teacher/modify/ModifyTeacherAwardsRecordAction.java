@@ -29,6 +29,7 @@ import com.cqupt.mis.rms.model.TeachersRecordAchievements;
 import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.service.SubmitInfoAndProofsService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -170,16 +171,16 @@ public class ModifyTeacherAwardsRecordAction extends ActionSupport implements
 				recordId, "TeachersRecordAchievements", "teachersAwardsRecord",
 				"id", 26, teachersRecordAchievementsList);// TODO
 		Confirm confirm = new Confirm();
-		if (result1 && result2 && result3) {
+		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("教学成果奖信息修改成功");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"修改成功");
 			confirm.setUrl("viewTeacherAwardsRecords.action");
-			confirm.setRetName("个人教师获奖信息页面");
-		} else {
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(3)+"页面");
+		}else{
 			confirm.setIsSuccess("error");
-			confirm.setMessage("教学成果奖信息修改失败");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"修改失败");
 			confirm.setUrl("viewTeacherAwardsRecords.action");
-			confirm.setRetName("个人教师获奖信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(3)+"页面");
 		}
 		ActionContext.getContext().put("confirm", confirm);
 

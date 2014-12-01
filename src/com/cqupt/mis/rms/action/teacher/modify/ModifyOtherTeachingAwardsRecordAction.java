@@ -24,6 +24,7 @@ import com.cqupt.mis.rms.model.OtherTeachingRecordAward;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -144,16 +145,16 @@ public class ModifyOtherTeachingAwardsRecordAction extends ActionSupport impleme
 		boolean result2 = researchInfoService.modifyProofs(proofs);
 		boolean result3 = researchInfoService.modifyResearchMemberInfo(recordId, "OtherTeachingRecordAward", "otherTeachingAwardsRecord", "id", 33, otherTeachingRecordAwards);//TODO
 		Confirm confirm = new Confirm();
-		if(result1 && result2 && result3) {
+		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("其他教学类信息修改成功");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"修改成功");
 			confirm.setUrl("viewOtherTeachingAwardsRecords.action");
-			confirm.setRetName("个人其他教学类信息页面");
-		} else {
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(9)+"页面");
+		}else{
 			confirm.setIsSuccess("error");
-			confirm.setMessage("其他教学类信息修改失败");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"修改失败");
 			confirm.setUrl("viewOtherTeachingAwardsRecords.action");
-			confirm.setRetName("个人其他教学类信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(9)+"页面");
 		}
 		ActionContext.getContext().put("confirm", confirm);
 		return SUCCESS;

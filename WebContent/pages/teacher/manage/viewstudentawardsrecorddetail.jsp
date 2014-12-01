@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-    <title>学生获奖详细信息</title>
+    <title>指导学生参赛获奖信息</title>
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -30,11 +30,11 @@
 
 	<div class="item">
 		<div class="title">
-			1.学生获奖信息
+			1.指导学生参赛获奖信息
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">获奖名称</label>
+				<label for="awardsName">赛事名</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">

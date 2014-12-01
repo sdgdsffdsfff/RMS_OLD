@@ -24,6 +24,7 @@ import com.cqupt.mis.rms.model.MajorRecordMember;
 import com.cqupt.mis.rms.model.Proofs;
 import com.cqupt.mis.rms.service.ResearchInfoService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -152,14 +153,14 @@ public class ModifyMajorContributeRecordAction extends ActionSupport implements 
 		Confirm confirm = new Confirm();
 		if(result1 && result2 && result3){
 			confirm.setIsSuccess("right");
-			confirm.setMessage("专业建设信息修改成功");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"修改成功");
 			confirm.setUrl("viewMajorContributeRecords.action");
-			confirm.setRetName("个人专业建设信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(1)+"页面");
 		} else {
 			confirm.setIsSuccess("error");
-			confirm.setMessage("专业建设信息修改失败");
+			confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"修改失败");
 			confirm.setUrl("viewMajorContributeRecords.action");
-			confirm.setRetName("个人专业建设信息页面");
+			confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(1)+"页面");
 		}
 		ActionContext.getContext().put("confirm", confirm);
 		return SUCCESS;
