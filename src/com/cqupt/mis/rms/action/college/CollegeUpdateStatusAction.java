@@ -2,6 +2,7 @@ package com.cqupt.mis.rms.action.college;
 
 import com.cqupt.mis.rms.service.CollegeManagerService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -219,41 +220,41 @@ public class CollegeUpdateStatusAction extends ActionSupport {
 				confirm.setUrl("collegeAchNewInfo/teachAchievementsCQ.action");
 				confirm.setRetName("重庆市大学生创新创业训练计划项目信息审批页面");
 			} else if ("StudentAwardsRecord".equals(modelName)) { // TODO
-				confirm.setMessage("学生获奖信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(5)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(5)+"审批页面");
 			} else if ("TeachersAwardsRecord".equals(modelName)) { // TODO
-				confirm.setMessage("教学成果奖信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
-				confirm.setRetName("教学成果奖信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"审批页面");
 			}else if("MajorContributeRecord".equals(modelName)) {		
-				confirm.setMessage("专业建设/教改项目信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
-				confirm.setRetName("专业建设/教改项目信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"审批页面");
 			}else if("TeachingMaterialRecord".equals(modelName)) {		
-				confirm.setMessage("教材立项信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(4)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
-				confirm.setRetName("教材立项信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(4)+"审批页面");
 			}else if("ExcellentTrainerRecord".equals(modelName)){
-				confirm.setMessage("优秀培训师信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/excellentTrainerRecord.action");
-				confirm.setRetName("优秀培训师信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"审批页面");
 			}else if("QualityProjectRecord".equals(modelName)){
-				confirm.setMessage("质量工程信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/qualityProjectRecord.action");
-				confirm.setRetName("质量工程信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"审批页面");
 			}else if("LearningEvaluationRecord".equals(modelName)){
-				confirm.setMessage("学评教信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(7)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/learningEvaluationRecord.action");
-				confirm.setRetName("学评教信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(7)+"审批页面");
 			}else if("EducationalReformRecord".equals(modelName)){
-				confirm.setMessage("教改项目信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(8)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/educationalReformRecord.action");
-				confirm.setRetName("教改项目信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(8)+"审批页面");
 			}else if("OtherTeachingAwardsRecord".equals(modelName)){
-				confirm.setMessage("其他教学奖励信息审批成功");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/otherTeachingAwardsRecord.action");
-				confirm.setRetName("其他教学奖励信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"审批页面");
 			}
 		} else {
 			confirm.setIsSuccess("error");
@@ -358,41 +359,41 @@ public class CollegeUpdateStatusAction extends ActionSupport {
 				confirm.setUrl("collegeAchNewInfo/teachAchievementsCQ.action");
 				confirm.setRetName("重庆市大学生创新创业训练计划项目信息审批页面");
 			} else if ("StudentAwardsRecord".equals(modelName)) { // TODO
-				confirm.setMessage("学生获奖信息审批失败");
-				confirm.setUrl("collegeAchInfoRecord/studentAwardsRecord.action");
-				confirm.setRetName("学生获奖信息审批页面");
-			} else if ("TeachersAwardsRecord".equals(modelName)) { // TODO
-				confirm.setMessage("教学成果奖信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(5)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
-				confirm.setRetName("教学成果奖信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(5)+"审批页面");
+			} else if ("TeachersAwardsRecord".equals(modelName)) { // TODO
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"审批成功");
+				confirm.setUrl("collegeAchInfoRecord/teacherAwardsRecord.action");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(3)+"审批页面");
 			}else if("MajorContributeRecord".equals(modelName)) {		
-				confirm.setMessage("专业建设/教改项目信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/majorContributeRecord.action");
-				confirm.setRetName("专业建设/教改项目信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(1)+"审批页面");
 			}else if("TeachingMaterialRecord".equals(modelName)) {		
-				confirm.setMessage("教材立项信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(4)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
-				confirm.setRetName("教材立项信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(4)+"审批页面");
 			}else if("ExcellentTrainerRecord".equals(modelName)){
-				confirm.setMessage("优秀培训师信息审批失败");
-				confirm.setUrl("collegeAchInfoRecord/teachingMaterialRecord.action");
-				confirm.setRetName("优秀培训师信息审批页面");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"审批成功");
+				confirm.setUrl("collegeAchInfoRecord/excellentTrainerRecord.action");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(2)+"审批页面");
 			}else if("QualityProjectRecord".equals(modelName)){
-				confirm.setMessage("质量工程信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/qualityProjectRecord.action");
-				confirm.setRetName("质量工程信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"审批页面");
 			}else if("LearningEvaluationRecord".equals(modelName)){
-				confirm.setMessage("学评教信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(7)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/learningEvaluationRecord.action");
-				confirm.setRetName("学评教信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(7)+"审批页面");
 			}else if("EducationalReformRecord".equals(modelName)){
-				confirm.setMessage("教改项目信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(8)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/educationalReformRecord.action");
-				confirm.setRetName("教改项目信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(8)+"审批页面");
 			}else if("OtherTeachingAwardsRecord".equals(modelName)){
-				confirm.setMessage("其他教学奖励信息审批失败");
+				confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"审批成功");
 				confirm.setUrl("collegeAchInfoRecord/otherTeachingAwardsRecord.action");
-				confirm.setRetName("其他教学奖励信息审批页面");
+				confirm.setRetName(DynamicDataFieldUtils.getInfoNameByClassNum(9)+"审批页面");
 			}
 		}
 		ActionContext.getContext().put("confirm", confirm);

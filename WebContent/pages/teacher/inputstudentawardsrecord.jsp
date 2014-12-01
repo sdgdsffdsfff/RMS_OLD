@@ -10,7 +10,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入学生获奖信息</title>
+	<title>录入指导学生参赛获奖信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -25,16 +25,20 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitStudentAwardsRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“赛事”包括教务处、学生处、团委统一组织申报的各项比赛；“获奖级别”包括国家级、省部级1、2、3等奖。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入学生获奖信息
+			录入指导学生参赛获奖信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">
 			<div class="line">	<!-- ####三个换行#### -->
 				<div class="element" style="height:31px;">
-					<label for="awardsName">获奖名称</label>
+					<label for="awardsName">赛事名称</label>
 					<input type="text" id="awardsName" name="awardsName" class=":required" />
 				</div>
 				<s:iterator value="#allFields" id="f">

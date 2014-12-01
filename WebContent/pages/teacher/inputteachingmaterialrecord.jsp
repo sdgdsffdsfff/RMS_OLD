@@ -10,7 +10,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入教材立项信息</title>
+	<title>录入教材出版信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -25,16 +25,20 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitTeachingMaterialRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“教材等级”包括正式出版的国家规划教材、正式出版一般教材；“类别”包括专著、编著、译著。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入教材立项信息
+			录入教材出版信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">
 			<div class="line">	<!-- ####三个换行#### -->
 				<div class="element" style="height:31px;">
-					<label for="awardsName">立项名称</label>
+					<label for="awardsName">教材名称</label>
 					<input type="text" id="materialName" name="materialName" class=":required" />
 				</div>
 				<s:iterator value="#allFields" id="f">
@@ -47,12 +51,12 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			主编/作者信息
+			作者信息
 			</div>
 			<div id="membertoolbar"></div>
 			<div class="line spe">
 				<div class="element del person">
-					<label for="memberName">主编/作者姓名:</label>
+					<label for="memberName">作者姓名:</label>
 					<input type="text" id="memberName" name="memberName" />
 				</div>
 				<div class="element del detail">

@@ -11,7 +11,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入优秀培训师奖信息</title>
+	<title>录入教学技术奖</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -26,10 +26,14 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitExcellentTrainerRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“项目类别”包括全国高校微课教学比赛、全国多媒体课件大赛、全国一级学会评选的优秀教材。学校教务处认定的其他教学技术奖，经过学院教学委员会讨论通过后有效。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入优秀培训师奖信息
+			录入教学技术奖信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">
@@ -52,12 +56,12 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			获奖人信息
+			负责人信息
 			</div>
 			<div id="membertoolbar"></div>
 			<div class="line spe">
 				<div class="element del person">
-					<label for="memberName">获奖人姓名:</label>
+					<label for="memberName">负责人信息:</label>
 					<input type="text" id="memberName" name="memberName" />
 				</div>
 				<div class="element del detail">

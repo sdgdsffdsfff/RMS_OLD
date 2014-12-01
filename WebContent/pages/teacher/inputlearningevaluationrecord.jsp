@@ -11,7 +11,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入学评教信息</title>
+	<title>录入重庆市大学生创新创业训练计划项目</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -26,10 +26,14 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitLearningEvaluationRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“类型”包括创新实验、创新训练。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入学评教信息
+			录入重庆市大学生创新创业训练计划项目
 			<div class="clear"></div>
 		</div>
 		<div class="content">
@@ -52,12 +56,12 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			获奖人信息
+			负责人
 			</div>
 			<div id="membertoolbar"></div>
 			<div class="line spe">
 				<div class="element del person">
-					<label for="memberName">获奖人姓名:</label>
+					<label for="memberName">负责人姓名:</label>
 					<input type="text" id="memberName" name="memberName" />
 				</div>
 				<div class="element del detail">

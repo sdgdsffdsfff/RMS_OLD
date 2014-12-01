@@ -25,16 +25,20 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitMajorContributeRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“期刊类别”包括：CSSCI来源；CSSCI扩展；北大核心；一般。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入专业建设信息
+			录入发表教改论文信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">
 			<div class="line">	<!-- ####三个换行#### -->
 				<div class="element" style="height:31px;">
-					<label for="contributeName">立项名称</label>
+					<label for="contributeName">论文名称</label>
 					<input type="text" id="contributeName" name="contributeName" class=":required" />
 				</div>
 				<s:iterator value="#allFields" id="f">
@@ -47,12 +51,12 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			负责人信息
+			作者信息
 			</div>
 			<div id="membertoolbar"></div>
 			<div class="line spe">
 				<div class="element del person">
-					<label for="memberName">负责人姓名:</label>
+					<label for="memberName">作者姓名:</label>
 					<input type="text" id="memberName" name="memberName" />
 				</div>
 				<div class="element del detail">

@@ -11,7 +11,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入其他教学奖信息</title>
+	<title>录入其他获奖信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -26,17 +26,21 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitOtherTeachingAwardsRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入其他教学奖信息
+			录入其他获奖信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">
 			<div class="line">
 				
 				<div class="element" style="height:31px;">
-					<label for="projectName">获奖名称:</label>
+					<label for="projectName">项目名称:</label>
 					<input type="text" id="projectName" name="projectName" class=":required" />
 				</div>
 				
@@ -52,12 +56,12 @@
 			
 			<div class="clear" style="height:15px;"></div>
 			<div class="title">
-			获奖人信息
+			获奖教师
 			</div>
 			<div id="membertoolbar"></div>
 			<div class="line spe">
 				<div class="element del person">
-					<label for="memberName">获奖人姓名:</label>
+					<label for="memberName">获奖教师:</label>
 					<input type="text" id="memberName" name="memberName" />
 				</div>
 				<div class="element del detail">

@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批质量工程信息</title>
+        <title>审批本科教学工程信息</title>
    
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
@@ -39,7 +39,7 @@
 
 	<div class="item">
 		<div class="title">
-			1.质量工程信息
+			1.本科教学工程信息
 		</div>
 		<div class="content">
 			<div class="element">
@@ -58,7 +58,7 @@
 	<div class="clear" style="height:15px;"></div>
 	<div class="item">
 		<div class="title">
-			2.获奖老师信息
+			2.负责人信息
 		</div>
 		<s:iterator value="#memberList" id="m">
 		<div class="content">

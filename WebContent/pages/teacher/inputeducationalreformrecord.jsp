@@ -26,6 +26,10 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitEducationalReformRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“项目级别”包括国家级、省部级、校级；“项目类别”包括重大、重大、一般。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">

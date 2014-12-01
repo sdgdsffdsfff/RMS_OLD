@@ -11,7 +11,7 @@
 <base href="<%=basePath%>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>录入质量工程信息</title>
+	<title>录入本科教学工程信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
@@ -26,10 +26,14 @@
 </head>
 <body style="padding:0px;">
 	<form id="form" name="form" action="submitQualityProjectRecord.action" onsubmit="return checkClickAndSubmit();" method="post" enctype="multipart/form-data">
+	
+	<!-- 提示信息 -->
+	<b>提示：对应栏没有信息的请填写“无”！</b>“项目级别”包括国家级、省部级、校级；“项目类别”包括高等学校特色专业建设点、“专业综合改革试点”项目、精品开放课程、精品视频公开课、教学团队、教学名师、实验教学示范中心、精品资源共享可、重点课程等。
+	
 	<div id="allpage">
 	<div class="item">
 		<div class="title">
-			录入质量工程信息
+			录入本科教学工程信息
 			<div class="clear"></div>
 		</div>
 		<div class="content">

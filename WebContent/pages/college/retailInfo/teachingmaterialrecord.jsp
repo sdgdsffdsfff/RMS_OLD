@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批教材立项信息</title>
+        <title>审批教材出版信息</title>
    
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
@@ -39,11 +39,11 @@
 
 	<div class="item">
 		<div class="title">
-			1.教材立项信息
+			1.教材出版信息
 		</div>
 		<div class="content">
 			<div class="element">
-				<label for="awardsName">立项名称</label>
+				<label for="awardsName">教材名称</label>
 				<input type="text" name="awardsName" value="<s:property value="#record.name"/>" readonly />
 			</div>
 			<s:iterator value="#record.fields" id="f">

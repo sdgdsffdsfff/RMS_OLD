@@ -24,6 +24,7 @@ import com.cqupt.mis.rms.model.QualityProjectRecord;
 import com.cqupt.mis.rms.model.QualityRecordAward;
 import com.cqupt.mis.rms.service.SubmitInfoAndProofsService;
 import com.cqupt.mis.rms.utils.Confirm;
+import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.GenerateUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -61,7 +62,6 @@ public class SubmitQualityProjectRecordAction extends ActionSupport implements S
 			HttpServletRequest request = ServletActionContext.getRequest();
 			//如果submit==保存，status=0，如果submit==提交，status=1
 			int status;
-			System.out.println("submit:"+submit);
 			if("保存".equals(submit)){
 				status = 0;
 			}else if("提交".equals(submit)){
@@ -158,14 +158,14 @@ public class SubmitQualityProjectRecordAction extends ActionSupport implements S
 				Confirm confirm = new Confirm();
 				if(result1 && result2 && result3){
 					confirm.setIsSuccess("right");
-					confirm.setMessage("质量工程信息添加成功");
+					confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"添加成功");
 					confirm.setUrl("viewQualityProjectRecords.action");
-					confirm.setRetName("质量工程信息页面");
+					confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(6)+"页面");
 				}else{
 					confirm.setIsSuccess("error");
-					confirm.setMessage("质量工程信息添加失败");
+					confirm.setMessage(DynamicDataFieldUtils.getInfoNameByClassNum(6)+"添加失败");
 					confirm.setUrl("viewQualityProjectRecords.action");
-					confirm.setRetName("质量工程信息页面");
+					confirm.setRetName("管理个人"+DynamicDataFieldUtils.getInfoNameByClassNum(6)+"页面");
 				}
 				ActionContext.getContext().put("confirm", confirm);
 				return SUCCESS;

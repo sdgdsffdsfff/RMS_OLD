@@ -11,7 +11,7 @@
 <html>
 <base href="<%=basePath%>">
 <head>
-        <title>审批其他教学获奖信息</title>
+        <title>审批其他获奖信息</title>
    
     
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
@@ -39,7 +39,7 @@
 
 	<div class="item">
 		<div class="title">
-			1.其他教学获奖信息
+			1.其他获奖信息
 		</div>
 		<div class="content">
 			<div class="element">
