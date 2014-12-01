@@ -78,6 +78,15 @@ var clickresult;
         
         function checkClickAndSubmit(){
         	var showContent;
+        	
+        	var ovalue=document.getElementById('fieldName');
+        	var text=ovalue.value;
+            var pattern=/^[a-zA-Z_]+$/;
+            if(!pattern.test(text)){
+        	  alert('字段数据库名不能含有中文！');
+        	  return false;
+            }
+        	
         	if(clickresult == 'save'){
         		showContent = '确定保存已填写的科研信息？（保存后的科研信息仍可以修改！）';
         	}else if(clickresult == 'confirm'){
