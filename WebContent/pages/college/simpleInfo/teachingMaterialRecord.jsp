@@ -6,12 +6,11 @@
 <%    
       String path = request.getContextPath();
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <base href="<%=basePath%>">
 <head>
-        <title>教材立项信息</title>
+    <title>教材立项信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
     <script src="lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script> 
@@ -46,22 +45,6 @@
 	     		</script>
    			</s:iterator> 
     	</div>
-	<%-- <table border="1">
-    	<tr>
-    		<th>操作</th>
-    		<th>提交者</th>
-    		<th>信息名称</th>
-    		<th>状态</th>
-     	</tr>
-     	<s:iterator value="#records" id="r">
-     		<tr>
-     			<td><a href="collegeAchStatus/teachingMaterialRecord.action?recordId=<s:property value="#r.id"/>">查看详细</a></td>
-     			<td><s:property value="#r.submitUser.userName"/></td>
-     			<td><s:property value="#r.name"/></td>
-     			<td><s:property value="#r.statusDes"/></td>
-     		</tr>
-     	</s:iterator>
-     	</table> --%>
   </form>
 </body>
 </html>

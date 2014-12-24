@@ -86,15 +86,15 @@ var manager;
                            
                         }
                     return;
-                	 case "modify":
+                	case "modify":
                     	 var data = gridManager.getCheckedRows();
                     	 if (data.length != 1)
                         	 alert('请选择单行进行操作!');
                          else
                          {
-                             var checkedIds = [];
-                             var checkedNames = [];
-                             var checkedStatus = [];
+                             var checkedIds=[];
+                             var checkedNames=[];
+                             var checkedStatus=[];
                              $(data).each(function ()
                                      {
                                      

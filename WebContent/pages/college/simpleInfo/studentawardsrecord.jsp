@@ -5,15 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%    
       String path = request.getContextPath();
-      String basePath = request.getScheme() + "://" + 
-
-request.getServerName() + ":" + request.getServerPort() + path + "/";
-       
+      String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <base href="<%=basePath%>">
 <head>
-        <title>学生获奖信息</title>
+    <title>学生获奖信息</title>
     <link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="css/Data.css" rel="stylesheet" type="text/css" />
     <script src="lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script> 
@@ -39,13 +36,12 @@ request.getServerName() + ":" + request.getServerPort() + path + "/";
     		<s:iterator value="records">
      			<script type="text/javascript">
 	     			var row = {
-	     					id:"${id}",
-	     					submitUser: "${submitUser.userName}",
+	     			        id:"${id}",
+	     			        submitUser: "${submitUser.userName}",
 	     					name: "${name}", 
-	     					Status: "${statusDes}",
+	     					Status: "${statusDes}"
 					};
 	     			rows.push(row);
-	     			 
 	     		</script>
    			</s:iterator> 
    			 </s:if>
@@ -54,22 +50,6 @@ request.getServerName() + ":" + request.getServerPort() + path + "/";
 <div style="display:none;">
 
 </div>
-<%-- 	<table border="1">
-    	<tr>
-    		<th>操作</th>
-    		<th>提交者</th>
-    		<th>信息名称</th>
-    		<th>状态</th>
-     	</tr>
-     	<s:iterator value="#records" id="r">
-     		<tr>
-     			<td><a href="collegeAchStatus/studentAwardsRecord.action?recordId=<s:property value="#r.id"/>">查看详细</a></td>
-     			<td><s:property value="#r.submitUser.userName"/></td>
-     			<td><s:property value="#r.name"/></td>
-     			<td><s:property value="#r.statusDes"/></td>
-     		</tr>
-     	</s:iterator>
-     	</table> --%>
   </form>
 </body>
 </html>

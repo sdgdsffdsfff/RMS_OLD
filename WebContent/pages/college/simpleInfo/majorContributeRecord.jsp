@@ -47,27 +47,9 @@
    			</s:iterator> 
    			 </s:if>
     	</div>
-	
 <div style="display:none;">
 
 </div>
-	<%-- <table border="1">
-    	<tr>
-    		<th>操作</th>
-    		<th>提交者</th>
-    		<th>专业建设信息名称</th>
-    		<th>状态</th>
-     	</tr>
-     	<s:iterator value="#records" id="r">
-     		<tr>
-     			<td><a href="collegeAchStatus/majorContributeRecord.action?recordId=<s:property value="#r.id"/>">查看详细</a></td>
-     			<td><s:property value="#r.submitUser.userName"/></td>
-     			<td><s:property value="#r.name"/></td>
-     			<td><s:property value="#r.statusDes"/></td>
-     		</tr>
-     	</s:iterator>
-     	</table> --%>
   </form>
-  
 </body>
 </html>

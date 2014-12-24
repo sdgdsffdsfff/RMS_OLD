@@ -49,7 +49,7 @@
      			   });
      			  
 	     		 </script>
-   			</s:iterator> 
+   			 </s:iterator> 
    			 </s:if>
     	</div>
 	

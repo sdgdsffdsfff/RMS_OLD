@@ -47,12 +47,11 @@
   		             rows.push(rowObj);
      			   });
 	     		 </script>
-   			</s:iterator> 
+   			 </s:iterator> 
    			 </s:if>
     	</div>
 	
 <div style="display:none;">
-
 </div>
 </form>
 </body>

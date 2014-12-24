@@ -36,7 +36,36 @@ var manager, g;
 			 $("#pageloading").hide();
                        
         });
-
+        function GetxmlhttpObject()
+    	{
+    	   var xmlhttp;
+    	   try
+		   {
+    		   // Firefox, Opera 8.0+, Safari
+    		   xmlhttp = new XMLHttpRequest();
+		   }
+    	   catch (e)
+		   {
+    		   // Internet Explorer
+    		   try
+    		   {
+    			   xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+    		   }
+    		   catch (e)
+    		   {
+    			   try
+    			   {
+    				   xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    			   }
+    			   catch (e)
+    			   {
+    				   alert("您的浏览器不支持AJAX！");
+    				   xmlhttp = false;
+    			   }
+    		   }
+		   }
+    	   return xmlhttp;
+    	}
     
 	 function show()
      {
