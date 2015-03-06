@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.Properties;  
 import java.util.Set;  
   
+
 import org.apache.commons.logging.Log;  
 import org.apache.commons.logging.LogFactory;  
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
   
@@ -124,6 +126,24 @@ public class ExcelTemplate {
         cell.setCellType(HSSFCell.CELL_TYPE_STRING);  
         cell.setCellValue(value);  
     }  
+    
+    /**  
+     * 根据传入的字符串值，在当前行上创建新列  
+     * @param value 列的值（字符串）  
+     */  
+    @SuppressWarnings("deprecation")
+	public void createHyperlinkCell(String value){  
+        HSSFCell cell = createCell();  
+        cell.setCellType(HSSFCell.CELL_TYPE_STRING);  
+        cell.setCellValue(value);  
+        //设置样式
+        HSSFCellStyle linkStyle = workbook.createCellStyle();
+        HSSFFont cellFont= workbook.createFont();
+        cellFont.setUnderline((byte) 1);
+        cellFont.setColor(HSSFColor.BLUE.index);
+        linkStyle.setFont(cellFont);
+        cell.setCellStyle(linkStyle);
+    }
       
     /**  
      * 根据传入的日期值，在当前行上创建新列  

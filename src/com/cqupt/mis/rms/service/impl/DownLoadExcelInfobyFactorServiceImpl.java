@@ -1,7 +1,6 @@
 package com.cqupt.mis.rms.service.impl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -14,7 +13,6 @@ import com.cqupt.mis.rms.model.CourseContribute;
 import com.cqupt.mis.rms.model.CourseContributeMember;
 import com.cqupt.mis.rms.model.CourseContributeNew;
 import com.cqupt.mis.rms.model.CourseContributeMemberNew;
-import com.cqupt.mis.rms.model.EducationalReformData;
 import com.cqupt.mis.rms.model.HumanitiesAcademicMeeting;
 import com.cqupt.mis.rms.model.HumanitiesAcademicMeetingPerson;
 import com.cqupt.mis.rms.model.HumanitiesBook;
@@ -50,10 +48,7 @@ import com.cqupt.mis.rms.model.ScienceTechProjectMember;
 import com.cqupt.mis.rms.model.ScienceTechTransfer;
 import com.cqupt.mis.rms.model.ScienceTransferLeader;
 import com.cqupt.mis.rms.model.StudentAwards;
-import com.cqupt.mis.rms.model.StudentAwardsData;
-import com.cqupt.mis.rms.model.StudentAwardsField;
 import com.cqupt.mis.rms.model.StudentAwardsNew;
-import com.cqupt.mis.rms.model.StudentAwardsRecord;
 import com.cqupt.mis.rms.model.StudentInstructor;
 import com.cqupt.mis.rms.model.StudentInstructorNew;
 import com.cqupt.mis.rms.model.TeachAchievements;
@@ -70,8 +65,6 @@ import com.cqupt.mis.rms.service.DownLoadExcelInfobyFactorService;
 import com.cqupt.mis.rms.service.GetDownloadInfoService;
 import com.cqupt.mis.rms.utils.DynamicDataFieldUtils;
 import com.cqupt.mis.rms.utils.ExcelTemplate;
-import com.cqupt.mis.rms.utils.StudentAwardsDataComparator;
-
 import edu.emory.mathcs.backport.java.util.TreeSet;
 
 public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfobyFactorService{
@@ -5403,10 +5396,12 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 			throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, InstantiationException {
 		
 		ExcelTemplate template = ExcelTemplate.newInstance("download.xls");    
-		String recordName = DynamicDataFieldUtils.getRecordNameByClassNum(classNum);
-		String fieldName = DynamicDataFieldUtils.getClassNameByClassNum(classNum);
-		String dataName = DynamicDataFieldUtils.getDataNameByClassNum(classNum);
-		String dataComparatorName = DynamicDataFieldUtils.getDataComparatorNameByClassNum(classNum);
+		String recordName = DynamicDataFieldUtils.getRecordNameByClassNum(classNum);	//记录类名
+		String fieldName = DynamicDataFieldUtils.getClassNameByClassNum(classNum);	//字段类名
+		String dataName = DynamicDataFieldUtils.getDataNameByClassNum(classNum);	//字段值类名
+		String dataComparatorName = DynamicDataFieldUtils.getDataComparatorNameByClassNum(classNum);	//字段类的比较器类名
+		String relationClassName = DynamicDataFieldUtils.getRelationClassByClassNum(classNum);	//记录相关联的负责人\指导教师类名
+		String relationClassField = DynamicDataFieldUtils.getRelationClassFieldByClassNum(classNum);	//记录相关联的负责人\指导教师类的姓名字段
 		
 		List<Object> lists1 = (List<Object>) getDownloadInfoService.getExcelDownloadInfoByFactors(recordName,factorName,factorValues);
 		List<Object> lists2 = (List<Object>) dynamicDataFieldDao.findAllFields(fieldName);
@@ -5485,12 +5480,13 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 		template.createCell("审批该信息的用户");
 		template.createCell("该信息的状态");
 		template.createCell("返回原因");
+		template.createCell("负责人/获奖成员/指导老师");
 		
 		if("admin".equals(userId)){
 			 template.createCell("附件");
 		}
 		
-		for(int i=0;i<lists1.size();i++){
+		for(int i=0;i<lists1.size();i++) {
 			Object object = lists1.get(i);
 			
 			template.createRow(i+1);
@@ -5576,16 +5572,19 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 			template.createCell(value6);
 			
 			 
-/*			//指导老师
+			//负责人/获奖成员/指导老师
 			@SuppressWarnings("unchecked")
-			List<StudentInstructor> lists2 = (List<StudentInstructor>) getDownloadInfoService.getExcelDownloadInfoByFactor("StudentInstructor", "studentAwards.awardsId", awardsId);
+			String recordNameLower = recordName.substring(0, 1).toLowerCase()+recordName.substring(1);	//获取首字母小写的记录类名
+			List<Object> lists3 = (List<Object>) getDownloadInfoService.getExcelDownloadInfoByFactor(relationClassName, recordNameLower+".id", value1);//TODO
 			String other = "";
-			for(int j=0;j<lists2.size();j++){
-				StudentInstructor studentInstructor= lists2.get(j);
-				other = other + studentInstructor.getMemberName()+"、";
+			for(int j=0;j<lists3.size();j++){
+				Object relationObject = lists3.get(j);
+				Field fieldTmp = relationObject.getClass().getDeclaredField(relationClassField);
+				fieldTmp.setAccessible(true);
+				other = other + fieldTmp.get(relationObject) + "、";
 			}
 				 
-			if(other==""){
+			if(other == ""){
 				other = "无"; 
 			}else{
 				other = other.substring(0,other.length()-1);
@@ -5595,7 +5594,7 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 			//旁证材料
 			 if("admin".equals(userId)){
 				@SuppressWarnings("unchecked")
-				List<Proofs> proofslists = (List<Proofs>) getDownloadInfoService.getExcelDownloadInfoByFactor("Proofs", "infoApprovedId",awardsId);
+				List<Proofs> proofslists = (List<Proofs>) getDownloadInfoService.getExcelDownloadInfoByFactor("Proofs", "infoApprovedId",value1);
 				
 				 for(int j=0;j<proofslists.size();j++){
 					 Proofs proofs= proofslists.get(j);
@@ -5603,12 +5602,12 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 						 template.createCell("没有上传附件");
 					 }else{
 						 String proofsUrl = proofs.getUploadRealName();
-						 proofsUrl = "file:///"+proofsUrl;
+						 proofsUrl = "http://202.202.43.91/RMS/upload/"+proofsUrl;
 						 template.createCell(proofsUrl);
 					 }
 				 }
 			  } 
- */		
+ 	
 		}
 		return template;
 	}

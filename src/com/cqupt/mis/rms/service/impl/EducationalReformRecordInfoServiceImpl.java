@@ -54,6 +54,7 @@ public class EducationalReformRecordInfoServiceImpl implements EducationalReform
 			}
 		}
 		
+//		recordIds.add("20141223103702312");
 		/*
 		 * 通过已查找的记录id来查找相应的教改结题信息记录
 		 */

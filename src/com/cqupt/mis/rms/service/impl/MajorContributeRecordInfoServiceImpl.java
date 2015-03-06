@@ -59,6 +59,10 @@ public class MajorContributeRecordInfoServiceImpl implements MajorContributeReco
 			}
 		}
 		
+//		recordIds.add("20141211112610517");
+//		recordIds.add("20141221235455446");
+//		recordIds.add("20141230121217347");
+//		recordIds.add("20141211140443410");
 		/*
 		 * 通过已查找的记录id来查找相应的学生获奖信息记录
 		 */

@@ -54,6 +54,8 @@ public class ExcellentTrainerRecordInfoServiceImpl implements ExcellentTrainerRe
 			}
 		}
 		
+//		recordIds.add("20141223153821114");
+//		recordIds.add("20141223154652257");
 		/*
 		 * 通过已查找的记录id来查找相应的学生获奖信息记录
 		 */

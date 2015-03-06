@@ -212,4 +212,86 @@ public class DynamicDataFieldUtils {
 		return comparatorName;
 	}
 	
+	/**
+	 * 根据数字获取动态字段类相关联的负责人/指导教师类名
+	 * @param classNum
+	 * @return java类名
+	 */
+	public static String getRelationClassByClassNum(int classNum) {
+		String relationClass = null;
+		switch (classNum) {
+		case 1:		//专业建设/教改项目信息的成员类
+			relationClass = "MajorRecordMember";
+			break;
+		case 2:		//优秀培训师的获奖成员类
+			relationClass = "ExcellentRecordAward";
+			break;
+		case 3:     //教学成果奖信息的获奖老师类
+			relationClass = "TeachersRecordAchievements";
+			break;
+		case 4:		//教材立项信息的编辑者类
+			relationClass = "TeachingRecordEditor";
+			break;
+		case 5:		//学生获奖信息的指导老师类
+			relationClass = "StudentRecordInstructor";
+			break;
+		case 6:		//质量工程的负责人类
+			relationClass = "QualityRecordAward";
+			break;
+		case 7:		//学评教的获奖成员类
+			relationClass = "LearningRecordAward";
+			break;
+		case 8:		//教改项目结题的获奖成员类
+			relationClass = "EducationalRecordAward";
+			break;
+		case 9:		//其他教学奖励的获奖成员类
+			relationClass = "OtherTeachingRecordAward";
+			break;
+		default:
+			break;
+		}
+		return relationClass;
+	}
+	
+	/**
+	 * 根据数字获取动态字段类相关联的负责人/指导教师类的主要姓名字段名
+	 * @param classNum
+	 * @return
+	 */
+	public static String getRelationClassFieldByClassNum(int classNum) {
+		String relationClassField = null;
+		switch (classNum) {
+		case 1:		//专业建设/教改项目信息的成员类
+			relationClassField = "memberName";
+			break;
+		case 2:		//优秀培训师的获奖成员类
+			relationClassField = "memberName";
+			break;
+		case 3:     //教学成果奖信息的获奖老师类
+			relationClassField = "memberName";
+			break;
+		case 4:		//教材立项信息的编辑者类
+			relationClassField = "editorName";
+			break;
+		case 5:		//学生获奖信息的指导老师类
+			relationClassField = "memberName";
+			break;
+		case 6:		//质量工程的负责人类
+			relationClassField = "memberName";
+			break;
+		case 7:		//学评教的获奖成员类
+			relationClassField = "memberName";
+			break;
+		case 8:		//教改项目结题的获奖成员类
+			relationClassField = "memberName";
+			break;
+		case 9:		//其他教学奖励的获奖成员类
+			relationClassField = "memberName";
+			break;
+		default:
+			break;
+		}
+		return relationClassField;
+	}
+	
 }
