@@ -186,7 +186,7 @@ public class DynamicDataFieldUtils {
 			comparatorName = "ExcellentTrainerDataComparator";
 			break;
 		case 3:     //教学成果奖信息字段类
-			comparatorName = "TeachersAwardsDataComparator";
+			comparatorName = "TeachAchievementsDataComparator";
 			break;
 		case 4:		//教材立项信息
 			comparatorName = "TeachingMaterialDataComparator";

@@ -8,11 +8,14 @@ import java.util.Properties;
 import java.util.Set;  
   
 
+
+
 import org.apache.commons.logging.Log;  
 import org.apache.commons.logging.LogFactory;  
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Hyperlink;
 
   
 /**  
@@ -74,7 +77,7 @@ public class ExcelTemplate {
             excel.readCellStyles();  
               
             //删除配置行  
-            excel.sheet.removeRow( excel.sheet.getRow(excel.initrow) );  
+//            excel.sheet.removeRow( excel.sheet.getRow(excel.initrow) );  
               
             return excel;  
         } catch (Exception e) {  
@@ -128,15 +131,17 @@ public class ExcelTemplate {
     }  
     
     /**  
-     * 根据传入的字符串值，在当前行上创建新列  
+     * 根据传入的字符串值，在当前行上创建新超链接列  
      * @param value 列的值（字符串）  
      */  
     @SuppressWarnings("deprecation")
 	public void createHyperlinkCell(String value){  
-        HSSFCell cell = createCell();  
-        cell.setCellType(HSSFCell.CELL_TYPE_STRING);  
+    	Hyperlink hyperlink = new HSSFHyperlink(HSSFHyperlink.LINK_FILE);
+    	hyperlink.setAddress(value);
+    	HSSFCell cell = createCell();
+        cell.setHyperlink(hyperlink);
         cell.setCellValue(value);  
-        //设置样式
+        //设置蓝色下划线的超链接样式
         HSSFCellStyle linkStyle = workbook.createCellStyle();
         HSSFFont cellFont= workbook.createFont();
         cellFont.setUnderline((byte) 1);
@@ -167,9 +172,9 @@ public class ExcelTemplate {
       
     @SuppressWarnings("deprecation")
 	private HSSFCell createCell(){  
-        HSSFCell cell = currentRow.createCell((short)currentcol++);  
+        HSSFCell cell = currentRow.createCell((short)currentcol++);
         
-        cell.setEncoding(HSSFCell.ENCODING_UTF_16);  
+        //cell.setEncoding(HSSFCell.ENCODING_UTF_16);  
         
         HSSFCellStyle style = (HSSFCellStyle)styles.get(new Integer(cell.getCellNum()));  
         if(style != null){  
@@ -230,7 +235,7 @@ public class ExcelTemplate {
                     }  
                 }  
                 
-                cell.setEncoding(HSSFCell.ENCODING_UTF_16);  
+//                cell.setEncoding(HSSFCell.ENCODING_UTF_16);  
                 cell.setCellValue(value);  
             }  
         }  

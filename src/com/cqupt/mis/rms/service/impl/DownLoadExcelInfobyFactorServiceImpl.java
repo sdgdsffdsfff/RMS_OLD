@@ -5602,8 +5602,8 @@ public class DownLoadExcelInfobyFactorServiceImpl implements DownLoadExcelInfoby
 						 template.createCell("没有上传附件");
 					 }else{
 						 String proofsUrl = proofs.getUploadRealName();
-						 proofsUrl = "http://202.202.43.91/RMS/upload/"+proofsUrl;
-						 template.createCell(proofsUrl);
+//						 proofsUrl = "http://202.202.43.91/RMS/upload/"+proofsUrl;
+						 template.createHyperlinkCell(proofsUrl);
 					 }
 				 }
 			  } 
